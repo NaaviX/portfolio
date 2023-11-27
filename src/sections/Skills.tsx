@@ -1,13 +1,43 @@
 import { Box } from "@mui/material";
-import { SKILL_TYPE, Skill } from "../components/skills/skills.type";
+import { useScroll } from "framer-motion";
+import { useRef } from "react";
+import SkillsCard from "../components/skills/components/SkillsCard";
 import { skillsData } from "../components/skills/skills.data";
-import SectionSubtitle from "../components/sections/components/SectionSubtitle";
-import ApartmentIcon from "@mui/icons-material/Apartment";
-import Paper from "../components/base/components/Paper";
-import { relative } from "path";
-import { motion } from "framer-motion";
+import { SkillCategory } from "../components/skills/skills.type";
 
-const skillVariants = {
+const Skills = () => {
+  const container = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: container,
+
+    offset: ["start start", "end end"],
+  });
+
+  return (
+    <Box
+      ref={container}
+      sx={{ my: "50px", display: "block", width: "100%" }}
+      id="skills"
+    >
+      {skillsData.map((skillCategory: SkillCategory, i: number) => {
+        const targetScale = 1 - (skillsData.length - i) * 0.05;
+        return (
+          <SkillsCard
+            skillCategory={skillCategory}
+            i={i}
+            key={"skill_cat_" + skillCategory.name.toString()}
+            progress={scrollYProgress}
+            range={[i * 0.25, 1]}
+            targetScale={targetScale}
+          ></SkillsCard>
+        );
+      })}
+    </Box>
+  );
+};
+
+/*const skillVariants = {
   hidden: { opacity: 0 },
   visible: ({ i, totalCount }: { i: number; totalCount: number }) => ({
     opacity: 1,
@@ -19,21 +49,9 @@ const skillVariants = {
 const wrapperSkillVariants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.2 } },
-};
+};*/
 
-const Skills = () => {
-  return (
-    <>
-      {Object.keys(SKILL_TYPE).map((skillKey) => {
-        const skillType: SKILL_TYPE =
-          SKILL_TYPE[skillKey as keyof typeof SKILL_TYPE];
-        return <SkillCategory category={skillType}></SkillCategory>;
-      })}
-    </>
-  );
-};
-
-const SkillCategory = ({ category }: { category: SKILL_TYPE }) => {
+/*const SkillCategory = ({ category }: { category: SKILL_TYPE }) => {
   const skills: Skill[] = skillsData.filter((skill) => skill.type == category);
   return (
     <>
@@ -71,6 +89,6 @@ const SkillCategory = ({ category }: { category: SKILL_TYPE }) => {
       </Paper>
     </>
   );
-};
+};*/
 
 export default Skills;

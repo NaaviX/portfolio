@@ -1,8 +1,8 @@
 import { FC, FunctionComponent, ReactComponentElement, SVGProps } from "react";
 
 export enum SKILL_TYPE {
-  WEBBACK = "Backend",
   WEBFRONT = "Frontend",
+  WEBBACK = "Backend",
   DATA = "Données",
   DEVTOOLS = "Outils de développement",
   MOBILE = "Mobile",
@@ -42,7 +42,14 @@ export enum SKILL_NAME {
 
 export interface Skill {
   name: string;
-  type: SKILL_TYPE | keyof typeof SKILL_TYPE;
   about: string;
   icon: FC<SVGProps<SVGSVGElement>> | undefined;
+}
+
+export interface SkillCategory {
+  name: SKILL_TYPE | keyof SKILL_TYPE;
+  description: string;
+  color: string;
+  skills: Array<Skill>;
+  image: FC<SVGProps<SVGSVGElement>>;
 }

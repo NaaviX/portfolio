@@ -1,11 +1,4 @@
-import {
-  Box,
-  Chip,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from "@mui/material";
+import { Box, List, ListItem, ListItemText, Typography } from "@mui/material";
 import ComputerIcon from "@mui/icons-material/Computer";
 import {
   TimelineConnector,
@@ -25,9 +18,10 @@ import {
   formatDurationMonthYear,
 } from "../../../utils/Utils";
 import Paper from "../../base/components/Paper";
-import SectionSubtitle from "../../sections/components/SectionSubtitle";
 import { Skill } from "../../skills/skills.type";
 import { ReactElement } from "react";
+import Chip from "../../base/components/Chip";
+import React from "react";
 
 interface ExperiencesTimelineItemProps {
   experience: Experience;
@@ -37,11 +31,7 @@ const ExperiencesTimelineItem = (props: ExperiencesTimelineItemProps) => {
   const exp: Experience = props.experience;
   return (
     <TimelineItem>
-      <TimelineOppositeContent
-        sx={{ py: "20px" }}
-        variant="h4"
-        color="text.secondary"
-      >
+      <TimelineOppositeContent sx={{ py: "20px" }} variant="subtitle1">
         {formatDateMonthYear(exp.dateFrom)} - {formatDateMonthYear(exp.dateTo)}
         <br />
         {formatDurationMonthYear(exp.dateFrom, exp.dateTo)}
@@ -61,24 +51,32 @@ const ExperiencesTimelineItem = (props: ExperiencesTimelineItemProps) => {
         }}
       >
         <Paper>
-          <SectionSubtitle>{exp.title}</SectionSubtitle>
+          <Typography variant="h2" sx={{ textAlign: "center" }}>
+            {exp.title}
+          </Typography>
           <Box
             sx={{
               display: "flex",
               marginBottom: "10px",
               gap: "10px",
+              ["& svg"]: {
+                fontSize: "1.3rem",
+              },
+              ["& .expInfos"]: {
+                display: "flex",
+                placeItems: "center",
+                gap: "3px",
+              },
             }}
           >
-            <Box sx={{ display: "flex", gap: "3px" }}>
-              <ApartmentIcon fontSize="small" />{" "}
-              <Typography>{exp.company}</Typography>
+            <Box className="expInfos">
+              <ApartmentIcon /> <Typography>{exp.company}</Typography>
             </Box>
-            <Box sx={{ display: "flex", gap: "3px" }}>
-              <PlaceIcon fontSize="small" /> <Typography>{exp.city}</Typography>
+            <Box className="expInfos">
+              <PlaceIcon /> <Typography>{exp.city}</Typography>
             </Box>
-            <Box sx={{ display: "flex", gap: "3px" }}>
-              <BusinessCenterIcon fontSize="small" />{" "}
-              <Typography>{exp.contract}</Typography>
+            <Box className="expInfos">
+              <BusinessCenterIcon /> <Typography>{exp.contract}</Typography>
             </Box>
           </Box>
           <List sx={{ listStyle: "disc", pl: 2 }}>
@@ -111,7 +109,7 @@ const ExperiencesTimelineItem = (props: ExperiencesTimelineItemProps) => {
                   skill.icon ? (
                     <skill.icon style={{ width: "1rem" }} />
                   ) : (
-                    <ApartmentIcon />
+                    <span />
                   )
                 }
                 key={skill.name}

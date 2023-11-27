@@ -4,6 +4,6 @@
   transition: all 0.5s;
 }
 .nav-item.active > button {
-  border-color: white;
+  border-color: #004558;
   color: white;
 }

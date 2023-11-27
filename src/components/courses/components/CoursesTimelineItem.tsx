@@ -11,7 +11,6 @@ import "moment/locale/fr";
 import PlaceIcon from "@mui/icons-material/Place";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import Paper from "../../base/components/Paper";
-import SectionSubtitle from "../../sections/components/SectionSubtitle";
 import { Course } from "../courses.type";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
@@ -24,11 +23,7 @@ const CoursesTimelineItem = (props: CoursesTimelineItemProps) => {
   const course: Course = props.course;
   return (
     <TimelineItem>
-      <TimelineOppositeContent
-        sx={{ pt: "28px" }}
-        variant="h4"
-        color="text.secondary"
-      >
+      <TimelineOppositeContent sx={{ pt: "28px" }}>
         {course.dateFrom.getFullYear()} - {course.dateTo.getFullYear()}
       </TimelineOppositeContent>
       <TimelineSeparator>
@@ -43,27 +38,33 @@ const CoursesTimelineItem = (props: CoursesTimelineItemProps) => {
           py: "22px",
           px: 2,
         }}
-        variant="body2"
       >
-        <SectionSubtitle>{course.name}</SectionSubtitle>
+        <Typography variant="h2">{course.name}</Typography>
         <Box
           sx={{
             mt: "20px",
             display: "inline-flex",
             flexDirection: "column",
+            placeContent: "center",
             gap: "10px",
+            ["& svg"]: {
+              fontSize: "1.3rem",
+            },
+            ["& .courseInfos"]: {
+              display: "flex",
+              placeItems: "center",
+              gap: "3px",
+            },
           }}
         >
-          <Box sx={{ display: "flex", gap: "3px" }}>
-            <ApartmentIcon sx={{ fontSize: "1.2rem" }} />{" "}
-            <span>{course.school}</span>
+          <Box className="courseInfos">
+            <ApartmentIcon /> <span>{course.school}</span>
           </Box>
-          <Box sx={{ display: "flex", gap: "3px" }}>
-            <PlaceIcon sx={{ fontSize: "1.2rem" }} /> <span>{course.city}</span>
+          <Box className="courseInfos">
+            <PlaceIcon /> <span>{course.city}</span>
           </Box>
-          <Box sx={{ display: "flex", gap: "3px" }}>
-            <HistoryEduIcon sx={{ fontSize: "1.2rem" }} />{" "}
-            <span>{course.diploma}</span>
+          <Box className="courseInfos">
+            <HistoryEduIcon /> <span>{course.diploma}</span>
           </Box>
         </Box>
       </TimelineContent>

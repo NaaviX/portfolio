@@ -1,6 +1,5 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { FormEvent } from "react";
-import SectionSubtitle from "../../sections/components/SectionSubtitle";
 
 function handleSubmit(event: FormEvent<HTMLFormElement>) {
   event.preventDefault();
@@ -61,7 +60,6 @@ const ContactForm = () => {
       <Button
         type="submit"
         variant="contained"
-        color="secondary"
         sx={{ mt: 4, ml: "30%", width: "40%" }}
       >
         <Typography variant="button">Envoyer</Typography>

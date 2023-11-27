@@ -24,7 +24,7 @@ const HeaderContent = () => {
         <HeaderTitle />
         <Paper>
           <Typography
-            variant="subtitle1"
+            variant="h2"
             gutterBottom
             fontFamily="kaushan script"
             textAlign="center"

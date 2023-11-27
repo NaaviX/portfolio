@@ -7,10 +7,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import SectionLayout from "../components/sections/SectionLayout";
 import React from "react";
-import SectionTitle from "../components/sections/components/SectionTitle";
-import { SKILL_TYPE } from "../components/skills/skills.type";
 import { projectsData } from "../components/projects/projects.data";
 import { Project } from "../components/projects/projects.type";
 
@@ -28,7 +25,7 @@ const getProjectsTemplate = (): React.JSX.Element[] => {
       <Card>
         <CardActionArea>
           <CardContent>
-            <Typography gutterBottom variant="h4" component="div">
+            <Typography gutterBottom variant="h2">
               {project.name} {project.type} {project.year}
             </Typography>
             {project.description}
@@ -38,9 +35,7 @@ const getProjectsTemplate = (): React.JSX.Element[] => {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
-            Exemple
-          </Button>
+          <Button>Exemple</Button>
         </CardActions>
       </Card>
     </Grid>

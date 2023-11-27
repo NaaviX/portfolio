@@ -11,9 +11,9 @@ export interface Section {
 }
 
 export const sectionsData: Section[] = [
-  { name: "Compétences", target: "skills", element: Skills },
+  { name: "Compétences & technos", target: "skills", element: Skills },
   { name: "Expériences", target: "experiences", element: Experiences },
   { name: "Formations & Diplômes", target: "courses", element: Courses },
-  { name: "Projets", target: "projects", element: Projects },
-  { name: "Contact", target: "contact", element: Contact },
+  { name: "Projets principaux", target: "projects", element: Projects },
+  { name: "Me contacter", target: "contact", element: Contact },
 ];

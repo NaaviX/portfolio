@@ -1,4 +1,4 @@
-import type { IOptions, RecursivePartial } from "tsparticles-engine";
+import type {IOptions, RecursivePartial} from "tsparticles-engine";
 import androidIcon from "../../assets/icons/android-icon-svgrepo-com.svg";
 import cssIcon from "../../assets/icons/css-3-svgrepo-com.svg";
 import tailwindIcon from "../../assets/icons/tailwindcss-icon-svgrepo-com.svg";

@@ -1,14 +1,14 @@
-import { Box } from "@mui/material";
-import { useScroll } from "framer-motion";
-import { useRef } from "react";
+import {Box} from "@mui/material";
+import {useScroll} from "framer-motion";
+import {useRef} from "react";
 import SkillsCard from "../components/skills/components/SkillsCard";
-import { skillsData } from "../components/skills/skills.data";
-import { SkillCategory } from "../components/skills/skills.type";
+import {skillsData} from "../components/skills/skills.data";
+import {SkillCategory} from "../components/skills/skills.type";
 
 const Skills = () => {
   const container = useRef(null);
 
-  const { scrollYProgress } = useScroll({
+  const {scrollYProgress} = useScroll({
     target: container,
 
     offset: ["start start", "end end"],
@@ -17,9 +17,8 @@ const Skills = () => {
   return (
     <Box
       ref={container}
-      sx={{ my: "50px", display: "block", width: "100%" }}
-      id="skills"
-    >
+      sx={{my: "50px", display: "block", width: "100%"}}
+      id="skills">
       {skillsData.map((skillCategory: SkillCategory, i: number) => {
         const targetScale = 1 - (skillsData.length - i) * 0.05;
         return (
@@ -29,8 +28,7 @@ const Skills = () => {
             key={"skill_cat_" + skillCategory.name.toString()}
             progress={scrollYProgress}
             range={[i * 0.25, 1]}
-            targetScale={targetScale}
-          ></SkillsCard>
+            targetScale={targetScale}></SkillsCard>
         );
       })}
     </Box>

@@ -1,5 +1,5 @@
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import { FormEvent } from "react";
+import {Box, Button, Grid, TextField, Typography} from "@mui/material";
+import {FormEvent} from "react";
 
 function handleSubmit(event: FormEvent<HTMLFormElement>) {
   event.preventDefault();
@@ -13,7 +13,7 @@ function handleSubmit(event: FormEvent<HTMLFormElement>) {
 const ContactForm = () => {
   return (
     <Box component="form" noValidate onSubmit={handleSubmit}>
-      <Grid container spacing={2} sx={{ mt: "40px", height: "100%" }}>
+      <Grid container spacing={2} sx={{mt: "40px", height: "100%"}}>
         <Grid item xs={12} sm={6}>
           <TextField
             autoComplete="family-name"
@@ -60,8 +60,7 @@ const ContactForm = () => {
       <Button
         type="submit"
         variant="contained"
-        sx={{ mt: 4, ml: "30%", width: "40%" }}
-      >
+        sx={{mt: 4, ml: "30%", width: "40%"}}>
         <Typography variant="button">Envoyer</Typography>
       </Button>
     </Box>

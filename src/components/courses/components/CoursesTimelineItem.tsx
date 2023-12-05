@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import {Box, Typography} from "@mui/material";
 import {
   TimelineConnector,
   TimelineContent,
@@ -11,7 +11,7 @@ import "moment/locale/fr";
 import PlaceIcon from "@mui/icons-material/Place";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import Paper from "../../base/components/Paper";
-import { Course } from "../courses.type";
+import {Course} from "../courses.type";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
 
@@ -23,11 +23,11 @@ const CoursesTimelineItem = (props: CoursesTimelineItemProps) => {
   const course: Course = props.course;
   return (
     <TimelineItem>
-      <TimelineOppositeContent sx={{ pt: "28px" }}>
+      <TimelineOppositeContent sx={{pt: "28px"}}>
         {course.dateFrom.getFullYear()} - {course.dateTo.getFullYear()}
       </TimelineOppositeContent>
       <TimelineSeparator>
-        <TimelineConnector sx={{ flexGrow: "0.05" }} />
+        <TimelineConnector sx={{flexGrow: "0.05"}} />
         <TimelineDot variant="outlined">
           <SchoolOutlinedIcon />
         </TimelineDot>
@@ -37,8 +37,7 @@ const CoursesTimelineItem = (props: CoursesTimelineItemProps) => {
         sx={{
           py: "22px",
           px: 2,
-        }}
-      >
+        }}>
         <Typography variant="h2">{course.name}</Typography>
         <Box
           sx={{
@@ -55,8 +54,7 @@ const CoursesTimelineItem = (props: CoursesTimelineItemProps) => {
               placeItems: "center",
               gap: "3px",
             },
-          }}
-        >
+          }}>
           <Box className="courseInfos">
             <ApartmentIcon /> <span>{course.school}</span>
           </Box>

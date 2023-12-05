@@ -1,6 +1,6 @@
-import { Box, Typography } from "@mui/material";
-import { Skill, SkillCategory } from "../skills.type";
-import { useTransform, useScroll, motion, MotionValue } from "framer-motion";
+import {Box, Typography} from "@mui/material";
+import {Skill, SkillCategory} from "../skills.type";
+import {useTransform, useScroll, motion, MotionValue} from "framer-motion";
 import Chip from "../../base/components/Chip";
 
 const SkillsCardBody = ({
@@ -20,8 +20,7 @@ const SkillsCardBody = ({
           display: "flex",
           height: "100%",
           gap: "50px",
-        }}
-      >
+        }}>
         <Box
           className="skillCardDescription"
           sx={{
@@ -30,8 +29,7 @@ const SkillsCardBody = ({
             gap: "30px",
             display: "flex",
             flexDirection: "column",
-          }}
-        >
+          }}>
           <Typography variant="h2">{skillCategory.name.toString()}</Typography>
           <Typography variant="body1">{skillCategory.description}</Typography>
         </Box>
@@ -45,15 +43,11 @@ const SkillsCardBody = ({
             display: "flex",
             height: "100%",
             alignItems: "center",
-          }}
-        >
+          }}>
           <motion.div
-            style={{ scale: imageScale, width: "100%" }}
-            className="skillCategoryInnerImage"
-          >
-            <skillCategory.image
-              style={{ width: "100%", objectFit: "cover" }}
-            />
+            style={{scale: imageScale, width: "100%"}}
+            className="skillCategoryInnerImage">
+            <skillCategory.image style={{width: "100%", objectFit: "cover"}} />
           </motion.div>
         </Box>
       </Box>
@@ -65,13 +59,12 @@ const SkillsCardBody = ({
           gap: "10px",
           flexWrap: "wrap",
           justifyContent: "center",
-        }}
-      >
+        }}>
         {skillCategory.skills.map((skill: Skill, i: number) => (
           <Chip
             key={skill.name}
             icon={
-              skill.icon ? <skill.icon style={{ width: "1rem" }} /> : <span />
+              skill.icon ? <skill.icon style={{width: "1rem"}} /> : <span />
             }
             label={skill.name}
           />

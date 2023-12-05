@@ -7,7 +7,7 @@ import {
   springbootSkill,
   vueSkill,
 } from "../skills/skills.data";
-import { Experience } from "./experiences.type";
+import {Experience} from "./experiences.type";
 
 export const experiencesData: Experience[] = [
   {

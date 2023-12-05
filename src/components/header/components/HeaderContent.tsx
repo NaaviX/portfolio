@@ -1,5 +1,5 @@
-import { Box, IconButton, Typography } from "@mui/material";
-import { userData } from "../../user/user.data";
+import {Box, IconButton, Typography} from "@mui/material";
+import {userData} from "../../user/user.data";
 import SectionLayout from "../../sections/SectionLayout";
 import HeaderTitle from "./HeaderTitle";
 import Paper from "../../base/components/Paper";
@@ -19,8 +19,7 @@ const HeaderContent = () => {
           justifyContent: "space-evenly",
           textAlign: "center",
           zIndex: 1,
-        }}
-      >
+        }}>
         <HeaderTitle />
         <Paper>
           <Typography
@@ -28,8 +27,7 @@ const HeaderContent = () => {
             gutterBottom
             fontFamily="kaushan script"
             textAlign="center"
-            marginBottom="50px"
-          >
+            marginBottom="50px">
             {userData.jobTitle} <br />
             {userData.mainDescription}
           </Typography>
@@ -38,8 +36,7 @@ const HeaderContent = () => {
               width: "30%",
               display: "flex",
               justifyContent: "space-evenly",
-            }}
-          >
+            }}>
             <MagneticButton>
               <IconButton
                 href={userData.linkedin}
@@ -49,8 +46,7 @@ const HeaderContent = () => {
                   m: "3px",
                   boxShadow:
                     "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;",
-                }}
-              >
+                }}>
                 <ContactPageOutlinedIcon />
               </IconButton>
             </MagneticButton>
@@ -63,8 +59,7 @@ const HeaderContent = () => {
                   m: "3px",
                   boxShadow:
                     "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;",
-                }}
-              >
+                }}>
                 <LinkedInIcon />
               </IconButton>
             </MagneticButton>

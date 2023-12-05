@@ -8,8 +8,8 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import { projectsData } from "../components/projects/projects.data";
-import { Project } from "../components/projects/projects.type";
+import {projectsData} from "../components/projects/projects.data";
+import {Project} from "../components/projects/projects.type";
 
 const Projects = () => {
   return (

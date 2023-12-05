@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Toolbar } from "@mui/material";
+import {Container, Toolbar} from "@mui/material";
 import SectionTitle from "./components/SectionTitle";
 
 const SectionLayout = ({
@@ -19,8 +19,7 @@ const SectionLayout = ({
         display: "flex",
         flexDirection: "column",
         placeItems: "center",
-      }}
-    >
+      }}>
       <Toolbar />
       <SectionTitle>{title}</SectionTitle>
 

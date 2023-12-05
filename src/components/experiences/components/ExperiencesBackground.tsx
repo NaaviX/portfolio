@@ -1,10 +1,10 @@
-import { ReactComponent as Exp1 } from "../../../assets/images/exp1.svg";
-import { ReactComponent as Exp2 } from "../../../assets/images/exp2.svg";
-import { Box } from "@mui/material";
+import {ReactComponent as Exp1} from "../../../assets/images/exp1.svg";
+import {ReactComponent as Exp2} from "../../../assets/images/exp2.svg";
+import {Box} from "@mui/material";
 
 const ExperiencesBackground = () => {
   return (
-    <Box display={{ xs: "none", lg: "block", opacity: "0.6" }}>
+    <Box display={{xs: "none", lg: "block", opacity: "0.6"}}>
       <Exp1
         role="img"
         name="exp1"

@@ -1,4 +1,4 @@
-import { Container, Grid } from "@mui/material";
+import {Container, Grid} from "@mui/material";
 import ContactForm from "../components/contact/components/ContactForm";
 
 const Contact = () => {

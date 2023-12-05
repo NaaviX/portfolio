@@ -1,4 +1,4 @@
-import { Theme, ThemeOptions, createTheme } from "@mui/material";
+import {Theme, ThemeOptions, createTheme} from "@mui/material";
 
 /*
 cyan :
@@ -46,14 +46,14 @@ const appTheme: Theme = createTheme({
       styleOverrides: {
         root: {
           borderColor: "#12677e",
-          "&:hover": { "& fieldset": { borderColor: "#11809c !important" } },
+          "&:hover": {"& fieldset": {borderColor: "#11809c !important"}},
         },
       },
     },
     MuiButtonBase: {
       styleOverrides: {
         root: {
-          "&:hover": { backgroundColor: "#003848 !important" },
+          "&:hover": {backgroundColor: "#003848 !important"},
         },
       },
     },
@@ -61,7 +61,7 @@ const appTheme: Theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: "#003848",
-          "&:hover": { backgroundColor: "#004558 !important" },
+          "&:hover": {backgroundColor: "#004558 !important"},
         },
       },
     },

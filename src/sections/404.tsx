@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import {Box} from "@mui/material";
 
 function Error404() {
   return (
@@ -9,8 +9,7 @@ function Error404() {
         display: "flex",
         placeItems: "center",
         placeContent: "center",
-      }}
-    ></Box>
+      }}></Box>
   );
 }
 

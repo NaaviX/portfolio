@@ -1,4 +1,4 @@
-import { FC, FunctionComponent, ReactComponentElement, SVGProps } from "react";
+import {FC, FunctionComponent, ReactComponentElement, SVGProps} from "react";
 
 export enum SKILL_TYPE {
   WEBFRONT = "Frontend",

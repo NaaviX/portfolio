@@ -1,4 +1,4 @@
-import { Skill } from "../skills/skills.type";
+import {Skill} from "../skills/skills.type";
 
 export interface Experience {
   title: string;

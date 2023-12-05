@@ -1,18 +1,15 @@
-import { useEffect } from "react";
-import "./App.css";
-import Header from "./sections/Header";
-import Appbar from "./components/appbar/Appbar";
-import Footer from "./sections/Footer";
 import "@fontsource/roboto";
-import moment from "moment/moment";
-import { Section, sectionsData } from "./components/sections/sections.data";
-import { Element } from "react-scroll";
-import SectionLayout from "./components/sections/SectionLayout";
+import {Box} from "@mui/material";
 import Lenis from "@studio-freight/lenis";
-import { Box } from "@mui/material";
-import React from "react";
-import { Parallax, ParallaxProvider } from "react-scroll-parallax";
-
+import moment from "moment/moment";
+import {useEffect} from "react";
+import {Element} from "react-scroll";
+import "./App.css";
+import Appbar from "./components/appbar/Appbar";
+import SectionLayout from "./components/sections/SectionLayout";
+import {Section, sectionsData} from "./components/sections/sections.data";
+import Footer from "./sections/Footer";
+import Header from "./sections/Header";
 moment().locale("fr");
 
 const App = () => {
@@ -35,8 +32,7 @@ const App = () => {
           name={section.target}
           key={section.name}
           className="element"
-          style={{ position: "relative" }}
-        >
+          style={{position: "relative"}}>
           <SectionLayout title={section.name}>
             <section.element />
           </SectionLayout>

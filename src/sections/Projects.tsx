@@ -1,45 +1,54 @@
-import {
-  Button,
-  Card,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  Grid,
-  Typography,
-} from "@mui/material";
-import React from "react";
+import {Box, Typography} from "@mui/material";
+import Paper from "../components/base/components/Paper";
 import {projectsData} from "../components/projects/projects.data";
 import {Project} from "../components/projects/projects.type";
 
 const Projects = () => {
   return (
-    <Grid container spacing={2}>
-      {getProjectsTemplate()}
+    <Box
+      sx={{
+        width: "100%",
+        display: "flex",
+        gap: "10px",
+        flexWrap: "wrap",
+        justifyContent: "center",
+      }}>
+      {projectsData.MAIN.map((project: Project) => (
+        <Paper key={project.name}>
+          <Typography gutterBottom variant="h2">
+            {project.name} {project.type} {project.year}
+          </Typography>
+          {project.description}
+          {project.stack.map(stack => (
+            <div key={stack}>{stack}</div>
+          ))}
+        </Paper>
+      ))}
+    </Box>
+    /*<Grid container spacing={2}>
+      {projectsData.MAIN.map(project => (
+        <Grid item xs={12} key={project.name}>
+          <Card>
+            <CardActionArea>
+              <CardContent>
+                <Typography gutterBottom variant="h2">
+                  {project.name} {project.type} {project.year}
+                </Typography>
+                {project.description}
+                {project.stack.map(stack => (
+                  <div key={stack}>{stack}</div>
+                ))}
+              </CardContent>
+            </CardActionArea>
+            <CardActions>
+              <Button>Exemple</Button>
+            </CardActions>
+          </Card>
+        </Grid>
+      ))}
     </Grid>
+  );*/
   );
-};
-
-const getProjectsTemplate = (): React.JSX.Element[] => {
-  return projectsData.map((project: Project) => (
-    <Grid item xs={3} key={project.name}>
-      <Card>
-        <CardActionArea>
-          <CardContent>
-            <Typography gutterBottom variant="h2">
-              {project.name} {project.type} {project.year}
-            </Typography>
-            {project.description}
-            {project.stack.map((stack: string) => (
-              <div key={stack}>{stack}</div>
-            ))}
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button>Exemple</Button>
-        </CardActions>
-      </Card>
-    </Grid>
-  ));
 };
 
 export default Projects;

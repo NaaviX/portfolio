@@ -7,6 +7,7 @@ import App from './App'
 import Appbar from './components/appbar/Appbar'
 import ProjectInfos from './components/projects/components/ProjectInfos'
 import './index.css'
+import reportWebVitals from './reportWebVitals'
 import Footer from './sections/Footer'
 import appTheme from './theme'
 
@@ -35,3 +36,8 @@ root.render(
         </ThemeProvider>
     </React.StrictMode>
 )
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals()

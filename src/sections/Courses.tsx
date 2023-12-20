@@ -1,15 +1,13 @@
-import SectionLayout from "../components/sections/SectionLayout";
-import SectionTitle from "../components/sections/components/SectionTitle";
-import CoursesTimeline from "../components/courses/components/CoursesTimeline";
-import CoursesBackground from "../components/courses/components/CoursesBackground";
+import CoursesBackground from '../components/courses/components/CoursesBackground'
+import CoursesTimeline from '../components/courses/components/CoursesTimeline'
 
 const Courses = () => {
-  return (
-    <>
-      <CoursesBackground />
-      <CoursesTimeline />
-    </>
-  );
-};
+    return (
+        <>
+            <CoursesBackground />
+            <CoursesTimeline />
+        </>
+    )
+}
 
-export default Courses;
+export default Courses

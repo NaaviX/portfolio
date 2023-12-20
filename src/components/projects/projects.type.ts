@@ -1,17 +1,22 @@
-export interface ProjectPaper {
-  style: React.CSSProperties | undefined;
+import {Theme} from "@emotion/react";
+import {SxProps} from "@mui/material";
+import {FC, SVGProps} from "react";
+
+export interface ProjectStack {
+  name: string;
+  icon: FC<SVGProps<SVGSVGElement>> | undefined;
 }
 export interface Project {
   name: string;
   type: "WEB" | "MOBILE" | "APP";
   description: string;
   year: string;
-  stack: string[];
-  paper: ProjectPaper;
+  stack: ProjectStack[];
+
+  images: string[];
 }
 
 export interface ProjectSection {
-  title: string;
+  style: SxProps<Theme>;
   projects: Project[];
-  paper: ProjectPaper;
 }

@@ -1,54 +1,78 @@
-import {Project, ProjectSection} from "./projects.type";
+import {ReactComponent as BootstrapIcon} from "../../assets/icons/bootstrap-svgrepo-com.svg";
+import {ReactComponent as BulmaIcon} from "../../assets/icons/bulma-svgrepo-com.svg";
+import {ReactComponent as FirebaseIcon} from "../../assets/icons/firebase-svgrepo-com.svg";
+import {ReactComponent as FlutterIcon} from "../../assets/icons/flutter-svgrepo-com.svg";
+import {ReactComponent as JavaIcon} from "../../assets/icons/java-svgrepo-com.svg";
+import {ReactComponent as JavascriptIcon} from "../../assets/icons/javascript-svgrepo-com.svg";
+import {ReactComponent as VueIcon} from "../../assets/icons/vue-svgrepo-com.svg";
+import esieeplus1 from "../../assets/images/projects/esieeplus/esieeplus1.jpg";
+import groom1 from "../../assets/images/projects/groom/groom1.png";
+
+import {Project} from "./projects.type";
+
+export const projectsStyle = {
+  MainProjects: {
+    width: {sm: "100%", md: "48%"},
+    margin: "1%",
+  },
+  OtherProject: {
+    width: "31%",
+    margin: "1%",
+  },
+};
 
 export const projectsData = {
-  MAIN: {
-    title: "Projets Principaux",
-    paper: {
-      style: {},
+  projects: [
+    {
+      name: "Groom",
+      type: "WEB",
+      description:
+        "Application web de gestion de projet, permettant une communication simplifiée entre les développeurs et les clients.",
+      year: "2022",
+      stack: [
+        {name: "VueJS", icon: VueIcon},
+        {
+          name: "Firebase authentification/Cloud Firestore",
+          icon: FirebaseIcon,
+        },
+      ],
+      images: [groom1],
     },
-    projects: [
-      {
-        name: "ESIEE +",
-        type: "MOBILE",
-        description:
-          "Application mobile du BDE ESIEE Paris, utile à tous les étudiants de l'école",
-        year: "",
-        stack: ["Flutter", "Firebase authentification"],
-      },
-      {
-        name: "Groom",
-        type: "WEB",
-        description:
-          "Site web de gestion de projet, permettant une communication simplifiée entre les développeurs et les clients.",
-        year: "",
-        stack: [
-          "VueJS (Composition API)",
-          "Firebase authentification, storage, hosting & Cloud Firestore",
-        ],
-      },
-    ],
-  } as ProjectSection,
-  IMPORTANT: [
+    {
+      name: "ESIEE +",
+      type: "MOBILE",
+      description:
+        "Application mobile du BDE ESIEE Paris, pensée pour tous les étudiants de l'école",
+      year: "2019",
+      stack: [
+        {name: "Flutter", icon: FlutterIcon},
+        {name: "Firebase authentification", icon: FirebaseIcon},
+      ],
+      images: [esieeplus1],
+    },
     {
       name: "BDE Django",
       type: "MOBILE",
       description: "",
-      year: "",
-      stack: ["Flutter"],
+      year: "2020",
+      stack: [{name: "Flutter", icon: FlutterIcon}],
+      images: [""],
     },
     {
       name: "BDE Nova",
       type: "MOBILE",
       description: "",
-      year: "",
-      stack: ["Flutter"],
+      year: "2021",
+      stack: [{name: "Flutter", icon: FlutterIcon}],
+      images: [""],
     },
     {
       name: "Liste Sparrow",
       type: "MOBILE",
       description: "",
-      year: "",
-      stack: ["Flutter"],
+      year: "2022",
+      stack: [{name: "Flutter", icon: FlutterIcon}],
+      images: [""],
     },
     {
       name: "BDE Tools",
@@ -56,33 +80,50 @@ export const projectsData = {
       description:
         "Site web regroupant plusieurs outils, afin de gérer de façon simple les prévisions pour les voyages et les soirées, ainsi que les informations des étudiants",
       year: "2019",
-      stack: ["VueJS", "Buefy", "Firebase (Authentification et Firestore)"],
+      stack: [
+        {name: "VueJS", icon: VueIcon},
+        {name: "Bulma", icon: BulmaIcon},
+        {
+          name: "Firebase (Authentification et Firestore)",
+          icon: FirebaseIcon,
+        },
+      ],
+      images: [""],
     },
-  ] as Project[],
-  SIDE: [
     {
       name: "Liste Sunrise",
       type: "WEB",
       description:
         "Site web vitrine de présentation de la liste Sunrise, dont je faisais parti dans le cadre de l'election du BDE ESIEE Paris 2019. Cette liste a par la suite gagné l'élection et s'est renommée BDE Django.",
       year: "2019",
-      stack: ["Jquery", "AJAX", "Bootstrap"],
+      stack: [
+        {name: "Jquery", icon: undefined},
+        {name: "AJAX", icon: undefined},
+        {name: "Bootstrap", icon: BootstrapIcon},
+      ],
+      images: [""],
     },
     {
       name: "Treasure hunt",
       type: "APP",
       description: "",
       year: "2023",
-      stack: ["Java 21"],
+      stack: [{name: "Java 21", icon: JavaIcon}],
+      images: [""],
     },
-  ] as Project[],
-  OTHER: [
     {
       name: "VO2Max",
       type: "WEB",
       description: "Site web vitrine pour un coach sportif",
       year: "2019",
-      stack: ["PHP 5", "Javascript", "Jquery", "AJAX", "Bootstrap"],
+      stack: [
+        {name: "PHP 5", icon: undefined},
+        {name: "Javascript", icon: JavascriptIcon},
+        {name: "Jquery", icon: undefined},
+        {name: "AJAX", icon: undefined},
+        {name: "Bootstrap", icon: BootstrapIcon},
+      ],
+      images: [""],
     },
     {
       name: "Cotisants BDE ESIEE Paris",
@@ -90,7 +131,12 @@ export const projectsData = {
       description:
         "Simple interface connectée à l'API du BDE Django afin de gérer les cotisants de manière simple",
       year: "2019",
-      stack: ["VueJS", "Buefy", "Jquery"],
+      stack: [
+        {name: "VueJS", icon: VueIcon},
+        {name: "Bulma", icon: BulmaIcon},
+        {name: "Jquery", icon: undefined},
+      ],
+      images: [""],
     },
   ] as Project[],
 };

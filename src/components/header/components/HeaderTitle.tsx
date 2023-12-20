@@ -1,14 +1,14 @@
 import {Box, Typography} from "@mui/material";
-import {userData} from "../../user/user.data";
 import {motion} from "framer-motion";
-import React from "react";
+import {userData} from "../../user/user.data";
+
 const HeaderTitle = () => {
   return (
     <Box id="repulse-div">
       <motion.div
-        initial={{opacity: 0.3}}
-        whileInView={{opacity: 1}}
-        transition={{duration: 2}}
+        initial={{x: "100vw"}}
+        animate={{x: 0}}
+        transition={{type: "spring", duration: 2, bounce: 0.3}}
         viewport={{once: true}}>
         <Typography
           component="h1"

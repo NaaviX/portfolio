@@ -1,53 +1,42 @@
-import {Box, Typography} from "@mui/material";
-import Paper from "../components/base/components/Paper";
-import {projectsData} from "../components/projects/projects.data";
+import {Box} from "@mui/material";
+import OtherProjects from "../components/projects/components/OtherProjects";
+import ProjectCard from "../components/projects/components/ProjectCard";
+import {
+  projectsData,
+  projectsStyle,
+} from "../components/projects/projects.data";
 import {Project} from "../components/projects/projects.type";
 
 const Projects = () => {
+  const projects = projectsData.projects;
+  const mainProjects = projects.slice(0, 2);
+  const otherProjects = projects.slice(2);
   return (
     <Box
       sx={{
         width: "100%",
         display: "flex",
-        gap: "10px",
-        flexWrap: "wrap",
-        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
       }}>
-      {projectsData.MAIN.map((project: Project) => (
-        <Paper key={project.name}>
-          <Typography gutterBottom variant="h2">
-            {project.name} {project.type} {project.year}
-          </Typography>
-          {project.description}
-          {project.stack.map(stack => (
-            <div key={stack}>{stack}</div>
-          ))}
-        </Paper>
-      ))}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+        }}>
+        {mainProjects.map((project: Project) => (
+          <ProjectCard
+            key={project.name}
+            project={project}
+            sx={projectsStyle.MainProjects}
+          />
+        ))}
+      </Box>
+
+      <br />
+      <OtherProjects projects={otherProjects} />
     </Box>
-    /*<Grid container spacing={2}>
-      {projectsData.MAIN.map(project => (
-        <Grid item xs={12} key={project.name}>
-          <Card>
-            <CardActionArea>
-              <CardContent>
-                <Typography gutterBottom variant="h2">
-                  {project.name} {project.type} {project.year}
-                </Typography>
-                {project.description}
-                {project.stack.map(stack => (
-                  <div key={stack}>{stack}</div>
-                ))}
-              </CardContent>
-            </CardActionArea>
-            <CardActions>
-              <Button>Exemple</Button>
-            </CardActions>
-          </Card>
-        </Grid>
-      ))}
-    </Grid>
-  );*/
   );
 };
 

@@ -1,14 +1,11 @@
 import "@fontsource/roboto";
-import {Box} from "@mui/material";
 import Lenis from "@studio-freight/lenis";
 import moment from "moment/moment";
 import {useEffect} from "react";
 import {Element} from "react-scroll";
 import "./App.css";
-import Appbar from "./components/appbar/Appbar";
 import SectionLayout from "./components/sections/SectionLayout";
 import {Section, sectionsData} from "./components/sections/sections.data";
-import Footer from "./sections/Footer";
 import Header from "./sections/Header";
 moment().locale("fr");
 
@@ -21,10 +18,8 @@ const App = () => {
     }
     requestAnimationFrame(raf);
   });
-
   return (
-    <Box className="app">
-      <Appbar />
+    <>
       <Header />
 
       {sectionsData.map((section: Section) => (
@@ -38,8 +33,7 @@ const App = () => {
           </SectionLayout>
         </Element>
       ))}
-      <Footer />
-    </Box>
+    </>
   );
 };
 

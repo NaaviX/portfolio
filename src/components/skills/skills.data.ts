@@ -1,30 +1,31 @@
-import {SKILL_TYPE, SKILL_NAME, Skill, SkillCategory} from "./skills.type";
-import {ReactComponent as VueIcon} from "../../assets/icons/vue-svgrepo-com.svg";
-import {ReactComponent as NuxtIcon} from "../../assets/icons/nuxt-icon-svgrepo-com.svg";
-import {ReactComponent as ReactIcon} from "../../assets/icons/react-svgrepo-com.svg";
-import {ReactComponent as SpringBootIcon} from "../../assets/icons/spring-icon-svgrepo-com.svg";
-
-import {ReactComponent as BulmaIcon} from "../../assets/icons/bulma-svgrepo-com.svg";
-import {ReactComponent as PostgreSQLIcon} from "../../assets/icons/postgresql-svgrepo-com.svg";
-import {ReactComponent as JavascriptIcon} from "../../assets/icons/javascript-svgrepo-com.svg";
-import {ReactComponent as TypescriptIcon} from "../../assets/icons/typescript-icon-svgrepo-com.svg";
-import {ReactComponent as JavaIcon} from "../../assets/icons/java-svgrepo-com.svg";
-import {ReactComponent as CssIcon} from "../../assets/icons/css-3-svgrepo-com.svg";
+import {ReactComponent as AndroidIcon} from "../../assets/icons/android-icon-svgrepo-com.svg";
 import {ReactComponent as BootstrapIcon} from "../../assets/icons/bootstrap-svgrepo-com.svg";
-import {ReactComponent as TailwindIcon} from "../../assets/icons/tailwindcss-icon-svgrepo-com.svg";
-import {ReactComponent as MuiIcon} from "../../assets/icons/material-ui-svgrepo-com.svg";
+import {ReactComponent as BulmaIcon} from "../../assets/icons/bulma-svgrepo-com.svg";
+import {ReactComponent as CssIcon} from "../../assets/icons/css-3-svgrepo-com.svg";
 import {ReactComponent as FirebaseIcon} from "../../assets/icons/firebase-svgrepo-com.svg";
 import {ReactComponent as FlutterIcon} from "../../assets/icons/flutter-svgrepo-com.svg";
-import {ReactComponent as AndroidIcon} from "../../assets/icons/android-icon-svgrepo-com.svg";
-import {ReactComponent as SwaggerIcon} from "../../assets/icons/swagger-svgrepo-com.svg";
-import {ReactComponent as PostmanIcon} from "../../assets/icons/postman-icon-svgrepo-com.svg";
 import {ReactComponent as GitIcon} from "../../assets/icons/git-icon-svgrepo-com.svg";
+import {ReactComponent as JavaIcon} from "../../assets/icons/java-svgrepo-com.svg";
+import {ReactComponent as JavascriptIcon} from "../../assets/icons/javascript-svgrepo-com.svg";
+import {ReactComponent as MuiIcon} from "../../assets/icons/material-ui-svgrepo-com.svg";
+import {ReactComponent as NuxtIcon} from "../../assets/icons/nuxt-icon-svgrepo-com.svg";
+import {ReactComponent as PostgreSQLIcon} from "../../assets/icons/postgresql-svgrepo-com.svg";
+import {ReactComponent as PostmanIcon} from "../../assets/icons/postman-icon-svgrepo-com.svg";
+import {ReactComponent as ReactIcon} from "../../assets/icons/react-svgrepo-com.svg";
+import {ReactComponent as SpringBootIcon} from "../../assets/icons/spring-icon-svgrepo-com.svg";
+import {ReactComponent as SwaggerIcon} from "../../assets/icons/swagger-svgrepo-com.svg";
+import {ReactComponent as TailwindIcon} from "../../assets/icons/tailwindcss-icon-svgrepo-com.svg";
+import {ReactComponent as TypescriptIcon} from "../../assets/icons/typescript-icon-svgrepo-com.svg";
+import {ReactComponent as VueIcon} from "../../assets/icons/vue-svgrepo-com.svg";
+import {SKILL_NAME, SKILL_TYPE, Skill, SkillCategory} from "./skills.type";
 
-import {ReactComponent as SkillFrontImage} from "../../assets/images/skillFront.svg";
-import {ReactComponent as SkillBackImage} from "../../assets/images/skillback.svg";
 import {ReactComponent as SkillDataImage} from "../../assets/images/skillData.svg";
 import {ReactComponent as SkillDevToolsImage} from "../../assets/images/skillDevTools.svg";
-import {ReactComponent as SkillMobileImage} from "../../assets/images/skillFront.svg";
+import {
+  ReactComponent as SkillFrontImage,
+  ReactComponent as SkillMobileImage,
+} from "../../assets/images/skillFront.svg";
+import {ReactComponent as SkillBackImage} from "../../assets/images/skillback.svg";
 
 export const javaSkill: Skill = {
   name: SKILL_NAME.JAVA,

@@ -93,7 +93,6 @@ const appTheme: Theme = createTheme({
       color: "#4ccce6",
     },
     h2: {
-      paddingBottom: "1rem",
       fontWeight: 600,
       letterSpacing: 1.3,
       fontSize: 24,

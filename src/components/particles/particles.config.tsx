@@ -1,14 +1,14 @@
 import type {IOptions, RecursivePartial} from "tsparticles-engine";
 import androidIcon from "../../assets/icons/android-icon-svgrepo-com.svg";
 import cssIcon from "../../assets/icons/css-3-svgrepo-com.svg";
-import tailwindIcon from "../../assets/icons/tailwindcss-icon-svgrepo-com.svg";
 import flutterIcon from "../../assets/icons/flutter-svgrepo-com.svg";
 import javaIcon from "../../assets/icons/java-svgrepo-com.svg";
 import javascriptIcon from "../../assets/icons/javascript-svgrepo-com.svg";
 import reactIcon from "../../assets/icons/react-svgrepo-com.svg";
-import vueIcon from "../../assets/icons/vue-svgrepo-com.svg";
-import typescriptIcon from "../../assets/icons/typescript-icon-svgrepo-com.svg";
 import springIcon from "../../assets/icons/spring-icon-svgrepo-com.svg";
+import tailwindIcon from "../../assets/icons/tailwindcss-icon-svgrepo-com.svg";
+import typescriptIcon from "../../assets/icons/typescript-icon-svgrepo-com.svg";
+import vueIcon from "../../assets/icons/vue-svgrepo-com.svg";
 
 export const headerOptions: RecursivePartial<IOptions> | undefined = {
   autoPlay: true,
@@ -22,7 +22,7 @@ export const headerOptions: RecursivePartial<IOptions> | undefined = {
   fpsLimit: 120,
 
   interactivity: {
-    detectsOn: "window",
+    detectsOn: "parent",
     events: {
       onDiv: [
         {

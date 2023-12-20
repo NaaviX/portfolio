@@ -1,8 +1,8 @@
-import Skills from "../../sections/Skills";
-import Experiences from "../../sections/Experiences";
-import Projects from "../../sections/Projects";
 import Contact from "../../sections/Contact";
 import Courses from "../../sections/Courses";
+import Experiences from "../../sections/Experiences";
+import Projects from "../../sections/Projects";
+import Skills from "../../sections/Skills";
 
 export interface Section {
   name: string;

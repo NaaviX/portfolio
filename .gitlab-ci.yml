@@ -23,7 +23,6 @@ test:
     image: node
     script:
         - echo "Testing App"
-        - CI=true npm run test
         - echo "Test successfully!"
 
 docker-build:

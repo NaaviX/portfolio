@@ -1,15 +1,22 @@
-export enum PROJECT_SIZE {
-  SMALL = 0.4,
-  MEDIUM = 0.6,
-  LARGE = 0.8,
-  MAIN = 1,
+import { Theme } from '@emotion/react'
+import { SxProps } from '@mui/material'
+import { FC, SVGProps } from 'react'
+
+export interface ProjectStack {
+    name: string
+    icon: FC<SVGProps<SVGSVGElement>> | undefined
+}
+export interface Project {
+    name: string
+    type: 'WEB' | 'MOBILE' | 'APP'
+    description: string
+    year: string
+    stack: ProjectStack[]
+
+    images: string[]
 }
 
-export interface Project {
-  name: string;
-  type: "WEB" | "MOBILE" | "APP";
-  description: string;
-  year: string;
-  stack: string[];
-  scale: PROJECT_SIZE | typeof PROJECT_SIZE;
+export interface ProjectSection {
+    style: SxProps<Theme>
+    projects: Project[]
 }

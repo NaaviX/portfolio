@@ -1,45 +1,45 @@
+import { Box } from '@mui/material'
+import OtherProjects from '../components/projects/components/OtherProjects'
+import ProjectCard from '../components/projects/components/ProjectCard'
 import {
-  Button,
-  Card,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  Grid,
-  Typography,
-} from "@mui/material";
-import React from "react";
-import {projectsData} from "../components/projects/projects.data";
-import {Project} from "../components/projects/projects.type";
+    projectsData,
+    projectsStyle,
+} from '../components/projects/projects.data'
+import { Project } from '../components/projects/projects.type'
 
 const Projects = () => {
-  return (
-    <Grid container spacing={2}>
-      {getProjectsTemplate()}
-    </Grid>
-  );
-};
+    const projects = projectsData.projects
+    const mainProjects = projects.slice(0, 2)
+    const otherProjects = projects.slice(2)
+    return (
+        <Box
+            sx={{
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+            }}
+        >
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                }}
+            >
+                {mainProjects.map((project: Project) => (
+                    <ProjectCard
+                        key={project.name}
+                        project={project}
+                        sx={projectsStyle.MainProjects}
+                    />
+                ))}
+            </Box>
 
-const getProjectsTemplate = (): React.JSX.Element[] => {
-  return projectsData.map((project: Project) => (
-    <Grid item xs={3} key={project.name}>
-      <Card>
-        <CardActionArea>
-          <CardContent>
-            <Typography gutterBottom variant="h2">
-              {project.name} {project.type} {project.year}
-            </Typography>
-            {project.description}
-            {project.stack.map((stack: string) => (
-              <div key={stack}>{stack}</div>
-            ))}
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button>Exemple</Button>
-        </CardActions>
-      </Card>
-    </Grid>
-  ));
-};
+            <br />
+            <OtherProjects projects={otherProjects} />
+        </Box>
+    )
+}
 
-export default Projects;
+export default Projects

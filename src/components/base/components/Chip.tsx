@@ -1,17 +1,23 @@
-import React, {FC, ReactElement, SVGProps} from "react";
-import {Paper as MuiPaper, SxProps, Chip as MuiChip} from "@mui/material";
-import {Theme} from "@emotion/react";
+import { Theme } from '@emotion/react'
+import { Chip as MuiChip, SxProps } from '@mui/material'
+import { ReactElement } from 'react'
 
 const Chip = ({
-  icon,
-  label,
-  sx,
+    icon,
+    label,
+    sx,
 }: {
-  icon: ReactElement | undefined;
-  label: string;
-  sx?: SxProps<Theme>;
+    icon: ReactElement | undefined
+    label: string
+    sx?: SxProps<Theme>
 }) => {
-  return <MuiChip label={label} icon={icon} sx={{...sx, pl: "4px"}}></MuiChip>;
-};
+    return (
+        <MuiChip
+            label={label}
+            icon={icon}
+            sx={{ ...sx, pl: '4px', height: 'min' }}
+        ></MuiChip>
+    )
+}
 
-export default Chip;
+export default Chip

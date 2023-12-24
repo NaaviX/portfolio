@@ -1,0 +1,66 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:react/jsx-runtime",
+        "plugin:jsx-a11y/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier",
+        "plugin:prettier/recommended",
+        "plugin:react-hooks/recommended",
+        "plugin:jest/recommended",
+        "plugin:testing-library/react",
+        "plugin:import/typescript"
+    ],
+
+    "overrides": [
+        {
+            "files": ["**/*.ts?(x)"],
+            "parser": "@typescript-eslint/parser",
+            "parserOptions": {
+                "ecmaFeatures": {
+                    "jsx": true
+                },
+                "ecmaVersion": 2018,
+                "sourceType": "module"
+            },
+            "plugins": ["@typescript-eslint"],
+            // You can add Typescript specific rules here.
+            // If you are adding the typescript variant of a rule which is there in the javascript
+            // ruleset, disable the JS one.
+            "rules": {
+                "@typescript-eslint/no-array-constructor": "warn",
+                "no-array-constructor": "off",
+                "spaced-comment": "off"
+            }
+        }
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": ["react", "@typescript-eslint", "import"],
+    "rules": {
+        "react/react-in-jsx-scope": "off",
+        "camelcase": "error",
+        "spaced-comment": "error",
+        "no-duplicate-imports": "error"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        },
+        "import/resolver": {
+            "typescript": {}
+        }
+    }
+}

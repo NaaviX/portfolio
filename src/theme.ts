@@ -1,4 +1,4 @@
-import {Theme, ThemeOptions, createTheme} from "@mui/material";
+import { Theme, ThemeOptions, createTheme } from '@mui/material'
 
 /*
 cyan :
@@ -17,110 +17,111 @@ cyan :
 */
 
 const appTheme: Theme = createTheme({
-  palette: {
-    mode: "dark",
-    primary: {
-      main: "#b6ecf7",
-    },
-    secondary: {
-      main: "#4ccce6",
-    },
-    background: {
-      paper: "rgba(8, 44, 54, 0.4)",
-      default: "#101b20",
-    },
-    divider: "#045468",
-  },
-  components: {
-    MuiListItemText: {
-      styleOverrides: {
-        primary: {},
-      },
-    },
-    MuiFormLabel: {
-      styleOverrides: {
-        root: {},
-      },
-    },
-    MuiInputBase: {
-      styleOverrides: {
-        root: {
-          borderColor: "#12677e",
-          "&:hover": {"& fieldset": {borderColor: "#11809c !important"}},
+    palette: {
+        mode: 'dark',
+        primary: {
+            main: '#b6ecf7',
         },
-      },
-    },
-    MuiButtonBase: {
-      styleOverrides: {
-        root: {
-          "&:hover": {backgroundColor: "#003848 !important"},
+        secondary: {
+            main: '#4ccce6',
         },
-      },
-    },
-    MuiIconButton: {
-      styleOverrides: {
-        root: {
-          backgroundColor: "#003848",
-          "&:hover": {backgroundColor: "#004558 !important"},
+        background: {
+            paper: 'rgba(8, 44, 54, 0.4)',
+            default: '#101b20',
         },
-      },
+        divider: '#045468',
     },
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          backdropFilter: "blur(1px)",
-          color: "#b6ecf7",
+    components: {
+        MuiListItemText: {
+            styleOverrides: {
+                primary: {},
+            },
         },
-      },
-    },
-    MuiChip: {
-      styleOverrides: {
-        root: {
-          fontWeight: 400,
-          letterSpacing: 0.8,
-          color: "#ffffff",
-          backgroundColor: "#004558",
+        MuiFormLabel: {
+            styleOverrides: {
+                root: {},
+            },
         },
-      },
+        MuiInputBase: {
+            styleOverrides: {
+                root: {
+                    borderColor: '#12677e',
+                    '&:hover': {
+                        '& fieldset': { borderColor: '#11809c !important' },
+                    },
+                },
+            },
+        },
+        MuiButtonBase: {
+            styleOverrides: {
+                root: {
+                    '&:hover': { backgroundColor: '#003848 !important' },
+                },
+            },
+        },
+        MuiIconButton: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: '#003848',
+                    '&:hover': { backgroundColor: '#004558 !important' },
+                },
+            },
+        },
+        MuiPaper: {
+            styleOverrides: {
+                root: {
+                    backdropFilter: 'blur(1px)',
+                    color: '#b6ecf7',
+                },
+            },
+        },
+        MuiChip: {
+            styleOverrides: {
+                root: {
+                    fontWeight: 400,
+                    letterSpacing: 0.8,
+                    color: '#ffffff',
+                    backgroundColor: '#004558',
+                },
+            },
+        },
     },
-  },
-  typography: {
-    h1: {
-      textAlign: "center",
-      letterSpacing: 1.1,
-      fontWeight: 400,
-      fontSize: 24,
-      color: "#4ccce6",
+    typography: {
+        h1: {
+            textAlign: 'center',
+            letterSpacing: 1.1,
+            fontWeight: 400,
+            fontSize: 24,
+            color: '#4ccce6',
+        },
+        h2: {
+            fontWeight: 600,
+            letterSpacing: 1.3,
+            fontSize: 24,
+            color: '#b6ecf7',
+        },
+        subtitle1: {
+            fontSize: 15,
+            color: '#4ccce6',
+            fontWeight: '700',
+            letterSpacing: '0.07rem',
+        },
+        body1: {
+            textAlign: 'justify',
+            fontSize: 15,
+            color: '#b6ecf7',
+        },
+        body2: {
+            textAlign: 'justify',
+            fontSize: 15,
+            color: '#4ccce6',
+        },
+        button: {
+            fontWeight: 'bold',
+            paddingBlock: 2,
+            paddingInline: 8,
+        },
     },
-    h2: {
-      paddingBottom: "1rem",
-      fontWeight: 600,
-      letterSpacing: 1.3,
-      fontSize: 24,
-      color: "#b6ecf7",
-    },
-    subtitle1: {
-      fontSize: 15,
-      color: "#4ccce6",
-      fontWeight: "700",
-      letterSpacing: "0.07rem",
-    },
-    body1: {
-      textAlign: "justify",
-      fontSize: 15,
-      color: "#b6ecf7",
-    },
-    body2: {
-      textAlign: "justify",
-      fontSize: 15,
-      color: "#4ccce6",
-    },
-    button: {
-      fontWeight: "bold",
-      paddingBlock: 2,
-      paddingInline: 8,
-    },
-  },
-} as ThemeOptions);
+} as ThemeOptions)
 
-export default appTheme;
+export default appTheme

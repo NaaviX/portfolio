@@ -1,26 +1,43 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import {Route, BrowserRouter, Routes} from "react-router-dom";
-import {CssBaseline, ThemeProvider} from "@mui/material";
-import appTheme from "./theme";
-import {ParallaxProvider} from "react-scroll-parallax";
+import { Box, CssBaseline, ThemeProvider } from '@mui/material'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { ParallaxProvider } from 'react-scroll-parallax'
+import App from './App'
+import Appbar from './components/appbar/Appbar'
+import ProjectInfos from './components/projects/components/ProjectInfos'
+import './index.css'
+import reportWebVitals from './reportWebVitals'
+import Footer from './sections/Footer'
+import appTheme from './theme'
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement,
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+
 root.render(
-  <React.StrictMode>
-    <ThemeProvider theme={appTheme}>
-      <ParallaxProvider>
-        <CssBaseline />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<App />} />
-          </Routes>
-        </BrowserRouter>
-      </ParallaxProvider>
-    </ThemeProvider>
-  </React.StrictMode>,
-);
+    <React.StrictMode>
+        <ThemeProvider theme={appTheme}>
+            <ParallaxProvider>
+                <CssBaseline />
+                <Box className='app'>
+                    <Appbar />
+                    <BrowserRouter>
+                        <Routes>
+                            <Route path='/' element={<App />} />
+                            <Route
+                                path='/project/:projectName'
+                                element={<ProjectInfos />}
+                            />
+                            <Route path='*' element={<Navigate to='/' />} />
+                        </Routes>
+                    </BrowserRouter>
+                    <Footer />
+                </Box>
+            </ParallaxProvider>
+        </ThemeProvider>
+    </React.StrictMode>
+)
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals()

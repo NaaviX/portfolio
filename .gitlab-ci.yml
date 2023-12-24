@@ -39,18 +39,13 @@ docker-build:
 
 deploy:
     stage: deploy
-    image: docker:dind
+    image: kroniak/ssh-client
     before_script:
-        - echo $SSH_PRIVATE_KEY
-        - 'command -v ssh-agent >/dev/null || ( apk update && apk add openssh)'
-        - eval $(ssh-agent -s)
-        - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-        - mkdir -p ~/.ssh
-        - chmod 700 ~/.ssh
-        - ssh-keyscan $VM_IPADDRESS >> ~/.ssh/known_hosts
-        - chmod 644 ~/.ssh/known_hosts
+        - echo "deploying app"
     script:
-        - ssh $SSH_USER@$VM_IPADDRESS "hostname && echo 'Welcome!!!' > welcome.txt"
-        - ssh $SSH_USER@$VM_IPADDRESS "docker pull registry.gitlab.com/naavix/portfolio"
-        - ssh $SSH_USER@$VM_IPADDRESS "docker stop portfoliocontainer || true && docker rm portfoliocontainer || true"
-        - ssh $SSH_USER@$VM_IPADDRESS "docker run -p 3001:80 -d --name portfoliocontainer registry.gitlab.com/naavix/portfolio"
+        - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > key.pem
+        - chmod 400 key.pem
+        - ssh -o StrictHostKeyChecking=no -i key.pem root@$VM_IPADDRESS "hostname && echo 'Welcome!!!' > welcome.txt"
+        - ssh -o StrictHostKeyChecking=no -i key.pem root@$VM_IPADDRESS "docker pull registry.gitlab.com/naavix/portfolio"
+        - ssh -o StrictHostKeyChecking=no -i key.pem root@$VM_IPADDRESS "docker stop portfoliocontainer || true && docker rm portfoliocontainer || true"
+        - ssh -o StrictHostKeyChecking=no -i key.pem root@$VM_IPADDRESS "docker run -p 3001:80 -d --name portfoliocontainer registry.gitlab.com/naavix/portfolio"

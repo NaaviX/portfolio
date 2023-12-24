@@ -1,3 +1,4 @@
+import { isMobile } from 'react-device-detect'
 import androidIcon from 'src/assets/icons/android-icon-svgrepo-com.svg'
 import cssIcon from 'src/assets/icons/css-3-svgrepo-com.svg'
 import flutterIcon from 'src/assets/icons/flutter-svgrepo-com.svg'
@@ -22,7 +23,7 @@ export const headerOptions: RecursivePartial<IOptions> | undefined = {
     fpsLimit: 120,
 
     interactivity: {
-        detectsOn: 'parent',
+        detectsOn: 'canvas',
         events: {
             onDiv: [
                 {
@@ -34,7 +35,7 @@ export const headerOptions: RecursivePartial<IOptions> | undefined = {
             ],
 
             onHover: {
-                enable: true,
+                enable: isMobile ? false : true,
                 mode: ['bubble', 'grab'],
                 parallax: {
                     enable: true,
@@ -44,7 +45,7 @@ export const headerOptions: RecursivePartial<IOptions> | undefined = {
             },
             resize: {
                 delay: 0.8,
-                enable: true,
+                enable: isMobile ? false : true,
             },
         },
 
@@ -97,7 +98,7 @@ export const headerOptions: RecursivePartial<IOptions> | undefined = {
         },
         number: {
             limit: 0,
-            value: 50,
+            value: isMobile ? 8 : 40,
         },
 
         opacity: {
@@ -156,7 +157,7 @@ export const headerOptions: RecursivePartial<IOptions> | undefined = {
         size: {
             random: {
                 enable: true,
-                minimumValue: 25,
+                minimumValue: 30,
             },
             animation: {
                 count: 0,

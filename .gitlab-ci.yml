@@ -8,7 +8,7 @@ build:
     script:
         - echo "Start building App"
         - npm install
-        - npm build
+        - npm run build
         - echo "Build successfully!"
 
 test:
@@ -17,5 +17,5 @@ test:
     script:
         - echo "Testing App"
         - npm install
-        - CI=true npm test
+        - CI=true npm run test
         - echo "Tested successfully!"

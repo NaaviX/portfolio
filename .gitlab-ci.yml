@@ -3,6 +3,7 @@ stages:
     - test
     - docker-build
     - deploy
+    - analyze
 
 build:
     stage: build
@@ -23,7 +24,13 @@ test:
     image: node
     script:
         - echo "Testing App"
+        - npm run test:ci
         - echo "Test successfully!"
+    coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+    artifacts:
+        paths:
+            - coverage/lcov.info
+            - test-report.xml
 
 docker-build:
     stage: docker-build
@@ -51,3 +58,22 @@ deploy:
         - ssh -o StrictHostKeyChecking=no -i key.pem $SSH_USER@$VM_IPADDRESS "docker pull registry.gitlab.com/naavix/portfolio"
         - ssh -o StrictHostKeyChecking=no -i key.pem $SSH_USER@$VM_IPADDRESS "docker stop portfoliocontainer || true && docker rm portfoliocontainer || true"
         - ssh -o StrictHostKeyChecking=no -i key.pem $SSH_USER@$VM_IPADDRESS "docker run -p 3001:80 -d --name portfoliocontainer registry.gitlab.com/naavix/portfolio"
+
+sonar-analysis:
+    stage: analyze
+    image:
+        name: sonarsource/sonar-scanner-cli:latest
+        entrypoint: ['']
+    variables:
+        SONAR_USER_HOME: '${CI_PROJECT_DIR}/.sonar'
+        GIT_DEPTH: '0' # Tells git to fetch all the branches of the project
+    cache:
+        key: '${CI_JOB_NAME}'
+        paths:
+            - .sonar/cache
+    script:
+        - sonar-scanner
+    allow_failure: true
+    only:
+        - master
+        - dev

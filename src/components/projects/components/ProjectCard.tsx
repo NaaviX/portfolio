@@ -2,7 +2,6 @@ import { Theme } from '@emotion/react'
 import CodeIcon from '@mui/icons-material/Code'
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline'
 import { Box, Button, SxProps, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
 import Chip from '../../base/components/Chip'
 import Paper from '../../base/components/Paper'
 import { Project } from '../projects.type'
@@ -58,15 +57,13 @@ const ProjectCard = ({
                         gap: '20px',
                     }}
                 >
-                    <Link to={`/project/${project.name}`}>
-                        <Button
-                            variant='outlined'
-                            endIcon={<PlayCircleOutlineIcon />}
-                            size='small'
-                        >
-                            Démo
-                        </Button>
-                    </Link>
+                    <Button
+                        variant='outlined'
+                        endIcon={<PlayCircleOutlineIcon />}
+                        size='small'
+                    >
+                        Démo
+                    </Button>
                     <Button
                         variant='outlined'
                         endIcon={<CodeIcon />}

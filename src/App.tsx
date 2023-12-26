@@ -1,7 +1,6 @@
 import '@fontsource/roboto'
-import Lenis from '@studio-freight/lenis'
+import { ReactLenis, useLenis } from '@studio-freight/react-lenis'
 import moment from 'moment/moment'
-import { useEffect } from 'react'
 import { Element } from 'react-scroll'
 import './App.css'
 import SectionLayout from './components/sections/SectionLayout'
@@ -10,16 +9,11 @@ import Header from './sections/Header'
 moment().locale('fr')
 
 const App = () => {
-    useEffect(() => {
-        const lenis = new Lenis()
-        function raf(time: number) {
-            lenis.raf(time)
-            requestAnimationFrame(raf)
-        }
-        requestAnimationFrame(raf)
+    useLenis(({ scroll }) => {
+        console.log(scroll)
     })
     return (
-        <>
+        <ReactLenis root>
             <Header />
 
             {sectionsData.map((section: Section) => (
@@ -34,7 +28,7 @@ const App = () => {
                     </SectionLayout>
                 </Element>
             ))}
-        </>
+        </ReactLenis>
     )
 }
 

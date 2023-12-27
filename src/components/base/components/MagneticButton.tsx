@@ -1,10 +1,10 @@
-import { MouseEventHandler, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
+import { MouseEventHandler, useRef, useState } from 'react'
 
 export default function MagneticButton({
     children,
 }: {
-    children: React.ReactNode
+    readonly children: React.ReactNode
 }) {
     const ref = useRef<HTMLInputElement>(null)
     const [position, setPosition] = useState({ x: 0, y: 0 })

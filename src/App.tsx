@@ -1,5 +1,5 @@
 import '@fontsource/roboto'
-import { ReactLenis, useLenis } from '@studio-freight/react-lenis'
+import { ReactLenis } from '@studio-freight/react-lenis'
 import moment from 'moment/moment'
 import { Element } from 'react-scroll'
 import './App.css'
@@ -9,9 +9,6 @@ import Header from './sections/Header'
 moment().locale('fr')
 
 const App = () => {
-    useLenis(({ scroll }) => {
-        console.log(scroll)
-    })
     return (
         <ReactLenis root>
             <Header />

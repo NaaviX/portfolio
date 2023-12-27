@@ -32,7 +32,7 @@ const SkillsCardBody = ({
                         flexDirection: 'column',
                     }}
                 >
-                    <Typography variant='h2'>
+                    <Typography variant='h2' textAlign='left'>
                         {skillCategory.name.toString()}
                     </Typography>
                     <Typography variant='body1'>

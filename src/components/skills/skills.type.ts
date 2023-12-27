@@ -4,7 +4,7 @@ export enum SKILL_TYPE {
     WEBFRONT = 'Frontend',
     WEBBACK = 'Backend',
     DATA = 'Données',
-    DEVTOOLS = 'Outils de développement',
+    DEVTOOLS = 'Outils',
     MOBILE = 'Mobile',
     OTHER = 'Autres',
 }

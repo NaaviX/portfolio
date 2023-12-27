@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { ReactComponent as Courses1 } from 'src/assets/images/courses1.svg'
+import { ReactComponent as Courses1 } from 'assets/images/courses1.svg'
 
 const CoursesBackground = () => {
     return (

@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material'
 import { motion } from 'framer-motion'
+import { isDesktop } from 'react-device-detect'
 import { userData } from '../../user/user.data'
 
 const HeaderTitle = () => {
@@ -16,8 +17,9 @@ const HeaderTitle = () => {
                     sx={{
                         letterSpacing: 1.4,
                         fontWeight: 300,
-                        fontSize: 95,
+                        fontSize: isDesktop ? 95 : 40,
                         color: '#b6ecf7',
+                        textAlign: 'center',
                     }}
                     fontFamily='courgette'
                 >

@@ -22,8 +22,9 @@ const CoursesTimelineItem = (props: CoursesTimelineItemProps) => {
     const course: Course = props.course
     return (
         <TimelineItem>
-            <TimelineOppositeContent sx={{ pt: '28px' }}>
-                {course.dateFrom.getFullYear()} - {course.dateTo.getFullYear()}
+            <TimelineOppositeContent sx={{ pt: '28px', width: '100%' }}>
+                {course.dateFrom.getFullYear()}&nbsp;-&nbsp;
+                {course.dateTo.getFullYear()}
             </TimelineOppositeContent>
             <TimelineSeparator>
                 <TimelineConnector sx={{ flexGrow: '0.05' }} />

@@ -11,8 +11,9 @@ const CoursesTimeline = () => {
             position='right'
             sx={{
                 width: '100%',
+                px: { xs: '0px', md: '20px' },
                 [`& .${timelineOppositeContentClasses.root}`]: {
-                    flex: { xs: 0.3, lg: 1 },
+                    flexGrow: { xs: 0, sm: 0.3, lg: 1 },
                 },
             }}
         >

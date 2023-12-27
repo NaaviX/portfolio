@@ -1,14 +1,14 @@
+import androidIcon from 'assets/icons/android-icon-svgrepo-com.svg'
+import cssIcon from 'assets/icons/css-3-svgrepo-com.svg'
+import flutterIcon from 'assets/icons/flutter-svgrepo-com.svg'
+import javaIcon from 'assets/icons/java-svgrepo-com.svg'
+import javascriptIcon from 'assets/icons/javascript-svgrepo-com.svg'
+import reactIcon from 'assets/icons/react-svgrepo-com.svg'
+import springIcon from 'assets/icons/spring-icon-svgrepo-com.svg'
+import tailwindIcon from 'assets/icons/tailwindcss-icon-svgrepo-com.svg'
+import typescriptIcon from 'assets/icons/typescript-icon-svgrepo-com.svg'
+import vueIcon from 'assets/icons/vue-svgrepo-com.svg'
 import { isMobile } from 'react-device-detect'
-import androidIcon from 'src/assets/icons/android-icon-svgrepo-com.svg'
-import cssIcon from 'src/assets/icons/css-3-svgrepo-com.svg'
-import flutterIcon from 'src/assets/icons/flutter-svgrepo-com.svg'
-import javaIcon from 'src/assets/icons/java-svgrepo-com.svg'
-import javascriptIcon from 'src/assets/icons/javascript-svgrepo-com.svg'
-import reactIcon from 'src/assets/icons/react-svgrepo-com.svg'
-import springIcon from 'src/assets/icons/spring-icon-svgrepo-com.svg'
-import tailwindIcon from 'src/assets/icons/tailwindcss-icon-svgrepo-com.svg'
-import typescriptIcon from 'src/assets/icons/typescript-icon-svgrepo-com.svg'
-import vueIcon from 'src/assets/icons/vue-svgrepo-com.svg'
 import type { IOptions, RecursivePartial } from 'tsparticles-engine'
 
 export const headerOptions: RecursivePartial<IOptions> | undefined = {
@@ -98,24 +98,11 @@ export const headerOptions: RecursivePartial<IOptions> | undefined = {
         },
         number: {
             limit: 0,
-            value: isMobile ? 8 : 40,
+            value: isMobile ? 8 : 30,
         },
 
         opacity: {
-            random: {
-                enable: true,
-                minimumValue: 0.5,
-            },
             value: 0.6,
-            animation: {
-                count: 0,
-                enable: true,
-                speed: 0.2,
-                decay: 0,
-                sync: true,
-                destroy: 'none',
-                startValue: 'random',
-            },
         },
 
         shape: {
@@ -179,7 +166,7 @@ export const headerOptions: RecursivePartial<IOptions> | undefined = {
             distance: 120,
             enable: true,
             frequency: 15,
-            opacity: 0.7,
+            opacity: 0.6,
             width: 1,
         },
     },

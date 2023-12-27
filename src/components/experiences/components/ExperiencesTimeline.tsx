@@ -1,8 +1,10 @@
+import { Timeline, timelineOppositeContentClasses } from '@mui/lab'
+import { Box } from '@mui/system'
 import 'moment/locale/fr'
-import ExperiencesTimelineItem from './ExperiencesTimelineItem'
 import { Experience } from '../experiences.type'
 import { getExperiences } from '../experiences.utils'
-import { Timeline, timelineOppositeContentClasses } from '@mui/lab'
+import ExperiencesCard from './ExperiencesCard'
+import ExperiencesTimelineItem from './ExperiencesTimelineItem'
 
 const ExperiencesTimeline = () => {
     const experiences: Experience[] = getExperiences()
@@ -19,7 +21,7 @@ const ExperiencesTimeline = () => {
             <Timeline
                 sx={{
                     width: '100%',
-                    display: { xs: 'block', lg: 'none' },
+                    display: { xs: 'none', md: 'block', lg: 'none' },
                     [`& .${timelineOppositeContentClasses.root}`]: {
                         flex: 0.3,
                     },
@@ -29,6 +31,16 @@ const ExperiencesTimeline = () => {
                     <ExperiencesTimelineItem experience={exp} key={exp.title} />
                 ))}
             </Timeline>
+            <Box
+                sx={{
+                    width: '100%',
+                    display: { xs: 'block', md: 'none' },
+                }}
+            >
+                {experiences.map((exp: Experience) => (
+                    <ExperiencesCard experience={exp} key={exp.title} />
+                ))}
+            </Box>
         </>
     )
 }

@@ -7,7 +7,7 @@ const SectionTitle = ({ children }: { children?: string }) => {
     }
     if (isMobile) {
         return (
-            <Typography variant='h2' textAlign='center'>
+            <Typography variant='h2' textAlign='center' sx={{ mb: '30px' }}>
                 {children}
             </Typography>
         )

@@ -1,9 +1,11 @@
 import { Theme } from '@emotion/react'
 import CodeIcon from '@mui/icons-material/Code'
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline'
-import { Box, Button, SxProps, Typography } from '@mui/material'
-import Chip from '../../base/components/Chip'
-import Paper from '../../base/components/Paper'
+import { Box, IconButton, SxProps, Typography } from '@mui/material'
+import Chip from 'components/base/components/Chip'
+import MagneticButton from 'components/base/components/MagneticButton'
+import Paper from 'components/base/components/Paper'
+import { userData } from 'components/user/user.data'
 import { Project } from '../projects.type'
 
 const ProjectCard = ({
@@ -42,7 +44,7 @@ const ProjectCard = ({
                     }}
                 >
                     <Typography variant='h2'>{project.name}</Typography>
-                    <Typography variant='body2'>{project.year}</Typography>
+                    <Typography variant='subtitle1'>{project.year}</Typography>
                 </Box>
                 <Typography
                     variant='body1'
@@ -53,25 +55,39 @@ const ProjectCard = ({
                 </Typography>
                 <Box
                     sx={{
+                        width: '30%',
                         display: 'flex',
-                        gap: '20px',
+                        justifyContent: 'space-evenly',
                     }}
                 >
-                    <Button
-                        variant='outlined'
-                        endIcon={<PlayCircleOutlineIcon />}
-                        size='small'
-                    >
-                        Démo
-                    </Button>
-                    <Button
-                        variant='outlined'
-                        endIcon={<CodeIcon />}
-                        size='small'
-                        href=''
-                    >
-                        Code
-                    </Button>
+                    <MagneticButton>
+                        <IconButton
+                            href={userData.linkedin}
+                            target='_blank'
+                            size='large'
+                            sx={{
+                                m: '3px',
+                                boxShadow:
+                                    'rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;',
+                            }}
+                        >
+                            <PlayCircleOutlineIcon />
+                        </IconButton>
+                    </MagneticButton>
+                    <MagneticButton>
+                        <IconButton
+                            href={userData.linkedin}
+                            target='_blank'
+                            size='large'
+                            sx={{
+                                m: '3px',
+                                boxShadow:
+                                    'rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;',
+                            }}
+                        >
+                            <CodeIcon />
+                        </IconButton>
+                    </MagneticButton>
                 </Box>
                 <Box
                     sx={{

@@ -10,10 +10,10 @@ import { Experience } from './experiences.type'
 
 export const experiencesData: Experience[] = [
     {
-        title: 'Ingénieur conception et développement junior',
+        title: 'Ingénieur conception & développement junior',
         contract: 'Apprentissage',
-        company: 'CASDEN Banque Populaire',
-        city: 'Champs-sur-Marne (77)',
+        company: 'CASDEN',
+        city: 'Champs-sur-Marne',
         dateFrom: new Date('2017-09-01'),
         dateTo: new Date('2021-09-01'),
         activities: [
@@ -26,10 +26,10 @@ export const experiencesData: Experience[] = [
         skills: [springbootSkill, vueSkill, bulmaSkill, postgresqlSkill],
     },
     {
-        title: 'Ingénieur études et développement',
+        title: 'Ingénieur études & développement',
         contract: 'CDI',
         company: 'Axelor',
-        city: 'Champs-sur-Marne (77)',
+        city: 'Champs-sur-Marne',
         dateFrom: new Date('2021-09-20'),
         dateTo: new Date('2023-08-23'),
         activities: [

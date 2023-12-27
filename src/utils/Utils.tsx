@@ -1,4 +1,4 @@
-import moment from 'moment'
+import moment, { duration } from 'moment'
 
 export const getAge = (date: string): number => {
     const today = new Date()
@@ -15,9 +15,9 @@ export function formatDateMonthYear(date: Date): string {
 }
 
 export function formatDurationMonthYear(dateFrom: Date, dateTo: Date): string {
-    const duration = moment.duration(moment(dateTo).diff(moment(dateFrom)))
-    const years = duration.years()
-    const months = duration.months()
+    const time = duration(moment(dateTo).diff(moment(dateFrom)))
+    const years = time.years()
+    const months = time.months()
     let str = ''
     str += years
     if (years > 1) {

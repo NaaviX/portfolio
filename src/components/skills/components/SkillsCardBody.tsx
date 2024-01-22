@@ -1,16 +1,12 @@
 import { Box, Typography } from '@mui/material'
-import { MotionValue, motion, useTransform } from 'framer-motion'
 import Chip from '../../base/components/Chip'
 import { Skill, SkillCategory } from '../skills.type'
 
 const SkillsCardBody = ({
     skillCategory,
-    progress,
 }: {
     skillCategory: SkillCategory
-    progress: MotionValue
 }) => {
-    const imageScale = useTransform(progress, [0.7, 1], [1, 0.8])
     return (
         <>
             <Box
@@ -19,13 +15,14 @@ const SkillsCardBody = ({
                     position: 'relative',
                     display: 'flex',
                     height: '100%',
-                    gap: '50px',
+                    gap: '100px',
+                    width: '100%',
                 }}
             >
                 <Box
                     className='skillCardDescription'
                     sx={{
-                        flex: 1,
+                        flex: 1.5,
                         ml: '15px',
                         gap: '30px',
                         display: 'flex',
@@ -51,14 +48,9 @@ const SkillsCardBody = ({
                         alignItems: 'center',
                     }}
                 >
-                    <motion.div
-                        style={{ scale: imageScale, width: '100%' }}
-                        className='skillCategoryInnerImage'
-                    >
-                        <skillCategory.image
-                            style={{ width: '100%', objectFit: 'cover' }}
-                        />
-                    </motion.div>
+                    <skillCategory.image
+                        style={{ width: '100%', objectFit: 'cover' }}
+                    />
                 </Box>
             </Box>
             <Box

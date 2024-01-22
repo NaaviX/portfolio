@@ -1,6 +1,6 @@
-import React from 'react'
-import { Paper as MuiPaper, SxProps } from '@mui/material'
 import { Theme } from '@emotion/react'
+import { Paper as MuiPaper, SxProps } from '@mui/material'
+import React from 'react'
 
 const Paper = ({
     children,
@@ -20,6 +20,8 @@ const Paper = ({
                 display: 'flex',
                 flexDirection: 'column',
                 placeItems: 'center',
+                boxShadow:
+                    '0px 0px 6px 2px rgba(4,84,104, 0.1), 0px 0px 15px 4px rgba(4,84,104, 0.2), 0 0 0 1px rgba(4,84,104, 0.2)',
             }}
         >
             {children}

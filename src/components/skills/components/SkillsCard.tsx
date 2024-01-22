@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { MotionValue, motion, useScroll, useTransform } from 'framer-motion'
+import { motion, MotionValue, useTransform } from 'framer-motion'
 import { isDesktop } from 'react-device-detect'
 import { SkillCategory } from '../skills.type'
 
@@ -31,12 +31,7 @@ const SkillsCard = ({
             />
         )
     }
-    return (
-        <SkillsCardBase
-            scrollYProgress={progress}
-            skillCategory={skillCategory}
-        />
-    )
+    return <SkillsCardBase skillCategory={skillCategory} />
 }
 
 const SkillsCardMobile = ({
@@ -53,12 +48,6 @@ const SkillsCardMobile = ({
     i: number
 }) => {
     const container = useRef(null)
-
-    const { scrollYProgress } = useScroll({
-        target: container,
-
-        offset: ['start end', 'start start'],
-    })
 
     const scale = useTransform(progress, range, [1, targetScale])
     return (
@@ -81,37 +70,27 @@ const SkillsCardMobile = ({
                     transformOrigin: 'top',
                 }}
             >
-                <SkillsCardBase
-                    scrollYProgress={scrollYProgress}
-                    skillCategory={skillCategory}
-                />
+                <SkillsCardBase skillCategory={skillCategory} />
             </motion.div>
         </Box>
     )
 }
 const SkillsCardBase = ({
     skillCategory,
-    scrollYProgress,
 }: {
     skillCategory: SkillCategory
-    scrollYProgress: MotionValue
 }) => {
     return (
         <Paper
             sx={{
                 background: 'linear-gradient(80deg, #082c36, #082c36, #101b20)',
                 width: '100%',
-                boxShadow:
-                    '0px 0px 6px 2px rgba(4,84,104, 0.1), 0px 0px 15px 4px rgba(4,84,104, 0.2), 0 0 0 1px rgba(4,84,104, 0.2)',
                 padding: '40px 80px',
                 marginBottom: '50px',
                 height: '50vh',
             }}
         >
-            <SkillsCardBody
-                progress={scrollYProgress}
-                skillCategory={skillCategory}
-            ></SkillsCardBody>
+            <SkillsCardBody skillCategory={skillCategory}></SkillsCardBody>
         </Paper>
     )
 }

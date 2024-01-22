@@ -1,9 +1,9 @@
+import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import MenuIcon from '@mui/icons-material/Menu'
 import {
     AppBar,
     Box,
     Button,
-    Container,
     Divider,
     Drawer,
     IconButton,
@@ -13,6 +13,7 @@ import {
     Toolbar,
     Typography,
 } from '@mui/material'
+import { userData } from 'components/user/user.data'
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { Link, animateScroll as scroll } from 'react-scroll'
@@ -94,32 +95,38 @@ const Appbar = () => {
                         boxShadow: appbarElevation,
                     }}
                 >
-                    <Container>
-                        <Toolbar>
-                            <IconButton
-                                aria-label='open drawer'
-                                edge='start'
-                                onClick={handleDrawerToggle}
-                                sx={{ mr: 2, display: { md: 'none' } }}
-                            >
-                                <MenuIcon />
-                            </IconButton>
-                            <Box
-                                sx={{
-                                    flexGrow: 1,
-                                    display: { xs: 'none', md: 'block' },
-                                }}
-                            >
+                    <Toolbar>
+                        <IconButton
+                            aria-label='open drawer'
+                            edge='start'
+                            onClick={handleDrawerToggle}
+                            sx={{ mr: 2, display: { lg: 'none' } }}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                width: '100%',
+                                justifyContent: 'space-between',
+                            }}
+                        >
+                            {' '}
+                            <Box>
                                 <Button
                                     onClick={() => scroll.scrollToTop()}
-                                    sx={{ height: '64px', px: '20px' }}
+                                    sx={{
+                                        height: '64px',
+                                        px: '20px',
+                                        display: { xs: 'none', lg: 'block' },
+                                    }}
                                 >
                                     <Typography variant='button'>
                                         ANTOINE
                                     </Typography>
                                 </Button>
                             </Box>
-                            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+                            <Box sx={{ display: { xs: 'none', lg: 'block' } }}>
                                 {sectionsData.map((item) => (
                                     <Link
                                         to={item.target}
@@ -139,8 +146,16 @@ const Appbar = () => {
                                     </Link>
                                 ))}
                             </Box>
-                        </Toolbar>
-                    </Container>
+                            <Box>
+                                <Button
+                                    href={userData.linkedin}
+                                    sx={{ height: '64px', px: '20px' }}
+                                >
+                                    <LinkedInIcon />
+                                </Button>
+                            </Box>
+                        </Box>
+                    </Toolbar>
                 </motion.div>
             </AppBar>
             <nav>
@@ -152,7 +167,7 @@ const Appbar = () => {
                         keepMounted: true, // Better open performance on mobile.
                     }}
                     sx={{
-                        display: { xs: 'block', md: 'none' },
+                        display: { xs: 'block', lg: 'none' },
                         '& .MuiDrawer-paper': {
                             boxSizing: 'border-box',
                             width: drawerWidth,

@@ -108,12 +108,12 @@ const appTheme: Theme = createTheme({
         },
         body1: {
             textAlign: 'justify',
-            fontSize: 15,
+            fontSize: 16,
             color: '#b6ecf7',
         },
         body2: {
             textAlign: 'justify',
-            fontSize: 15,
+            fontSize: 16,
             color: '#4ccce6',
         },
         button: {

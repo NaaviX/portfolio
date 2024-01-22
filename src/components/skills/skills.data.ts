@@ -1,31 +1,36 @@
 import { ReactComponent as AndroidIcon } from 'assets/icons/android-icon-svgrepo-com.svg'
 import { ReactComponent as BootstrapIcon } from 'assets/icons/bootstrap-svgrepo-com.svg'
 import { ReactComponent as BulmaIcon } from 'assets/icons/bulma-svgrepo-com.svg'
+import { ReactComponent as CICDIcon } from 'assets/icons/ci-cd-svgrepo-com.svg'
 import { ReactComponent as CssIcon } from 'assets/icons/css-3-svgrepo-com.svg'
+import { ReactComponent as DockerIcon } from 'assets/icons/docker-svgrepo-com.svg'
 import { ReactComponent as FirebaseIcon } from 'assets/icons/firebase-svgrepo-com.svg'
 import { ReactComponent as FlutterIcon } from 'assets/icons/flutter-svgrepo-com.svg'
 import { ReactComponent as GitIcon } from 'assets/icons/git-icon-svgrepo-com.svg'
 import { ReactComponent as JavaIcon } from 'assets/icons/java-svgrepo-com.svg'
 import { ReactComponent as JavascriptIcon } from 'assets/icons/javascript-svgrepo-com.svg'
+import { ReactComponent as JenkinsIcon } from 'assets/icons/jenkins-svgrepo-com.svg'
+import { ReactComponent as JestIcon } from 'assets/icons/jest-svgrepo-com.svg'
+import { ReactComponent as LinuxIcon } from 'assets/icons/linux-svgrepo-com.svg'
 import { ReactComponent as MuiIcon } from 'assets/icons/material-ui-svgrepo-com.svg'
 import { ReactComponent as NuxtIcon } from 'assets/icons/nuxt-icon-svgrepo-com.svg'
 import { ReactComponent as PostgreSQLIcon } from 'assets/icons/postgresql-svgrepo-com.svg'
 import { ReactComponent as PostmanIcon } from 'assets/icons/postman-icon-svgrepo-com.svg'
 import { ReactComponent as ReactIcon } from 'assets/icons/react-svgrepo-com.svg'
+import { ReactComponent as RestIcon } from 'assets/icons/rest-svgrepo-com.svg'
+import { ReactComponent as SonarIcon } from 'assets/icons/sonarqube-svgrepo-com.svg'
 import { ReactComponent as SpringBootIcon } from 'assets/icons/spring-icon-svgrepo-com.svg'
 import { ReactComponent as SwaggerIcon } from 'assets/icons/swagger-svgrepo-com.svg'
 import { ReactComponent as TailwindIcon } from 'assets/icons/tailwindcss-icon-svgrepo-com.svg'
 import { ReactComponent as TypescriptIcon } from 'assets/icons/typescript-icon-svgrepo-com.svg'
 import { ReactComponent as VueIcon } from 'assets/icons/vue-svgrepo-com.svg'
-import { Skill, SkillCategory, SKILL_NAME, SKILL_TYPE } from './skills.type'
 
-import { ReactComponent as SkillBackImage } from 'assets/images/skillback.svg'
-import { ReactComponent as SkillDataImage } from 'assets/images/skillData.svg'
+import { ReactComponent as SkillBackImage } from 'assets/images/skillData.svg'
 import { ReactComponent as SkillDevToolsImage } from 'assets/images/skillDevTools.svg'
-import {
-    ReactComponent as SkillFrontImage,
-    ReactComponent as SkillMobileImage,
-} from 'assets/images/skillFront.svg'
+import { ReactComponent as SkillFrontImage } from 'assets/images/skillFront.svg'
+import { ReactComponent as SkillMobileImage } from 'assets/images/skillMobile.svg'
+
+import { SKILL_NAME, SKILL_TYPE, Skill, SkillCategory } from './skills.type'
 
 export const javaSkill: Skill = {
     name: SKILL_NAME.JAVA,
@@ -138,7 +143,7 @@ export const androidSkill: Skill = {
 export const restSkill: Skill = {
     name: SKILL_NAME.REST,
     about: '',
-    icon: undefined,
+    icon: RestIcon,
 }
 
 export const swaggerSkill: Skill = {
@@ -161,17 +166,17 @@ export const gitSkill: Skill = {
 export const linuxSkill: Skill = {
     name: SKILL_NAME.LINUX,
     about: 'Ubuntu, Debian',
-    icon: undefined,
+    icon: LinuxIcon,
 }
 export const jenkinsSkill: Skill = {
     name: SKILL_NAME.JENKINS,
     about: '',
-    icon: undefined,
+    icon: JenkinsIcon,
 }
 export const sonarSkill: Skill = {
     name: SKILL_NAME.SONARQUBE,
     about: '',
-    icon: undefined,
+    icon: SonarIcon,
 }
 export const nexusSkill: Skill = {
     name: SKILL_NAME.NEXUS,
@@ -179,9 +184,28 @@ export const nexusSkill: Skill = {
     icon: undefined,
 }
 
+export const CICDSkill: Skill = {
+    name: SKILL_NAME.CICD,
+    about: '',
+    icon: CICDIcon,
+}
+
+export const dockerSkill: Skill = {
+    name: SKILL_NAME.DOCKER,
+    about: '',
+    icon: DockerIcon,
+}
+
+export const jestSkill: Skill = {
+    name: SKILL_NAME.JEST,
+    about: '',
+    icon: JestIcon,
+}
+
 export const frontSkillCategory: SkillCategory = {
     name: SKILL_TYPE.WEBFRONT,
-    description: 'blabla',
+    description:
+        "Création d'interfaces utilisateur web ou mobile ergonomiques, optimisation de l'expérience utilisateur.",
     color: 'rgb(43, 93, 108)',
     skills: [
         javascriptSkill,
@@ -202,16 +226,15 @@ export const backSkillCategory: SkillCategory = {
     name: SKILL_TYPE.WEBBACK,
     description: 'blabla',
     color: '#0f172a',
-    skills: [javaSkill, springbootSkill],
+    skills: [
+        javaSkill,
+        springbootSkill,
+        postgresqlSkill,
+        jpqlSkill,
+        firebaseSkill,
+        restSkill,
+    ],
     image: SkillBackImage,
-}
-
-export const dataSkillCategory: SkillCategory = {
-    name: SKILL_TYPE.DATA,
-    description: 'blabla',
-    color: '#0f172a',
-    skills: [postgresqlSkill, jpqlSkill, firebaseSkill, restSkill],
-    image: SkillDataImage,
 }
 
 export const devToolsSkillCategory: SkillCategory = {
@@ -241,7 +264,6 @@ export const mobileSkillCategory: SkillCategory = {
 export const skillsData: SkillCategory[] = [
     frontSkillCategory,
     backSkillCategory,
-    dataSkillCategory,
     devToolsSkillCategory,
     mobileSkillCategory,
     /* javaSkill,

@@ -2,8 +2,7 @@ import { FC, SVGProps } from 'react'
 
 export enum SKILL_TYPE {
     WEBFRONT = 'Frontend',
-    WEBBACK = 'Backend',
-    DATA = 'Données',
+    WEBBACK = 'Backend & données',
     DEVTOOLS = 'Outils',
     MOBILE = 'Mobile',
     OTHER = 'Autres',
@@ -38,6 +37,9 @@ export enum SKILL_NAME {
     SONARQUBE = 'SonarQUBE',
     NEXUS = 'Nexus',
     SOLID = 'Principes CRAFT & SOLID',
+    CICD = 'CI/CD',
+    DOCKER = 'Docker',
+    JEST = 'Jest',
 }
 
 export interface Skill {

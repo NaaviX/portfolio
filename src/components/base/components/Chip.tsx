@@ -1,20 +1,14 @@
 import { Theme } from '@emotion/react'
 import { Chip as MuiChip, SxProps } from '@mui/material'
-import { ReactElement } from 'react'
+import { Skill } from 'components/skills/skills.type'
 
-const Chip = ({
-    icon,
-    label,
-    sx,
-}: {
-    icon: ReactElement | undefined
-    label: string
-    sx?: SxProps<Theme>
-}) => {
+const Chip = ({ skill, sx }: { skill: Skill; sx?: SxProps<Theme> }) => {
     return (
         <MuiChip
-            label={label}
-            icon={icon}
+            label={skill.name}
+            icon={
+                skill.icon ? <skill.icon style={{ width: '1rem' }} /> : <span />
+            }
             sx={{ ...sx, pl: '4px', height: 'min' }}
         ></MuiChip>
     )

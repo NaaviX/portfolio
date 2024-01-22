@@ -4,14 +4,13 @@ import BusinessCenterIcon from '@mui/icons-material/BusinessCenter'
 import DateRangeIcon from '@mui/icons-material/DateRange'
 import PlaceIcon from '@mui/icons-material/Place'
 import { Box, List, ListItem, ListItemText, Typography } from '@mui/material'
+import ChipList from 'components/base/components/ChipList'
 import 'moment/locale/fr'
 import {
     formatDateMonthYear,
     formatDurationMonthYear,
 } from '../../../utils/Utils'
-import Chip from '../../base/components/Chip'
 import Paper from '../../base/components/Paper'
-import { Skill } from '../../skills/skills.type'
 import { Experience } from '../experiences.type'
 
 interface ExperiencesCardProps {
@@ -93,31 +92,7 @@ const ExperiencesCard = (props: ExperiencesCardProps) => {
                     </ListItem>
                 ))}
             </List>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    flexDirection: 'row',
-                    gap: '2px',
-                    mt: '20px',
-                    width: '100%',
-                }}
-            >
-                {exp.skills.map((skill: Skill) => (
-                    <Chip
-                        label={skill.name}
-                        icon={
-                            skill.icon ? (
-                                <skill.icon style={{ width: '1rem' }} />
-                            ) : (
-                                <span />
-                            )
-                        }
-                        key={skill.name}
-                        sx={{ pl: '4px' }}
-                    ></Chip>
-                ))}
-            </Box>
+            <ChipList skills={exp.skills} />
         </Paper>
     )
 }

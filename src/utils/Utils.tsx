@@ -16,17 +16,26 @@ export function formatDateMonthYear(date: Date): string {
 
 export function formatDurationMonthYear(dateFrom: Date, dateTo: Date): string {
     const time = duration(moment(dateTo).diff(moment(dateFrom)))
-    const years = time.years()
-    const months = time.months()
+    let years = time.years()
+    let months = time.months() + 1
+    if (months === 12) {
+        years += 1
+        months = 0
+    }
     let str = ''
-    str += years
-    if (years > 1) {
-        str += ' ans'
-    } else {
-        str += ' an'
+    if (years > 0) {
+        str += years
+        if (years > 1) {
+            str += ' ans'
+        } else {
+            str += ' an'
+        }
+        if (months > 0) {
+            str += ' et '
+        }
     }
     if (months > 0) {
-        str += ' et ' + months + ' mois'
+        str += months + ' mois'
     }
     return str
 }

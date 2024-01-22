@@ -2,7 +2,7 @@ import { Theme } from '@emotion/react'
 import CodeIcon from '@mui/icons-material/Code'
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline'
 import { Box, IconButton, SxProps, Typography } from '@mui/material'
-import Chip from 'components/base/components/Chip'
+import ChipList from 'components/base/components/ChipList'
 import MagneticButton from 'components/base/components/MagneticButton'
 import Paper from 'components/base/components/Paper'
 import { userData } from 'components/user/user.data'
@@ -89,34 +89,10 @@ const ProjectCard = ({
                         </IconButton>
                     </MagneticButton>
                 </Box>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        gap: '5px',
-                        flexWrap: 'wrap',
-                    }}
-                >
-                    {project.stack.map((stack) => (
-                        <Chip
-                            sx={{ letterSpacing: 'normal', pl: '4px' }}
-                            label={stack.name}
-                            icon={
-                                stack.icon ? (
-                                    <stack.icon
-                                        style={{
-                                            width: '1rem',
-                                            height: '1rem',
-                                        }}
-                                    />
-                                ) : (
-                                    <span />
-                                )
-                            }
-                            key={stack.name}
-                        ></Chip>
-                    ))}
-                </Box>
+                <ChipList
+                    skills={project.skills}
+                    sx={{ justifyContent: 'center' }}
+                />
             </Box>
         </Paper>
     )

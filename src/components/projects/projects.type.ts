@@ -1,17 +1,12 @@
 import { Theme } from '@emotion/react'
 import { SxProps } from '@mui/material'
-import { FC, SVGProps } from 'react'
-
-export interface ProjectStack {
-    name: string
-    icon: FC<SVGProps<SVGSVGElement>> | undefined
-}
+import { Skill } from 'components/skills/skills.type'
 export interface Project {
     name: string
     type: 'WEB' | 'MOBILE' | 'APP'
     description: string
     year: string
-    stack: ProjectStack[]
+    skills: Skill[]
 
     images: string[]
 }

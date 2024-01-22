@@ -34,7 +34,7 @@ const HeaderContent = () => {
                 }}
                 viewport={{ once: true }}
             >
-                <Paper>
+                <Paper sx={{ alignItems: 'center' }}>
                     <Typography
                         variant='h2'
                         gutterBottom
@@ -48,7 +48,7 @@ const HeaderContent = () => {
                     </Typography>
                     <Box
                         sx={{
-                            width: '30%',
+                            width: '50%',
                             display: 'flex',
                             justifyContent: 'space-evenly',
                         }}

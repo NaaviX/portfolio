@@ -1,3 +1,4 @@
+import '@fontsource/space-grotesk/400.css'
 import ContactPageOutlinedIcon from '@mui/icons-material/ContactPageOutlined'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import { Box, Container, IconButton, Typography } from '@mui/material'
@@ -37,7 +38,7 @@ const HeaderContent = () => {
                     <Typography
                         variant='h2'
                         gutterBottom
-                        fontFamily='kaushan script'
+                        fontFamily='Space Grotesk'
                         textAlign='center'
                         marginBottom='50px'
                     >

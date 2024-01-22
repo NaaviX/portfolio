@@ -1,5 +1,3 @@
-import '@fontsource/courgette/latin-400.css'
-import '@fontsource/kaushan-script/latin-400.css'
 import { Box } from '@mui/material'
 import HeaderContent from '../components/header/components/HeaderContent'
 import Particles from '../components/particles/Particles'

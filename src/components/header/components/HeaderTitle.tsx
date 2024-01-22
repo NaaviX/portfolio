@@ -15,13 +15,12 @@ const HeaderTitle = () => {
                 <Typography
                     component='h1'
                     sx={{
-                        letterSpacing: 1.4,
                         fontWeight: 300,
                         fontSize: isDesktop ? 95 : 40,
                         color: '#b6ecf7',
                         textAlign: 'center',
                     }}
-                    fontFamily='courgette'
+                    fontFamily='Space Grotesk'
                 >
                     {userData.firstname} {userData.lastname}
                 </Typography>

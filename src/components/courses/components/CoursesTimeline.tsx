@@ -1,4 +1,5 @@
 import { Timeline, timelineOppositeContentClasses } from '@mui/lab'
+import { motion } from 'framer-motion'
 import 'moment/locale/fr'
 import { Course } from '../courses.type'
 import { getCourses } from '../courses.utils'
@@ -18,7 +19,15 @@ const CoursesTimeline = () => {
             }}
         >
             {courses.map((course: Course) => (
-                <CoursesTimelineItem course={course} key={course.name} />
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ type: 'spring', duration: 2 }}
+                    viewport={{ once: true }}
+                    key={course.name}
+                >
+                    <CoursesTimelineItem course={course} />
+                </motion.div>
             ))}
         </Timeline>
     )

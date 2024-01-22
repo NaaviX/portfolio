@@ -1,4 +1,5 @@
 import { Box } from '@mui/material'
+import { motion } from 'framer-motion'
 import OtherProjects from '../components/projects/components/OtherProjects'
 import ProjectCard from '../components/projects/components/ProjectCard'
 import {
@@ -20,22 +21,28 @@ const Projects = () => {
                 alignItems: 'center',
             }}
         >
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    flexWrap: 'wrap',
-                }}
+            <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ type: 'spring', duration: 2 }}
+                viewport={{ once: true }}
             >
-                {mainProjects.map((project: Project) => (
-                    <ProjectCard
-                        key={project.name}
-                        project={project}
-                        sx={projectsStyle.MainProjects}
-                    />
-                ))}
-            </Box>
-
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        flexWrap: 'wrap',
+                    }}
+                >
+                    {mainProjects.map((project: Project) => (
+                        <ProjectCard
+                            project={project}
+                            sx={projectsStyle.MainProjects}
+                            key={project.name}
+                        />
+                    ))}
+                </Box>
+            </motion.div>
             <br />
             <OtherProjects projects={otherProjects} />
         </Box>

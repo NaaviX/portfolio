@@ -14,7 +14,6 @@ import {
     formatDurationMonthYear,
 } from '../../../utils/Utils'
 import { Experience } from '../experiences.type'
-import { getExperiences } from '../experiences.utils'
 import ExperiencesCard from './ExperiencesCard'
 
 interface ExperiencesTimelineItemProps {
@@ -23,8 +22,6 @@ interface ExperiencesTimelineItemProps {
 
 const ExperiencesTimelineItem = (props: ExperiencesTimelineItemProps) => {
     const exp: Experience = props.experience
-    const experiences: Experience[] = getExperiences()
-    const initialRotate = experiences.indexOf(exp) % 2 === 0 ? '20' : '-20'
     return (
         <TimelineItem>
             <TimelineOppositeContent sx={{ py: '20px' }} variant='subtitle1'>
@@ -46,8 +43,8 @@ const ExperiencesTimelineItem = (props: ExperiencesTimelineItemProps) => {
                 }}
             >
                 <motion.div
-                    initial={{ rotate: initialRotate }}
-                    whileInView={{ rotate: 0 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
                     transition={{ type: 'spring', duration: 2 }}
                     viewport={{ once: true }}
                 >

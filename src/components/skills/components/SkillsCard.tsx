@@ -87,7 +87,7 @@ const SkillsCardBase = ({
                 width: '100%',
                 padding: '40px 80px',
                 marginBottom: '50px',
-                height: '50vh',
+                minHeight: '50vh',
             }}
         >
             <SkillsCardBody skillCategory={skillCategory}></SkillsCardBody>

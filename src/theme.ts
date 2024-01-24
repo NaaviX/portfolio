@@ -70,7 +70,7 @@ const appTheme: Theme = createTheme({
         MuiPaper: {
             styleOverrides: {
                 root: {
-                    backdropFilter: 'blur(1px)',
+                    backdropFilter: 'blur(2px)',
                     color: '#b6ecf7',
                 },
             },
@@ -101,7 +101,7 @@ const appTheme: Theme = createTheme({
             color: '#b6ecf7',
         },
         subtitle1: {
-            fontSize: 15,
+            fontSize: 16,
             color: '#4ccce6',
             fontWeight: '700',
             letterSpacing: '0.07rem',

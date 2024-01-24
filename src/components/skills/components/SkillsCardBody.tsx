@@ -14,15 +14,14 @@ const SkillsCardBody = ({
                 position: 'relative',
                 display: 'flex',
                 height: '100%',
-                gap: '100px',
+                gap: '20px',
                 width: '100%',
             }}
         >
             <Box
                 className='skillCardDescription'
                 sx={{
-                    flex: 1.5,
-                    ml: '15px',
+                    flex: 1,
                     gap: '30px',
                     display: 'flex',
                     flexDirection: 'column',
@@ -43,7 +42,7 @@ const SkillsCardBody = ({
                     flex: 1,
                     position: 'relative',
                     width: '100%',
-                    display: 'flex',
+                    display: { xs: 'none', lg: 'flex' },
                     height: '100%',
                     alignItems: 'center',
                 }}

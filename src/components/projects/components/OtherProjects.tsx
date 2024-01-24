@@ -23,12 +23,19 @@ const OtherProjects = ({
                 display: 'flex',
                 flexDirection: 'column',
                 cursor: 'pointer',
+                mt: 5,
             }}
             onClick={() => setIsOpen((prev) => !prev)}
         >
-            <Typography variant='subtitle1'>
+            <Typography variant='subtitle1' sx={{ textAlign: 'center' }}>
                 Voir les autres projets{' '}
-                <ExpandMoreIcon sx={{ verticalAlign: 'middle' }} />
+                <ExpandMoreIcon
+                    sx={{
+                        verticalAlign: 'middle',
+                        transition: 'all .2s linear',
+                        transform: isOpen ? 'rotate(-180deg)' : 'rotate(0)',
+                    }}
+                />
             </Typography>
             <AnimatePresence mode='wait'>
                 {isOpen && (
@@ -62,8 +69,6 @@ const OtherProjects = ({
                                 },
                             },
                         }}
-                        key='test'
-                        className='text-lg font-light'
                     >
                         <Box
                             sx={{

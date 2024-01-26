@@ -1,4 +1,3 @@
-import '@fontsource/roboto'
 import { ReactLenis } from '@studio-freight/react-lenis'
 import dayjs from 'dayjs'
 import 'dayjs/locale/fr'

@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
-import { ReactComponent as Exp1 } from 'assets/images/exp1.svg'
-import { ReactComponent as Exp2 } from 'assets/images/exp2.svg'
+import Exp1 from 'assets/images/exp1.svg?react'
+import Exp2 from 'assets/images/exp2.svg?react'
 
 const ExperiencesBackground = () => {
     return (

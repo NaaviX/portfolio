@@ -11,7 +11,7 @@ import {
     TimelineSeparator,
 } from '@mui/lab'
 import { Box, Typography } from '@mui/material'
-import 'moment/locale/fr'
+
 import { Course } from '../courses.type'
 
 interface CoursesTimelineItemProps {

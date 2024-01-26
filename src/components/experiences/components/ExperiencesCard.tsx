@@ -5,7 +5,7 @@ import DateRangeIcon from '@mui/icons-material/DateRange'
 import PlaceIcon from '@mui/icons-material/Place'
 import { Box, List, ListItem, ListItemText, Typography } from '@mui/material'
 import ChipList from 'components/base/components/ChipList'
-import 'moment/locale/fr'
+
 import {
     formatDateMonthYear,
     formatDurationMonthYear,

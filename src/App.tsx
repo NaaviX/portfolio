@@ -1,12 +1,13 @@
 import '@fontsource/roboto'
 import { ReactLenis } from '@studio-freight/react-lenis'
-import moment from 'moment/moment'
+import dayjs from 'dayjs'
+import 'dayjs/locale/fr'
 import { Element } from 'react-scroll'
 import './App.css'
 import SectionLayout from './components/sections/SectionLayout'
 import { Section, sectionsData } from './components/sections/sections.data'
 import Header from './sections/Header'
-moment().locale('fr')
+dayjs.locale('fr')
 
 const App = () => {
     return (

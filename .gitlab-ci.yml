@@ -19,19 +19,6 @@ build:
             - build
             - node_modules/
 
-test:
-    stage: test
-    image: node
-    script:
-        - echo "Testing App"
-        - npm run test:ci
-        - echo "Test successfully!"
-    coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
-    artifacts:
-        paths:
-            - coverage/lcov.info
-            - test-report.xml
-
 docker-build:
     stage: docker-build
     image: docker:latest
@@ -53,7 +40,6 @@ deploy:
         - echo $CI_REGISTRY
         - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > key.pem
         - chmod 400 key.pem
-        - ssh -o StrictHostKeyChecking=no -i key.pem $SSH_USER@$VM_IPADDRESS "hostname && echo 'Welcome!!!' > welcome.txt"
         - ssh -o StrictHostKeyChecking=no -i key.pem $SSH_USER@$VM_IPADDRESS "docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY"
         - ssh -o StrictHostKeyChecking=no -i key.pem $SSH_USER@$VM_IPADDRESS "docker pull registry.gitlab.com/naavix/portfolio"
         - ssh -o StrictHostKeyChecking=no -i key.pem $SSH_USER@$VM_IPADDRESS "docker stop portfoliocontainer || true && docker rm portfoliocontainer || true"

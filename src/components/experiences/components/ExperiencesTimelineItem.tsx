@@ -8,7 +8,7 @@ import {
     TimelineSeparator,
 } from '@mui/lab'
 import { motion } from 'framer-motion'
-import 'moment/locale/fr'
+
 import {
     formatDateMonthYear,
     formatDurationMonthYear,

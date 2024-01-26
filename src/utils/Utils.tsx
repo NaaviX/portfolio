@@ -1,4 +1,4 @@
-import moment, { duration } from 'moment'
+import dayjs from 'dayjs'
 
 export const getAge = (date: string): number => {
     const today = new Date()
@@ -11,13 +11,12 @@ export const getAge = (date: string): number => {
 }
 
 export function formatDateMonthYear(date: Date): string {
-    return moment(date).format('MMMM YYYY')
+    return dayjs(date).format('MMMM YYYY')
 }
 
 export function formatDurationMonthYear(dateFrom: Date, dateTo: Date): string {
-    const time = duration(moment(dateTo).diff(moment(dateFrom)))
-    let years = time.years()
-    let months = time.months() + 1
+    let years = dayjs(dateTo).diff(dayjs(dateFrom), 'years')
+    let months = dayjs(dateTo).diff(dayjs(dateFrom), 'months') - years * 12 + 1
     if (months === 12) {
         years += 1
         months = 0

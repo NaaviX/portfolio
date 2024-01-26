@@ -1,6 +1,5 @@
 import { Timeline, timelineOppositeContentClasses } from '@mui/lab'
 import { motion } from 'framer-motion'
-import 'moment/locale/fr'
 import { Course } from '../courses.type'
 import { getCourses } from '../courses.utils'
 import CoursesTimelineItem from './CoursesTimelineItem'

@@ -1,5 +1,5 @@
-import { ReactComponent as FirebaseIcon } from 'assets/icons/firebase-svgrepo-com.svg'
-import { ReactComponent as JavaIcon } from 'assets/icons/java-svgrepo-com.svg'
+import FirebaseIcon from 'assets/icons/firebase-svgrepo-com.svg?react'
+import JavaIcon from 'assets/icons/java-svgrepo-com.svg?react'
 import esieeplus1 from 'assets/images/projects/esieeplus/esieeplus1.jpg'
 import groom1 from 'assets/images/projects/groom/groom1.png'
 

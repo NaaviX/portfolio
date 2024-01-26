@@ -15,39 +15,44 @@ cyan :
   Low-contrast text: #4ccce6;
   High-contrast text: #b6ecf7;
 */
+const importantColor: string = ' !important'
 
+const uiBackgroundColor: string = '#082c36' + importantColor
+const hoveredUiBackgroundColor: string = '#003848' + importantColor
+
+const borderColor: string = '#12677e' + importantColor
+const hoveredBorderColor: string = '#11809c' + importantColor
+
+const primaryLightColor: string = '#b6ecf7' + importantColor
+const primaryDarkColor: string = '#4ccce6' + importantColor
+const secondaryMainColor: string = '#CDC181' + importantColor
 const appTheme: Theme = createTheme({
     palette: {
         mode: 'dark',
         primary: {
-            main: '#b6ecf7',
+            dark: primaryDarkColor,
+            main: primaryLightColor,
+            light: primaryLightColor,
         },
         secondary: {
-            main: '#4ccce6',
+            main: secondaryMainColor,
         },
         background: {
             paper: 'rgba(8, 44, 54, 0.4)',
             default: '#101b20',
         },
-        divider: '#045468',
+        divider: borderColor,
     },
     components: {
-        MuiListItemText: {
-            styleOverrides: {
-                primary: {},
-            },
-        },
-        MuiFormLabel: {
-            styleOverrides: {
-                root: {},
-            },
-        },
         MuiInputBase: {
             styleOverrides: {
                 root: {
-                    borderColor: '#12677e',
-                    '&:hover': {
-                        '& fieldset': { borderColor: '#11809c !important' },
+                    '& fieldset': {
+                        borderColor: borderColor,
+                        transition: '0.2s !important',
+                    },
+                    '&:hover fieldset': {
+                        borderColor: hoveredBorderColor,
                     },
                 },
             },
@@ -55,15 +60,19 @@ const appTheme: Theme = createTheme({
         MuiButtonBase: {
             styleOverrides: {
                 root: {
-                    '&:hover': { backgroundColor: '#003848 !important' },
+                    '&:hover': {
+                        backgroundColor: hoveredUiBackgroundColor,
+                    },
                 },
             },
         },
         MuiIconButton: {
             styleOverrides: {
                 root: {
-                    backgroundColor: '#003848',
-                    '&:hover': { backgroundColor: '#004558 !important' },
+                    backgroundColor: uiBackgroundColor,
+                    '&:hover': {
+                        backgroundColor: hoveredUiBackgroundColor,
+                    },
                 },
             },
         },
@@ -71,7 +80,7 @@ const appTheme: Theme = createTheme({
             styleOverrides: {
                 root: {
                     backdropFilter: 'blur(2px)',
-                    color: '#b6ecf7',
+                    color: primaryLightColor,
                 },
             },
         },
@@ -81,7 +90,7 @@ const appTheme: Theme = createTheme({
                     fontWeight: 400,
                     letterSpacing: 0.8,
                     color: '#ffffff',
-                    backgroundColor: '#004558',
+                    backgroundColor: hoveredUiBackgroundColor,
                 },
             },
         },
@@ -92,29 +101,29 @@ const appTheme: Theme = createTheme({
             letterSpacing: 1.1,
             fontWeight: 400,
             fontSize: 24,
-            color: '#4ccce6',
+            color: primaryDarkColor,
         },
         h2: {
             fontWeight: 600,
             letterSpacing: 1.3,
             fontSize: 24,
-            color: '#b6ecf7',
+            color: primaryLightColor,
         },
         subtitle1: {
             fontSize: 16,
-            color: '#4ccce6',
+            color: primaryDarkColor,
             fontWeight: '700',
             letterSpacing: '0.07rem',
         },
         body1: {
             textAlign: 'justify',
             fontSize: 16,
-            color: '#b6ecf7',
+            color: primaryLightColor,
         },
         body2: {
             textAlign: 'justify',
             fontSize: 16,
-            color: '#4ccce6',
+            color: primaryDarkColor,
         },
         button: {
             fontWeight: 'bold',

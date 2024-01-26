@@ -83,7 +83,7 @@ const SkillsCardBase = ({
     return (
         <Paper
             sx={{
-                background: 'linear-gradient(80deg, #082c36, #082c36, #101b20)',
+                background: 'linear-gradient(80deg, #101b20, #082c36, #082c36)',
                 width: '100%',
                 padding: '40px 80px',
                 marginBottom: '50px',

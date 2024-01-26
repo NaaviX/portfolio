@@ -1,5 +1,5 @@
 import { Timeline, timelineOppositeContentClasses } from '@mui/lab'
-import { Box } from '@mui/system'
+import { Box } from '@mui/material'
 import 'moment/locale/fr'
 import { Experience } from '../experiences.type'
 import { getExperiences } from '../experiences.utils'

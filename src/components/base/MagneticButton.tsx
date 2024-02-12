@@ -1,6 +1,7 @@
 import { IconButton, Link } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { MouseEventHandler, useRef, useState } from 'react'
+import { isDesktop } from 'react-device-detect'
 
 interface MagneticButtonProps {
     icon: React.ReactElement | undefined
@@ -9,10 +10,12 @@ interface MagneticButtonProps {
 }
 
 export const MagneticButton = (props: MagneticButtonProps) => {
-    const { icon, href, ariaLabel } = props
-
     const ref = useRef<HTMLInputElement>(null)
     const [position, setPosition] = useState({ x: 0, y: 0 })
+
+    if (!isDesktop) {
+        return <ButtonBody {...props} />
+    }
 
     const handleMouse: MouseEventHandler = (e) => {
         const { clientX, clientY } = e
@@ -41,20 +44,27 @@ export const MagneticButton = (props: MagneticButtonProps) => {
                 mass: 0.1,
             }}
         >
-            <Link href={href} isExternal>
-                <IconButton
-                    _hover={{ bgColor: 'bg-hover' }}
-                    border='1px dotted'
-                    icon={icon}
-                    isRound
-                    aria-label={ariaLabel}
-                    fontSize='xl'
-                    color='primary-light'
-                    bgColor='bg'
-                    m='5px'
-                    shadow='rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;'
-                />
-            </Link>
+            <ButtonBody {...props} />
         </motion.div>
+    )
+}
+
+const ButtonBody = (props: MagneticButtonProps) => {
+    const { icon, href, ariaLabel } = props
+    return (
+        <Link href={href} isExternal>
+            <IconButton
+                _hover={{ bgColor: 'bg-hover' }}
+                border='1px dotted'
+                icon={icon}
+                isRound
+                aria-label={ariaLabel}
+                fontSize='xl'
+                color='primary-light'
+                bgColor='bg'
+                m='5px'
+                shadow='rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;'
+            />
+        </Link>
     )
 }

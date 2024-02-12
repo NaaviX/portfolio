@@ -1,28 +1,83 @@
-import { Box, CssBaseline, ThemeProvider } from '@mui/material'
-import React from 'react'
+import App from '@/App'
+import { ChakraProvider, ColorModeScript, extendTheme } from '@chakra-ui/react'
+import '@fontsource/roboto/latin.css'
+import '@fontsource/space-grotesk/400.css'
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import App from './App'
-import Appbar from './components/appbar/Appbar'
-import Footer from './sections/Footer'
-import appTheme from './theme'
+import { Navbar } from './components/appbar'
+import { FooterSection } from './sections/FooterSection'
 
 const root = createRoot(document.getElementById('root') as HTMLElement)
 
+const appTheme = extendTheme({
+    config: {
+        initialColorMode: 'dark',
+        useSystemColorMode: false,
+    },
+    colors: {
+        bg: '#082c36',
+        'bg-hover': '#003848',
+        border: '#12677e',
+        'border-hover': '#11809c',
+        'primary-light': '#b6ecf7',
+        'primary-dark': '#4ccce6',
+    },
+    fonts: {
+        body: 'Roboto, system-ui, sans-serif',
+        heading: 'Roboto, "Space Grotesk", serif',
+    },
+    fontSizes: {
+        '3xs': '0.45rem',
+        '2xs': '0.625rem',
+        xs: '0.75rem',
+        sm: '0.875rem',
+        md: '1rem',
+        lg: '1.125rem',
+        xl: '1.25rem',
+        '2xl': '1.5rem',
+        '3xl': '1.875rem',
+        '4xl': '2.25rem',
+        '5xl': '3rem',
+        '6xl': '3.75rem',
+        '7xl': '4.5rem',
+        '8xl': '6rem',
+        '9xl': '8rem',
+    },
+    styles: {
+        global: {
+            '*': {
+                fontSize: 'md',
+            },
+            'input, textarea, button': {
+                borderColor: 'border !important',
+                _hover: {
+                    borderColor: 'border-hover !important',
+                    backgroundColor: 'transparent !important',
+                },
+                _focus: {
+                    backgroundColor: 'transparent !important',
+                },
+            },
+        },
+    },
+})
 root.render(
-    <React.StrictMode>
-        <ThemeProvider theme={appTheme}>
-            <CssBaseline />
-            <Box className='app'>
-                <Appbar />
+    <StrictMode>
+        <ChakraProvider theme={appTheme}>
+            <>
+                <ColorModeScript
+                    initialColorMode={appTheme.config.initialColorMode}
+                />
+                <Navbar />
                 <BrowserRouter>
                     <Routes>
                         <Route path='/' element={<App />} />
                         <Route path='*' element={<Navigate to='/' />} />
                     </Routes>
                 </BrowserRouter>
-                <Footer />
-            </Box>
-        </ThemeProvider>
-    </React.StrictMode>
+                <FooterSection />
+            </>
+        </ChakraProvider>
+    </StrictMode>
 )

@@ -1,3 +1,4 @@
+import { TimelineExperience } from '../base/timeline/timeline.type'
 import {
     CICDSkill,
     bulmaSkill,
@@ -12,13 +13,12 @@ import {
     typescriptSkill,
     vueSkill,
 } from '../skills/skills.data'
-import { Experience } from './experiences.type'
 
-export const experiencesData: Experience[] = [
+export const experiencesData: TimelineExperience[] = [
     {
         title: 'Ingénieur conception & développement junior',
-        contract: 'Apprentissage',
-        company: 'CASDEN',
+        type: 'Apprentissage',
+        institution: 'CASDEN',
         city: 'Champs-sur-Marne',
         dateFrom: new Date('2017-09-01'),
         dateTo: new Date('2021-08-31'),
@@ -32,8 +32,8 @@ export const experiencesData: Experience[] = [
     },
     {
         title: 'Ingénieur études & développement',
-        contract: 'CDI',
-        company: 'Axelor',
+        type: 'CDI',
+        institution: 'Axelor',
         city: 'Champs-sur-Marne',
         dateFrom: new Date('2021-09-20'),
         dateTo: new Date('2023-08-23'),
@@ -51,8 +51,7 @@ export const experiencesData: Experience[] = [
     },
     {
         title: 'Auto-entrepreneur - Développeur web',
-        contract: 'Auto-entrepreneur',
-        company: 'Aucune',
+        type: 'Auto-entrepreneur',
         city: 'Chelles',
         dateFrom: new Date('2023-10-01'),
         dateTo: new Date(),
@@ -71,4 +70,7 @@ export const experiencesData: Experience[] = [
             springbootSkill,
         ],
     },
-]
+].sort(
+    (e1: TimelineExperience, e2: TimelineExperience) =>
+        e2.dateFrom.getTime() - e1.dateFrom.getTime()
+)

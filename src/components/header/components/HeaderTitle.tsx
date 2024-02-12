@@ -1,32 +1,28 @@
-import { Box, Typography } from '@mui/material'
+import { Heading } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { isDesktop } from 'react-device-detect'
 import { userData } from '../../user/user.data'
 
-const HeaderTitle = () => {
+export const HeaderTitle = () => {
     return (
-        <Box id='repulse-div'>
-            <motion.div
-                initial={{ x: '100vw' }}
-                animate={{ x: 0 }}
-                transition={{ type: 'spring', duration: 2, bounce: 0.3 }}
-                viewport={{ once: true }}
+        <motion.div
+            initial={{ x: '100vw' }}
+            animate={{ x: 0 }}
+            transition={{
+                type: 'spring',
+                duration: 2,
+                bounce: 0.3,
+                delay: 0.1,
+            }}
+            viewport={{ once: true }}
+        >
+            <Heading
+                as='h1'
+                textAlign='center'
+                fontSize={{ base: '4xl', md: '6xl', lg: '8xl' }}
+                fontFamily='Space Grotesk'
             >
-                <Typography
-                    component='h1'
-                    sx={{
-                        fontWeight: 300,
-                        fontSize: isDesktop ? 95 : 40,
-                        color: '#b6ecf7',
-                        textAlign: 'center',
-                    }}
-                    fontFamily='Space Grotesk'
-                >
-                    {userData.firstname} {userData.lastname}
-                </Typography>
-            </motion.div>
-        </Box>
+                {userData.firstname} {userData.lastname}
+            </Heading>
+        </motion.div>
     )
 }
-
-export default HeaderTitle

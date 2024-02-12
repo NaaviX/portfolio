@@ -1,35 +1,36 @@
-import AndroidIcon from 'assets/icons/android-icon-svgrepo-com.svg?react'
-import BootstrapIcon from 'assets/icons/bootstrap-svgrepo-com.svg?react'
-import BulmaIcon from 'assets/icons/bulma-svgrepo-com.svg?react'
-import CICDIcon from 'assets/icons/ci-cd-svgrepo-com.svg?react'
-import CssIcon from 'assets/icons/css-3-svgrepo-com.svg?react'
-import DockerIcon from 'assets/icons/docker-svgrepo-com.svg?react'
-import FirebaseIcon from 'assets/icons/firebase-svgrepo-com.svg?react'
-import FlutterIcon from 'assets/icons/flutter-svgrepo-com.svg?react'
-import GitIcon from 'assets/icons/git-icon-svgrepo-com.svg?react'
-import JavaIcon from 'assets/icons/java-svgrepo-com.svg?react'
-import JavascriptIcon from 'assets/icons/javascript-svgrepo-com.svg?react'
-import JenkinsIcon from 'assets/icons/jenkins-svgrepo-com.svg?react'
-import JestIcon from 'assets/icons/jest-svgrepo-com.svg?react'
-import LinuxIcon from 'assets/icons/linux-svgrepo-com.svg?react'
-import MuiIcon from 'assets/icons/material-ui-svgrepo-com.svg?react'
-import NuxtIcon from 'assets/icons/nuxt-icon-svgrepo-com.svg?react'
-import PostgreSQLIcon from 'assets/icons/postgresql-svgrepo-com.svg?react'
-import PostmanIcon from 'assets/icons/postman-icon-svgrepo-com.svg?react'
-import ReactIcon from 'assets/icons/react-svgrepo-com.svg?react'
-import RestIcon from 'assets/icons/rest-svgrepo-com.svg?react'
-import SonarIcon from 'assets/icons/sonarqube-svgrepo-com.svg?react'
-import SpringBootIcon from 'assets/icons/spring-icon-svgrepo-com.svg?react'
-import SwaggerIcon from 'assets/icons/swagger-svgrepo-com.svg?react'
-import TailwindIcon from 'assets/icons/tailwindcss-icon-svgrepo-com.svg?react'
-import TypescriptIcon from 'assets/icons/typescript-icon-svgrepo-com.svg?react'
-import VueIcon from 'assets/icons/vue-svgrepo-com.svg?react'
+import SkillBackImage from '@/assets/images/skillData.svg?react'
+import SkillDevToolsImage from '@/assets/images/skillDevTools.svg?react'
+import SkillFrontImage from '@/assets/images/skillFront.svg?react'
+import SkillMobileImage from '@/assets/images/skillMobile.svg?react'
 
-import SkillBackImage from 'assets/images/skillData.svg?react'
-import SkillDevToolsImage from 'assets/images/skillDevTools.svg?react'
-import SkillFrontImage from 'assets/images/skillFront.svg?react'
-import SkillMobileImage from 'assets/images/skillMobile.svg?react'
-
+import {
+    AndroidIcon,
+    BootstrapIcon,
+    BulmaIcon,
+    CICDIcon,
+    CSSIcon,
+    DockerIcon,
+    FirebaseIcon,
+    FlutterIcon,
+    GitIcon,
+    JavaIcon,
+    JenkinsIcon,
+    JestIcon,
+    JsIcon,
+    LinuxIcon,
+    MuiIcon,
+    NuxtIcon,
+    PostgresqlIcon,
+    PostmanIcon,
+    ReactIcon,
+    RestIcon,
+    SonarIcon,
+    SpringIcon,
+    SwaggerIcon,
+    TailwindIcon,
+    TsIcon,
+    VueIcon,
+} from '@/assets/icons'
 import { SKILL_NAME, SKILL_TYPE, Skill, SkillCategory } from './skills.type'
 
 export const javaSkill: Skill = {
@@ -41,7 +42,7 @@ export const javaSkill: Skill = {
 export const springbootSkill: Skill = {
     name: SKILL_NAME.SPRINGBOOT,
     about: '',
-    icon: SpringBootIcon,
+    icon: SpringIcon,
 }
 
 export const UXSkill: Skill = {
@@ -53,13 +54,13 @@ export const UXSkill: Skill = {
 export const javascriptSkill: Skill = {
     name: SKILL_NAME.JAVASCRIPT,
     about: '',
-    icon: JavascriptIcon,
+    icon: JsIcon,
 }
 
 export const typescriptSkill: Skill = {
     name: SKILL_NAME.TYPESCRIPT,
     about: '',
-    icon: TypescriptIcon,
+    icon: TsIcon,
 }
 
 export const vueSkill: Skill = {
@@ -83,7 +84,7 @@ export const reactSkill: Skill = {
 export const cssSkill: Skill = {
     name: SKILL_NAME.CSS,
     about: '',
-    icon: CssIcon,
+    icon: CSSIcon,
 }
 
 export const bootstrapSkill: Skill = {
@@ -113,7 +114,7 @@ export const muiSkill: Skill = {
 export const postgresqlSkill: Skill = {
     name: SKILL_NAME.POSTGRESQL,
     about: '',
-    icon: PostgreSQLIcon,
+    icon: PostgresqlIcon,
 }
 
 export const jpqlSkill: Skill = {

@@ -1,7 +1,7 @@
-import FirebaseIcon from 'assets/icons/firebase-svgrepo-com.svg?react'
-import JavaIcon from 'assets/icons/java-svgrepo-com.svg?react'
-import esieeplus1 from 'assets/images/projects/esieeplus/esieeplus1.jpg'
-import groom1 from 'assets/images/projects/groom/groom1.png'
+import FirebaseIcon from '@/assets/icons/firebase-svgrepo-com.svg?react'
+import JavaIcon from '@/assets/icons/java-svgrepo-com.svg?react'
+import esieeplus1 from '@/assets/images/projects/esieeplus/esieeplus1.jpg'
+import groom1 from '@/assets/images/projects/groom/groom1.png'
 
 import {
     bootstrapSkill,
@@ -9,19 +9,8 @@ import {
     flutterSkill,
     javascriptSkill,
     vueSkill,
-} from 'components/skills/skills.data'
+} from '../skills/skills.data'
 import { Project } from './projects.type'
-
-export const projectsStyle = {
-    MainProjects: {
-        width: { sm: '100%', md: '48%' },
-        margin: '1%',
-    },
-    OtherProject: {
-        width: '31%',
-        margin: '1%',
-    },
-}
 
 export const projectsData = {
     projects: [

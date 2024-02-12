@@ -1,6 +1,5 @@
-import { Theme } from '@emotion/react'
-import { SxProps } from '@mui/material'
-import { Skill } from 'components/skills/skills.type'
+import { Skill } from '../skills'
+
 export interface Project {
     name: string
     type: 'WEB' | 'MOBILE' | 'APP'
@@ -12,6 +11,5 @@ export interface Project {
 }
 
 export interface ProjectSection {
-    style: SxProps<Theme>
     projects: Project[]
 }

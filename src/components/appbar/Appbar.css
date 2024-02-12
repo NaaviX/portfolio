@@ -1,9 +1,0 @@
-.nav-item > button {
-    border-radius: 0%;
-    border-bottom: 1px solid transparent;
-    transition: all 0.5s;
-}
-.nav-item.active > button {
-    border-color: #004558;
-    color: white;
-}

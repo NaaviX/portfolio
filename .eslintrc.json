@@ -16,29 +16,6 @@
         "plugin:import/typescript",
         "plugin:sonarjs/recommended"
     ],
-
-    "overrides": [
-        {
-            "files": ["**/*.ts?(x)"],
-            "parser": "@typescript-eslint/parser",
-            "parserOptions": {
-                "ecmaFeatures": {
-                    "jsx": true
-                },
-                "ecmaVersion": 2018,
-                "sourceType": "module"
-            },
-            "plugins": ["react", "@typescript-eslint", "import", "sonarjs"],
-            // You can add Typescript specific rules here.
-            // If you are adding the typescript variant of a rule which is there in the javascript
-            // ruleset, disable the JS one.
-            "rules": {
-                "@typescript-eslint/no-array-constructor": "warn",
-                "no-array-constructor": "off",
-                "spaced-comment": "off"
-            }
-        }
-    ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
@@ -51,8 +28,10 @@
     "rules": {
         "react/react-in-jsx-scope": "off",
         "camelcase": "error",
-        "spaced-comment": "error",
-        "no-duplicate-imports": "error"
+        "no-duplicate-imports": "error",
+        "@typescript-eslint/no-array-constructor": "warn",
+        "no-array-constructor": "off",
+        "spaced-comment": "off"
     },
     "settings": {
         "react": {
@@ -65,5 +44,6 @@
             "typescript": true,
             "node": true
         }
-    }
+    },
+    "ignorePatterns": ["node_modules/", "build/", "src/assets/**"]
 }

@@ -41,85 +41,71 @@ export const javaSkill: Skill = {
 
 export const springbootSkill: Skill = {
     name: SKILL_NAME.SPRINGBOOT,
-    about: '',
     icon: SpringIcon,
 }
 
 export const UXSkill: Skill = {
     name: SKILL_NAME.UX,
-    about: '',
     icon: undefined,
 }
 
 export const javascriptSkill: Skill = {
     name: SKILL_NAME.JAVASCRIPT,
-    about: '',
     icon: JsIcon,
 }
 
 export const typescriptSkill: Skill = {
     name: SKILL_NAME.TYPESCRIPT,
-    about: '',
     icon: TsIcon,
 }
 
 export const vueSkill: Skill = {
     name: SKILL_NAME.VUE,
-    about: '',
     icon: VueIcon,
 }
 
 export const nuxtSkill: Skill = {
     name: SKILL_NAME.NUXT,
-    about: '',
     icon: NuxtIcon,
 }
 
 export const reactSkill: Skill = {
     name: SKILL_NAME.REACT,
-    about: '',
     icon: ReactIcon,
 }
 
 export const cssSkill: Skill = {
     name: SKILL_NAME.CSS,
-    about: '',
     icon: CSSIcon,
 }
 
 export const bootstrapSkill: Skill = {
     name: SKILL_NAME.BOOTSTRAP,
-    about: '',
     icon: BootstrapIcon,
 }
 
 export const bulmaSkill: Skill = {
     name: SKILL_NAME.BULMA,
-    about: '',
     icon: BulmaIcon,
 }
 
 export const tailwindSkill: Skill = {
     name: SKILL_NAME.TAILWIND,
-    about: '',
     icon: TailwindIcon,
 }
 
 export const muiSkill: Skill = {
     name: SKILL_NAME.MUI,
-    about: '',
     icon: MuiIcon,
 }
 
 export const postgresqlSkill: Skill = {
     name: SKILL_NAME.POSTGRESQL,
-    about: '',
     icon: PostgresqlIcon,
 }
 
 export const jpqlSkill: Skill = {
     name: SKILL_NAME.JPQL,
-    about: '',
     icon: undefined,
 }
 
@@ -131,37 +117,31 @@ export const firebaseSkill: Skill = {
 
 export const flutterSkill: Skill = {
     name: SKILL_NAME.FLUTTER,
-    about: '',
     icon: FlutterIcon,
 }
 
 export const androidSkill: Skill = {
     name: SKILL_NAME.ANDROID,
-    about: '',
     icon: AndroidIcon,
 }
 
 export const restSkill: Skill = {
     name: SKILL_NAME.REST,
-    about: '',
     icon: RestIcon,
 }
 
 export const swaggerSkill: Skill = {
     name: SKILL_NAME.SWAGGER,
-    about: '',
     icon: SwaggerIcon,
 }
 
 export const postmanSkill: Skill = {
     name: SKILL_NAME.POSTMAN,
-    about: '',
     icon: PostmanIcon,
 }
 
 export const gitSkill: Skill = {
     name: SKILL_NAME.GIT,
-    about: '',
     icon: GitIcon,
 }
 export const linuxSkill: Skill = {
@@ -171,35 +151,29 @@ export const linuxSkill: Skill = {
 }
 export const jenkinsSkill: Skill = {
     name: SKILL_NAME.JENKINS,
-    about: '',
     icon: JenkinsIcon,
 }
 export const sonarSkill: Skill = {
     name: SKILL_NAME.SONARQUBE,
-    about: '',
     icon: SonarIcon,
 }
 export const nexusSkill: Skill = {
     name: SKILL_NAME.NEXUS,
-    about: '',
     icon: undefined,
 }
 
 export const CICDSkill: Skill = {
     name: SKILL_NAME.CICD,
-    about: '',
     icon: CICDIcon,
 }
 
 export const dockerSkill: Skill = {
     name: SKILL_NAME.DOCKER,
-    about: '',
     icon: DockerIcon,
 }
 
 export const jestSkill: Skill = {
     name: SKILL_NAME.JEST,
-    about: '',
     icon: JestIcon,
 }
 

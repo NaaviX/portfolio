@@ -44,7 +44,7 @@ export enum SKILL_NAME {
 
 export interface Skill {
     name: string
-    about: string
+    about?: string
     icon: FC<SVGProps<SVGSVGElement>> | undefined
 }
 

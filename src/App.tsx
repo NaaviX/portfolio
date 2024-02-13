@@ -1,3 +1,4 @@
+import { useTheme } from '@chakra-ui/react'
 import { ReactLenis } from '@studio-freight/react-lenis'
 import dayjs from 'dayjs'
 import 'dayjs/locale/fr'
@@ -9,6 +10,7 @@ import { Section, sectionsData } from './sections/sections.data'
 dayjs.locale('fr')
 
 const App = () => {
+    console.log(useTheme())
     return (
         <ReactLenis root>
             <HeaderSection />

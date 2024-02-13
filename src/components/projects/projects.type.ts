@@ -8,6 +8,9 @@ export interface Project {
     skills: Skill[]
 
     images: string[]
+    previewLink?: string
+    gitLink?: string
+    membersCount?: number
 }
 
 export interface ProjectSection {

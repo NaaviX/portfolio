@@ -44,7 +44,7 @@ deploy:
           cd /home/antoine/full-app/portfolio;
           docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY;
           docker pull "$CI_REGISTRY_IMAGE";
-          docker compose up --file compose.ci.yaml --build -d --remove-orphans"
+          docker compose -f compose.ci.yaml up --build -d --remove-orphans"
 
 sonar-analysis:
     stage: analyze

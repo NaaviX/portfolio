@@ -40,9 +40,11 @@ deploy:
         - echo $CI_REGISTRY
         - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > key.pem
         - chmod 400 key.pem
-        - ssh -o StrictHostKeyChecking=no -i key.pem $SSH_USER@$VM_IPADDRESS "docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY;
+        - ssh -o StrictHostKeyChecking=no -i key.pem $SSH_USER@$VM_IPADDRESS "
           cd /home/antoine/full-app/portfolio;
-          docker compose --file compose.yaml up -d"
+          docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY;
+          docker pull "$CI_REGISTRY_IMAGE";
+          docker compose up --build -d"
 
 sonar-analysis:
     stage: analyze

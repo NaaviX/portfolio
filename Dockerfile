@@ -6,7 +6,7 @@
 
 # Want to help us make this template better? Share your feedback here: https://forms.gle/ybq9Krt8jtBL3iCk7
 
-ARG NODE_VERSION=18
+ARG NODE_VERSION=20.8.0
 
 ################################################################################
 # Use node image for base image for all stages.
@@ -35,7 +35,8 @@ RUN npm run build
 
 
 FROM nginx:alpine
-COPY nginx/nginx.conf /etc/nginx/nginx.conf
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx/nginx.conf /etc/nginx/conf.d
 
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=build /usr/src/app/build /usr/share/nginx/html

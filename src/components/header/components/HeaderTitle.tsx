@@ -21,7 +21,7 @@ export const HeaderTitle = () => {
                 fontSize={{ base: '4xl', md: '6xl', lg: '8xl' }}
                 fontFamily='Space Grotesk'
             >
-                {userData.firstname} {userData.lastname + 'a'}
+                {userData.firstname} {userData.lastname}
             </Heading>
         </motion.div>
     )

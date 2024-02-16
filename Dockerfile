@@ -10,7 +10,7 @@ ARG NODE_VERSION=18
 
 ################################################################################
 # Use node image for base image for all stages.
-FROM node:${NODE_VERSION}-alpine as base
+FROM node:${NODE_VERSION}-alpine as build
 
 # Set working directory for all build stages.
 WORKDIR /usr/src/app
@@ -18,7 +18,6 @@ WORKDIR /usr/src/app
 
 ################################################################################
 # Create a stage for installing production dependecies.
-FROM base as build
 
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.npm to speed up subsequent builds.
@@ -27,7 +26,7 @@ FROM base as build
 RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
     --mount=type=cache,target=/root/.npm \
-    npm ci --omit=dev
+    npm ci
 
 # Copy the rest of the source files into the image.
 COPY . .

@@ -10,7 +10,8 @@
 services:
     portfolio-front:
         container_name: portfolio-front
-        image: registry.gitlab.com/naavix/portfolio
+        build:
+            context: .
         restart: 'unless-stopped'
         environment:
             NODE_ENV: production

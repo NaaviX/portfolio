@@ -26,7 +26,7 @@ export const particlesData: RecursivePartial<IOptions> | undefined = {
     fpsLimit: 120,
 
     interactivity: {
-        detectsOn: 'window',
+        detectsOn: 'canvas',
         events: {
             onDiv: [
                 {
@@ -97,7 +97,7 @@ export const particlesData: RecursivePartial<IOptions> | undefined = {
         },
         number: {
             limit: 0,
-            value: isMobile ? 8 : 18,
+            value: isMobile ? 8 : 15,
         },
 
         opacity: {

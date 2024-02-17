@@ -10,14 +10,18 @@ import {
     Textarea,
 } from '@chakra-ui/react'
 import { FormEvent } from 'react'
+import { MdSend } from 'react-icons/md'
 
 function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    console.log({
-        email: data.get('email'),
-        password: data.get('password'),
-    })
+
+    const email = 'portfolio.antoinelegrand@gmail.com'
+    const subject = data.get('subject')
+    const message = data.get('message')
+
+    window.location.href =
+        'mailto:' + email + '?subject=' + subject + '&body=' + message
 }
 
 export const ContactForm = () => {
@@ -30,31 +34,14 @@ export const ContactForm = () => {
         >
             <Fade>
                 <Grid mt='3rem' h='100%' gap='1rem'>
-                    <GridItem colSpan={{ base: 12, sm: 6 }}>
-                        <FormControl isRequired>
-                            <FormLabel htmlFor='fullName'>Nom</FormLabel>
-                            <Input
-                                size='lg'
-                                autoComplete='full-name'
-                                name='fullName'
-                                required
-                                width='100%'
-                            />
-                        </FormControl>
-                    </GridItem>
-                    <GridItem colSpan={{ base: 12, sm: 6 }}>
-                        <FormControl isRequired>
-                            <FormLabel htmlFor='email'>Adresse email</FormLabel>
-                            <Input
-                                size='lg'
-                                autoComplete='email'
-                                name='email'
-                                w='full'
-                            />
+                    <GridItem colSpan={12}>
+                        <FormControl>
+                            <FormLabel htmlFor='subject'>Sujet</FormLabel>
+                            <Input size='lg' name='subject' w='full' />
                         </FormControl>
                     </GridItem>
                     <GridItem colSpan={12}>
-                        <FormControl isRequired>
+                        <FormControl>
                             <FormLabel htmlFor='message'>Message</FormLabel>
                             <Textarea
                                 size='lg'
@@ -67,11 +54,11 @@ export const ContactForm = () => {
                 </Grid>
                 <Button
                     type='submit'
-                    variant='outline'
                     mt='4'
-                    ml='30%'
-                    w='40%'
                     size='lg'
+                    rightIcon={<MdSend />}
+                    background='#082c36'
+                    _hover={{ background: '#003848 !important' }}
                 >
                     Envoyer
                 </Button>

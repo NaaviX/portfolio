@@ -21,6 +21,7 @@ import {
     useTransform,
 } from 'framer-motion'
 import { FaLinkedinIn } from 'react-icons/fa6'
+import { MdEmail } from 'react-icons/md'
 import { Link, animateScroll as scroll } from 'react-scroll'
 import { userData } from '../user'
 
@@ -81,7 +82,10 @@ const NavbarDesktop = () => {
                     <NavLink key={'nav-' + section.name} section={section} />
                 ))}
             </HStack>
-            <LinkedInLink />
+            <Flex gap='0.5rem'>
+                <ContactLink />
+                <LinkedInLink />
+            </Flex>
         </Flex>
     )
 }
@@ -100,7 +104,10 @@ const NavbarMobile = () => {
                     aria-label={'Open Menu'}
                     onClick={isOpen ? onClose : onOpen}
                 />
-                <LinkedInLink />
+                <Flex gap='0.5rem'>
+                    <ContactLink />
+                    <LinkedInLink />
+                </Flex>
             </Flex>
 
             <Collapse in={isOpen} animateOpacity>
@@ -139,6 +146,19 @@ const NavLink = (props: NavLinkProps) => {
                 {section.name}
             </Button>
         </Link>
+    )
+}
+
+const ContactLink = () => {
+    return (
+        <ChakraLink href={'mailto:' + userData.email}>
+            <IconButton
+                variant='outline'
+                size={'md'}
+                icon={<Icon as={MdEmail} fontSize='lg' />}
+                aria-label={'Email'}
+            />
+        </ChakraLink>
     )
 }
 

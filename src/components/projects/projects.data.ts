@@ -1,8 +1,7 @@
 import FirebaseIcon from '@/assets/icons/firebase-svgrepo-com.svg?react'
 import JavaIcon from '@/assets/icons/java-svgrepo-com.svg?react'
-import esieeplus1 from '@/assets/images/projects/esieeplus/esieeplus1.jpg'
-import groom1 from '@/assets/images/projects/groom/groom1.png'
 
+import { EsieePlus1, Groom1 } from '@/assets/images'
 import {
     bootstrapSkill,
     bulmaSkill,
@@ -26,7 +25,7 @@ export const projectsData: Project[] = [
                 icon: FirebaseIcon,
             },
         ],
-        images: [groom1],
+        images: [Groom1],
         previewLink: '/groom',
         gitLink: 'https://gitlab.com/NaaviX/groom-web',
         membersCount: 2,
@@ -41,7 +40,7 @@ export const projectsData: Project[] = [
             flutterSkill,
             { name: 'Firebase authentification', icon: FirebaseIcon },
         ],
-        images: [esieeplus1],
+        images: [EsieePlus1, Groom1],
         gitLink: 'https://gitlab.com/NaaviX/esiee-plus-portfolio',
         membersCount: 3,
     },

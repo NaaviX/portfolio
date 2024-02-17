@@ -4,7 +4,8 @@ import { Title } from '@/components/base/typography/Title'
 import { Center, Flex } from '@chakra-ui/react'
 import '@fontsource/space-grotesk/400.css'
 import { motion } from 'framer-motion'
-import { FaFilePdf, FaLinkedinIn } from 'react-icons/fa'
+import { FaLinkedinIn } from 'react-icons/fa'
+import { PiReadCvLogo } from 'react-icons/pi'
 import { userData } from '../../user'
 
 export const HeaderContent = () => {
@@ -42,12 +43,12 @@ export const HeaderContent = () => {
                         <Flex w='50%' justify='space-evenly'>
                             <MagneticButton
                                 icon={<FaLinkedinIn />}
-                                ariaLabel='LinkedIn'
+                                ariaLabel='Linked in'
                                 href={userData.linkedin}
                             />
                             <MagneticButton
-                                icon={<FaFilePdf />}
-                                ariaLabel='Resume'
+                                icon={<PiReadCvLogo size={23} />}
+                                ariaLabel='CV'
                                 href={CvPdf}
                             />
                         </Flex>

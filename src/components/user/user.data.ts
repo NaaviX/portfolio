@@ -8,7 +8,7 @@ export const userData: User = {
     car: true,
     jobTitle: 'Ingénieur conception & développement full stack Java/JS',
     mainDescription: "En recherche active d'un CDI",
-    email: 'antoine.legrand77@gmail.com',
+    email: 'portfolio.antoinelegrand@gmail.com',
     address: {
         zip: '77500',
         city: 'Chelles',

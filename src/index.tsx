@@ -10,6 +10,22 @@ import { FooterSection } from './sections/FooterSection'
 
 const root = createRoot(document.getElementById('root') as HTMLElement)
 
+/*
+cyan :
+  App background: #0b161a;
+  Subtle background: #101b20;
+  UI element background: #082c36;
+  Hovered UI element background: #003848;
+  Active / Selected UI element background: #004558;
+  Subtle borders and separators: #045468;
+  UI element border and focus rings: #12677e;
+  Hovered UI element border: #11809c;
+  Solid backgrounds: #00a2c7;
+  Hovered solid backgrounds: #23afd0;
+  Low-contrast text: #4ccce6;
+  High-contrast text: #b6ecf7;
+*/
+
 const appTheme = extendTheme({
     config: {
         initialColorMode: 'dark',

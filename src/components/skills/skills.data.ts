@@ -180,7 +180,7 @@ export const jestSkill: Skill = {
 export const frontSkillCategory: SkillCategory = {
     name: SKILL_TYPE.WEBFRONT,
     description:
-        "Création d'interfaces utilisateur web ou mobile ergonomiques, optimisation de l'expérience utilisateur.",
+        "Interfaces utilisateur web ou mobile ergonomiques, optimisation de l'expérience utilisateur.",
     color: 'rgb(43, 93, 108)',
     skills: [
         javascriptSkill,
@@ -199,7 +199,8 @@ export const frontSkillCategory: SkillCategory = {
 
 export const backSkillCategory: SkillCategory = {
     name: SKILL_TYPE.WEBBACK,
-    description: 'blabla',
+    description:
+        'Couche responsable de la gestion de données et de la logique métier.',
     color: '#0f172a',
     skills: [
         javaSkill,
@@ -214,7 +215,7 @@ export const backSkillCategory: SkillCategory = {
 
 export const devToolsSkillCategory: SkillCategory = {
     name: SKILL_TYPE.DEVTOOLS,
-    description: 'blabla',
+    description: 'Divers outils utilisés lors de mes précédents projets.',
     color: '#0f172a',
     skills: [
         swaggerSkill,
@@ -230,7 +231,7 @@ export const devToolsSkillCategory: SkillCategory = {
 
 export const mobileSkillCategory: SkillCategory = {
     name: SKILL_TYPE.MOBILE,
-    description: 'blabla',
+    description: 'Applications mobiles Android et iOS.',
     color: '#0f172a',
     skills: [flutterSkill, androidSkill],
     image: SkillMobileImage,

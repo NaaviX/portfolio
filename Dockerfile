@@ -1,23 +1,45 @@
-#Stage 1
-FROM node:18-alpine as build
+# syntax=docker/dockerfile:1
 
-# Specify where our app will live in the container
-WORKDIR /app
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Dockerfile reference guide at
+# https://docs.docker.com/go/dockerfile-reference/
 
-# Copy the React App to the container
-COPY . /app/
+# Want to help us make this template better? Share your feedback here: https://forms.gle/ybq9Krt8jtBL3iCk7
 
-# Prepare the container for building React
-RUN npm install
-RUN npm install react-scripts@5.0.1 -g
-# We want the production version
+ARG NODE_VERSION=20.8.0
+
+################################################################################
+# Use node image for base image for all stages.
+FROM node:${NODE_VERSION}-alpine as build
+
+# Set working directory for all build stages.
+WORKDIR /usr/src/app
+
+
+################################################################################
+# Create a stage for installing production dependecies.
+
+# Download dependencies as a separate step to take advantage of Docker's caching.
+# Leverage a cache mount to /root/.npm to speed up subsequent builds.
+# Leverage bind mounts to package.json and package-lock.json to avoid having to copy them
+# into this layer.
+RUN --mount=type=bind,source=package.json,target=package.json \
+    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+    --mount=type=cache,target=/root/.npm \
+    npm ci
+
+# Copy the rest of the source files into the image.
+COPY . .
+# Run the build script.
 RUN npm run build
 
-# Prepare nginx
-FROM nginx:1.19.0-alpine
-COPY --from=build /app/build /usr/share/nginx/html
+
+FROM nginx:alpine
 RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx/nginx.conf /etc/nginx/conf.d
+
+RUN rm -rf /usr/share/nginx/html/*
+COPY --from=build /usr/src/app/build /usr/share/nginx/html
 
 # Fire up nginx
 EXPOSE 80

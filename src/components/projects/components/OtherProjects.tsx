@@ -1,90 +1,42 @@
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { Box, SxProps, Theme, Typography } from '@mui/material'
-import { AnimatePresence, motion } from 'framer-motion'
+import { Box, Collapse, Flex, Text } from '@chakra-ui/react'
 import { useState } from 'react'
-import { projectsStyle } from '../projects.data'
+import { FaAngleRight } from 'react-icons/fa6'
 import { Project } from '../projects.type'
-import ProjectCard from './ProjectCard'
+import { ProjectCard } from './card/ProjectCard'
 
-const OtherProjects = ({
-    projects,
-    sx,
-}: {
+interface OtherProjectsProps {
     projects: Project[]
-    sx?: SxProps<Theme>
-}) => {
+}
+
+export const OtherProjects = (props: OtherProjectsProps) => {
+    const { projects } = props
     const [isOpen, setIsOpen] = useState(false)
 
     return (
-        <Box
-            sx={{
-                ...sx,
-                width: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                cursor: 'pointer',
-            }}
-            onClick={() => setIsOpen((prev) => !prev)}
-        >
-            <Typography variant='subtitle1'>
-                Voir les autres projets{' '}
-                <ExpandMoreIcon sx={{ verticalAlign: 'middle' }} />
-            </Typography>
-            <AnimatePresence mode='wait'>
-                {isOpen && (
-                    <motion.div
-                        initial={{
-                            height: 0,
-                            opacity: 0,
-                        }}
-                        animate={{
-                            height: 'auto',
-                            opacity: 1,
-                            transition: {
-                                height: {
-                                    duration: 0.6,
-                                },
-                                opacity: {
-                                    duration: 0.25,
-                                    delay: 0.15,
-                                },
-                            },
-                        }}
-                        exit={{
-                            height: 0,
-                            opacity: 0,
-                            transition: {
-                                height: {
-                                    duration: 0.5,
-                                },
-                                opacity: {
-                                    duration: 0.25,
-                                },
-                            },
-                        }}
-                        key='test'
-                        className='text-lg font-light'
-                    >
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                flexWrap: 'wrap',
-                            }}
-                        >
-                            {projects.map((project: Project) => (
-                                <ProjectCard
-                                    key={project.name}
-                                    project={project}
-                                    sx={projectsStyle.OtherProject}
-                                />
-                            ))}
-                        </Box>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </Box>
+        <Flex direction='column' w='full' cursor='pointer' mt={5}>
+            <Flex
+                alignItems='center'
+                gap='0.5rem'
+                m='1rem'
+                onClick={() => setIsOpen((prev) => !prev)}
+            >
+                <Text align='center'>Mes autres projets </Text>
+                <Box
+                    as='span'
+                    transform={isOpen ? 'rotate(90deg)' : 'rotate(0)'}
+                    transition='transform 0.3s'
+                >
+                    <FaAngleRight />
+                </Box>
+            </Flex>
+
+            <Collapse in={isOpen} transition={{ enter: { duration: 0.5 } }}>
+                <Flex wrap='wrap'>
+                    {projects.map((project: Project) => (
+                        <ProjectCard key={project.name} project={project} />
+                    ))}
+                </Flex>
+            </Collapse>
+        </Flex>
     )
 }
-
-export default OtherProjects

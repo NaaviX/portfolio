@@ -1,76 +1,68 @@
-import { Box, Button, Grid, TextField, Typography } from '@mui/material'
+import { Fade } from '@/components/base/effects/Fade'
+import {
+    Box,
+    Button,
+    FormControl,
+    FormLabel,
+    Grid,
+    GridItem,
+    Input,
+    Textarea,
+} from '@chakra-ui/react'
 import { FormEvent } from 'react'
+import { MdSend } from 'react-icons/md'
 
 function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    console.log({
-        email: data.get('email'),
-        password: data.get('password'),
-    })
+
+    const email = 'portfolio.antoinelegrand@gmail.com'
+    const subject = data.get('subject')
+    const message = data.get('message')
+
+    window.location.href =
+        'mailto:' + email + '?subject=' + subject + '&body=' + message
 }
 
-const ContactForm = () => {
+export const ContactForm = () => {
     return (
-        <Box component='form' noValidate onSubmit={handleSubmit}>
-            <Grid container spacing={2} sx={{ mt: '40px', height: '100%' }}>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        autoComplete='family-name'
-                        name='familyName'
-                        required
-                        fullWidth
-                        id='familyName'
-                        label='Nom'
-                    />
+        <Box
+            as='form'
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ width: { base: '100%', md: '70%' }, minHeight: '50vh' }}
+        >
+            <Fade>
+                <Grid mt='3rem' h='100%' gap='1rem'>
+                    <GridItem colSpan={12}>
+                        <FormControl>
+                            <FormLabel htmlFor='subject'>Sujet</FormLabel>
+                            <Input size='lg' name='subject' w='full' />
+                        </FormControl>
+                    </GridItem>
+                    <GridItem colSpan={12}>
+                        <FormControl>
+                            <FormLabel htmlFor='message'>Message</FormLabel>
+                            <Textarea
+                                size='lg'
+                                name='message'
+                                w='full'
+                                rows={4}
+                            />
+                        </FormControl>
+                    </GridItem>
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        autoComplete='given-name'
-                        name='firstName'
-                        required
-                        fullWidth
-                        id='firstName'
-                        label='Prénom'
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        required
-                        fullWidth
-                        id='email'
-                        label='Adresse email'
-                        name='email'
-                        autoComplete='email'
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        name='subject'
-                        required
-                        fullWidth
-                        id='subject'
-                        label='Sujet'
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        label='Message'
-                        fullWidth
-                        multiline
-                        maxRows={4}
-                    />
-                </Grid>
-            </Grid>
-            <Button
-                type='submit'
-                variant='contained'
-                sx={{ mt: 4, ml: '30%', width: '40%' }}
-            >
-                <Typography variant='button'>Envoyer</Typography>
-            </Button>
+                <Button
+                    type='submit'
+                    mt='4'
+                    size='lg'
+                    rightIcon={<MdSend />}
+                    background='#082c36'
+                    _hover={{ background: '#003848 !important' }}
+                >
+                    Envoyer
+                </Button>
+            </Fade>
         </Box>
     )
 }
-
-export default ContactForm

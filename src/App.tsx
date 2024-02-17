@@ -1,24 +1,30 @@
-import '@fontsource/roboto'
+import { useTheme } from '@chakra-ui/react'
 import { ReactLenis } from '@studio-freight/react-lenis'
-import moment from 'moment/moment'
+import dayjs from 'dayjs'
+import 'dayjs/locale/fr'
 import { Element } from 'react-scroll'
 import './App.css'
-import SectionLayout from './components/sections/SectionLayout'
-import { Section, sectionsData } from './components/sections/sections.data'
-import Header from './sections/Header'
-moment().locale('fr')
+import { HeaderSection } from './sections/HeaderSection'
+import { SectionLayout } from './sections/components/SectionLayout'
+import { Section, sectionsData } from './sections/sections.data'
+dayjs.locale('fr')
 
 const App = () => {
+    console.log(useTheme())
     return (
         <ReactLenis root>
-            <Header />
+            <HeaderSection />
 
             {sectionsData.map((section: Section) => (
                 <Element
                     name={section.target}
                     key={section.name}
                     className='element'
-                    style={{ position: 'relative' }}
+                    style={{
+                        marginTop: '1px',
+                        paddingTop: '150px',
+                        position: 'relative',
+                    }}
                 >
                     <SectionLayout title={section.name}>
                         <section.element />

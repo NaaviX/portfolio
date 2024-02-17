@@ -1,31 +1,37 @@
-import { Course } from './courses.type'
+import { TimelineExperience } from '../base/timeline/timeline.type'
 
-export const coursesData: Course[] = [
+export const coursesData: TimelineExperience[] = [
     {
-        name: 'Ingénieur informatique & applications',
-        school: 'ESIEE Paris',
+        title: 'Ingénieur informatique & applications',
+        institution: 'ESIEE Paris',
         city: 'Noisy-le-grand (93)',
         dateFrom: new Date('2018-09-01'),
         dateTo: new Date('2021-08-31'),
-        description: 'Grand admis sur dossier',
-        diploma: 'Ingénieur',
+        activities: [],
+        type: 'Ingénieur',
+        skills: [],
     },
     {
-        name: 'DUT Informatique',
-        school: 'IUT de Marne-La-Vallée',
+        title: 'DUT Informatique',
+        institution: 'IUT de Marne-La-Vallée',
         city: 'Champs-sur-Marne (77)',
         dateFrom: new Date('2016-09-01'),
         dateTo: new Date('2018-08-31'),
-        description: '',
-        diploma: 'DUT',
+        activities: [],
+        type: 'DUT',
+        skills: [],
     },
     {
-        name: "Baccalauréat scientifique - Sciences de l'ingénieur",
-        school: 'Lycée Gaston Bachelard',
+        title: "Baccalauréat scientifique - Sciences de l'ingénieur",
+        institution: 'Lycée Gaston Bachelard',
         city: 'Chelles (77)',
         dateFrom: new Date('2013-09-01'),
         dateTo: new Date('2016-08-31'),
-        description: '',
-        diploma: 'BAC',
+        activities: [],
+        type: 'BAC',
+        skills: [],
     },
-]
+].sort(
+    (c1: TimelineExperience, c2: TimelineExperience) =>
+        c2.dateFrom.getTime() - c1.dateFrom.getTime()
+)

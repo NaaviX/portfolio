@@ -1,90 +1,60 @@
-import ContactPageOutlinedIcon from '@mui/icons-material/ContactPageOutlined'
-import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import { Box, Container, IconButton, Typography } from '@mui/material'
+import CvPdf from '@/assets/CV.pdf'
+import { MagneticButton, Paper } from '@/components/base'
+import { Title } from '@/components/base/typography/Title'
+import { Center, Flex } from '@chakra-ui/react'
+import '@fontsource/space-grotesk/400.css'
 import { motion } from 'framer-motion'
-import MagneticButton from '../../base/components/MagneticButton'
-import Paper from '../../base/components/Paper'
-import { userData } from '../../user/user.data'
-import HeaderTitle from './HeaderTitle'
+import { FaLinkedinIn } from 'react-icons/fa'
+import { PiReadCvLogo } from 'react-icons/pi'
+import { userData } from '../../user'
 
-const HeaderContent = () => {
+export const HeaderContent = () => {
     return (
-        <Container
-            id='header'
-            maxWidth='xl'
-            sx={{
-                display: 'flex',
-                height: '100vh',
-                flexDirection: 'column',
-                justifyContent: 'space-evenly',
-                alignItems: 'center',
-                textAlign: 'center',
+        <motion.div
+            initial={{ x: '-100vw' }}
+            animate={{ x: 0 }}
+            transition={{
+                type: 'spring',
+                duration: 2,
+                bounce: 0.2,
+                delay: 0.4,
             }}
+            viewport={{ once: true }}
         >
-            <HeaderTitle />
-            <motion.div
-                initial={{ x: '-100vw' }}
-                animate={{ x: 0 }}
-                transition={{
-                    type: 'spring',
-                    duration: 2,
-                    bounce: 0.2,
-                    delay: 0.5,
-                }}
-                viewport={{ once: true }}
-            >
-                <Paper>
-                    <Typography
-                        variant='h2'
-                        gutterBottom
-                        fontFamily='kaushan script'
-                        textAlign='center'
-                        marginBottom='50px'
-                    >
-                        {userData.jobTitle} <br />
-                        <br />
-                        {userData.mainDescription}
-                    </Typography>
-                    <Box
+            <Paper style={{ alignItems: 'center' }}>
+                <Flex direction='column' gap='3rem'>
+                    <Title
                         sx={{
-                            width: '30%',
-                            display: 'flex',
-                            justifyContent: 'space-evenly',
+                            fontFamily: 'Space Grotesk',
+                            fontSize: '2xl',
                         }}
                     >
-                        <MagneticButton>
-                            <IconButton
+                        {userData.jobTitle}
+                    </Title>
+                    <Title
+                        sx={{
+                            fontFamily: 'Space Grotesk',
+                            fontsize: 'xl',
+                        }}
+                    >
+                        {userData.mainDescription}
+                    </Title>
+                    <Center>
+                        <Flex w='50%' justify='space-evenly'>
+                            <MagneticButton
+                                icon={<FaLinkedinIn />}
+                                ariaLabel='Linked in'
                                 href={userData.linkedin}
-                                target='_blank'
-                                size='large'
-                                sx={{
-                                    m: '3px',
-                                    boxShadow:
-                                        'rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;',
-                                }}
-                            >
-                                <ContactPageOutlinedIcon />
-                            </IconButton>
-                        </MagneticButton>
-                        <MagneticButton>
-                            <IconButton
-                                href={userData.linkedin}
-                                target='_blank'
-                                size='large'
-                                sx={{
-                                    m: '3px',
-                                    boxShadow:
-                                        'rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;',
-                                }}
-                            >
-                                <LinkedInIcon />
-                            </IconButton>
-                        </MagneticButton>
-                    </Box>
-                </Paper>
-            </motion.div>
-        </Container>
+                            />
+                            <MagneticButton
+                                icon={<PiReadCvLogo size={23} />}
+                                ariaLabel='CV'
+                                href={CvPdf}
+                            />
+                        </Flex>
+                    </Center>
+                </Flex>
+            </Paper>
+        </motion.div>
     )
 }
-
-export default HeaderContent

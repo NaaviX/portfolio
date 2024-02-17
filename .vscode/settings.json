@@ -2,5 +2,6 @@
     "sonarlint.connectedMode.project": {
         "connectionId": "http-154-56-56-88-9000",
         "projectKey": "NaaviX_portfolio_AYyj3l2MelWGysneB3RO"
-    }
+    },
+    "typescript.tsdk": "node_modules/typescript/lib"
 }

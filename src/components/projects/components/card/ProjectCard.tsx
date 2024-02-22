@@ -40,6 +40,7 @@ export const ProjectCard = (props: ProjectCardProps) => {
                         align='center'
                         gap='15px'
                         position='relative'
+                        width='100%'
                     >
                         <Box position='absolute' top='0' left='0'>
                             <ProjectTypeIcon {...project} />

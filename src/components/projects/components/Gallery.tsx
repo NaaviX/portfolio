@@ -57,7 +57,12 @@ const GallerySwiper = (project: Project) => {
         >
             {project.images.map((image) => (
                 <SwiperSlide key={image}>
-                    <Image src={image} alt={project.name} loading='lazy' />
+                    <Image
+                        src={image}
+                        alt={project.name}
+                        loading='lazy'
+                        width='100%'
+                    />
                 </SwiperSlide>
             ))}
         </Swiper>

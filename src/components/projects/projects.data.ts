@@ -1,10 +1,22 @@
 import FirebaseIcon from '@/assets/icons/firebase-svgrepo-com.svg?react'
 
-import { JavaIcon } from '@/assets/icons'
-import { EsieePlus1, Groom1 } from '@/assets/images'
+import {
+    EsieePlus10,
+    EsieePlus11,
+    EsieePlus12,
+    EsieePlus2,
+    EsieePlus3,
+    EsieePlus4,
+    EsieePlus5,
+    EsieePlus6,
+    EsieePlus7,
+    EsieePlus8,
+    EsieePlus9,
+    Groom1,
+    OldPortfolio,
+} from '@/assets/images'
 import {
     bootstrapSkill,
-    bulmaSkill,
     cssSkill,
     flutterSkill,
     jquerySkill,
@@ -41,43 +53,58 @@ export const projectsData: Project[] = [
             flutterSkill,
             { name: 'Firebase authentification', icon: FirebaseIcon },
         ],
-        images: [EsieePlus1, Groom1],
+        images: [
+            EsieePlus11,
+            EsieePlus4,
+            EsieePlus2,
+            EsieePlus3,
+
+            EsieePlus5,
+            EsieePlus6,
+            EsieePlus7,
+            EsieePlus8,
+            EsieePlus9,
+            EsieePlus10,
+
+            EsieePlus12,
+        ],
         gitLink: 'https://gitlab.com/NaaviX/esiee-plus-portfolio',
         membersCount: 3,
     },
-    {
-        name: 'BDE Tools',
-        type: 'WEB',
-        description:
-            'Site web regroupant plusieurs outils, afin de gérer de façon simple les prévisions pour les voyages et les soirées, ainsi que les informations des étudiants',
-        year: '2019',
-        skills: [
-            vueSkill,
-            bulmaSkill,
-            {
-                name: 'Firebase (Authentification et Firestore)',
-                icon: FirebaseIcon,
-            },
-        ],
-        images: [''],
-        membersCount: 1,
-    },
-    {
-        name: 'Treasure hunt',
-        type: 'APP',
-        description: '',
-        year: '2023',
-        skills: [{ name: 'Java 21', icon: JavaIcon }],
-        images: [''],
-        membersCount: 1,
-    },
+    // {
+    //     name: 'BDE Tools',
+    //     type: 'WEB',
+    //     description:
+    //         'Site web regroupant plusieurs outils, afin de gérer de façon simple les prévisions pour les voyages et les soirées, ainsi que les informations des étudiants',
+    //     year: '2019',
+    //     skills: [
+    //         vueSkill,
+    //         bulmaSkill,
+    //         {
+    //             name: 'Firebase (Authentification et Firestore)',
+    //             icon: FirebaseIcon,
+    //         },
+    //     ],
+    //     images: [''],
+    //     membersCount: 1,
+    // },
+    // {
+    //     name: 'Treasure hunt',
+    //     type: 'APP',
+    //     description: '',
+    //     year: '2023',
+    //     skills: [{ name: 'Java 21', icon: JavaIcon }],
+    //     images: [''],
+    //     membersCount: 1,
+    // },
     {
         name: 'Ancien portfolio',
         type: 'WEB',
         description: 'Mon premier portfolio, créé en 2017',
         year: '2017',
         skills: [vueSkill, jquerySkill, bootstrapSkill, cssSkill],
-        images: [''],
+        images: [OldPortfolio],
+        previewLink: '/old-portfolio',
         membersCount: 1,
     },
     /*{

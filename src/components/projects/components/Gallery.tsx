@@ -46,6 +46,7 @@ const GallerySwiper = (project: Project) => {
     return (
         <Swiper
             style={{
+                //@ts-ignore
                 '--swiper-navigation-color': '#fff',
                 '--swiper-pagination-color': '#fff',
             }}

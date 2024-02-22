@@ -1,12 +1,13 @@
 import FirebaseIcon from '@/assets/icons/firebase-svgrepo-com.svg?react'
-import JavaIcon from '@/assets/icons/java-svgrepo-com.svg?react'
 
+import { JavaIcon } from '@/assets/icons'
 import { EsieePlus1, Groom1 } from '@/assets/images'
 import {
     bootstrapSkill,
     bulmaSkill,
+    cssSkill,
     flutterSkill,
-    javascriptSkill,
+    jquerySkill,
     vueSkill,
 } from '../skills/skills.data'
 import { Project } from './projects.type'
@@ -26,7 +27,7 @@ export const projectsData: Project[] = [
             },
         ],
         images: [Groom1],
-        previewLink: '/groom',
+        previewLink: '/groom/login',
         gitLink: 'https://gitlab.com/NaaviX/groom-web',
         membersCount: 2,
     },
@@ -45,30 +46,6 @@ export const projectsData: Project[] = [
         membersCount: 3,
     },
     {
-        name: 'BDE Django',
-        type: 'MOBILE',
-        description: '',
-        year: '2020',
-        skills: [flutterSkill],
-        images: [''],
-    },
-    {
-        name: 'BDE Nova',
-        type: 'MOBILE',
-        description: '',
-        year: '2021',
-        skills: [flutterSkill],
-        images: [''],
-    },
-    {
-        name: 'Liste Sparrow',
-        type: 'MOBILE',
-        description: '',
-        year: '2022',
-        skills: [flutterSkill],
-        images: [''],
-    },
-    {
         name: 'BDE Tools',
         type: 'WEB',
         description:
@@ -83,8 +60,27 @@ export const projectsData: Project[] = [
             },
         ],
         images: [''],
+        membersCount: 1,
     },
     {
+        name: 'Treasure hunt',
+        type: 'APP',
+        description: '',
+        year: '2023',
+        skills: [{ name: 'Java 21', icon: JavaIcon }],
+        images: [''],
+        membersCount: 1,
+    },
+    {
+        name: 'Ancien portfolio',
+        type: 'WEB',
+        description: 'Mon premier portfolio, créé en 2017',
+        year: '2017',
+        skills: [vueSkill, jquerySkill, bootstrapSkill, cssSkill],
+        images: [''],
+        membersCount: 1,
+    },
+    /*{
         name: 'Liste Sunrise',
         type: 'WEB',
         description:
@@ -97,14 +93,7 @@ export const projectsData: Project[] = [
         ],
         images: [''],
     },
-    {
-        name: 'Treasure hunt',
-        type: 'APP',
-        description: '',
-        year: '2023',
-        skills: [{ name: 'Java 21', icon: JavaIcon }],
-        images: [''],
-    },
+    
     {
         name: 'VO2Max',
         type: 'WEB',
@@ -127,5 +116,5 @@ export const projectsData: Project[] = [
         year: '2019',
         skills: [vueSkill, bulmaSkill, { name: 'Jquery', icon: undefined }],
         images: [''],
-    },
+    },*/
 ]

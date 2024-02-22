@@ -10,7 +10,7 @@ export interface Project {
     images: string[]
     previewLink?: string
     gitLink?: string
-    membersCount?: number
+    membersCount: number
 }
 
 export interface ProjectSection {

@@ -31,7 +31,7 @@ export const OtherProjects = (props: OtherProjectsProps) => {
             </Flex>
 
             <Collapse in={isOpen} transition={{ enter: { duration: 0.5 } }}>
-                <Flex wrap='wrap'>
+                <Flex wrap='wrap' gap='2%'>
                     {projects.map((project: Project) => (
                         <ProjectCard key={project.name} project={project} />
                     ))}

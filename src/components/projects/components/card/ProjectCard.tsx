@@ -1,4 +1,4 @@
-import { Box, Flex, Image, useDisclosure, useTheme } from '@chakra-ui/react'
+import { Box, Flex, Image, useTheme } from '@chakra-ui/react'
 
 import {
     ChipList,
@@ -7,11 +7,11 @@ import {
     Subtitle,
     Title,
 } from '@/components/base'
-import { Modal } from '@/components/base/Modal'
 import { FaCode, FaPlayCircle } from 'react-icons/fa'
 import { FaUserGroup } from 'react-icons/fa6'
 import { GoDeviceDesktop, GoDeviceMobile } from 'react-icons/go'
 import { Project } from '../../projects.type'
+import { Gallery } from '../Gallery'
 
 interface ProjectCardProps {
     project: Project
@@ -71,21 +71,21 @@ export const ProjectCard = (props: ProjectCardProps) => {
                             {project.description}
                         </Flex>
                         <Flex w='30%' justify='space-evenly'>
-                            {project.previewLink ? (
-                                <MagneticButton
-                                    href={project.previewLink}
-                                    ariaLabel='Démo'
-                                    icon={<FaPlayCircle />}
-                                />
-                            ) : null}
-                            <Gallery {...project} />
                             {project.gitLink ? (
                                 <MagneticButton
                                     href={project.gitLink}
                                     ariaLabel='Code'
-                                    icon={<FaCode />}
+                                    icon={<FaCode size='1.2rem' />}
                                 />
                             ) : null}
+                            {project.previewLink ? (
+                                <MagneticButton
+                                    href={project.previewLink}
+                                    ariaLabel='Démo'
+                                    icon={<FaPlayCircle size='1.2rem' />}
+                                />
+                            ) : null}
+                            <Gallery {...project} />
                         </Flex>
                         <Flex>
                             <ChipList skills={project.skills} />
@@ -104,24 +104,4 @@ const ProjectTypeIcon = (project: Project) => {
         return <GoDeviceMobile size='2rem' />
     }
     return null
-}
-
-const Gallery = (project: Project) => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    if (!project.previewLink) {
-        return (
-            <>
-                <Box onClick={() => onOpen()}>
-                    <MagneticButton ariaLabel='Galerie' icon={<FaCode />} />
-                </Box>
-                <Modal title={project.name} isOpen={isOpen} onClose={onClose}>
-                    <Flex wrap='wrap'>
-                        {project.images.map((image) => (
-                            <Image src={image} alt={project.name} key={image} />
-                        ))}
-                    </Flex>
-                </Modal>
-            </>
-        )
-    }
 }

@@ -16,6 +16,7 @@ import {
     JavaIcon,
     JenkinsIcon,
     JestIcon,
+    JqueryIcon,
     JsIcon,
     LinuxIcon,
     MuiIcon,
@@ -57,6 +58,11 @@ export const javascriptSkill: Skill = {
 export const typescriptSkill: Skill = {
     name: SKILL_NAME.TYPESCRIPT,
     icon: TsIcon,
+}
+
+export const jquerySkill: Skill = {
+    name: SKILL_NAME.JQUERY,
+    icon: JqueryIcon,
 }
 
 export const vueSkill: Skill = {

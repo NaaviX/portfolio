@@ -40,6 +40,7 @@ export enum SKILL_NAME {
     CICD = 'CI/CD',
     DOCKER = 'Docker',
     JEST = 'Jest',
+    JQUERY = 'JQuery',
 }
 
 export interface Skill {

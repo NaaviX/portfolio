@@ -31,7 +31,7 @@ export const Navbar = () => {
             style={{
                 position: 'fixed',
                 width: '100%',
-                zIndex: 10000,
+                zIndex: 1000,
                 padding: '0 2rem',
                 ...useNavbarScrollStyle(),
             }}

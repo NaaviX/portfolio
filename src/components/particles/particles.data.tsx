@@ -23,10 +23,10 @@ export const particlesData: RecursivePartial<IOptions> | undefined = {
     },
 
     detectRetina: true,
-    fpsLimit: 120,
+    fpsLimit: 60,
 
     interactivity: {
-        detectsOn: 'canvas',
+        detectsOn: 'window',
         events: {
             onDiv: [
                 {

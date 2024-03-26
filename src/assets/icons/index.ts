@@ -4,6 +4,7 @@ export { default as BulmaIcon } from './bulma-svgrepo-com.svg?react'
 export { default as CICDIcon } from './ci-cd-svgrepo-com.svg?react'
 export { default as CSSIcon } from './css-3-svgrepo-com.svg?react'
 export { default as DockerIcon } from './docker-svgrepo-com.svg?react'
+export { default as ExpressIcon } from './express-js-icon.svg?react'
 export { default as FirebaseIcon } from './firebase-svgrepo-com.svg?react'
 export { default as FlutterIcon } from './flutter-svgrepo-com.svg?react'
 export { default as GitIcon } from './git-icon-svgrepo-com.svg?react'
@@ -33,6 +34,7 @@ export { default as VsCodeIcon } from './visual-studio-code-svgrepo-com.svg?reac
 export { default as ViteIcon } from './vitejs-svgrepo-com.svg?react'
 export { default as VueIcon } from './vue-svgrepo-com.svg?react'
 export { default as WebstormIcon } from './webstorm-svgrepo-com.svg?react'
+
 
 export { default as AndroidParticle } from './android-icon-svgrepo-com.svg'
 export { default as BootstrapParticle } from './bootstrap-svgrepo-com.svg'
@@ -68,3 +70,4 @@ export { default as VsCodeParticle } from './visual-studio-code-svgrepo-com.svg'
 export { default as ViteParticle } from './vitejs-svgrepo-com.svg'
 export { default as VueParticle } from './vue-svgrepo-com.svg'
 export { default as WebstormParticle } from './webstorm-svgrepo-com.svg'
+

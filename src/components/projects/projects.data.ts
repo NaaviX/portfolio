@@ -12,14 +12,18 @@ import {
     EsieePlus7,
     EsieePlus8,
     EsieePlus9,
+    Firstcab,
     Groom1,
     OldPortfolio,
 } from '@/assets/images'
 import {
     bootstrapSkill,
+    chakraSkill,
     cssSkill,
+    expressSkill,
     flutterSkill,
     jquerySkill,
+    reactSkill,
     vueSkill,
 } from '../skills/skills.data'
 import { Project } from './projects.type'
@@ -97,6 +101,17 @@ export const projectsData: Project[] = [
     //     images: [''],
     //     membersCount: 1,
     // },
+    {
+        name: 'FirstCab',
+        type: 'WEB',
+        description:
+            'Site vitrine pour une entreprise de transport de personnes',
+        year: '2024',
+        skills: [reactSkill, expressSkill, chakraSkill],
+        images: [Firstcab],
+        previewLink: 'https://firstcab.fr/',
+        membersCount: 1,
+    },
     {
         name: 'Ancien portfolio',
         type: 'WEB',

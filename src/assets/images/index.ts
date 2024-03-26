@@ -9,5 +9,7 @@ export { default as EsieePlus6 } from './projects/esieeplus/esieeplus6.png'
 export { default as EsieePlus7 } from './projects/esieeplus/esieeplus7.png'
 export { default as EsieePlus8 } from './projects/esieeplus/esieeplus8.png'
 export { default as EsieePlus9 } from './projects/esieeplus/esieeplus9.png'
+export { default as Firstcab } from './projects/firstcab/firstcab.png'
 export { default as Groom1 } from './projects/groom/groom1.webp'
 export { default as OldPortfolio } from './projects/oldportfolio/oldportfolio.png'
+

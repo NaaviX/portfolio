@@ -41,6 +41,9 @@ export enum SKILL_NAME {
     DOCKER = 'Docker',
     JEST = 'Jest',
     JQUERY = 'JQuery',
+    CHAKRA = 'Chakra UI',
+    EXPRESS = 'ExpressJs',
+    REACT_NATIVE = 'React Native',
 }
 
 export interface Skill {

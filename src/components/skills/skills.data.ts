@@ -10,6 +10,7 @@ import {
     CICDIcon,
     CSSIcon,
     DockerIcon,
+    ExpressIcon,
     FirebaseIcon,
     FlutterIcon,
     GitIcon,
@@ -32,6 +33,7 @@ import {
     TsIcon,
     VueIcon,
 } from '@/assets/icons'
+import { SiChakraui } from 'react-icons/si'
 import { SKILL_NAME, SKILL_TYPE, Skill, SkillCategory } from './skills.type'
 
 export const javaSkill: Skill = {
@@ -181,6 +183,21 @@ export const dockerSkill: Skill = {
 export const jestSkill: Skill = {
     name: SKILL_NAME.JEST,
     icon: JestIcon,
+}
+
+export const chakraSkill: Skill = {
+    name: SKILL_NAME.CHAKRA,
+    icon: SiChakraui,
+}
+
+export const expressSkill: Skill = {
+    name: SKILL_NAME.EXPRESS,
+    icon: ExpressIcon,
+}
+
+export const reactNativeSkill: Skill = {
+    name: SKILL_NAME.REACT_NATIVE,
+    icon: ReactIcon,
 }
 
 export const frontSkillCategory: SkillCategory = {

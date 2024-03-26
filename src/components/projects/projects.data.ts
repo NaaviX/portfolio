@@ -39,7 +39,7 @@ export const projectsData: Project[] = [
             },
         ],
         images: [Groom1],
-        previewLink: '/groom/login',
+        previewLink: '/groom',
         gitLink: 'https://gitlab.com/NaaviX/groom-web',
         membersCount: 2,
     },

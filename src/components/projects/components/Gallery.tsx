@@ -18,7 +18,7 @@ import { Navigation, Pagination } from 'swiper/modules'
 
 export const Gallery = (project: Project) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
-    if (!project.previewLink) {
+    if (project.images.length > 1) {
         return (
             <>
                 <Box onClick={() => onOpen()}>

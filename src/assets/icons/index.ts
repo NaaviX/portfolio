@@ -26,8 +26,9 @@ export { default as PostmanIcon } from './postman-icon-svgrepo-com.svg?react'
 export { default as ReactIcon } from './react-svgrepo-com.svg?react'
 export { default as RestIcon } from './rest-svgrepo-com.svg?react'
 export { default as SonarIcon } from './sonarqube-svgrepo-com.svg?react'
-export { default as SupabaseIcon } from './supabase-icon.svg?react'
 export { default as SpringIcon } from './spring-icon-svgrepo-com.svg?react'
+export { default as SqlIcon } from './sql-svgrepo-com.svg?react'
+export { default as SupabaseIcon } from './supabase-icon.svg?react'
 export { default as SwaggerIcon } from './swagger-svgrepo-com.svg?react'
 export { default as TailwindIcon } from './tailwindcss-icon-svgrepo-com.svg?react'
 export { default as TsIcon } from './typescript-icon-svgrepo-com.svg?react'
@@ -35,7 +36,6 @@ export { default as VsCodeIcon } from './visual-studio-code-svgrepo-com.svg?reac
 export { default as ViteIcon } from './vitejs-svgrepo-com.svg?react'
 export { default as VueIcon } from './vue-svgrepo-com.svg?react'
 export { default as WebstormIcon } from './webstorm-svgrepo-com.svg?react'
-
 
 export { default as AndroidParticle } from './android-icon-svgrepo-com.svg'
 export { default as BootstrapParticle } from './bootstrap-svgrepo-com.svg'
@@ -72,4 +72,3 @@ export { default as VsCodeParticle } from './visual-studio-code-svgrepo-com.svg'
 export { default as ViteParticle } from './vitejs-svgrepo-com.svg'
 export { default as VueParticle } from './vue-svgrepo-com.svg'
 export { default as WebstormParticle } from './webstorm-svgrepo-com.svg'
-

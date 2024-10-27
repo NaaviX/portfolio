@@ -16,7 +16,8 @@ export interface User {
     drivingLicence: string
     car: boolean
     jobTitle: string
-    mainDescription: string
+    mainDescription1: string
+    mainDescription2: string
     email: string
     address: Address
     linkedin: string

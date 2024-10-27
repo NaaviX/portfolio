@@ -6,14 +6,14 @@ import {
     firebaseSkill,
     javaSkill,
     javascriptSkill,
-    muiSkill,
     postgresqlSkill,
     reactNativeSkill,
     reactSkill,
     springbootSkill,
+    sqlSkill,
     supabaseSkill,
     typescriptSkill,
-    vueSkill
+    vueSkill,
 } from '../skills/skills.data'
 
 export const experiencesData: TimelineExperience[] = [
@@ -27,7 +27,7 @@ export const experiencesData: TimelineExperience[] = [
         activities: [
             'Refonte totale de la page principale de la banque',
             'Évolutions des outils internes existants',
-            'Développement de micro-services',
+            'Développement de micro services',
             "Évolutions des bases de données existantes et du système d'information",
         ],
         skills: [springbootSkill, vueSkill, bulmaSkill, postgresqlSkill],
@@ -43,13 +43,14 @@ export const experiencesData: TimelineExperience[] = [
             "Développeur R&D sur l'outil interne",
             'Développements spécifiques pour divers clients (SD Services, Thissenkrupp, Orpéa, Groupe Sigma...)',
             'Lead développeur',
+            'Rédaction de scripts SQL de migration',
             /*"Evolutions et corrections sur l'ERP AOS",
             "Evolutions d'applications spécifiques pour divers clients (SD Services, Thissenkrupp, Orpéa, Groupe Sigma...)",
             'Lead dev temporaire sur le projet du client Stock B',
             "Stack technique : Springboot, Javascript, Groovy, AOP (Framework d'AOS)",
             'Scripts avancés JPQL et SQL',*/
         ],
-        skills: [springbootSkill, javascriptSkill],
+        skills: [springbootSkill, javascriptSkill, sqlSkill],
     },
     {
         title: 'Auto-entrepreneur - Développeur web',
@@ -64,16 +65,13 @@ export const experiencesData: TimelineExperience[] = [
         ],
         skills: [
             reactSkill,
-            reactNativeSkill,
             typescriptSkill,
             reactNativeSkill,
             dockerSkill,
-            //jestSkill,
-            muiSkill,
             CICDSkill,
             javaSkill,
             firebaseSkill,
-            supabaseSkill
+            supabaseSkill,
             //soliditySkill
         ],
     },

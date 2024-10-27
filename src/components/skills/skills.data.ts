@@ -20,32 +20,44 @@ import {
     JqueryIcon,
     JsIcon,
     LinuxIcon,
-    MuiIcon,
     NuxtIcon,
     PostgresqlIcon,
-    PostmanIcon,
     ReactIcon,
     RestIcon,
     SonarIcon,
     SpringIcon,
+    SqlIcon,
     SupabaseIcon,
-    SwaggerIcon,
     TailwindIcon,
     TsIcon,
     VueIcon,
 } from '@/assets/icons'
-import { SiChakraui } from 'react-icons/si'
+import { SiChakraui, SiNginx } from 'react-icons/si'
 import { SKILL_NAME, SKILL_TYPE, Skill, SkillCategory } from './skills.type'
 
 export const javaSkill: Skill = {
     name: SKILL_NAME.JAVA,
     about: 'Lombok, Junit, Mockito',
     icon: JavaIcon,
+    isImportant: true,
 }
 
 export const springbootSkill: Skill = {
     name: SKILL_NAME.SPRINGBOOT,
     icon: SpringIcon,
+    isImportant: true,
+}
+
+export const sqlSkill: Skill = {
+    name: SKILL_NAME.SQL,
+    icon: SqlIcon,
+    isImportant: true,
+}
+
+export const noSqlSkill: Skill = {
+    name: SKILL_NAME.NOSQL,
+    icon: SqlIcon,
+    isImportant: true,
 }
 
 export const UXSkill: Skill = {
@@ -61,6 +73,7 @@ export const javascriptSkill: Skill = {
 export const typescriptSkill: Skill = {
     name: SKILL_NAME.TYPESCRIPT,
     icon: TsIcon,
+    isImportant: true,
 }
 
 export const jquerySkill: Skill = {
@@ -71,6 +84,7 @@ export const jquerySkill: Skill = {
 export const vueSkill: Skill = {
     name: SKILL_NAME.VUE,
     icon: VueIcon,
+    isImportant: true,
 }
 
 export const nuxtSkill: Skill = {
@@ -81,11 +95,13 @@ export const nuxtSkill: Skill = {
 export const reactSkill: Skill = {
     name: SKILL_NAME.REACT,
     icon: ReactIcon,
+    isImportant: true,
 }
 
 export const cssSkill: Skill = {
     name: SKILL_NAME.CSS,
     icon: CSSIcon,
+    isImportant: true,
 }
 
 export const bootstrapSkill: Skill = {
@@ -103,10 +119,10 @@ export const tailwindSkill: Skill = {
     icon: TailwindIcon,
 }
 
-export const muiSkill: Skill = {
+/* export const muiSkill: Skill = {
     name: SKILL_NAME.MUI,
     icon: MuiIcon,
-}
+} */
 
 export const postgresqlSkill: Skill = {
     name: SKILL_NAME.POSTGRESQL,
@@ -145,15 +161,15 @@ export const restSkill: Skill = {
     icon: RestIcon,
 }
 
-export const swaggerSkill: Skill = {
+/* export const swaggerSkill: Skill = {
     name: SKILL_NAME.SWAGGER,
     icon: SwaggerIcon,
-}
+} */
 
-export const postmanSkill: Skill = {
+/* export const postmanSkill: Skill = {
     name: SKILL_NAME.POSTMAN,
     icon: PostmanIcon,
-}
+} */
 
 export const gitSkill: Skill = {
     name: SKILL_NAME.GIT,
@@ -172,10 +188,10 @@ export const sonarSkill: Skill = {
     name: SKILL_NAME.SONARQUBE,
     icon: SonarIcon,
 }
-export const nexusSkill: Skill = {
+/* export const nexusSkill: Skill = {
     name: SKILL_NAME.NEXUS,
     icon: undefined,
-}
+} */
 
 export const CICDSkill: Skill = {
     name: SKILL_NAME.CICD,
@@ -195,6 +211,11 @@ export const jestSkill: Skill = {
 export const chakraSkill: Skill = {
     name: SKILL_NAME.CHAKRA,
     icon: SiChakraui,
+}
+
+export const nginxSkill: Skill = {
+    name: SKILL_NAME.NGINX,
+    icon: SiNginx,
 }
 
 export const expressSkill: Skill = {
@@ -221,7 +242,6 @@ export const frontSkillCategory: SkillCategory = {
         cssSkill,
         chakraSkill,
         tailwindSkill,
-        muiSkill,
     ],
     image: SkillFrontImage,
 }
@@ -234,8 +254,8 @@ export const backSkillCategory: SkillCategory = {
     skills: [
         javaSkill,
         springbootSkill,
-        //sqlSkill,
-        //nosqlSkill,
+        sqlSkill,
+        noSqlSkill,
         jpqlSkill,
         restSkill,
     ],

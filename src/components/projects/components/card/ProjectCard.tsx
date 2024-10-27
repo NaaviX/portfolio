@@ -20,7 +20,7 @@ interface ProjectCardProps {
 export const ProjectCard = (props: ProjectCardProps) => {
     const project: Project = props.project
     return (
-        <Box sx={{ width: { base: '100%', md: '49%' } }}>
+        <Box sx={{ width: { base: '100%', md: '49%' } }} marginY='0.5rem'>
             <Paper
                 key={project.name}
                 style={{ padding: '1rem', marginBottom: '1rem' }}
@@ -88,9 +88,12 @@ export const ProjectCard = (props: ProjectCardProps) => {
                             ) : null}
                             <Gallery {...project} />
                         </Flex>
-                        <Flex>
-                            <ChipList skills={project.skills} />
-                        </Flex>
+                        <Box minHeight='5rem'>
+                            <ChipList
+                                skills={project.skills}
+                                justifyContent='center'
+                            />
+                        </Box>
                     </Flex>
                 </Flex>
             </Paper>

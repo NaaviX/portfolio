@@ -7,8 +7,8 @@ import {
 import { Flex } from '@chakra-ui/react'
 
 export const ProjectsSection = () => {
-    const mainProjects = projectsData.slice(0, 2)
-    const otherProjects = projectsData.slice(2)
+    const mainProjects = projectsData.slice(0, 4)
+    const otherProjects = projectsData.slice(4)
     return (
         <Flex width='100%' direction='column' align='center'>
             <Flex wrap='wrap' gap='2%'>

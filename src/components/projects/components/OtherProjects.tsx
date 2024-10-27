@@ -20,7 +20,9 @@ export const OtherProjects = (props: OtherProjectsProps) => {
                 m='1rem'
                 onClick={() => setIsOpen((prev) => !prev)}
             >
-                <Text align='center'>Mes autres projets </Text>
+                <Text align='center' fontSize='larger'>
+                    Mes autres projets{' '}
+                </Text>
                 <Box
                     as='span'
                     transform={isOpen ? 'rotate(90deg)' : 'rotate(0)'}

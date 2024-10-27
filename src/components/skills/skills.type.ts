@@ -9,6 +9,9 @@ export enum SKILL_TYPE {
 }
 
 export enum SKILL_NAME {
+    NGINX = 'Nginx',
+    SQL = 'SQL',
+    NOSQL = 'NoSQL',
     JAVA = 'Java',
     SPRINGBOOT = 'Spring Boot',
     UX = 'Notions UI/UX',
@@ -51,6 +54,7 @@ export interface Skill {
     name: string
     about?: string
     icon: FC<SVGProps<SVGSVGElement>> | undefined
+    isImportant?: boolean
 }
 
 export interface SkillCategory {

@@ -234,8 +234,8 @@ export const backSkillCategory: SkillCategory = {
     skills: [
         javaSkill,
         springbootSkill,
-        sqlSkill,
-        nosqlSkill,
+        //sqlSkill,
+        //nosqlSkill,
         jpqlSkill,
         restSkill,
     ],
@@ -253,9 +253,6 @@ export const devToolsSkillCategory: SkillCategory = {
         dockerSkill,
         firebaseSkill,
         supabaseSkill,
-        copilotSkill,
-        vscodeSkill,
-        intellijSkill
     ],
     image: SkillDevToolsImage,
 }

@@ -49,7 +49,7 @@ export const experiencesData: TimelineExperience[] = [
             "Stack technique : Springboot, Javascript, Groovy, AOP (Framework d'AOS)",
             'Scripts avancés JPQL et SQL',*/
         ],
-        skills: [springbootSkill, javascriptSkill, jpaSkill],
+        skills: [springbootSkill, javascriptSkill],
     },
     {
         title: 'Auto-entrepreneur - Développeur web',

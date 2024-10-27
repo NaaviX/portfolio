@@ -2,19 +2,18 @@ import { TimelineExperience } from '../base/timeline/timeline.type'
 import {
     CICDSkill,
     bulmaSkill,
-    chakraSkill,
     dockerSkill,
-    expressSkill,
+    firebaseSkill,
+    javaSkill,
     javascriptSkill,
-    jestSkill,
-    jpqlSkill,
     muiSkill,
     postgresqlSkill,
     reactNativeSkill,
     reactSkill,
     springbootSkill,
+    supabaseSkill,
     typescriptSkill,
-    vueSkill,
+    vueSkill
 } from '../skills/skills.data'
 
 export const experiencesData: TimelineExperience[] = [
@@ -50,7 +49,7 @@ export const experiencesData: TimelineExperience[] = [
             "Stack technique : Springboot, Javascript, Groovy, AOP (Framework d'AOS)",
             'Scripts avancés JPQL et SQL',*/
         ],
-        skills: [springbootSkill, javascriptSkill, jpqlSkill],
+        skills: [springbootSkill, javascriptSkill, jpaSkill],
     },
     {
         title: 'Auto-entrepreneur - Développeur web',
@@ -59,21 +58,23 @@ export const experiencesData: TimelineExperience[] = [
         dateFrom: new Date('2023-10-01'),
         dateTo: new Date(),
         activities: [
-            'Développement de mon portfolio web',
+            'Portfolio web personnel',
             'Auto formation sur diverses technologies',
-            'Développement de plusieurs mini projets',
+            'Projets personnels & professionnels',
         ],
         skills: [
             reactSkill,
             reactNativeSkill,
             typescriptSkill,
-            expressSkill,
-            springbootSkill,
+            reactNativeSkill,
             dockerSkill,
-            CICDSkill,
-            jestSkill,
+            //jestSkill,
             muiSkill,
-            chakraSkill,
+            CICDSkill,
+            javaSkill,
+            firebaseSkill,
+            supabaseSkill
+            //soliditySkill
         ],
     },
 ].sort(

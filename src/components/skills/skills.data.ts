@@ -28,6 +28,7 @@ import {
     RestIcon,
     SonarIcon,
     SpringIcon,
+    SupabaseIcon,
     SwaggerIcon,
     TailwindIcon,
     TsIcon,
@@ -123,6 +124,12 @@ export const firebaseSkill: Skill = {
     icon: FirebaseIcon,
 }
 
+export const supabaseSkill: Skill = {
+    name: SKILL_NAME.SUPABASE,
+    about: 'Authentification, Database, Storage',
+    icon: SupabaseIcon,
+}
+
 export const flutterSkill: Skill = {
     name: SKILL_NAME.FLUTTER,
     icon: FlutterIcon,
@@ -212,8 +219,7 @@ export const frontSkillCategory: SkillCategory = {
         nuxtSkill,
         reactSkill,
         cssSkill,
-        bootstrapSkill,
-        bulmaSkill,
+        chakraSkill,
         tailwindSkill,
         muiSkill,
     ],
@@ -228,9 +234,9 @@ export const backSkillCategory: SkillCategory = {
     skills: [
         javaSkill,
         springbootSkill,
-        postgresqlSkill,
+        sqlSkill,
+        nosqlSkill,
         jpqlSkill,
-        firebaseSkill,
         restSkill,
     ],
     image: SkillBackImage,
@@ -241,13 +247,15 @@ export const devToolsSkillCategory: SkillCategory = {
     description: 'Divers outils utilisés lors de mes précédents projets.',
     color: '#0f172a',
     skills: [
-        swaggerSkill,
-        postmanSkill,
         gitSkill,
-        linuxSkill,
         jenkinsSkill,
         sonarSkill,
-        nexusSkill,
+        dockerSkill,
+        firebaseSkill,
+        supabaseSkill,
+        copilotSkill,
+        vscodeSkill,
+        intellijSkill
     ],
     image: SkillDevToolsImage,
 }
@@ -256,7 +264,7 @@ export const mobileSkillCategory: SkillCategory = {
     name: SKILL_TYPE.MOBILE,
     description: 'Applications mobiles Android et iOS.',
     color: '#0f172a',
-    skills: [flutterSkill, androidSkill],
+    skills: [flutterSkill, androidSkill, reactNativeSkill],
     image: SkillMobileImage,
 }
 

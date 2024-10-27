@@ -25,6 +25,7 @@ export enum SKILL_NAME {
     POSTGRESQL = 'PostgreSQL',
     JPQL = 'JPQL',
     FIREBASE = 'Firebase',
+    SUPABASE = 'Supabase',
     FLUTTER = 'Flutter',
     ANDROID = 'Android',
     REST = 'REST',

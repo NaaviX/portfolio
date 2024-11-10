@@ -2,6 +2,7 @@ import { useTheme } from '@chakra-ui/react'
 import { ReactLenis } from '@studio-freight/react-lenis'
 import dayjs from 'dayjs'
 import 'dayjs/locale/fr'
+import { Toaster } from 'react-hot-toast'
 import { Element } from 'react-scroll'
 import './App.css'
 import { HeaderSection } from './sections/HeaderSection'
@@ -14,6 +15,7 @@ const App = () => {
     return (
         <ReactLenis root>
             <HeaderSection />
+            <Toaster />
 
             {sectionsData.map((section: Section) => (
                 <Element

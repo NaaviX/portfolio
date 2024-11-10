@@ -9,6 +9,9 @@ export enum SKILL_TYPE {
 }
 
 export enum SKILL_NAME {
+    NGINX = 'Nginx',
+    SQL = 'SQL',
+    NOSQL = 'NoSQL',
     JAVA = 'Java',
     SPRINGBOOT = 'Spring Boot',
     UX = 'Notions UI/UX',
@@ -25,6 +28,7 @@ export enum SKILL_NAME {
     POSTGRESQL = 'PostgreSQL',
     JPQL = 'JPQL',
     FIREBASE = 'Firebase',
+    SUPABASE = 'Supabase',
     FLUTTER = 'Flutter',
     ANDROID = 'Android',
     REST = 'REST',
@@ -41,12 +45,16 @@ export enum SKILL_NAME {
     DOCKER = 'Docker',
     JEST = 'Jest',
     JQUERY = 'JQuery',
+    CHAKRA = 'Chakra UI',
+    EXPRESS = 'ExpressJs',
+    REACT_NATIVE = 'React Native',
 }
 
 export interface Skill {
     name: string
     about?: string
     icon: FC<SVGProps<SVGSVGElement>> | undefined
+    isImportant?: boolean
 }
 
 export interface SkillCategory {

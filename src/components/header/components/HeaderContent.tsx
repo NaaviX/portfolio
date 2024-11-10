@@ -26,7 +26,7 @@ export const HeaderContent = () => {
                     <Title
                         sx={{
                             fontFamily: 'Space Grotesk',
-                            fontSize: '2xl',
+                            fontSize: '3xl',
                         }}
                     >
                         {userData.jobTitle}
@@ -35,9 +35,12 @@ export const HeaderContent = () => {
                         sx={{
                             fontFamily: 'Space Grotesk',
                             fontsize: 'xl',
+                            lineHeight: '1.5',
                         }}
                     >
-                        {userData.mainDescription}
+                        {userData.mainDescription1}
+                        <br />
+                        {userData.mainDescription2}
                     </Title>
                     <Center>
                         <Flex w='50%' justify='space-evenly'>

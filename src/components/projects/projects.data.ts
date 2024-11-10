@@ -1,6 +1,7 @@
 import FirebaseIcon from '@/assets/icons/firebase-svgrepo-com.svg?react'
 
 import {
+    AtTheMosBar1,
     EsieePlus10,
     EsieePlus11,
     EsieePlus12,
@@ -12,19 +13,65 @@ import {
     EsieePlus7,
     EsieePlus8,
     EsieePlus9,
+    Firstcab,
     Groom1,
     OldPortfolio,
+    Portfolio1,
+    Teedly,
+    Teedly1,
+    Teedly2,
+    Teedly3,
+    Teedly4,
 } from '@/assets/images'
 import {
     bootstrapSkill,
+    chakraSkill,
+    CICDSkill,
     cssSkill,
+    dockerSkill,
+    expressSkill,
     flutterSkill,
     jquerySkill,
+    nginxSkill,
+    reactNativeSkill,
+    reactSkill,
+    supabaseSkill,
+    typescriptSkill,
     vueSkill,
 } from '../skills/skills.data'
 import { Project } from './projects.type'
 
 export const projectsData: Project[] = [
+    {
+        name: 'Portfolio',
+        type: 'WEB',
+        description:
+            "Portfolio web personnel, présentant mes compétences, mes projets et mon parcours. Le but était de m'auto former à divers langages et technologies.",
+        year: '2024',
+        skills: [
+            reactSkill,
+            typescriptSkill,
+            dockerSkill,
+            CICDSkill,
+            nginxSkill,
+            chakraSkill,
+        ],
+        images: [Portfolio1],
+        gitLink: 'https://gitlab.com/NaaviX/portfolio',
+        membersCount: 1,
+    },
+    {
+        name: 'At the Mos bar',
+        type: 'WEB',
+        description:
+            "Site web de présentation d'une cave à bière. Un backoffice est également disponible pour gérer les produits, les stocks et les évènements.",
+        year: '2024',
+        skills: [reactSkill, typescriptSkill, supabaseSkill, chakraSkill],
+        images: [AtTheMosBar1],
+        previewLink: 'https://www.atthemosbar.fr/accueil',
+        //gitLink: 'https://gitlab.com/NaaviX/at-the-mos-web',
+        membersCount: 1,
+    },
     {
         name: 'Groom',
         type: 'WEB',
@@ -39,9 +86,30 @@ export const projectsData: Project[] = [
             },
         ],
         images: [Groom1],
-        previewLink: '/groom/login',
+        previewLink: '/groom',
         gitLink: 'https://gitlab.com/NaaviX/groom-web',
         membersCount: 2,
+    },
+    {
+        name: 'FirstCab',
+        type: 'WEB',
+        description:
+            'Site vitrine pour une entreprise de transport de personnes',
+        year: '2024',
+        skills: [reactSkill, expressSkill, chakraSkill],
+        images: [Firstcab],
+        previewLink: 'https://firstcab.fr/',
+        membersCount: 1,
+    },
+    {
+        name: 'Teedly',
+        type: 'MOBILE',
+        description: "POC d'une application mobile d'assistant shopping",
+        year: '2024',
+        skills: [reactNativeSkill],
+        images: [Teedly, Teedly1, Teedly2, Teedly3, Teedly4],
+        gitLink: 'https://gitlab.com/NaaviX/teedly',
+        membersCount: 1,
     },
     {
         name: 'ESIEE +',
@@ -71,6 +139,7 @@ export const projectsData: Project[] = [
         gitLink: 'https://gitlab.com/NaaviX/esiee-plus-portfolio',
         membersCount: 3,
     },
+
     // {
     //     name: 'BDE Tools',
     //     type: 'WEB',
@@ -97,6 +166,7 @@ export const projectsData: Project[] = [
     //     images: [''],
     //     membersCount: 1,
     // },
+
     {
         name: 'Ancien portfolio',
         type: 'WEB',

@@ -6,8 +6,10 @@ export const userData: User = {
     birthDate: new Date('1998-06-08'),
     drivingLicence: 'Permis B',
     car: true,
-    jobTitle: 'Ingénieur conception & développement full stack Java/JS',
-    mainDescription: "En recherche active d'un CDI",
+    jobTitle: 'Ingénieur conception & développement full stack',
+    mainDescription1: "7 ans d'expérience professionnelle",
+    mainDescription2:
+        "En recherche active d'un emploi de développeur web full stack",
     email: 'portfolio.antoinelegrand@gmail.com',
     address: {
         zip: '77500',

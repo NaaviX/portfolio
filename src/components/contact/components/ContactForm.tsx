@@ -10,18 +10,42 @@ import {
     Textarea,
 } from '@chakra-ui/react'
 import { FormEvent } from 'react'
+import toast from 'react-hot-toast'
 import { MdSend } from 'react-icons/md'
 
-function handleSubmit(event: FormEvent<HTMLFormElement>) {
+const SEND_EMAIL_API_URL = 'https://antoine-legrand.dev/backend/send-email'
+
+async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
 
-    const email = 'portfolio.antoinelegrand@gmail.com'
     const subject = data.get('subject')
     const message = data.get('message')
 
-    window.location.href =
-        'mailto:' + email + '?subject=' + subject + '&body=' + message
+    if (!subject && !message) {
+        return
+    }
+
+    try {
+        const response = await fetch(SEND_EMAIL_API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ subject, message }),
+        })
+
+        if (!response.ok) {
+            toast.error("L'envoi a échoué")
+            throw new Error("L'envoi a échoué")
+        }
+
+        const data = await response.json()
+        toast.success("L'email a bien été envoyé")
+        return data
+    } catch (error) {
+        throw new Error((error as Error).message)
+    }
 }
 
 export const ContactForm = () => {

@@ -18,7 +18,12 @@ export const Chip = (props: ChipProps) => {
             letterSpacing='widest'
         >
             {skill.icon ? <TagLeftIcon as={skill.icon} fontSize='md' /> : <></>}
-            <TagLabel fontSize='xs'>{skill.name}</TagLabel>
+            <TagLabel
+                fontSize='sm'
+                fontWeight={skill.isImportant ? '700' : '300'}
+            >
+                {skill.name}
+            </TagLabel>
         </Tag>
     )
 }

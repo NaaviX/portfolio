@@ -8,39 +8,18 @@
 
 ARG NODE_VERSION=20.8.0
 
-################################################################################
-# Use node image for base image for all stages.
-FROM node:${NODE_VERSION}-alpine as build
+FROM node:${NODE_VERSION}-alpine
 
-# Set working directory for all build stages.
 WORKDIR /usr/src/app
 
-
-################################################################################
-# Create a stage for installing production dependecies.
-
-# Download dependencies as a separate step to take advantage of Docker's caching.
-# Leverage a cache mount to /root/.npm to speed up subsequent builds.
-# Leverage bind mounts to package.json and package-lock.json to avoid having to copy them
-# into this layer.
-RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    --mount=type=cache,target=/root/.npm \
-    npm ci
-
-# Copy the rest of the source files into the image.
 COPY . .
-# Run the build script.
+
+RUN npm install
+
 RUN npm run build
 
+EXPOSE 3000
 
-FROM nginx:alpine
-RUN rm /etc/nginx/conf.d/default.conf
-COPY nginx/nginx.conf /etc/nginx/conf.d
+CMD npm run serve
 
-RUN rm -rf /usr/share/nginx/html/*
-COPY --from=build /usr/src/app/build /usr/share/nginx/html
 
-# Fire up nginx
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]

@@ -1,3 +1,5 @@
+import { Skill } from '../skills'
+
 interface Address {
     zip: string
     city: string
@@ -21,5 +23,6 @@ export interface User {
     email: string
     address: Address
     linkedin: string
+    mainSkills: Skill[]
     languages: Language[]
 }

@@ -6,7 +6,12 @@ import { HeaderTitle } from './components/HeaderTitle'
 export const Header = () => {
     return (
         <Container maxW='container.lg' textAlign='center'>
-            <Flex h='100vh' direction='column' justify='space-evenly'>
+            <Flex
+                h='100dvh'
+                py='10dvh'
+                direction='column'
+                justify='space-evenly'
+            >
                 <HeaderTitle />
                 <HeaderContent />
             </Flex>

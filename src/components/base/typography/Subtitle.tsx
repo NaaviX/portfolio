@@ -1,11 +1,11 @@
-import { Heading } from '@chakra-ui/react'
+import { Heading, HeadingProps } from '@chakra-ui/react'
 
 interface SubtitleProps {
     children: React.ReactNode
 }
 
-export const Subtitle = (props: SubtitleProps) => {
-    const { children } = props
+export const Subtitle = (props: SubtitleProps & HeadingProps) => {
+    const { children, ...headingProps } = props
     return (
         <Heading
             as='h3'
@@ -13,6 +13,7 @@ export const Subtitle = (props: SubtitleProps) => {
             color='primary-dark'
             fontWeight='400'
             letterSpacing='widest'
+            {...headingProps}
         >
             {children}
         </Heading>

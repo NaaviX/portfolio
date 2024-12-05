@@ -13,11 +13,11 @@ export const userData: User = {
     birthDate: new Date('1998-06-08'),
     drivingLicence: 'Permis B',
     car: true,
-    jobTitle: 'Ingénieur conception & développement full stack',
+    jobTitle: 'Ingénieur conception & développement',
     mainDescription1:
-        'Je suis développeur frontend & backend passionné, avec un intérêt marqué pour le Web3.',
+        'Ingénieur développeur frontend & backend passionné, avec un intérêt marqué pour le Web3.',
     mainDescription2:
-        'Je recherche un CDI en développement full stack à partir de janvier',
+        'En recherche active d\'un CDI à partir de janvier',
     email: 'portfolio.antoinelegrand@gmail.com',
     address: {
         zip: '77500',

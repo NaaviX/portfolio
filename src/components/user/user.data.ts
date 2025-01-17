@@ -4,6 +4,7 @@ import {
     javaSkill,
     sqlSkill,
     typescriptSkill,
+    vueSkill,
 } from '../skills/skills.data'
 import { User } from './user.type'
 
@@ -15,15 +16,15 @@ export const userData: User = {
     car: true,
     jobTitle: 'Ingénieur conception & développement',
     mainDescription1:
-        'Ingénieur développeur frontend & backend passionné, avec un intérêt marqué pour le Web3.',
-    mainDescription2: "En recherche active d'un CDI à partir de janvier",
+        'Ingénieur développeur web full stack Java/Js passionné',
+    mainDescription2: "En recherche active d'un CDI à partir de janvier 2025",
     email: 'portfolio.antoinelegrand@gmail.com',
     address: {
         zip: '77500',
         city: 'Chelles',
     },
     linkedin: 'https://linkedin.com/in/antoine-legrand1',
-    mainSkills: [typescriptSkill, reactSkill, sqlSkill, cssSkill, javaSkill],
+    mainSkills: [typescriptSkill, reactSkill, sqlSkill, cssSkill, javaSkill, vueSkill],
     languages: [
         {
             name: 'Français',

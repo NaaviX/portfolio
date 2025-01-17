@@ -22,6 +22,7 @@ export const useContact = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ subject, message }),
+                redirect: "follow"
             })
 
             if (!response.ok) {

@@ -16,8 +16,7 @@ export const userData: User = {
     jobTitle: 'Ingénieur conception & développement',
     mainDescription1:
         'Ingénieur développeur frontend & backend passionné, avec un intérêt marqué pour le Web3.',
-    mainDescription2:
-        'En recherche active d\'un CDI à partir de janvier',
+    mainDescription2: "En recherche active d'un CDI à partir de janvier",
     email: 'portfolio.antoinelegrand@gmail.com',
     address: {
         zip: '77500',

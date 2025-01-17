@@ -1,4 +1,4 @@
-import { Subtitle } from '@/components/base'
+import { Subtitle } from '@/components/common'
 import { Flex } from '@chakra-ui/react'
 
 export const FooterSection = () => {

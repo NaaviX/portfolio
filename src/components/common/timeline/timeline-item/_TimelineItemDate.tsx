@@ -4,7 +4,7 @@ import { Fade } from '../../effects/Fade'
 import { Subtitle } from '../../typography/Subtitle'
 import { TimelineExperience } from '../timeline.type'
 
-interface TimelineItemDateProps {
+type TimelineItemDateProps = {
     experience: TimelineExperience
     displayDuration: boolean
     isReversed: boolean

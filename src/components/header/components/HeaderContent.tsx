@@ -1,6 +1,6 @@
 import CvPdf from '@/assets/CV.pdf'
-import { ChipList, MagneticButton, Paper } from '@/components/base'
-import { Title } from '@/components/base/typography/Title'
+import { ChipList, MagneticButton, Paper } from '@/components/common'
+import { Title } from '@/components/common/typography/Title'
 import { Center, Flex, Text } from '@chakra-ui/react'
 import '@fontsource/space-grotesk/400.css'
 import { motion } from 'framer-motion'

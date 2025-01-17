@@ -2,7 +2,7 @@ import { Skill } from '@/components/skills'
 import { Flex, FlexProps } from '@chakra-ui/react'
 import { Chip } from './Chip'
 
-interface ChipListProps {
+type ChipListProps = {
     skills: Skill[]
 }
 

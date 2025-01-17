@@ -5,8 +5,8 @@ import '@fontsource/space-grotesk/400.css'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import { Navbar } from './components/appbar'
-import { FooterSection } from './sections/FooterSection'
+import { Navbar } from './components/navbar'
+import { FooterSection } from './pages/FooterSection'
 
 const root = createRoot(document.getElementById('root') as HTMLElement)
 

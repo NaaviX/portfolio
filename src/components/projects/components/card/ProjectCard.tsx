@@ -6,7 +6,7 @@ import {
     Paper,
     Subtitle,
     Title,
-} from '@/components/base'
+} from '@/components/common'
 import { FaCode, FaPlayCircle } from 'react-icons/fa'
 import { FaUserGroup } from 'react-icons/fa6'
 import { GoDeviceDesktop, GoDeviceMobile } from 'react-icons/go'

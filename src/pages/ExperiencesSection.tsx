@@ -1,4 +1,4 @@
-import { Timeline } from '@/components/base'
+import { Timeline } from '@/components/common'
 import {
     ExperiencesBackground,
     experiencesData,

@@ -1,4 +1,4 @@
-import { Timeline } from '@/components/base'
+import { Timeline } from '@/components/common'
 import { CoursesBackground, coursesData } from '@/components/courses'
 import { Box } from '@chakra-ui/react'
 

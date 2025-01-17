@@ -1,0 +1,61 @@
+import { Skill } from '@/components/skills'
+import { Box, BoxProps, ListItem, UnorderedList } from '@chakra-ui/react'
+import { ChipList } from '../../ChipList'
+import { Fade } from '../../effects/Fade'
+import { Title } from '../../typography/Title'
+import { TimelineItemContentInfo } from './_TimelineItemContentInfo'
+
+type TimelineItemContentProps = {
+    title: string
+    activities: string[]
+    type: string
+    institution?: string
+    city: string
+    skills: Skill[]
+    dateFrom: Date
+    dateTo: Date
+} & BoxProps
+
+export const TimelineItemContent = (props: TimelineItemContentProps) => {
+    const {
+        title,
+        activities,
+        type,
+        institution,
+        city,
+        skills,
+        dateFrom,
+        dateTo,
+        ...boxProps
+    } = props
+    return (
+        <Box {...boxProps}>
+            <Fade>
+                <Title>{title}</Title>
+
+                <TimelineItemContentInfo
+                    activities={activities}
+                    type={type}
+                    institution={institution}
+                    city={city}
+                    dateFrom={dateFrom}
+                    dateTo={dateTo}
+                />
+
+                <UnorderedList
+                    listStyleType='square'
+                    sx={{
+                        padding: '1rem 0',
+                        display: activities.length !== 0 ? 'block' : 'none',
+                    }}
+                >
+                    {activities.map((activity: string) => (
+                        <ListItem key={activity}>{activity}</ListItem>
+                    ))}
+                </UnorderedList>
+
+                <ChipList skills={skills} />
+            </Fade>
+        </Box>
+    )
+}

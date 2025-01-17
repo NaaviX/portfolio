@@ -1,8 +1,8 @@
 import { CSSProperties } from 'react'
-import { TimelineItem } from './item/TimelineItem'
+import { TimelineItem } from './timeline-item/TimelineItem'
 import { TimelineExperience } from './timeline.type'
 
-interface TimelineProps {
+type TimelineProps = {
     experiences: TimelineExperience[]
     style?: CSSProperties
     displayDuration?: boolean

@@ -1,10 +1,7 @@
 import { Heading, HeadingProps } from '@chakra-ui/react'
+import { PropsWithChildren } from 'react'
 
-interface SubtitleProps {
-    children: React.ReactNode
-}
-
-export const Subtitle = (props: SubtitleProps & HeadingProps) => {
+export const Subtitle = (props: PropsWithChildren & HeadingProps) => {
     const { children, ...headingProps } = props
     return (
         <Heading

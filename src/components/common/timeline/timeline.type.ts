@@ -1,6 +1,6 @@
 import { Skill } from '@/components/skills'
 
-export interface TimelineExperience {
+export type TimelineExperience = {
     title: string
     type: string
     institution?: string

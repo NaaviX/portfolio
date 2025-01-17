@@ -1,80 +1,14 @@
-import { Skill } from '@/components/skills'
 import { formatDurationMonthYear, useMediumScreen } from '@/utils/Utils'
 import { CalendarIcon } from '@chakra-ui/icons'
-import {
-    Box,
-    ChakraProps,
-    Flex,
-    ListItem,
-    UnorderedList,
-} from '@chakra-ui/react'
+import { Box, ChakraProps, Flex } from '@chakra-ui/react'
 import {
     FaBuilding,
     FaClock,
     FaFileSignature,
     FaLocationDot,
 } from 'react-icons/fa6'
-import { ChipList } from '../../ChipList'
-import { Fade } from '../../effects/Fade'
-import { Title } from '../../typography/Title'
 
-interface TimelineItemContentProps {
-    title: string
-    activities: string[]
-    type: string
-    institution?: string
-    city: string
-    skills: Skill[]
-    dateFrom: Date
-    dateTo: Date
-    sx?: ChakraProps['sx']
-}
-
-export const TimelineItemContent = (props: TimelineItemContentProps) => {
-    const {
-        title,
-        activities,
-        type,
-        institution,
-        city,
-        skills,
-        dateFrom,
-        dateTo,
-        sx,
-    } = props
-    return (
-        <Box sx={sx}>
-            <Fade>
-                <Title>{title}</Title>
-
-                <TimelineItemContentInfo
-                    activities={activities}
-                    type={type}
-                    institution={institution}
-                    city={city}
-                    dateFrom={dateFrom}
-                    dateTo={dateTo}
-                />
-
-                <UnorderedList
-                    listStyleType='square'
-                    sx={{
-                        padding: '1rem 0',
-                        display: activities.length !== 0 ? 'block' : 'none',
-                    }}
-                >
-                    {activities.map((activity: string) => (
-                        <ListItem key={activity}>{activity}</ListItem>
-                    ))}
-                </UnorderedList>
-
-                <ChipList skills={skills} />
-            </Fade>
-        </Box>
-    )
-}
-
-interface TimelineItemContentInfoProps {
+type TimelineItemContentInfoProps = {
     activities: string[]
     type: string
     institution?: string
@@ -83,7 +17,9 @@ interface TimelineItemContentInfoProps {
     dateTo: Date
 }
 
-const TimelineItemContentInfo = (props: TimelineItemContentInfoProps) => {
+export const TimelineItemContentInfo = (
+    props: TimelineItemContentInfoProps
+) => {
     const { activities, type, institution, city, dateFrom, dateTo } = props
 
     const timelineItemContentInfoStyle: ChakraProps['sx'] = {

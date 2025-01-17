@@ -1,8 +1,8 @@
-import { ContactSection } from '@/sections/ContactSection'
-import { CoursesSection } from '@/sections/CoursesSection'
-import { ExperiencesSection } from '@/sections/ExperiencesSection'
-import { ProjectsSection } from '@/sections/ProjectsSection'
-import { SkillsSection } from '@/sections/SkillsSection'
+import { ContactSection } from './ContactSection'
+import { CoursesSection } from './CoursesSection'
+import { ExperiencesSection } from './ExperiencesSection'
+import { ProjectsSection } from './ProjectsSection'
+import { SkillsSection } from './SkillsSection'
 
 export interface Section {
     name: string

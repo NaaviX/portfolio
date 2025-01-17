@@ -1,4 +1,4 @@
-import { TimelineExperience } from '../base/timeline/timeline.type'
+import { TimelineExperience } from '../common/timeline/timeline.type'
 
 export const coursesData: TimelineExperience[] = [
     {

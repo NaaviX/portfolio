@@ -5,9 +5,9 @@ import 'dayjs/locale/fr'
 import { Toaster } from 'react-hot-toast'
 import { Element } from 'react-scroll'
 import './App.css'
-import { HeaderSection } from './sections/HeaderSection'
-import { SectionLayout } from './sections/components/SectionLayout'
-import { Section, sectionsData } from './sections/sections.data'
+import { SectionLayout } from './pages/components/SectionLayout'
+import { HeaderSection } from './pages/HeaderSection'
+import { Section, sectionsData } from './pages/sections.data'
 dayjs.locale('fr')
 
 const App = () => {

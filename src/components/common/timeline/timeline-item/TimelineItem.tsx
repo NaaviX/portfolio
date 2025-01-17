@@ -1,26 +1,34 @@
 import { useLargeScreen, useMediumScreen } from '@/utils/Utils'
-import { Box } from '@chakra-ui/react'
+import { Box, BoxProps } from '@chakra-ui/react'
 import { CSSProperties } from 'react'
 import { Paper } from '../../Paper'
 import { TimelineExperience } from '../timeline.type'
-import { TimelineItemContent } from './TimelineItemContent'
-import { TimelineItemDate } from './TimelineItemDate'
-import { TimelineItemSeparator } from './TimelineItemSeparator'
+import { TimelineItemContent } from './_TimelineItemContent'
+import { TimelineItemDate } from './_TimelineItemDate'
+import { TimelineItemSeparator } from './_TimelineItemSeparator'
 
-interface TimelineItemProps {
+type TimelineItemProps = {
     experience: TimelineExperience
     sx?: CSSProperties
     displayDuration: boolean
     isReversed: boolean
     withFrame: boolean
-}
+} & BoxProps
 
 export const TimelineItem = (props: TimelineItemProps) => {
-    const { experience, sx, displayDuration, withFrame, isReversed } = props
+    const {
+        experience,
+        sx,
+        displayDuration,
+        withFrame,
+        isReversed,
+        ...boxProps
+    } = props
 
     return (
         <Box
             as='li'
+            {...boxProps}
             sx={{
                 listStyle: 'none',
                 display: 'flex',

@@ -1,5 +1,5 @@
-import { Separator } from '@/components/base/Separator'
-import { Title } from '@/components/base/typography/Title'
+import { Separator } from '@/components/common/Separator'
+import { Title } from '@/components/common/typography/Title'
 import { useMediumScreen } from '@/utils/Utils'
 
 interface SectionTitleProps {

@@ -20,6 +20,7 @@ export interface User {
     jobTitle: string
     mainDescription1: string
     mainDescription2: string
+    mainDescription3: string
     email: string
     address: Address
     linkedin: string

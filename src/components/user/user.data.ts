@@ -14,17 +14,24 @@ export const userData: User = {
     birthDate: new Date('1998-06-08'),
     drivingLicence: 'Permis B',
     car: true,
-    jobTitle: 'Ingénieur conception & développement',
-    mainDescription1:
-        'Ingénieur développeur web full stack Java/Js passionné',
-    mainDescription2: "En recherche active d'un CDI à partir de janvier 2025",
-    email: 'portfolio.antoinelegrand@gmail.com',
+    jobTitle: 'Ingénieur conception & développement web',
+    mainDescription1: 'Ingénieur développeur web full-stack Java/Js',
+    mainDescription2: "Passionné d'informatique et de nouvelles technologies",
+    mainDescription3: "En recherche active d'un CDI à partir de janvier 2025",
+    email: 'antoine.legrand77@gmail.com',
     address: {
         zip: '77500',
         city: 'Chelles',
     },
     linkedin: 'https://linkedin.com/in/antoine-legrand1',
-    mainSkills: [typescriptSkill, reactSkill, sqlSkill, cssSkill, javaSkill, vueSkill],
+    mainSkills: [
+        javaSkill,
+        typescriptSkill,
+        reactSkill,
+        sqlSkill,
+        cssSkill,
+        vueSkill,
+    ],
     languages: [
         {
             name: 'Français',

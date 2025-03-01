@@ -1,11 +1,11 @@
 import { FC, SVGProps } from 'react'
 
 export enum SKILL_TYPE {
-    WEBFRONT = 'Frontend',
-    WEBBACK = 'Backend & données',
-    DEVTOOLS = 'Outils',
-    MOBILE = 'Mobile',
-    OTHER = 'Autres',
+    WEBFRONT = 'Développement frontend',
+    WEBBACK = 'Développement backend & données',
+    DEVTOOLS = 'Outils & CI/CD',
+    MOBILE = 'Développement mobile',
+    PRACTICES = 'Méthodologies et bonnes pratiques',
 }
 
 export enum SKILL_NAME {
@@ -20,6 +20,8 @@ export enum SKILL_NAME {
     VUE = 'Vue',
     NUXT = 'Nuxt',
     REACT = 'React',
+    ANGULAR = 'Angular',
+    NODE = 'Node',
     CSS = 'CSS',
     BOOTSTRAP = 'Bootstrap',
     BULMA = 'Bulma',
@@ -40,14 +42,30 @@ export enum SKILL_NAME {
     JENKINS = 'Jenkins',
     SONARQUBE = 'SonarQUBE',
     NEXUS = 'Nexus',
-    SOLID = 'Principes CRAFT & SOLID',
+    SOLID = 'Principes SOLID',
     CICD = 'CI/CD',
     DOCKER = 'Docker',
     JEST = 'Jest',
+    JASMINE = 'Jasmine',
+    KARMA = 'Karma',
     JQUERY = 'JQuery',
     CHAKRA = 'Chakra UI',
     EXPRESS = 'ExpressJs',
     REACT_NATIVE = 'React Native',
+    ELASTICSEARCH = 'Elasticsearch',
+    INTELLIJ = 'IntelliJ IDEA',
+    VSCODE = 'VS Code',
+    CURSOR = 'Cursor',
+    AGILE = 'Agile',
+    TDD = 'TDD',
+    BDD = 'BDD',
+    CLEAN_CODE = 'Clean Code',
+    CLEAN_ARCHITECTURE = 'Clean Architecture',
+    HEXAGONAL = 'Architecture Hexagonale',
+    CRAFT = 'CRAFT',
+    DESIGN_PATTERNS = 'Design Patterns',
+    JUNIT = 'JUnit',
+    MOCKITO = 'Mockito',
 }
 
 export interface Skill {

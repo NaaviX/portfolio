@@ -55,8 +55,10 @@ export const HeaderContent = () => {
                     >
                         {userData.mainDescription1}
                         <br />
-                        <br />
                         {userData.mainDescription2}
+                        <br />
+                        <br />
+                        {userData.mainDescription3}
                     </Text>
                     <Flex
                         gap='3rem'

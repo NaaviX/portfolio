@@ -5,21 +5,28 @@ import SkillMobileImage from '@/assets/images/skillMobile.svg?react'
 
 import {
     AndroidIcon,
+    AngularIcon,
     BootstrapIcon,
     BulmaIcon,
     CICDIcon,
     CSSIcon,
+    CursorIcon,
     DockerIcon,
+    ElasticsearchIcon,
     ExpressIcon,
     FirebaseIcon,
     FlutterIcon,
     GitIcon,
+    IntellijIcon,
+    JasmineIcon,
     JavaIcon,
     JenkinsIcon,
     JestIcon,
     JqueryIcon,
     JsIcon,
+    KarmaIcon,
     LinuxIcon,
+    NodeIcon,
     NuxtIcon,
     PostgresqlIcon,
     ReactIcon,
@@ -30,6 +37,7 @@ import {
     SupabaseIcon,
     TailwindIcon,
     TsIcon,
+    VsCodeIcon,
     VueIcon,
 } from '@/assets/icons'
 import { SiChakraui, SiNginx } from 'react-icons/si'
@@ -68,6 +76,11 @@ export const UXSkill: Skill = {
 export const javascriptSkill: Skill = {
     name: SKILL_NAME.JAVASCRIPT,
     icon: JsIcon,
+}
+
+export const nodeSkill: Skill = {
+    name: SKILL_NAME.NODE,
+    icon: NodeIcon,
 }
 
 export const typescriptSkill: Skill = {
@@ -228,20 +241,119 @@ export const reactNativeSkill: Skill = {
     icon: ReactIcon,
 }
 
+export const angularSkill: Skill = {
+    name: SKILL_NAME.ANGULAR,
+    icon: AngularIcon,
+    isImportant: true,
+}
+
+export const jasmineSkill: Skill = {
+    name: SKILL_NAME.JASMINE,
+    icon: JasmineIcon,
+}
+
+export const karmaSkill: Skill = {
+    name: SKILL_NAME.KARMA,
+    icon: KarmaIcon,
+}
+
+export const elasticsearchSkill: Skill = {
+    name: SKILL_NAME.ELASTICSEARCH,
+    icon: ElasticsearchIcon,
+}
+
+export const intellijSkill: Skill = {
+    name: SKILL_NAME.INTELLIJ,
+    icon: IntellijIcon,
+}
+
+export const vscodeSkill: Skill = {
+    name: SKILL_NAME.VSCODE,
+    icon: VsCodeIcon,
+}
+
+export const cursorSkill: Skill = {
+    name: SKILL_NAME.CURSOR,
+    icon: CursorIcon,
+}
+
+export const agileSkill: Skill = {
+    name: SKILL_NAME.AGILE,
+    about: 'Scrum, Kanban',
+    icon: undefined,
+}
+
+export const TDDskill: Skill = {
+    name: SKILL_NAME.TDD,
+    about: 'Test Driven Development',
+    icon: undefined,
+}
+
+export const BDDskill: Skill = {
+    name: SKILL_NAME.BDD,
+    about: 'Behavior Driven Development',
+    icon: undefined,
+}
+
+export const CleanCodeSkill: Skill = {
+    name: SKILL_NAME.CLEAN_CODE,
+    icon: undefined,
+}
+
+export const CleanArchitectureSkill: Skill = {
+    name: SKILL_NAME.CLEAN_ARCHITECTURE,
+    icon: undefined,
+}
+
+export const ArchitectureHexagonaleSkill: Skill = {
+    name: SKILL_NAME.HEXAGONAL,
+    about: 'Architecture Hexagonale',
+    icon: undefined,
+}
+
+export const CRAFTSkill: Skill = {
+    name: SKILL_NAME.CRAFT,
+    icon: undefined,
+}
+
+export const SOLIDSkill: Skill = {
+    name: SKILL_NAME.SOLID,
+    icon: undefined,
+}
+
+export const DesignsPatternsSkill: Skill = {
+    name: SKILL_NAME.DESIGN_PATTERNS,
+    icon: undefined,
+}
+
+export const JUnitSkill: Skill = {
+    name: SKILL_NAME.JUNIT,
+    about: 'Tests unitaires Java',
+    icon: undefined,
+}
+
+export const MockitoSkill: Skill = {
+    name: SKILL_NAME.MOCKITO,
+    about: 'Framework de mock pour Java',
+    icon: undefined,
+}
+
 export const frontSkillCategory: SkillCategory = {
     name: SKILL_TYPE.WEBFRONT,
     description:
         "Interfaces utilisateur web ou mobile ergonomiques, optimisation de l'expérience utilisateur.",
     color: 'rgb(43, 93, 108)',
     skills: [
-        javascriptSkill,
         typescriptSkill,
-        vueSkill,
-        nuxtSkill,
+        javascriptSkill,
         reactSkill,
+        vueSkill,
+        angularSkill,
         cssSkill,
-        chakraSkill,
         tailwindSkill,
+        jestSkill,
+        jasmineSkill,
+        karmaSkill,
     ],
     image: SkillFrontImage,
 }
@@ -254,17 +366,21 @@ export const backSkillCategory: SkillCategory = {
     skills: [
         javaSkill,
         springbootSkill,
+        nodeSkill,
+        expressSkill,
         sqlSkill,
         noSqlSkill,
-        jpqlSkill,
-        restSkill,
+        elasticsearchSkill,
+        JUnitSkill,
+        MockitoSkill,
     ],
     image: SkillBackImage,
 }
 
 export const devToolsSkillCategory: SkillCategory = {
     name: SKILL_TYPE.DEVTOOLS,
-    description: 'Divers outils utilisés lors de mes précédents projets.',
+    description:
+        "Divers outils de développement et d'intégration continue utilisés lors de mes précédents projets.",
     color: '#0f172a',
     skills: [
         gitSkill,
@@ -273,15 +389,36 @@ export const devToolsSkillCategory: SkillCategory = {
         dockerSkill,
         firebaseSkill,
         supabaseSkill,
+        intellijSkill,
+        vscodeSkill,
+        cursorSkill,
     ],
     image: SkillDevToolsImage,
+}
+
+export const practicesSkillCategory: SkillCategory = {
+    name: SKILL_TYPE.PRACTICES,
+    description: '',
+    color: '#0f172a',
+    skills: [
+        agileSkill,
+        TDDskill,
+        BDDskill,
+        CleanCodeSkill,
+        CleanArchitectureSkill,
+        ArchitectureHexagonaleSkill,
+        CRAFTSkill,
+        SOLIDSkill,
+        DesignsPatternsSkill,
+    ],
+    image: SkillMobileImage,
 }
 
 export const mobileSkillCategory: SkillCategory = {
     name: SKILL_TYPE.MOBILE,
     description: 'Applications mobiles Android et iOS.',
     color: '#0f172a',
-    skills: [flutterSkill, androidSkill, reactNativeSkill],
+    skills: [reactNativeSkill, flutterSkill, androidSkill],
     image: SkillMobileImage,
 }
 
@@ -290,6 +427,7 @@ export const skillsData: SkillCategory[] = [
     backSkillCategory,
     devToolsSkillCategory,
     mobileSkillCategory,
+    practicesSkillCategory,
     /* javaSkill,
   springbootSkill,
   UXSkill,

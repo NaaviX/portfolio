@@ -1,14 +1,17 @@
 import { useScroll, useSpring, useTransform } from 'framer-motion'
+import { isDesktop } from 'react-device-detect'
 
 export const useNavbar = () => {
     const { scrollY } = useScroll()
     const springY = useSpring(scrollY)
 
-    const navbarBg = useTransform(
-        springY,
-        [0, screen.height],
-        ['rgba(8, 44, 54, 0.3)', 'rgba(8, 44, 54, 0.8)']
-    )
+    const navbarBg = isDesktop
+        ? useTransform(
+              springY,
+              [0, screen.height],
+              ['rgba(8, 44, 54, 0.3)', 'rgba(8, 44, 54, 0.8)']
+          )
+        : 'rgba(8, 44, 54, 0.95)'
 
     const navbarElevation = useTransform(
         springY,

@@ -59,8 +59,9 @@ export const experiencesData: TimelineExperience[] = [
     {
         title: 'Ingénieur conception & développement full-stack',
         type: 'Indépendant',
+        institution: 'At the Mos',
         city: 'Chelles',
-        dateFrom: new Date('2024-01-10'),
+        dateFrom: new Date('2024-01-27'),
         dateTo: new Date('2025-01-25'),
         activities: [
             'Lead développeur sur une application web from scratch',

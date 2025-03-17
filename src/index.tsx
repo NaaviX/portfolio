@@ -7,6 +7,10 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { Navbar } from './components/navbar'
 import { FooterSection } from './pages/FooterSection'
+import { initGA } from './utils/analytics'
+
+// Initialisation de GA4
+initGA()
 
 const root = createRoot(document.getElementById('root') as HTMLElement)
 

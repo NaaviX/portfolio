@@ -1,4 +1,3 @@
-import CvPdf from '@/assets/CV.pdf'
 import { ChipList, MagneticButton, Paper } from '@/components/common'
 import { Title } from '@/components/common/typography/Title'
 import { Center, Flex, Text } from '@chakra-ui/react'
@@ -6,7 +5,6 @@ import '@fontsource/space-grotesk/400.css'
 import { motion } from 'framer-motion'
 import { FaBirthdayCake, FaLinkedinIn } from 'react-icons/fa'
 import { FaBriefcase, FaLocationPin } from 'react-icons/fa6'
-import { PiReadCvLogo } from 'react-icons/pi'
 import { userData } from '../../user'
 
 export const HeaderContent = () => {
@@ -73,7 +71,7 @@ export const HeaderContent = () => {
                             flexDirection={{ base: 'column', lg: 'row' }}
                         >
                             <FaBirthdayCake />
-                            <Text fontSize='sm'>26&nbsp;ans</Text>
+                            <Text fontSize='sm'>27&nbsp;ans</Text>
                         </Flex>
                         <Flex
                             alignItems='center'
@@ -98,11 +96,6 @@ export const HeaderContent = () => {
                                 icon={<FaLinkedinIn />}
                                 ariaLabel='Linked in'
                                 href={userData.linkedin}
-                            />
-                            <MagneticButton
-                                icon={<PiReadCvLogo size={23} />}
-                                ariaLabel='CV'
-                                href={CvPdf}
                             />
                         </Flex>
                     </Center>

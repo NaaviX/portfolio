@@ -60,7 +60,6 @@ export const projectsData: Project[] = [
             chakraSkill,
         ],
         images: [Portfolio1],
-        gitLink: 'https://gitlab.com/NaaviX/portfolio',
         membersCount: 1,
     },
     {
@@ -203,7 +202,7 @@ export const projectsData: Project[] = [
         ],
         images: [''],
     },
-    
+
     {
         name: 'VO2Max',
         type: 'WEB',

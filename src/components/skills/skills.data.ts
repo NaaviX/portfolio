@@ -326,6 +326,21 @@ export const DesignsPatternsSkill: Skill = {
     icon: undefined,
 }
 
+export const quarkusSkill: Skill = {
+    name: SKILL_NAME.QUARKUS,
+    icon: undefined,
+}
+
+export const shadcnSkill: Skill = {
+    name: SKILL_NAME.SHADCN_UI,
+    icon: undefined,
+}
+
+export const traefikSkill: Skill = {
+    name: SKILL_NAME.TRAEFIK,
+    icon: undefined,
+}
+
 export const JUnitSkill: Skill = {
     name: SKILL_NAME.JUNIT,
     about: 'Tests unitaires Java',

@@ -1,3 +1,3 @@
 export default {
-    moduleFileExtensions: ["js", "jsx", "ts", "tsx"],
-};
+    moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
+}

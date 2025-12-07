@@ -66,6 +66,9 @@ export enum SKILL_NAME {
     DESIGN_PATTERNS = 'Design Patterns',
     JUNIT = 'JUnit',
     MOCKITO = 'Mockito',
+    QUARKUS = 'Quarkus',
+    SHADCN_UI = 'Shadcn/Radix UI',
+    TRAEFIK = 'Traefik',
 }
 
 export interface Skill {

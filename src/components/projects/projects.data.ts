@@ -32,19 +32,46 @@ import {
     expressSkill,
     flutterSkill,
     javaSkill,
+    jestSkill,
     jquerySkill,
     nginxSkill,
     nodeSkill,
     reactNativeSkill,
     reactSkill,
+    shadcnSkill,
     springbootSkill,
+    sqlSkill,
     supabaseSkill,
+    traefikSkill,
     typescriptSkill,
     vueSkill,
 } from '../skills/skills.data'
 import { Project } from './projects.type'
 
 export const projectsData: Project[] = [
+    {
+        name: 'Too Many Cooks',
+        type: 'WEB',
+        description:
+            "Dashboard d'analyse des différentes stratégies d'arbitrage de funding rates entre plusieurs échanges décentralisés de cryptomonnaie.",
+        year: '2025',
+        skills: [
+            reactSkill,
+            typescriptSkill,
+            nodeSkill,
+            expressSkill,
+            supabaseSkill,
+            sqlSkill,
+            dockerSkill,
+            traefikSkill,
+            shadcnSkill,
+            CICDSkill,
+            jestSkill,
+        ],
+        images: [],
+        previewLink: 'https://toomanycooks.app',
+        membersCount: 1,
+    },
     {
         name: 'Portfolio',
         type: 'WEB',

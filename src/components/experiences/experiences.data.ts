@@ -8,14 +8,30 @@ import {
     javascriptSkill,
     nodeSkill,
     postgresqlSkill,
+    quarkusSkill,
     reactSkill,
     springbootSkill,
+    sqlSkill,
     supabaseSkill,
     typescriptSkill,
     vueSkill,
 } from '../skills/skills.data'
 
 export const experiencesData: TimelineExperience[] = [
+    {
+        title: 'Ingénieur développement Java',
+        type: 'CDI',
+        institution: 'Amundi',
+        city: 'Paris Montparnasse',
+        dateFrom: new Date('2025-01-27'),
+        dateTo: new Date('2025-12-31'),
+        activities: [
+            "Prestataire chez Olympp, en mission au sein d'Amundi, le premier gérant d'actifs financiers européens",
+            "Ingénieur en développement Java au sein de l'équipe gestion de portefeuille",
+            "Maintenance et développement de nouvelles features sur l'outil Alto destiné aux gestionnaires de portefeuilles clients",
+        ],
+        skills: [javaSkill, springbootSkill, quarkusSkill, sqlSkill],
+    },
     {
         title: 'Ingénieur conception & développement',
         type: 'Apprentissage',

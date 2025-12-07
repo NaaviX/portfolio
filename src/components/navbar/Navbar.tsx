@@ -4,8 +4,7 @@ import { NavbarDesktop } from './_NavbarDesktop'
 import { NavbarMobile } from './_NavbarMobile'
 
 export const Navbar = () => {
-    const { backgroundColor,
-        boxShadow, } = useNavbar()
+    const { backgroundColor, boxShadow } = useNavbar()
     return (
         <motion.div
             style={{
@@ -14,7 +13,7 @@ export const Navbar = () => {
                 zIndex: 1000,
                 padding: '0 2rem',
                 backgroundColor,
-                boxShadow
+                boxShadow,
             }}
         >
             <NavbarDesktop />

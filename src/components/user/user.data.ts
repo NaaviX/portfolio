@@ -18,7 +18,7 @@ export const userData: User = {
     jobTitle: 'Ingénieur conception & développement',
     mainDescription1: 'Ingénieur conception & développement Java/Js',
     mainDescription2: "Passionné d'informatique et de nouvelles technologies",
-    mainDescription3: "Actuellement en mission chez Amundi",
+    mainDescription3: 'Actuellement en mission chez Amundi',
     email: 'antoine.legrand77@gmail.com',
     address: {
         zip: '77500',

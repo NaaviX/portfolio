@@ -22,6 +22,7 @@ import {
     Teedly2,
     Teedly3,
     Teedly4,
+    TooManyCooks,
 } from '@/assets/images'
 import {
     bootstrapSkill,
@@ -68,7 +69,7 @@ export const projectsData: Project[] = [
             CICDSkill,
             jestSkill,
         ],
-        images: [],
+        images: [TooManyCooks],
         previewLink: 'https://toomanycooks.app',
         membersCount: 1,
     },

@@ -19,3 +19,5 @@ export { default as Teedly1 } from './projects/teedly/teedly1.png'
 export { default as Teedly2 } from './projects/teedly/teedly2.png'
 export { default as Teedly3 } from './projects/teedly/teedly3.png'
 export { default as Teedly4 } from './projects/teedly/teedly4.png'
+export { default as TooManyCooks } from './projects/toomanycooks/toomanycooks.png'
+

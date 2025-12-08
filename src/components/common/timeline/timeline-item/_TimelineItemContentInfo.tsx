@@ -14,7 +14,7 @@ type TimelineItemContentInfoProps = {
     institution?: string
     city: string
     dateFrom: Date
-    dateTo: Date
+    dateTo?: Date
 }
 
 export const TimelineItemContentInfo = (
@@ -50,11 +50,11 @@ export const TimelineItemContentInfo = (
                 <>
                     <Flex sx={timelineItemContentInfoStyle}>
                         <CalendarIcon />
-                        {dateFrom.getFullYear()} - {dateTo.getFullYear()}
+                        {dateFrom.getFullYear()} - {!!dateTo ? dateTo.getFullYear() : 'Now'}
                     </Flex>
                     <Flex sx={timelineItemContentInfoStyle}>
                         <FaClock />
-                        {formatDurationMonthYear(dateFrom, dateTo)}
+                        {formatDurationMonthYear(dateFrom, dateTo || new Date())}
                     </Flex>
                 </>
             )}

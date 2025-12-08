@@ -1,20 +1,11 @@
-import { Skill } from '@/components/skills'
 import { Box, BoxProps, ListItem, UnorderedList } from '@chakra-ui/react'
 import { ChipList } from '../../ChipList'
 import { Fade } from '../../effects/Fade'
 import { Title } from '../../typography/Title'
+import { TimelineExperience } from '../timeline.type'
 import { TimelineItemContentInfo } from './_TimelineItemContentInfo'
 
-type TimelineItemContentProps = {
-    title: string
-    activities: string[]
-    type: string
-    institution?: string
-    city: string
-    skills: Skill[]
-    dateFrom: Date
-    dateTo: Date
-} & BoxProps
+type TimelineItemContentProps = TimelineExperience & BoxProps
 
 export const TimelineItemContent = (props: TimelineItemContentProps) => {
     const {

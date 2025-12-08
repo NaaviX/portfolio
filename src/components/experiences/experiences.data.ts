@@ -24,7 +24,6 @@ export const experiencesData: TimelineExperience[] = [
         institution: 'Amundi',
         city: 'Paris Montparnasse',
         dateFrom: new Date('2025-01-27'),
-        dateTo: new Date('2025-12-31'),
         activities: [
             "Prestataire chez Olympp, en mission au sein d'Amundi, le premier gérant d'actifs financiers européens",
             "Ingénieur en développement Java au sein de l'équipe gestion de portefeuille",

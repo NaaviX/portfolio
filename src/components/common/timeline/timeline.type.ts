@@ -6,7 +6,7 @@ export type TimelineExperience = {
     institution?: string
     city: string
     dateFrom: Date
-    dateTo: Date
+    dateTo?: Date
     activities: string[]
     skills: Skill[]
 }

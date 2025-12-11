@@ -20,7 +20,7 @@ interface ProjectCardProps {
 export const ProjectCard = (props: ProjectCardProps) => {
     const project: Project = props.project
     return (
-        <Box sx={{ width: { base: '100%', md: '49%' } }} marginY='0.5rem'>
+        <Box sx={{ width: { base: '100%', md: '49%' }, height: '100%' }} marginY='0.5rem'>
             <Paper
                 key={project.name}
                 style={{ padding: '1rem', marginBottom: '1rem' }}

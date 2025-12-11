@@ -29,10 +29,10 @@ export const TimelineItemDate = (props: TimelineItemDateProps) => {
         >
             <Fade>
                 <Subtitle>
-                    {dateFrom.getFullYear()} - {dateTo.getFullYear()}
+                    {dateFrom.getFullYear()} {dateTo && '- ' + dateTo.getFullYear()}
                 </Subtitle>
                 <Subtitle>
-                    {displayDuration
+                    {displayDuration && dateTo
                         ? formatDurationMonthYear(dateFrom, dateTo)
                         : ''}
                 </Subtitle>

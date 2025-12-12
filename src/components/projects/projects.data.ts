@@ -126,7 +126,7 @@ export const projectsData: Project[] = [
             },
         ],
         images: [Groom1],
-        previewLink: 'https://groom.antoine-legrand.dev',
+        previewLink: 'https://antoine-legrand.dev/groom',
         gitLink: 'https://gitlab.com/NaaviX/groom-web',
         membersCount: 2,
     },
@@ -185,7 +185,7 @@ export const projectsData: Project[] = [
         year: '2017',
         skills: [vueSkill, jquerySkill, bootstrapSkill, cssSkill],
         images: [OldPortfolio],
-        previewLink: 'https://old-portfolio.antoine-legrand.dev',
+        previewLink: 'https://antoine-legrand.dev/oldportfolio',
         membersCount: 1,
     },
 ]

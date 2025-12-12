@@ -1,7 +1,7 @@
 import { FormEvent } from 'react'
 import toast from 'react-hot-toast'
 
-const SEND_EMAIL_API_URL = 'https://backend.antoine-legrand.dev/'
+const SEND_EMAIL_API_URL = 'https://antoine-legrand.dev/api/'
 
 export const useContact = () => {
     async function handleFormSubmit(event: FormEvent<HTMLFormElement>) {

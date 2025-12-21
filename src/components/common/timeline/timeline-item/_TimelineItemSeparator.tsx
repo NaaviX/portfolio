@@ -1,4 +1,34 @@
 import { Box, useTheme } from '@chakra-ui/react'
+import { motion } from 'framer-motion'
+
+const MotionBox = motion(Box)
+
+const lineVariants = {
+    hidden: { scaleY: 0 },
+    visible: {
+        scaleY: 1,
+        transition: {
+            type: 'spring',
+            damping: 25,
+            stiffness: 100,
+            duration: 0.6,
+        },
+    },
+}
+
+const dotVariants = {
+    hidden: { scale: 0, opacity: 0 },
+    visible: {
+        scale: 1,
+        opacity: 1,
+        transition: {
+            type: 'spring',
+            damping: 15,
+            stiffness: 200,
+            delay: 0.2,
+        },
+    },
+}
 
 export const TimelineItemSeparator = () => {
     const borderColor = useTheme().__cssMap['colors.border'].value
@@ -12,14 +42,23 @@ export const TimelineItemSeparator = () => {
                 alignItems: 'center',
             }}
         >
-            <span
+            <MotionBox
+                initial='hidden'
+                whileInView='visible'
+                viewport={{ once: true, margin: '-20px' }}
+                variants={lineVariants}
                 style={{
                     width: '2px',
                     backgroundColor: borderColor,
                     height: '0.7rem',
+                    transformOrigin: 'top',
                 }}
             />
-            <span
+            <MotionBox
+                initial='hidden'
+                whileInView='visible'
+                viewport={{ once: true, margin: '-20px' }}
+                variants={dotVariants}
                 style={{
                     display: 'flex',
                     alignSelf: 'baseline',
@@ -35,11 +74,16 @@ export const TimelineItemSeparator = () => {
                     outlineColor: borderColor,
                 }}
             />
-            <span
+            <MotionBox
+                initial='hidden'
+                whileInView='visible'
+                viewport={{ once: true, margin: '-20px' }}
+                variants={lineVariants}
                 style={{
                     width: '2px',
                     backgroundColor: borderColor,
                     flexGrow: '1',
+                    transformOrigin: 'top',
                 }}
             />
         </Box>

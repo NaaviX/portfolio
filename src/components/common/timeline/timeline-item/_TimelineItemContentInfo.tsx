@@ -50,11 +50,15 @@ export const TimelineItemContentInfo = (
                 <>
                     <Flex sx={timelineItemContentInfoStyle}>
                         <CalendarIcon />
-                        {dateFrom.getFullYear()} - {!!dateTo ? dateTo.getFullYear() : 'Now'}
+                        {dateFrom.getFullYear()} -{' '}
+                        {dateTo ? dateTo.getFullYear() : 'Now'}
                     </Flex>
                     <Flex sx={timelineItemContentInfoStyle}>
                         <FaClock />
-                        {formatDurationMonthYear(dateFrom, dateTo || new Date())}
+                        {formatDurationMonthYear(
+                            dateFrom,
+                            dateTo || new Date()
+                        )}
                     </Flex>
                 </>
             )}

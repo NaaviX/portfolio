@@ -5,6 +5,7 @@ import '@fontsource/space-grotesk/400.css'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { ScrollProgress } from './components/common'
 import { Navbar } from './components/navbar'
 import { FooterSection } from './pages/FooterSection'
 import { initGA } from './utils/analytics'
@@ -89,6 +90,7 @@ root.render(
                 <ColorModeScript
                     initialColorMode={appTheme.config.initialColorMode}
                 />
+                <ScrollProgress />
                 <Navbar />
                 <BrowserRouter>
                     <Routes>

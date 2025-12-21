@@ -1,13 +1,10 @@
 import { Title } from '@/components/common/typography/Title'
 import { useMediumScreen } from '@/utils/Utils'
-import { Box } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
 interface SectionTitleProps {
     text?: string
 }
-
-const MotionBox = motion(Box)
 
 const titleVariants = {
     hidden: {
@@ -41,56 +38,40 @@ const lineVariants = {
 
 export const SectionTitle = (props: SectionTitleProps) => {
     const { text } = props
-    if (!useMediumScreen()) {
+    const isMedium = useMediumScreen()
+
+    if (!isMedium) {
         return (
-            <MotionBox
+            <motion.div
                 initial='hidden'
                 whileInView='visible'
                 viewport={{ once: true, margin: '-50px' }}
                 variants={titleVariants}
             >
-                <Title sx={{ textAlign: 'center', mb: '2rem' }}>{text}</Title>
-            </MotionBox>
+                <Title className='text-center mb-8'>{text}</Title>
+            </motion.div>
         )
     }
     return (
-        <MotionBox
+        <motion.div
             initial='hidden'
             whileInView='visible'
             viewport={{ once: true, margin: '-50px' }}
-            display='flex'
-            alignItems='center'
-            width='70%'
-            marginBottom='3rem'
-            marginLeft='30px'
+            className='flex items-center w-[70%] mb-12 ml-[30px]'
         >
-            <MotionBox
+            <motion.div
                 variants={lineVariants}
-                height='1px'
-                flex='1'
-                bg='border'
-                transformOrigin='right'
+                className='h-px flex-1 bg-border origin-right'
             />
-            <MotionBox variants={titleVariants}>
-                <Title
-                    sx={{
-                        textAlign: 'center',
-                        marginInline: '2rem',
-                        letterSpacing: 'widest',
-                        fontWeight: '600',
-                        whiteSpace: 'nowrap',
-                    }}
-                >
+            <motion.div variants={titleVariants}>
+                <Title className='text-center mx-8 tracking-widest font-semibold whitespace-nowrap'>
                     {text?.toUpperCase()}
                 </Title>
-            </MotionBox>
-            <MotionBox
+            </motion.div>
+            <motion.div
                 variants={lineVariants}
-                height='1px'
-                flex='1'
-                bg='border'
-                transformOrigin='left'
+                className='h-px flex-1 bg-border origin-left'
             />
-        </MotionBox>
+        </motion.div>
     )
 }

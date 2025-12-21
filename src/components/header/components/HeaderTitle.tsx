@@ -1,12 +1,5 @@
-import { Box, Heading, keyframes } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { userData } from '../../user/user.data'
-
-const gradientShift = keyframes`
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-`
 
 export const HeaderTitle = () => {
     return (
@@ -21,34 +14,12 @@ export const HeaderTitle = () => {
             }}
             viewport={{ once: true }}
         >
-            <Box position='relative'>
-                <Heading
-                    as='h1'
-                    textAlign='center'
-                    fontSize={{ base: '4xl', md: '6xl', lg: '8xl' }}
-                    fontFamily='Space Grotesk'
-                    fontWeight='700'
-                    bgGradient='linear(to-r, #00a2c7, #4ccce6, #b6ecf7, #4ccce6, #00a2c7)'
-                    bgClip='text'
-                    backgroundSize='200% 200%'
-                    animation={`${gradientShift} 6s ease infinite`}
-                    letterSpacing='tight'
-                >
+            <div className='relative'>
+                <h1 className='text-center text-4xl md:text-6xl lg:text-8xl font-[Space_Grotesk] font-bold tracking-tight bg-gradient-to-r from-primary via-primary-dark to-primary-light bg-clip-text text-transparent bg-[length:200%_200%] animate-gradient-shift'>
                     {userData.firstname} {userData.lastname}
-                </Heading>
-                <Box
-                    position='absolute'
-                    top='50%'
-                    left='50%'
-                    transform='translate(-50%, -50%)'
-                    width='80%'
-                    height='60%'
-                    background='radial-gradient(ellipse, rgba(0, 162, 199, 0.15) 0%, transparent 70%)'
-                    filter='blur(40px)'
-                    pointerEvents='none'
-                    zIndex={-1}
-                />
-            </Box>
+                </h1>
+                <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-3/5 bg-[radial-gradient(ellipse,rgba(0,162,199,0.15)_0%,transparent_70%)] blur-[40px] pointer-events-none -z-10' />
+            </div>
         </motion.div>
     )
 }

@@ -1,50 +1,55 @@
 import { Section, sectionsData } from '@/pages/sections.data'
-import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
-import {
-    Box,
-    Collapse,
-    Divider,
-    Flex,
-    IconButton,
-    Stack,
-    useDisclosure,
-} from '@chakra-ui/react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Menu, X } from 'lucide-react'
+import { useState } from 'react'
 import { NavLink } from './_NavLink'
 import { SocialButton } from './_SocialButton'
 
 export const NavbarMobile = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const [isOpen, setIsOpen] = useState(false)
+    const toggle = () => setIsOpen(!isOpen)
+
     return (
-        <Box display={{ lg: 'none' }}>
-            <Flex h={16} alignItems='center' justifyContent='space-between'>
-                <IconButton
-                    variant='outline'
-                    size={'md'}
-                    icon={
-                        isOpen ? <CloseIcon /> : <HamburgerIcon fontSize='xl' />
-                    }
-                    aria-label={'Open Menu'}
-                    onClick={isOpen ? onClose : onOpen}
-                />
-                <Flex gap='0.5rem'>
+        <div className='lg:hidden'>
+            <div className='h-16 flex items-center justify-between'>
+                <button
+                    className='p-2 border border-border rounded-md hover:bg-bg-hover transition-colors'
+                    aria-label='Open Menu'
+                    onClick={toggle}
+                >
+                    {isOpen ? (
+                        <X className='h-5 w-5' />
+                    ) : (
+                        <Menu className='h-5 w-5' />
+                    )}
+                </button>
+                <div className='flex gap-2'>
                     <SocialButton type='mail' />
                     <SocialButton type='linkedin' />
-                </Flex>
-            </Flex>
+                </div>
+            </div>
 
-            <Collapse in={isOpen} animateOpacity>
-                <Divider />
-                <Box pb={4}>
-                    <Stack as={'nav'} spacing={4}>
-                        {sectionsData.map((section: Section) => (
-                            <NavLink
-                                key={'nav-mobile-' + section.name}
-                                section={section}
-                            />
-                        ))}
-                    </Stack>
-                </Box>
-            </Collapse>
-        </Box>
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className='overflow-hidden'
+                    >
+                        <hr className='border-t border-border' />
+                        <nav className='flex flex-col gap-4 pb-4'>
+                            {sectionsData.map((section: Section) => (
+                                <NavLink
+                                    key={'nav-mobile-' + section.name}
+                                    section={section}
+                                />
+                            ))}
+                        </nav>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
     )
 }

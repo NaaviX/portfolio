@@ -1,18 +1,19 @@
-import { Heading, HeadingProps } from '@chakra-ui/react'
-import { PropsWithChildren } from 'react'
+import { cn } from '@/lib/utils'
+import { HTMLAttributes, PropsWithChildren } from 'react'
 
-export const Subtitle = (props: PropsWithChildren & HeadingProps) => {
-    const { children, ...headingProps } = props
+export const Subtitle = (
+    props: PropsWithChildren<HTMLAttributes<HTMLHeadingElement>>
+) => {
+    const { children, className, ...headingProps } = props
     return (
-        <Heading
-            as='h3'
-            fontSize='md'
-            color='primary-dark'
-            fontWeight='400'
-            letterSpacing='widest'
+        <h3
+            className={cn(
+                'text-base text-primary-dark font-normal tracking-widest font-heading',
+                className
+            )}
             {...headingProps}
         >
             {children}
-        </Heading>
+        </h3>
     )
 }

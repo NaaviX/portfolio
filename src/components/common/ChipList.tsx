@@ -1,18 +1,22 @@
 import { Skill } from '@/components/skills'
-import { Flex, FlexProps } from '@chakra-ui/react'
+import { cn } from '@/lib/utils'
+import { HTMLAttributes } from 'react'
 import { Chip } from './Chip'
 
 type ChipListProps = {
     skills: Skill[]
-}
+} & HTMLAttributes<HTMLDivElement>
 
-export const ChipList = (props: ChipListProps & FlexProps) => {
-    const { skills, ...flexProps } = props
+export const ChipList = (props: ChipListProps) => {
+    const { skills, className, ...divProps } = props
     return (
-        <Flex w='full' gap='10px' wrap='wrap' mt={2} {...flexProps}>
+        <div
+            className={cn('flex w-full flex-wrap gap-2.5 mt-2', className)}
+            {...divProps}
+        >
             {skills.map((skill: Skill) => (
                 <Chip key={skill.name} skill={skill} />
             ))}
-        </Flex>
+        </div>
     )
 }

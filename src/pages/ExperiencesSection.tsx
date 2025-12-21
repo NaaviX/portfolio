@@ -3,11 +3,10 @@ import {
     ExperiencesBackground,
     experiencesData,
 } from '@/components/experiences'
-import { Box } from '@chakra-ui/react'
 
 export const ExperiencesSection = () => {
     return (
-        <Box sx={{ position: 'relative', width: '100%' }}>
+        <div className='relative w-full'>
             <ExperiencesBackground />
             <Timeline
                 experiences={experiencesData}
@@ -15,6 +14,6 @@ export const ExperiencesSection = () => {
                 mode='alternate'
                 displayDuration
             />
-        </Box>
+        </div>
     )
 }

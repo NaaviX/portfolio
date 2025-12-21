@@ -1,4 +1,3 @@
-import { Link as ChakraLink, Icon, IconButton } from '@chakra-ui/react'
 import { FaLinkedinIn } from 'react-icons/fa6'
 import { MdEmail } from 'react-icons/md'
 import { userData } from '../user'
@@ -11,16 +10,15 @@ export const SocialButton = (props: SocialButtonProps) => {
     const { type } = props
     const href =
         type === 'mail' ? 'mailto:' + userData.email : userData.linkedin
-    const icon = type === 'mail' ? MdEmail : FaLinkedinIn
-    const label = type === 'mail' ? 'Email' : 'Linked in'
+    const IconComponent = type === 'mail' ? MdEmail : FaLinkedinIn
+    const label = type === 'mail' ? 'Email' : 'LinkedIn'
     return (
-        <ChakraLink href={href}>
-            <IconButton
-                variant='outline'
-                size={'md'}
-                icon={<Icon as={icon} fontSize='lg' />}
-                aria-label={label}
-            />
-        </ChakraLink>
+        <a
+            href={href}
+            aria-label={label}
+            className='inline-flex items-center justify-center w-10 h-10 rounded-md border border-border hover:border-border-hover transition-colors'
+        >
+            <IconComponent className='text-lg' />
+        </a>
     )
 }

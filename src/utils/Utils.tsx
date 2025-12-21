@@ -1,5 +1,5 @@
-import { useMediaQuery, useTheme } from '@chakra-ui/react'
 import dayjs from 'dayjs'
+import { useEffect, useState } from 'react'
 
 export function formatDateMonthYear(date: Date): string {
     return dayjs(date).format('MMMM YYYY')
@@ -30,22 +30,26 @@ export function formatDurationMonthYear(dateFrom: Date, dateTo: Date): string {
     return str
 }
 
-export const useLargeScreen = () => {
-    return useMediaQuery(
-        '(min-width: ' + useTheme().__breakpoints!.asObject['lg'] + ')',
-        {
-            ssr: false,
-            fallback: false, // return false on the server, and re-evaluate on the client side
+function useMediaQuery(query: string): boolean {
+    const [matches, setMatches] = useState(false)
+
+    useEffect(() => {
+        const media = window.matchMedia(query)
+        if (media.matches !== matches) {
+            setMatches(media.matches)
         }
-    )[0]
+        const listener = () => setMatches(media.matches)
+        media.addEventListener('change', listener)
+        return () => media.removeEventListener('change', listener)
+    }, [matches, query])
+
+    return matches
+}
+
+export const useLargeScreen = () => {
+    return useMediaQuery('(min-width: 1024px)')
 }
 
 export const useMediumScreen = () => {
-    return useMediaQuery(
-        '(min-width: ' + useTheme().__breakpoints!.asObject['md'] + ')',
-        {
-            ssr: false,
-            fallback: false, // return false on the server, and re-evaluate on the client side
-        }
-    )[0]
+    return useMediaQuery('(min-width: 768px)')
 }

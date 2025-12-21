@@ -1,3 +1,4 @@
+import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import svgr from 'vite-plugin-svgr'
@@ -10,5 +11,5 @@ export default defineConfig({
     build: {
         outDir: 'build',
     },
-    plugins: [react(), tsconfigPaths(), svgr()],
+    plugins: [react(), tailwindcss(), tsconfigPaths(), svgr()],
 })

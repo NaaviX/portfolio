@@ -1,4 +1,3 @@
-import { Container, Flex } from '@chakra-ui/react'
 import { ReactNode } from 'react'
 import { SectionTitle } from './SectionTitle'
 
@@ -10,12 +9,11 @@ interface SectionLayoutProps {
 export const SectionLayout = (props: SectionLayoutProps) => {
     const { children, title } = props
     return (
-        <Container maxW='container.xl'>
-            <Flex direction='column' placeItems='center'>
+        <div className='max-w-7xl mx-auto px-4'>
+            <div className='flex flex-col items-center'>
                 <SectionTitle text={title} />
-
                 {children}
-            </Flex>
-        </Container>
+            </div>
+        </div>
     )
 }

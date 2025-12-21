@@ -1,5 +1,7 @@
+import { IconType } from 'react-icons'
+
 export type MagneticButtonProps = {
-    icon: React.ReactElement | undefined
+    icon: IconType
     href?: string
     ariaLabel: string
 }

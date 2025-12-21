@@ -1,10 +1,9 @@
 import { Skills } from '@/components/skills/Skills'
-import { Container } from '@chakra-ui/react'
 
 export const SkillsSection = () => {
     return (
-        <Container maxW='container.md'>
+        <div className='max-w-3xl mx-auto px-4'>
             <Skills />
-        </Container>
+        </div>
     )
 }

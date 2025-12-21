@@ -1,7 +1,5 @@
-import { SkillCategory } from '../../skills.type'
-
 import { ChipList, Title } from '@/components/common'
-import { Flex, Text } from '@chakra-ui/react'
+import { SkillCategory } from '../../skills.type'
 
 type SkillCardBodyProps = {
     skillCategory: SkillCategory
@@ -10,30 +8,19 @@ type SkillCardBodyProps = {
 export const SkillsCardBody = (props: SkillCardBodyProps) => {
     const { skillCategory } = props
     return (
-        <Flex
-            className='skillCardBody'
-            margin={{ base: '1.5rem 2rem', md: '3rem, 5rem' }}
-        >
-            <Flex direction='column' flex='1' gap='30px'>
+        <div className='skillCardBody flex m-6 md:m-12'>
+            <div className='flex flex-col flex-1 gap-[30px]'>
                 <Title>{skillCategory.name.toString()}</Title>
-                <Text>{skillCategory.description}</Text>
+                <p>{skillCategory.description}</p>
                 <ChipList skills={skillCategory.skills} />
-            </Flex>
+            </div>
 
-            <Flex
-                className='skillCategoryImage'
-                flex='1'
-                position='relative'
-                width='100%'
-                display={{ base: 'none', md: 'flex' }}
-                h='100%'
-                align='center'
-            >
+            <div className='skillCategoryImage flex-1 relative w-full hidden md:flex h-full items-center'>
                 <skillCategory.image
                     width='100%'
                     style={{ objectFit: 'cover' }}
                 />
-            </Flex>
-        </Flex>
+            </div>
+        </div>
     )
 }

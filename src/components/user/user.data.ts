@@ -16,7 +16,7 @@ export const userData: User = {
     drivingLicence: 'Permis B',
     car: true,
     jobTitle: 'Ingénieur conception & développement',
-    mainDescription1: 'Ingénieur conception & développement Java/Js',
+    mainDescription1: 'Ingénieur conception & développement full stack',
     mainDescription2: "Passionné d'informatique et de nouvelles technologies",
     mainDescription3: 'Actuellement en mission chez Amundi',
     email: 'antoine.legrand77@gmail.com',

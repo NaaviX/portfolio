@@ -1,6 +1,7 @@
 import { TimelineExperience } from '../common/timeline/timeline.type'
 import {
     CICDSkill,
+    angularSkill,
     cssSkill,
     dockerSkill,
     expressSkill,
@@ -23,13 +24,13 @@ export const experiencesData: TimelineExperience[] = [
         type: 'CDI',
         institution: 'Amundi',
         city: 'Paris Montparnasse',
-        dateFrom: new Date('2025-01-27'),
+        dateFrom: new Date('2025-04-01'),
         activities: [
             "Prestataire chez Olympp, en mission au sein d'Amundi, le premier gérant d'actifs financiers européens",
             "Ingénieur en développement Java au sein de l'équipe gestion de portefeuille",
             "Maintenance et développement de nouvelles features sur l'outil Alto destiné aux gestionnaires de portefeuilles clients",
         ],
-        skills: [javaSkill, springbootSkill, quarkusSkill, sqlSkill],
+        skills: [javaSkill, springbootSkill, quarkusSkill, sqlSkill, angularSkill],
     },
     {
         title: 'Ingénieur conception & développement',

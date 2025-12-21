@@ -1,12 +1,7 @@
+import { cn } from '@/lib/utils'
 import { formatDurationMonthYear, useMediumScreen } from '@/utils/Utils'
-import { CalendarIcon } from '@chakra-ui/icons'
-import { Box, ChakraProps, Flex } from '@chakra-ui/react'
-import {
-    FaBuilding,
-    FaClock,
-    FaFileSignature,
-    FaLocationDot,
-} from 'react-icons/fa6'
+import { Calendar, Clock } from 'lucide-react'
+import { FaBuilding, FaFileSignature, FaLocationDot } from 'react-icons/fa6'
 
 type TimelineItemContentInfoProps = {
     activities: string[]
@@ -17,69 +12,64 @@ type TimelineItemContentInfoProps = {
     dateTo?: Date
 }
 
+const InfoItem = ({ children }: { children: React.ReactNode }) => (
+    <div className='flex items-center gap-1'>{children}</div>
+)
+
 export const TimelineItemContentInfo = (
     props: TimelineItemContentInfoProps
 ) => {
     const { activities, type, institution, city, dateFrom, dateTo } = props
-
-    const timelineItemContentInfoStyle: ChakraProps['sx'] = {
-        display: 'flex',
-        placeItems: 'center',
-        gap: '3px',
-    }
+    const isMedium = useMediumScreen()
 
     return (
-        <Flex
-            sx={{
-                marginTop: '20px',
-                flexDirection:
-                    useMediumScreen() && activities.length > 0
-                        ? 'row'
-                        : 'column',
-                gap:
-                    useMediumScreen() && activities.length > 0
-                        ? '1.5rem'
-                        : '0.4rem',
-                ml: {
-                    base: '0.4rem',
-                    md: activities.length === 0 ? '0.5rem' : '0',
-                },
-            }}
+        <div
+            className={cn(
+                'mt-5 flex',
+                isMedium && activities.length > 0
+                    ? 'flex-row gap-6'
+                    : 'flex-col gap-1',
+                isMedium
+                    ? activities.length === 0
+                        ? 'ml-2'
+                        : 'ml-0'
+                    : 'ml-1.5'
+            )}
         >
-            {useMediumScreen() ? null : (
+            {!isMedium && (
                 <>
-                    <Flex sx={timelineItemContentInfoStyle}>
-                        <CalendarIcon />
+                    <InfoItem>
+                        <Calendar className='h-4 w-4' />
                         {dateFrom.getFullYear()} -{' '}
                         {dateTo ? dateTo.getFullYear() : 'Now'}
-                    </Flex>
-                    <Flex sx={timelineItemContentInfoStyle}>
-                        <FaClock />
+                    </InfoItem>
+                    <InfoItem>
+                        <Clock className='h-4 w-4' />
                         {formatDurationMonthYear(
                             dateFrom,
                             dateTo || new Date()
                         )}
-                    </Flex>
+                    </InfoItem>
                 </>
             )}
             {type && type !== '' ? (
-                <Box sx={timelineItemContentInfoStyle}>
+                <InfoItem>
                     <FaFileSignature />
                     {type}
-                </Box>
+                </InfoItem>
             ) : null}
             {institution && institution !== '' ? (
-                <Box sx={timelineItemContentInfoStyle}>
+                <InfoItem>
                     <FaBuilding />
                     {institution}
-                </Box>
+                </InfoItem>
             ) : null}
             {city && city !== '' ? (
-                <Box sx={timelineItemContentInfoStyle}>
+                <InfoItem>
                     <FaLocationDot />
                     {city}
-                </Box>
+                </InfoItem>
             ) : null}
-        </Flex>
+        </div>
     )
 }

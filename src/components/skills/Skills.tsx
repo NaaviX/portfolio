@@ -1,4 +1,3 @@
-import { Flex } from '@chakra-ui/react'
 import { useScroll } from 'framer-motion'
 import { useRef } from 'react'
 import { SkillsCard } from './components/card/SkillsCard'
@@ -10,16 +9,12 @@ export const Skills = () => {
 
     const { scrollYProgress } = useScroll({
         target: container,
-
         offset: ['start start', 'end end'],
     })
     return (
-        <Flex
+        <div
             ref={container}
-            pt='50px'
-            direction='column'
-            align='center'
-            width='100%'
+            className='pt-[50px] flex flex-col items-center w-full'
         >
             {skillsData.map((skillCategory: SkillCategory, i: number) => {
                 const targetScale = 1 - (skillsData.length - i) * 0.05
@@ -31,9 +26,9 @@ export const Skills = () => {
                         progress={scrollYProgress}
                         range={[i * 0.25, 1]}
                         targetScale={targetScale}
-                    ></SkillsCard>
+                    />
                 )
             })}
-        </Flex>
+        </div>
     )
 }

@@ -5,13 +5,15 @@ export const useNavbar = () => {
     const { scrollY } = useScroll()
     const springY = useSpring(scrollY)
 
-    const navbarBg = isDesktop
-        ? useTransform(
-              springY,
-              [0, screen.height],
-              ['rgba(8, 44, 54, 0.3)', 'rgba(8, 44, 54, 0.8)']
-          )
-        : 'rgba(8, 44, 54, 0.95)'
+    // Call hooks unconditionally (React hooks rules)
+    const navbarBgTransform = useTransform(
+        springY,
+        [0, screen.height],
+        ['rgba(8, 44, 54, 0.3)', 'rgba(8, 44, 54, 0.8)']
+    )
+
+    // Apply conditional logic after hook is called
+    const navbarBg = isDesktop ? navbarBgTransform : 'rgba(8, 44, 54, 0.95)'
 
     const navbarElevation = useTransform(
         springY,

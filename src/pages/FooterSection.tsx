@@ -1,10 +1,9 @@
 import { Subtitle } from '@/components/common'
-import { Flex } from '@chakra-ui/react'
 
 export const FooterSection = () => {
     return (
-        <Flex justify='center' minHeight='3rem' marginTop='5rem'>
+        <div className='flex justify-center min-h-12 mt-20'>
             <Subtitle>Antoine LEGRAND 2023 - Tous droits réservés</Subtitle>
-        </Flex>
+        </div>
     )
 }

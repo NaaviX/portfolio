@@ -1,8 +1,6 @@
 import { motion, MotionValue, useTransform } from 'framer-motion'
-import { SkillCategory } from '../../skills.type'
-
-import { Box } from '@chakra-ui/react'
 import { useRef } from 'react'
+import { SkillCategory } from '../../skills.type'
 import { SkillsCardBase } from './_SkillsCardBase'
 
 type SkillsCardProps = {
@@ -12,18 +10,16 @@ type SkillsCardProps = {
     targetScale: number
     i: number
 }
+
 export const SkillsCard = (props: SkillsCardProps) => {
     const { skillCategory, progress, range, targetScale, i } = props
     const container = useRef(null)
 
     const scale = useTransform(progress, range, [1, targetScale])
     return (
-        <Box
+        <div
             ref={container}
-            className='skillCategory'
-            pos='sticky'
-            top='150px'
-            width='100%'
+            className='skillCategory sticky top-[150px] w-full'
         >
             <motion.div
                 style={{
@@ -36,6 +32,6 @@ export const SkillsCard = (props: SkillsCardProps) => {
             >
                 <SkillsCardBase skillCategory={skillCategory} />
             </motion.div>
-        </Box>
+        </div>
     )
 }

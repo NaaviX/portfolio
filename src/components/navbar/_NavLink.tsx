@@ -1,5 +1,4 @@
 import { Section } from '@/pages/sections.data'
-import { Box, Button } from '@chakra-ui/react'
 import { Link } from 'react-scroll'
 
 type NavLinkProps = {
@@ -17,42 +16,11 @@ export const NavLink = (props: NavLinkProps) => {
             activeStyle={{ color: 'white' }}
             isDynamic
         >
-            <Box
-                position='relative'
-                display='inline-block'
-                role='group'
-                _after={{
-                    content: '""',
-                    position: 'absolute',
-                    bottom: '-2px',
-                    left: '0',
-                    width: '0%',
-                    height: '2px',
-                    background: 'linear-gradient(90deg, #00a2c7, #4ccce6)',
-                    transition: 'width 0.3s ease',
-                }}
-                _hover={{
-                    '&::after': {
-                        width: '100%',
-                    },
-                }}
-                sx={{
-                    '&.active::after': {
-                        width: '100%',
-                    },
-                }}
-            >
-                <Button
-                    variant='unstyled'
-                    width={{ base: '100%', md: 'initial' }}
-                    transition='color 0.3s ease'
-                    _hover={{
-                        color: 'primary-light',
-                    }}
-                >
+            <div className='relative inline-block group after:content-[""] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary after:to-primary-dark after:transition-all after:duration-300 hover:after:w-full [&.active]:after:w-full'>
+                <button className='bg-transparent border-none w-full md:w-auto cursor-pointer transition-colors duration-300 hover:text-primary-light text-inherit'>
                     {section.name}
-                </Button>
-            </Box>
+                </button>
+            </div>
         </Link>
     )
 }

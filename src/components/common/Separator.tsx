@@ -1,5 +1,3 @@
-import { Box, Center, Divider } from '@chakra-ui/react'
-
 interface SeparatorProps {
     children?: React.ReactNode
 }
@@ -8,37 +6,15 @@ export const Separator = (props: SeparatorProps) => {
     const { children } = props
     if (children) {
         return (
-            <Box
+            <div
                 role='separator'
-                sx={{
-                    margin: '0 0 0 30px',
-                    flexShrink: 0,
-                    display: 'flex',
-                    whiteSpace: 'nowrap',
-                    textAlign: 'center',
-                    borderWidth: 0,
-                    borderStyle: 'none',
-                    borderImage: 'none',
-                    width: '70%',
-                    zIndex: 100,
-                    marginBottom: '3rem',
-                }}
-                _before={{
-                    width: '100%',
-                    borderTop: 'thin solid',
-                    content: '""',
-                    alignSelf: 'center',
-                }}
-                _after={{
-                    width: '100%',
-                    borderTop: 'thin solid',
-                    content: '""',
-                    alignSelf: 'center',
-                }}
+                className='ml-[30px] shrink-0 flex whitespace-nowrap text-center w-[70%] z-[100] mb-12 before:w-full before:border-t before:border-border before:content-[""] before:self-center after:w-full after:border-t after:border-border after:content-[""] after:self-center'
             >
-                <Center px='4'>{children}</Center>
-            </Box>
+                <div className='flex items-center justify-center px-4'>
+                    {children}
+                </div>
+            </div>
         )
     }
-    return <Divider />
+    return <hr className='border-t border-border' />
 }

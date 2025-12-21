@@ -1,5 +1,4 @@
 import { useMagneticButton } from '@/hooks/useMagneticButton'
-import { Flex, Text } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { useRef } from 'react'
 import { isDesktop } from 'react-device-detect'
@@ -12,15 +11,15 @@ export const MagneticButton = (props: MagneticButtonProps) => {
 
     if (!isDesktop) {
         return (
-            <Flex direction='column' align='center'>
+            <div className='flex flex-col items-center'>
                 <MagneticButtonBody {...props} />
-                <Text fontSize={'xs'}>{props.ariaLabel}</Text>
-            </Flex>
+                <span className='text-xs'>{props.ariaLabel}</span>
+            </div>
         )
     }
 
     return (
-        <Flex direction='column' align='center'>
+        <div className='flex flex-col items-center'>
             <motion.div
                 ref={ref}
                 onMouseMove={handleMouse}
@@ -35,7 +34,7 @@ export const MagneticButton = (props: MagneticButtonProps) => {
             >
                 <MagneticButtonBody {...props} />
             </motion.div>
-            <Text fontSize={'xs'}>{props.ariaLabel}</Text>
-        </Flex>
+            <span className='text-xs'>{props.ariaLabel}</span>
+        </div>
     )
 }

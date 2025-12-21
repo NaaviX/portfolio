@@ -81,6 +81,8 @@ export const javascriptSkill: Skill = {
 export const nodeSkill: Skill = {
     name: SKILL_NAME.NODE,
     icon: NodeIcon,
+    isImportant: true,
+
 }
 
 export const typescriptSkill: Skill = {
@@ -132,10 +134,10 @@ export const tailwindSkill: Skill = {
     icon: TailwindIcon,
 }
 
-/* export const muiSkill: Skill = {
-    name: SKILL_NAME.MUI,
-    icon: MuiIcon,
-} */
+export const shadcnSkill: Skill = {
+    name: SKILL_NAME.SHADCN_UI,
+    icon: undefined,
+}
 
 export const postgresqlSkill: Skill = {
     name: SKILL_NAME.POSTGRESQL,
@@ -174,16 +176,6 @@ export const restSkill: Skill = {
     icon: RestIcon,
 }
 
-/* export const swaggerSkill: Skill = {
-    name: SKILL_NAME.SWAGGER,
-    icon: SwaggerIcon,
-} */
-
-/* export const postmanSkill: Skill = {
-    name: SKILL_NAME.POSTMAN,
-    icon: PostmanIcon,
-} */
-
 export const gitSkill: Skill = {
     name: SKILL_NAME.GIT,
     icon: GitIcon,
@@ -201,10 +193,6 @@ export const sonarSkill: Skill = {
     name: SKILL_NAME.SONARQUBE,
     icon: SonarIcon,
 }
-/* export const nexusSkill: Skill = {
-    name: SKILL_NAME.NEXUS,
-    icon: undefined,
-} */
 
 export const CICDSkill: Skill = {
     name: SKILL_NAME.CICD,
@@ -328,11 +316,6 @@ export const DesignsPatternsSkill: Skill = {
 
 export const quarkusSkill: Skill = {
     name: SKILL_NAME.QUARKUS,
-    icon: undefined,
-}
-
-export const shadcnSkill: Skill = {
-    name: SKILL_NAME.SHADCN_UI,
     icon: undefined,
 }
 

@@ -1,12 +1,11 @@
 import { Timeline } from '@/components/common'
 import { CoursesBackground, coursesData } from '@/components/courses'
-import { Box } from '@chakra-ui/react'
 
 export const CoursesSection = () => {
     return (
-        <Box sx={{ width: '100%', position: 'relative' }}>
+        <div className='w-full relative'>
             <CoursesBackground />
             <Timeline experiences={coursesData} />
-        </Box>
+        </div>
     )
 }

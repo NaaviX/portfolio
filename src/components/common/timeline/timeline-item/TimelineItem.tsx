@@ -1,6 +1,6 @@
+import { cn } from '@/lib/utils'
 import { useLargeScreen, useMediumScreen } from '@/utils/Utils'
-import { Box, BoxProps } from '@chakra-ui/react'
-import { CSSProperties } from 'react'
+import { CSSProperties, HTMLAttributes } from 'react'
 import { Paper } from '../../Paper'
 import { TimelineExperience } from '../timeline.type'
 import { TimelineItemContent } from './_TimelineItemContent'
@@ -13,7 +13,7 @@ type TimelineItemProps = {
     displayDuration: boolean
     isReversed: boolean
     withFrame: boolean
-} & BoxProps
+} & HTMLAttributes<HTMLLIElement>
 
 export const TimelineItem = (props: TimelineItemProps) => {
     const {
@@ -22,25 +22,24 @@ export const TimelineItem = (props: TimelineItemProps) => {
         displayDuration,
         withFrame,
         isReversed,
-        ...boxProps
+        className,
+        ...liProps
     } = props
 
-    return (
-        <Box
-            as='li'
-            {...boxProps}
-            sx={{
-                listStyle: 'none',
-                display: 'flex',
-                flexDirection:
-                    useLargeScreen() && isReversed ? 'row-reverse' : 'row',
+    const isLarge = useLargeScreen()
+    const isMedium = useMediumScreen()
 
-                position: 'relative',
-                minHeight: '70px',
-                ...sx,
-            }}
+    return (
+        <li
+            {...liProps}
+            className={cn(
+                'list-none flex relative min-h-[70px]',
+                isLarge && isReversed ? 'flex-row-reverse' : 'flex-row',
+                className
+            )}
+            style={sx}
         >
-            {useMediumScreen() || !withFrame ? (
+            {isMedium || !withFrame ? (
                 <>
                     <TimelineItemDate
                         experience={experience}
@@ -50,13 +49,7 @@ export const TimelineItem = (props: TimelineItemProps) => {
                     <TimelineItemSeparator />
                 </>
             ) : null}
-            <Box
-                sx={{
-                    margin: '0',
-                    flex: '1 1 0%',
-                    padding: '1rem',
-                }}
-            >
+            <div className='m-0 flex-1 p-4'>
                 {withFrame ? (
                     <Paper style={{ margin: '0', flex: '1 1 0%' }}>
                         <TimelineItemContent {...experience} />
@@ -64,7 +57,7 @@ export const TimelineItem = (props: TimelineItemProps) => {
                 ) : (
                     <TimelineItemContent {...experience} />
                 )}
-            </Box>
-        </Box>
+            </div>
+        </li>
     )
 }

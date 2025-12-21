@@ -1,9 +1,8 @@
 import Courses1 from '@/assets/images/courses1.svg?react'
-import { Box } from '@chakra-ui/react'
 
 export const CoursesBackground = () => {
     return (
-        <Box display={{ base: 'none', lg: 'block' }}>
+        <div className='hidden lg:block'>
             <Courses1
                 name='exp1'
                 style={{
@@ -14,6 +13,6 @@ export const CoursesBackground = () => {
                     opacity: '0.5',
                 }}
             />
-        </Box>
+        </div>
     )
 }

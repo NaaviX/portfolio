@@ -1,0 +1,60 @@
+@import 'tailwindcss';
+
+@theme {
+    --color-bg: #082c36;
+    --color-bg-hover: #003848;
+    --color-bg-active: #004558;
+    --color-bg-subtle: #101b20;
+    --color-bg-app: #0b161a;
+    --color-border: #12677e;
+    --color-border-subtle: #045468;
+    --color-border-hover: #11809c;
+    --color-primary: #00a2c7;
+    --color-primary-hover: #23afd0;
+    --color-primary-light: #b6ecf7;
+    --color-primary-dark: #4ccce6;
+
+    --font-family-body: 'Roboto', system-ui, sans-serif;
+    --font-family-heading: 'Roboto', 'Space Grotesk', serif;
+
+    --font-size-3xs: 0.45rem;
+    --font-size-2xs: 0.625rem;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+    --font-size-5xl: 3rem;
+    --font-size-6xl: 3.75rem;
+    --font-size-7xl: 4.5rem;
+    --font-size-8xl: 6rem;
+    --font-size-9xl: 8rem;
+}
+
+#root {
+    background-image: url('/src/assets/background.svg');
+    color: var(--color-primary-light);
+    accent-color: var(--color-border);
+    font-family: var(--font-family-body);
+}
+
+input,
+textarea,
+button {
+    border-color: var(--color-border) !important;
+}
+
+input:hover,
+textarea:hover,
+button:hover {
+    border-color: var(--color-border-hover) !important;
+    background-color: transparent !important;
+}
+
+input:focus,
+textarea:focus {
+    background-color: transparent !important;
+}

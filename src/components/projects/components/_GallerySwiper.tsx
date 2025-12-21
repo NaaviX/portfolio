@@ -1,5 +1,3 @@
-import { Image } from '@chakra-ui/react'
-
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 // Import Swiper styles
@@ -22,7 +20,7 @@ export const GallerySwiper = (props: GallerySwiperProps) => {
     return (
         <Swiper
             style={{
-                //@ts-ignore
+                // @ts-expect-error CSS custom properties for Swiper
                 '--swiper-navigation-color': '#fff',
                 '--swiper-pagination-color': '#fff',
             }}
@@ -33,7 +31,12 @@ export const GallerySwiper = (props: GallerySwiperProps) => {
         >
             {images.map((image) => (
                 <SwiperSlide key={image}>
-                    <Image src={image} alt={name} loading='lazy' width='100%' />
+                    <img
+                        src={image}
+                        alt={name}
+                        loading='lazy'
+                        className='w-full'
+                    />
                 </SwiperSlide>
             ))}
         </Swiper>

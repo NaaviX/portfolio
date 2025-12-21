@@ -1,9 +1,11 @@
-import { IconButton, Link } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { MagneticButtonProps } from './magnetic-button.type'
 
+const buttonClasses =
+    'inline-flex items-center justify-center rounded-full border border-dotted border-border bg-bg text-primary-light text-xl m-1.5 p-2 hover:bg-bg-hover shadow-[rgba(0,0,0,0.2)_0px_3px_5px_-1px,rgba(0,0,0,0.14)_0px_6px_10px_0px,rgba(0,0,0,0.12)_0px_1px_18px_0px]'
+
 export const MagneticButtonBody = (props: MagneticButtonProps) => {
-    const { icon, href, ariaLabel } = props
+    const { icon: Icon, href, ariaLabel } = props
     return (
         <motion.div
             animate={{ scale: [1, 1.2, 1] }}
@@ -15,33 +17,15 @@ export const MagneticButtonBody = (props: MagneticButtonProps) => {
             }}
         >
             {href ? (
-                <Link href={href} isExternal>
-                    <IconButton
-                        _hover={{ bgColor: 'bg-hover' }}
-                        border='1px dotted'
-                        icon={icon}
-                        isRound
-                        aria-label={ariaLabel}
-                        fontSize='xl'
-                        color='primary-light'
-                        bgColor='bg'
-                        m='5px'
-                        shadow='rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;'
-                    />
-                </Link>
+                <a href={href} target='_blank' rel='noopener noreferrer'>
+                    <button className={buttonClasses} aria-label={ariaLabel}>
+                        <Icon />
+                    </button>
+                </a>
             ) : (
-                <IconButton
-                    _hover={{ bgColor: 'bg-hover' }}
-                    border='1px dotted'
-                    icon={icon}
-                    isRound
-                    aria-label={ariaLabel}
-                    fontSize='xl'
-                    color='primary-light'
-                    bgColor='bg'
-                    m='5px'
-                    shadow='rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;'
-                />
+                <button className={buttonClasses} aria-label={ariaLabel}>
+                    <Icon />
+                </button>
             )}
         </motion.div>
     )

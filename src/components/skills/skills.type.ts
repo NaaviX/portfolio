@@ -67,7 +67,7 @@ export enum SKILL_NAME {
     JUNIT = 'JUnit',
     MOCKITO = 'Mockito',
     QUARKUS = 'Quarkus',
-    SHADCN_UI = 'Shadcn/Radix UI',
+    SHADCN_UI = 'Shadcn',
     TRAEFIK = 'Traefik',
 }
 

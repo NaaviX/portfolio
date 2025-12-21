@@ -1,7 +1,6 @@
-import { Box, useTheme } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
-const MotionBox = motion(Box)
+const BORDER_COLOR = 'var(--color-border)'
 
 const lineVariants = {
     hidden: { scaleY: 0 },
@@ -31,30 +30,21 @@ const dotVariants = {
 }
 
 export const TimelineItemSeparator = () => {
-    const borderColor = useTheme().__cssMap['colors.border'].value
-    const primaryLight = useTheme().__cssMap['colors.primary-light'].value
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                flex: '0 1 0%',
-                alignItems: 'center',
-            }}
-        >
-            <MotionBox
+        <div className='flex flex-col flex-[0_1_0%] items-center'>
+            <motion.div
                 initial='hidden'
                 whileInView='visible'
                 viewport={{ once: true, margin: '-20px' }}
                 variants={lineVariants}
                 style={{
                     width: '2px',
-                    backgroundColor: borderColor,
+                    backgroundColor: BORDER_COLOR,
                     height: '0.7rem',
                     transformOrigin: 'top',
                 }}
             />
-            <MotionBox
+            <motion.div
                 initial='hidden'
                 whileInView='visible'
                 viewport={{ once: true, margin: '-20px' }}
@@ -70,22 +60,22 @@ export const TimelineItemSeparator = () => {
                     borderRadius: '50%',
                     boxShadow: 'none',
                     margin: '12px 0px',
-                    backgroundColor: primaryLight,
-                    outlineColor: borderColor,
+                    backgroundColor: 'var(--color-primary-light)',
+                    outlineColor: BORDER_COLOR,
                 }}
             />
-            <MotionBox
+            <motion.div
                 initial='hidden'
                 whileInView='visible'
                 viewport={{ once: true, margin: '-20px' }}
                 variants={lineVariants}
                 style={{
                     width: '2px',
-                    backgroundColor: borderColor,
+                    backgroundColor: BORDER_COLOR,
                     flexGrow: '1',
                     transformOrigin: 'top',
                 }}
             />
-        </Box>
+        </div>
     )
 }

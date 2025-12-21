@@ -1,17 +1,15 @@
-import { useTheme } from '@chakra-ui/react'
 import { ReactLenis } from '@studio-freight/react-lenis'
 import dayjs from 'dayjs'
 import 'dayjs/locale/fr'
 import { Toaster } from 'react-hot-toast'
 import { Element } from 'react-scroll'
-import './App.css'
 import { SectionLayout } from './pages/components/SectionLayout'
 import { HeaderSection } from './pages/HeaderSection'
 import { Section, sectionsData } from './pages/sections.data'
+
 dayjs.locale('fr')
 
 const App = () => {
-    console.log(useTheme())
     return (
         <ReactLenis root>
             <HeaderSection />

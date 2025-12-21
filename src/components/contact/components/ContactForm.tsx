@@ -1,57 +1,53 @@
 import { Fade } from '@/components/common/effects/Fade'
 import { useContact } from '@/hooks/useContact'
-import {
-    Box,
-    Button,
-    FormControl,
-    FormLabel,
-    Grid,
-    GridItem,
-    Input,
-    Textarea,
-} from '@chakra-ui/react'
 import { MdSend } from 'react-icons/md'
 
 export const ContactForm = () => {
     const { handleFormSubmit } = useContact()
     return (
-        <Box
-            as='form'
+        <form
             noValidate
             onSubmit={handleFormSubmit}
-            sx={{ width: { base: '100%', md: '70%' }, minHeight: '50vh' }}
+            className='w-full md:w-[70%] min-h-[50vh]'
         >
             <Fade>
-                <Grid mt='3rem' h='100%' gap='1rem'>
-                    <GridItem colSpan={12}>
-                        <FormControl>
-                            <FormLabel htmlFor='subject'>Sujet</FormLabel>
-                            <Input size='lg' name='subject' w='full' />
-                        </FormControl>
-                    </GridItem>
-                    <GridItem colSpan={12}>
-                        <FormControl>
-                            <FormLabel htmlFor='message'>Message</FormLabel>
-                            <Textarea
-                                size='lg'
-                                name='message'
-                                w='full'
-                                rows={4}
-                            />
-                        </FormControl>
-                    </GridItem>
-                </Grid>
-                <Button
+                <div className='mt-12 h-full flex flex-col gap-4'>
+                    <div>
+                        <label
+                            htmlFor='subject'
+                            className='block mb-2 text-sm font-medium'
+                        >
+                            Sujet
+                        </label>
+                        <input
+                            name='subject'
+                            id='subject'
+                            className='w-full px-4 py-3 text-lg rounded-md border border-border bg-transparent focus:outline-none focus:border-border-hover'
+                        />
+                    </div>
+                    <div>
+                        <label
+                            htmlFor='message'
+                            className='block mb-2 text-sm font-medium'
+                        >
+                            Message
+                        </label>
+                        <textarea
+                            name='message'
+                            id='message'
+                            rows={4}
+                            className='w-full px-4 py-3 text-lg rounded-md border border-border bg-transparent focus:outline-none focus:border-border-hover resize-none'
+                        />
+                    </div>
+                </div>
+                <button
                     type='submit'
-                    mt='4'
-                    size='lg'
-                    rightIcon={<MdSend />}
-                    background='#082c36'
-                    _hover={{ background: '#003848 !important' }}
+                    className='mt-4 px-6 py-3 text-lg bg-bg hover:bg-bg-hover border border-border rounded-md inline-flex items-center gap-2 transition-colors'
                 >
                     Envoyer
-                </Button>
+                    <MdSend />
+                </button>
             </Fade>
-        </Box>
+        </form>
     )
 }

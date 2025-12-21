@@ -1,48 +1,30 @@
 import { Skill } from '@/components/skills'
-import { Tag, TagLabel, TagLeftIcon, TagProps } from '@chakra-ui/react'
+import { cn } from '@/lib/utils'
+import { HTMLAttributes } from 'react'
 
 type ChipProps = {
     skill: Skill
-} & TagProps
+} & HTMLAttributes<HTMLSpanElement>
 
 export const Chip = (props: ChipProps) => {
-    const { skill, ...tagProps } = props
+    const { skill, className, ...spanProps } = props
     return (
-        <Tag
-            size='md'
-            padding='6px 8px'
-            fontWeight='400'
-            borderRadius='full'
-            bgColor='bg-hover'
-            color='white'
-            letterSpacing='widest'
-            transition='all 0.3s ease'
-            cursor='default'
-            _hover={{
-                bgColor: 'bg',
-                transform: 'scale(1.05)',
-                boxShadow: '0 0 12px rgba(0, 162, 199, 0.3)',
-            }}
-            {...tagProps}
+        <span
+            className={cn(
+                'group inline-flex items-center gap-1.5 rounded-full bg-bg-hover px-2 py-1.5',
+                'text-sm font-normal tracking-widest text-white',
+                'cursor-default transition-all duration-300',
+                'hover:bg-bg hover:scale-105 hover:shadow-[0_0_12px_rgba(0,162,199,0.3)]',
+                className
+            )}
+            {...spanProps}
         >
             {skill.icon ? (
-                <TagLeftIcon
-                    as={skill.icon}
-                    fontSize='md'
-                    transition='transform 0.3s ease'
-                    sx={{
-                        '.chakra-tag:hover &': {
-                            transform: 'rotate(10deg)',
-                        },
-                    }}
-                />
+                <skill.icon className='w-4 h-4 shrink-0 transition-transform duration-300 group-hover:rotate-[10deg]' />
             ) : null}
-            <TagLabel
-                fontSize='sm'
-                fontWeight={skill.isImportant ? '700' : '300'}
-            >
+            <span className={skill.isImportant ? 'font-bold' : 'font-light'}>
                 {skill.name}
-            </TagLabel>
-        </Tag>
+            </span>
+        </span>
     )
 }

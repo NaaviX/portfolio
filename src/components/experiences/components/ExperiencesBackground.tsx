@@ -1,9 +1,8 @@
 import Exp2 from '@/assets/images/exp2.svg?react'
-import { Box } from '@chakra-ui/react'
 
 export const ExperiencesBackground = () => {
     return (
-        <Box display={{ base: 'none', lg: 'block' }}>
+        <div className='hidden lg:block'>
             <Exp2
                 name='exp2'
                 style={{
@@ -14,6 +13,6 @@ export const ExperiencesBackground = () => {
                     opacity: 0.5,
                 }}
             />
-        </Box>
+        </div>
     )
 }

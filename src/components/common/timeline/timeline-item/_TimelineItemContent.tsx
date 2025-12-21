@@ -1,11 +1,13 @@
-import { Box, BoxProps, ListItem, UnorderedList } from '@chakra-ui/react'
+import { cn } from '@/lib/utils'
+import { HTMLAttributes } from 'react'
 import { ChipList } from '../../ChipList'
 import { Fade } from '../../effects/Fade'
 import { Title } from '../../typography/Title'
 import { TimelineExperience } from '../timeline.type'
 import { TimelineItemContentInfo } from './_TimelineItemContentInfo'
 
-type TimelineItemContentProps = TimelineExperience & BoxProps
+type TimelineItemContentProps = TimelineExperience &
+    HTMLAttributes<HTMLDivElement>
 
 export const TimelineItemContent = (props: TimelineItemContentProps) => {
     const {
@@ -17,10 +19,11 @@ export const TimelineItemContent = (props: TimelineItemContentProps) => {
         skills,
         dateFrom,
         dateTo,
-        ...boxProps
+        className,
+        ...divProps
     } = props
     return (
-        <Box {...boxProps}>
+        <div className={cn(className)} {...divProps}>
             <Fade>
                 <Title>{title}</Title>
 
@@ -33,20 +36,19 @@ export const TimelineItemContent = (props: TimelineItemContentProps) => {
                     dateTo={dateTo}
                 />
 
-                <UnorderedList
-                    listStyleType='square'
-                    sx={{
-                        padding: '1rem 0',
-                        display: activities.length !== 0 ? 'block' : 'none',
-                    }}
+                <ul
+                    className={cn(
+                        'list-square py-4 pl-5',
+                        activities.length === 0 && 'hidden'
+                    )}
                 >
                     {activities.map((activity: string) => (
-                        <ListItem key={activity}>{activity}</ListItem>
+                        <li key={activity}>{activity}</li>
                     ))}
-                </UnorderedList>
+                </ul>
 
                 <ChipList skills={skills} />
             </Fade>
-        </Box>
+        </div>
     )
 }

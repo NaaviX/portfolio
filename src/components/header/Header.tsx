@@ -1,4 +1,3 @@
-import { Box, Container, Flex } from '@chakra-ui/react'
 import '@fontsource/space-grotesk/400.css'
 import { HeaderContent } from './components/HeaderContent'
 import { HeaderTitle } from './components/HeaderTitle'
@@ -6,19 +5,14 @@ import { ScrollIndicator } from './components/ScrollIndicator'
 
 export const Header = () => {
     return (
-        <Box position='relative'>
-            <Container maxW='container.lg' textAlign='center'>
-                <Flex
-                    h='100dvh'
-                    py='10dvh'
-                    direction='column'
-                    justify='space-evenly'
-                >
+        <div className='relative'>
+            <div className='max-w-4xl mx-auto px-4 text-center'>
+                <div className='h-dvh py-[10dvh] flex flex-col justify-evenly'>
                     <HeaderTitle />
                     <HeaderContent />
-                </Flex>
-            </Container>
+                </div>
+            </div>
             <ScrollIndicator />
-        </Box>
+        </div>
     )
 }

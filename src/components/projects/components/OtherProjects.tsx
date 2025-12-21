@@ -1,4 +1,4 @@
-import { Box, Collapse, Flex, Text } from '@chakra-ui/react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 import { FaAngleRight } from 'react-icons/fa6'
 import { Project } from '../projects.type'
@@ -13,32 +13,39 @@ export const OtherProjects = (props: OtherProjectsProps) => {
     const [isOpen, setIsOpen] = useState(false)
 
     return (
-        <Flex direction='column' w='full' cursor='pointer' mt={5}>
-            <Flex
-                alignItems='center'
-                gap='0.5rem'
-                m='1rem'
+        <div className='flex flex-col w-full cursor-pointer mt-5'>
+            <div
+                className='flex items-center gap-2 m-4'
                 onClick={() => setIsOpen((prev) => !prev)}
             >
-                <Text align='center' fontSize='larger'>
-                    Mes autres projets{' '}
-                </Text>
-                <Box
-                    as='span'
-                    transform={isOpen ? 'rotate(90deg)' : 'rotate(0)'}
-                    transition='transform 0.3s'
+                <span className='text-center text-lg'>Mes autres projets</span>
+                <span
+                    className={`transition-transform duration-300 ${isOpen ? 'rotate-90' : 'rotate-0'}`}
                 >
                     <FaAngleRight />
-                </Box>
-            </Flex>
+                </span>
+            </div>
 
-            <Collapse in={isOpen} transition={{ enter: { duration: 0.5 } }}>
-                <Flex wrap='wrap' gap='2%'>
-                    {projects.map((project: Project) => (
-                        <ProjectCard key={project.name} project={project} />
-                    ))}
-                </Flex>
-            </Collapse>
-        </Flex>
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className='overflow-hidden'
+                    >
+                        <div className='flex flex-wrap gap-[2%]'>
+                            {projects.map((project: Project) => (
+                                <ProjectCard
+                                    key={project.name}
+                                    project={project}
+                                />
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
     )
 }

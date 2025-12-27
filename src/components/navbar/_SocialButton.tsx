@@ -17,13 +17,17 @@ export const SocialButton = (props: SocialButtonProps) => {
         <motion.a
             href={href}
             aria-label={label}
-            className='relative inline-flex items-center justify-center w-10 h-10 rounded-lg border border-border/60 bg-bg/30 backdrop-blur-sm text-primary-light/80 transition-all duration-300 group overflow-hidden hover:border-primary/50 hover:text-primary hover:bg-primary/10'
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className='relative inline-flex items-center justify-center w-10 h-10 rounded-xl border border-border/40 bg-bg/40 backdrop-blur-md text-primary-light/80 transition-all duration-300 group overflow-hidden hover:border-primary/60 hover:text-white hover:shadow-[0_0_20px_rgba(0,162,199,0.15)]'
+            whileHover={{ scale: 1.08, y: -2 }}
+            whileTap={{ scale: 0.92 }}
         >
-            <IconComponent className='text-lg relative z-10 transition-transform duration-300 group-hover:scale-110' />
-            <span className='absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary-dark/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
-            <span className='absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[inset_0_0_12px_rgba(0,162,199,0.3)]' />
+            <IconComponent className='text-lg relative z-10 transition-all duration-300 group-hover:scale-110 group-hover:text-primary' />
+            <motion.span
+                className='absolute inset-0 bg-gradient-to-t from-primary/25 via-primary/10 to-transparent'
+                initial={{ opacity: 0, y: '100%' }}
+                whileHover={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+            />
         </motion.a>
     )
 }

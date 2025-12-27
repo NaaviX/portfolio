@@ -114,8 +114,6 @@ const FeaturedCard = ({
                     style={{ animationDuration: '8s' }}
                 />
                 <div className='relative bg-gradient-to-br from-bg-subtle/98 via-bg-subtle/95 to-bg-hover/90 backdrop-blur-2xl border border-border/60 rounded-[2rem] overflow-hidden shadow-[0_32px_64px_-12px_rgba(0,0,0,0.5)]'>
-                    <div className='absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_80%_-20%,_var(--color-primary),_transparent)] opacity-[0.08]' />
-                    <div className='absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_20%_120%,_var(--color-primary-dark),_transparent)] opacity-[0.06]' />
                     <motion.div
                         variants={shimmerVariants}
                         className='absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12'
@@ -128,9 +126,7 @@ const FeaturedCard = ({
                                 className='w-full h-full lg:absolute lg:inset-0'
                                 variants={imageVariants}
                             />
-                            <div className='absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-bg-subtle/70 lg:opacity-100 opacity-0' />
-                            <div className='absolute inset-0 bg-gradient-to-t from-bg-subtle via-bg-subtle/30 to-transparent opacity-60' />
-                            <div className='absolute inset-0 bg-gradient-to-b from-bg-subtle/50 via-transparent to-transparent' />
+                            <div className='absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-bg-subtle/70 lg:opacity-70 opacity-0' />
                         </div>
                         <motion.div
                             variants={contentVariants}
@@ -196,7 +192,7 @@ const LargeCard = ({ project, index }: { project: Project; index: number }) => {
                             className='w-full h-full'
                             variants={imageVariants}
                         />
-                        <div className='absolute inset-0 bg-gradient-to-t from-bg-subtle via-bg-subtle/40 to-transparent opacity-75' />
+                        <div className='absolute inset-0 bg-gradient-to-t from-bg-subtle via-bg-subtle/40 to-transparent opacity-35' />
                         <div className='absolute inset-0 bg-gradient-to-b from-bg-subtle/40 via-transparent to-transparent' />
                     </div>
                     <motion.div

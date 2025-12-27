@@ -13,14 +13,14 @@ export const NavLink = (props: NavLinkProps) => {
             to={section.target}
             smooth={true}
             spy={true}
-            activeStyle={{ color: 'white' }}
+            activeClass='nav-active'
             isDynamic
+            className='group'
         >
-            <div className='relative inline-block group after:content-[""] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary after:to-primary-dark after:transition-all after:duration-300 hover:after:w-full [&.active]:after:w-full'>
-                <button className='bg-transparent border-none w-full md:w-auto cursor-pointer transition-colors duration-300 hover:text-primary-light text-inherit'>
-                    {section.name}
-                </button>
-            </div>
+            <button className='relative px-4 py-2 text-sm font-medium bg-transparent border-none cursor-pointer transition-all duration-300 text-primary-light/80 hover:text-white rounded-full group-[.nav-active]:text-white group-[.nav-active]:bg-primary/20'>
+                <span className='relative z-10'>{section.name}</span>
+                <span className='absolute inset-0 rounded-full bg-primary/0 group-hover:bg-primary/10 transition-colors duration-300' />
+            </button>
         </Link>
     )
 }

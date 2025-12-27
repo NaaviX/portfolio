@@ -30,7 +30,13 @@ export const experiencesData: TimelineExperience[] = [
             "Ingénieur en développement Java au sein de l'équipe gestion de portefeuille",
             "Maintenance et développement de nouvelles features sur l'outil Alto destiné aux gestionnaires de portefeuilles clients",
         ],
-        skills: [javaSkill, springbootSkill, quarkusSkill, sqlSkill, angularSkill],
+        skills: [
+            javaSkill,
+            springbootSkill,
+            quarkusSkill,
+            sqlSkill,
+            angularSkill,
+        ],
     },
     {
         title: 'Ingénieur conception & développement',

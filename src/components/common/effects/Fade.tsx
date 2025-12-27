@@ -4,6 +4,7 @@ type FadeDirection = 'up' | 'down' | 'left' | 'right' | 'none'
 
 interface FadeProps {
     children: React.ReactNode
+    className?: string
     style?: React.CSSProperties
     direction?: FadeDirection
     delay?: number
@@ -29,6 +30,7 @@ const getDirectionOffset = (direction: FadeDirection, distance: number) => {
 export const Fade = (props: FadeProps) => {
     const {
         children,
+        className,
         style,
         direction = 'up',
         delay = 0,
@@ -61,6 +63,7 @@ export const Fade = (props: FadeProps) => {
                 delay,
             }}
             viewport={{ once: true, margin: '-50px' }}
+            className={className}
             style={style}
         >
             {children}

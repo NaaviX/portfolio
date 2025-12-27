@@ -24,12 +24,16 @@ export const TimelineItemDate = (props: TimelineItemDateProps) => {
         >
             <Fade>
                 <Subtitle>
-                    {dateFrom.getFullYear()}{' - '}
-                    {dateTo ? dateTo.getFullYear() : 'aujourd\'hui'}
+                    {dateFrom.getFullYear()}
+                    {' - '}
+                    {dateTo ? dateTo.getFullYear() : "aujourd'hui"}
                 </Subtitle>
                 <Subtitle>
                     {displayDuration
-                        ? formatDurationMonthYear(dateFrom, dateTo || new Date())
+                        ? formatDurationMonthYear(
+                              dateFrom,
+                              dateTo || new Date()
+                          )
                         : ''}
                 </Subtitle>
             </Fade>

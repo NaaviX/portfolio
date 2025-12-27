@@ -24,9 +24,10 @@ const titleVariants = {
 }
 
 const lineVariants = {
-    hidden: { scaleX: 0 },
+    hidden: { scaleX: 0, opacity: 0 },
     visible: {
         scaleX: 1,
+        opacity: 1,
         transition: {
             type: 'spring',
             damping: 25,
@@ -47,8 +48,13 @@ export const SectionTitle = (props: SectionTitleProps) => {
                 whileInView='visible'
                 viewport={{ once: true, margin: '-50px' }}
                 variants={titleVariants}
+                className='relative'
             >
                 <Title className='text-center mb-8'>{text}</Title>
+                <motion.div
+                    variants={lineVariants}
+                    className='absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent'
+                />
             </motion.div>
         )
     }
@@ -61,17 +67,24 @@ export const SectionTitle = (props: SectionTitleProps) => {
         >
             <motion.div
                 variants={lineVariants}
-                className='h-px flex-1 bg-border origin-right'
-            />
-            <motion.div variants={titleVariants}>
+                className='relative h-px flex-1 origin-right'
+            >
+                <div className='absolute inset-0 bg-gradient-to-r from-transparent via-border-hover to-border' />
+                <div className='absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-primary/40 blur-sm' />
+            </motion.div>
+            <motion.div variants={titleVariants} className='relative'>
                 <Title className='text-center mx-8 tracking-widest font-semibold whitespace-nowrap'>
                     {text?.toUpperCase()}
                 </Title>
+                <div className='absolute inset-0 bg-primary/5 blur-xl -z-10' />
             </motion.div>
             <motion.div
                 variants={lineVariants}
-                className='h-px flex-1 bg-border origin-left'
-            />
+                className='relative h-px flex-1 origin-left'
+            >
+                <div className='absolute inset-0 bg-gradient-to-l from-transparent via-border-hover to-border' />
+                <div className='absolute inset-0 bg-gradient-to-l from-transparent via-primary/20 to-primary/40 blur-sm' />
+            </motion.div>
         </motion.div>
     )
 }

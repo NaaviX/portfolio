@@ -82,7 +82,6 @@ export const nodeSkill: Skill = {
     name: SKILL_NAME.NODE,
     icon: NodeIcon,
     isImportant: true,
-
 }
 
 export const typescriptSkill: Skill = {

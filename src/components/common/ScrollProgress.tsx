@@ -9,18 +9,25 @@ export const ScrollProgress = () => {
     })
 
     return (
-        <motion.div
-            style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                right: 0,
-                height: '3px',
-                background: 'linear-gradient(90deg, #00a2c7, #4ccce6, #b6ecf7)',
-                transformOrigin: '0%',
-                scaleX,
-                zIndex: 1001,
-            }}
-        />
+        <>
+            <motion.div
+                className='fixed top-0 left-0 right-0 h-[3px] z-[1001] origin-left'
+                style={{
+                    background:
+                        'linear-gradient(90deg, #00a2c7, #4ccce6, #b6ecf7, #4ccce6, #00a2c7)',
+                    backgroundSize: '200% 100%',
+                    scaleX,
+                }}
+            />
+            <motion.div
+                className='fixed top-0 left-0 right-0 h-[3px] z-[1000] origin-left blur-sm'
+                style={{
+                    background:
+                        'linear-gradient(90deg, #00a2c7, #4ccce6, #b6ecf7)',
+                    scaleX,
+                    opacity: 0.6,
+                }}
+            />
+        </>
     )
 }

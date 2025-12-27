@@ -17,12 +17,14 @@ import {
     Groom1,
     OldPortfolio,
     Portfolio1,
+    Prediction,
     Teedly,
     Teedly1,
     Teedly2,
     Teedly3,
     Teedly4,
     TooManyCooks,
+    Yams,
 } from '@/assets/images'
 import {
     bootstrapSkill,
@@ -73,21 +75,23 @@ export const projectsData: Project[] = [
         previewLink: 'https://toomanycooks.app',
         membersCount: 1,
     },
+
     {
-        name: 'Portfolio',
+        name: 'Too Many Cooks - Prediction',
         type: 'WEB',
         description:
-            "Portfolio web personnel, présentant mes compétences, mes projets et mon parcours. Le but était de m'auto former à divers langages et technologies.",
-        year: '2024',
+            "Dashboard d'analyse des différentes stratégies d'arbitrage entre plusieurs plateformes de marché de prédiction, utilisant l'IA.",
+        year: '2025',
         skills: [
             reactSkill,
             typescriptSkill,
+            shadcnSkill,
+            nodeSkill,
             dockerSkill,
-            CICDSkill,
-            nginxSkill,
-            chakraSkill,
+            supabaseSkill,
         ],
-        images: [Portfolio1],
+        images: [Prediction],
+        previewLink: 'https://prediction.toomanycooks.app',
         membersCount: 1,
     },
     {
@@ -113,6 +117,34 @@ export const projectsData: Project[] = [
         membersCount: 1,
     },
     {
+        name: 'Portfolio',
+        type: 'WEB',
+        description:
+            "Portfolio web personnel, présentant mes compétences, mes projets et mon parcours. Le but était de m'auto former à divers langages et technologies.",
+        year: '2024',
+        skills: [
+            reactSkill,
+            typescriptSkill,
+            dockerSkill,
+            CICDSkill,
+            nginxSkill,
+            chakraSkill,
+        ],
+        images: [Portfolio1],
+        membersCount: 1,
+    },
+    {
+        name: 'Yams',
+        type: 'WEB',
+        description:
+            'Dashboard simple de gestion de points et de parties pour le jeu de Yams (Yahtzee).',
+        year: '2025',
+        skills: [reactSkill, typescriptSkill, dockerSkill, shadcnSkill],
+        images: [Yams],
+        previewLink: 'https://yams.antoine-legrand.dev/',
+        membersCount: 1,
+    },
+    {
         name: 'Groom',
         type: 'WEB',
         description:
@@ -126,7 +158,7 @@ export const projectsData: Project[] = [
             },
         ],
         images: [Groom1],
-        previewLink: 'https://antoine-legrand.dev/groom',
+        //previewLink: 'https://antoine-legrand.dev/groom',
         gitLink: 'https://gitlab.com/NaaviX/groom-web',
         membersCount: 2,
     },

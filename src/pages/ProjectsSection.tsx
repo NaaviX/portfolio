@@ -1,22 +1,43 @@
-import {
-    OtherProjects,
-    Project,
-    ProjectCard,
-    projectsData,
-} from '@/components/projects'
+import { OtherProjects, projectsData } from '@/components/projects'
+import { BentoProjectCard } from '@/components/projects/components/card/BentoProjectCard'
 
 export const ProjectsSection = () => {
-    const mainProjects = projectsData.slice(0, 4)
-    const otherProjects = projectsData.slice(4)
+    const featuredProject = projectsData[0]
+    const secondaryProjects = projectsData.slice(1, 3)
+    const tertiaryProjects = projectsData.slice(3, 5)
+    const otherProjects = projectsData.slice(5)
+
     return (
-        <div className='w-full flex flex-col items-center'>
-            <div className='flex flex-wrap gap-[2%]'>
-                {mainProjects.map((project: Project) => (
-                    <ProjectCard project={project} key={project.name} />
+        <div className='w-full flex flex-col items-center gap-6'>
+            <div className='grid grid-cols-12 gap-4 lg:gap-6 w-full'>
+                <BentoProjectCard
+                    project={featuredProject}
+                    variant='featured'
+                    index={0}
+                />
+
+                {secondaryProjects.map((project, i) => (
+                    <BentoProjectCard
+                        key={project.name}
+                        project={project}
+                        variant={i === 0 ? 'large' : 'medium'}
+                        index={i + 1}
+                    />
+                ))}
+
+                {tertiaryProjects.map((project, i) => (
+                    <BentoProjectCard
+                        key={project.name}
+                        project={project}
+                        variant='medium'
+                        index={i + 3}
+                    />
                 ))}
             </div>
-            <br />
-            <OtherProjects projects={otherProjects} />
+
+            {otherProjects.length > 0 && (
+                <OtherProjects projects={otherProjects} />
+            )}
         </div>
     )
 }

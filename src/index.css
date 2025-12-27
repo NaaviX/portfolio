@@ -32,6 +32,52 @@
     --font-size-7xl: 4.5rem;
     --font-size-8xl: 6rem;
     --font-size-9xl: 8rem;
+
+    --animate-gradient-shift: gradient-shift 8s ease infinite;
+    --animate-float: float 3s ease-in-out infinite;
+    --animate-glow-pulse: glow-pulse 2s ease-in-out infinite;
+    --animate-shimmer: shimmer 2.5s linear infinite;
+
+    @keyframes gradient-shift {
+        0%,
+        100% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+
+    @keyframes float {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-8px);
+        }
+    }
+
+    @keyframes glow-pulse {
+        0%,
+        100% {
+            opacity: 0.6;
+            filter: blur(20px);
+        }
+        50% {
+            opacity: 1;
+            filter: blur(30px);
+        }
+    }
+
+    @keyframes shimmer {
+        0% {
+            background-position: -200% 0;
+        }
+        100% {
+            background-position: 200% 0;
+        }
+    }
 }
 
 #root {

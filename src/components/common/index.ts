@@ -1,5 +1,6 @@
 export * from './Chip'
 export * from './ChipList'
+export * from './LazyImage'
 export * from './magnetic-button/MagneticButton'
 export * from './Paper'
 export * from './ScrollProgress'

@@ -1,11 +1,10 @@
 import { motion } from 'framer-motion'
 
-const BORDER_COLOR = 'var(--color-border)'
-
 const lineVariants = {
-    hidden: { scaleY: 0 },
+    hidden: { scaleY: 0, opacity: 0 },
     visible: {
         scaleY: 1,
+        opacity: 1,
         transition: {
             type: 'spring',
             damping: 25,
@@ -29,51 +28,91 @@ const dotVariants = {
     },
 }
 
+const pulseVariants = {
+    hidden: { scale: 0.5, opacity: 0 },
+    visible: {
+        scale: [1, 1.8, 1],
+        opacity: [0.6, 0, 0.6],
+        transition: {
+            duration: 2.5,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: 0.5,
+        },
+    },
+}
+
 export const TimelineItemSeparator = () => {
     return (
-        <div className='flex flex-col flex-[0_1_0%] items-center'>
+        <div className='flex flex-col flex-[0_1_0%] items-center relative'>
             <motion.div
                 initial='hidden'
                 whileInView='visible'
                 viewport={{ once: true, margin: '-20px' }}
                 variants={lineVariants}
+                className='w-[2px] h-3'
                 style={{
-                    width: '2px',
-                    backgroundColor: BORDER_COLOR,
-                    height: '0.7rem',
+                    background:
+                        'linear-gradient(to bottom, transparent, var(--color-border))',
                     transformOrigin: 'top',
                 }}
             />
-            <motion.div
-                initial='hidden'
-                whileInView='visible'
-                viewport={{ once: true, margin: '-20px' }}
-                variants={dotVariants}
-                style={{
-                    display: 'flex',
-                    alignSelf: 'baseline',
-                    outlineStyle: 'solid',
-                    outlineWidth: '2px',
-                    outlineOffset: '4px',
-                    width: '7px',
-                    height: '7px',
-                    borderRadius: '50%',
-                    boxShadow: 'none',
-                    margin: '12px 0px',
-                    backgroundColor: 'var(--color-primary-light)',
-                    outlineColor: BORDER_COLOR,
-                }}
-            />
+
+            <div className='relative my-3'>
+                <motion.div
+                    initial='hidden'
+                    whileInView='visible'
+                    viewport={{ once: true, margin: '-20px' }}
+                    variants={pulseVariants}
+                    className='absolute inset-0 rounded-full'
+                    style={{
+                        width: '20px',
+                        height: '20px',
+                        left: '-6px',
+                        top: '-6px',
+                        background:
+                            'radial-gradient(circle, var(--color-primary) 0%, transparent 70%)',
+                    }}
+                />
+
+                <motion.div
+                    initial='hidden'
+                    whileInView='visible'
+                    viewport={{ once: true, margin: '-20px' }}
+                    variants={dotVariants}
+                    className='relative z-10'
+                    style={{
+                        width: '8px',
+                        height: '8px',
+                        borderRadius: '50%',
+                        background:
+                            'linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%)',
+                        boxShadow: `
+                            0 0 8px var(--color-primary),
+                            0 0 16px rgba(0,162,199,0.4),
+                            inset 0 1px 2px rgba(255,255,255,0.3)
+                        `,
+                        outline: '2px solid var(--color-border)',
+                        outlineOffset: '3px',
+                    }}
+                />
+            </div>
+
             <motion.div
                 initial='hidden'
                 whileInView='visible'
                 viewport={{ once: true, margin: '-20px' }}
                 variants={lineVariants}
+                className='w-[2px] flex-grow'
                 style={{
-                    width: '2px',
-                    backgroundColor: BORDER_COLOR,
-                    flexGrow: '1',
+                    background: `linear-gradient(
+                        to bottom,
+                        var(--color-border) 0%,
+                        var(--color-primary) 50%,
+                        var(--color-border) 100%
+                    )`,
                     transformOrigin: 'top',
+                    boxShadow: '0 0 8px rgba(0,162,199,0.2)',
                 }}
             />
         </div>

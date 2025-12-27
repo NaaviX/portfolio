@@ -36,6 +36,7 @@ export const Timeline = (props: TimelineProps) => {
                     displayDuration={displayDuration}
                     withFrame={withFrame || mode === 'alternate'}
                     isReversed={mode === 'alternate' && index % 2 === 0}
+                    index={index}
                 />
             ))}
         </ul>

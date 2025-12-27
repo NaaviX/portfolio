@@ -120,7 +120,7 @@ export const projectsData: Project[] = [
         name: 'Portfolio',
         type: 'WEB',
         description:
-            "Portfolio web personnel, présentant mes compétences, mes projets et mon parcours. Le but était de m'auto former à divers langages et technologies.",
+            'Portfolio web personnel, présentant mes compétences, mes projets et mon parcours.',
         year: '2024',
         skills: [
             reactSkill,

@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils'
 import { useLargeScreen, useMediumScreen } from '@/utils/Utils'
-import { CSSProperties, HTMLAttributes } from 'react'
+import { motion, Variants } from 'framer-motion'
+import { CSSProperties } from 'react'
 import { Paper } from '../../Paper'
 import { TimelineExperience } from '../timeline.type'
 import { TimelineItemContent } from './_TimelineItemContent'
@@ -13,7 +14,25 @@ type TimelineItemProps = {
     displayDuration: boolean
     isReversed: boolean
     withFrame: boolean
-} & HTMLAttributes<HTMLLIElement>
+    index?: number
+    className?: string
+}
+
+const itemVariants: Variants = {
+    hidden: (isReversed: boolean) => ({
+        opacity: 0,
+        x: isReversed ? 50 : -50,
+    }),
+    visible: {
+        opacity: 1,
+        x: 0,
+        transition: {
+            type: 'spring',
+            damping: 25,
+            stiffness: 90,
+        },
+    },
+}
 
 export const TimelineItem = (props: TimelineItemProps) => {
     const {
@@ -23,15 +42,20 @@ export const TimelineItem = (props: TimelineItemProps) => {
         withFrame,
         isReversed,
         className,
-        ...liProps
+        index = 0,
     } = props
 
     const isLarge = useLargeScreen()
     const isMedium = useMediumScreen()
 
     return (
-        <li
-            {...liProps}
+        <motion.li
+            custom={isLarge && isReversed}
+            initial='hidden'
+            whileInView='visible'
+            viewport={{ once: true, margin: '-80px' }}
+            variants={itemVariants}
+            transition={{ delay: index * 0.1 }}
             className={cn(
                 'list-none flex relative min-h-[70px]',
                 isLarge && isReversed ? 'flex-row-reverse' : 'flex-row',
@@ -58,6 +82,6 @@ export const TimelineItem = (props: TimelineItemProps) => {
                     <TimelineItemContent {...experience} />
                 )}
             </div>
-        </li>
+        </motion.li>
     )
 }

@@ -1,4 +1,4 @@
-import { ChipList, MagneticButton, Title } from '@/components/common'
+import { ChipList, LazyImage, MagneticButton, Title } from '@/components/common'
 import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
 import { FaCode, FaPlayCircle } from 'react-icons/fa'
@@ -122,11 +122,11 @@ const FeaturedCard = ({
                     />
                     <div className='relative grid grid-cols-1 lg:grid-cols-2 gap-0'>
                         <div className='relative h-[340px] lg:h-auto min-h-[400px] overflow-hidden'>
-                            <motion.img
-                                variants={imageVariants}
+                            <LazyImage
                                 src={project.images[0]}
                                 alt={project.name}
-                                className='w-full h-full object-cover object-top lg:absolute lg:inset-0'
+                                className='w-full h-full lg:absolute lg:inset-0'
+                                variants={imageVariants}
                             />
                             <div className='absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-bg-subtle/70 lg:opacity-100 opacity-0' />
                             <div className='absolute inset-0 bg-gradient-to-t from-bg-subtle via-bg-subtle/30 to-transparent opacity-60' />
@@ -190,11 +190,11 @@ const LargeCard = ({ project, index }: { project: Project; index: number }) => {
                         className='absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12'
                     />
                     <div className='relative h-[280px] overflow-hidden'>
-                        <motion.img
-                            variants={imageVariants}
+                        <LazyImage
                             src={project.images[0]}
                             alt={project.name}
-                            className='w-full h-full object-cover object-top'
+                            className='w-full h-full'
+                            variants={imageVariants}
                         />
                         <div className='absolute inset-0 bg-gradient-to-t from-bg-subtle via-bg-subtle/40 to-transparent opacity-75' />
                         <div className='absolute inset-0 bg-gradient-to-b from-bg-subtle/40 via-transparent to-transparent' />
@@ -267,11 +267,11 @@ const MediumCard = ({
                         className='absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12'
                     />
                     <div className='relative h-[200px] overflow-hidden'>
-                        <motion.img
-                            variants={imageVariants}
+                        <LazyImage
                             src={project.images[0]}
                             alt={project.name}
-                            className='w-full h-full object-cover object-top'
+                            className='w-full h-full'
+                            variants={imageVariants}
                         />
                         <div className='absolute inset-0 bg-gradient-to-t from-bg-subtle via-bg-subtle/30 to-transparent opacity-80' />
                         <div className='absolute inset-0 bg-gradient-to-b from-bg-subtle/30 via-transparent to-transparent' />
@@ -343,11 +343,11 @@ const CompactCard = ({
                         className='absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12'
                     />
                     <div className='relative h-[150px] overflow-hidden'>
-                        <motion.img
-                            variants={imageVariants}
+                        <LazyImage
                             src={project.images[0]}
                             alt={project.name}
-                            className='w-full h-full object-cover object-top'
+                            className='w-full h-full'
+                            variants={imageVariants}
                         />
                         <div className='absolute inset-0 bg-gradient-to-t from-bg-subtle via-bg-subtle/40 to-transparent opacity-90' />
                     </div>
@@ -402,7 +402,7 @@ const ProjectTypeBadge = ({
                 'bg-gradient-to-r from-bg-hover/80 to-bg-active/60',
                 'backdrop-blur-md border border-border/30',
                 'shadow-sm',
-                'transition-all duration-300',
+                TRANSITION_ALL_300,
                 'group-hover:border-border/50 group-hover:shadow-md',
                 config[size].padding
             )}
@@ -444,7 +444,7 @@ const YearBadge = ({
                 'backdrop-blur-md text-primary-light',
                 'border border-primary/30',
                 'shadow-[0_0_12px_-3px_var(--color-primary)]',
-                'transition-all duration-300',
+                TRANSITION_ALL_300,
                 'group-hover:shadow-[0_0_20px_-3px_var(--color-primary)] group-hover:border-primary/50',
                 config[size]
             )}
@@ -477,7 +477,7 @@ const MembersBadge = ({
             <div
                 className={cn(
                     'rounded-lg bg-bg/60 border border-border/30',
-                    'transition-all duration-300',
+                    TRANSITION_ALL_300,
                     'group-hover:bg-bg/80 group-hover:border-border/50',
                     config[size].padding
                 )}
@@ -502,28 +502,22 @@ const ActionButtons = ({
         return (
             <div className='flex gap-2'>
                 {project.gitLink && (
-                    <motion.a
+                    <MagneticButton
                         href={project.gitLink}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        whileHover={{ scale: 1.08, y: -2 }}
-                        whileTap={{ scale: 0.95 }}
-                        className='p-2 rounded-lg bg-bg/70 border border-border/40 text-primary-light/70 hover:text-primary hover:border-primary/40 hover:bg-bg-hover/60 transition-all duration-300 shadow-sm hover:shadow-md'
-                    >
-                        <FaCode size='0.8rem' />
-                    </motion.a>
+                        ariaLabel='Code'
+                        icon={FaCode}
+                        size='small'
+                        hideLabel
+                    />
                 )}
                 {project.previewLink && (
-                    <motion.a
+                    <MagneticButton
                         href={project.previewLink}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        whileHover={{ scale: 1.08, y: -2 }}
-                        whileTap={{ scale: 0.95 }}
-                        className='p-2 rounded-lg bg-gradient-to-r from-primary/20 to-primary-dark/20 border border-primary/40 text-primary hover:from-primary/30 hover:to-primary-dark/30 hover:border-primary/60 transition-all duration-300 shadow-sm shadow-primary/20 hover:shadow-md hover:shadow-primary/30'
-                    >
-                        <FaPlayCircle size='0.8rem' />
-                    </motion.a>
+                        ariaLabel='Démo'
+                        icon={FaPlayCircle}
+                        size='small'
+                        hideLabel
+                    />
                 )}
                 <Gallery {...project} />
             </div>

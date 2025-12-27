@@ -6,6 +6,7 @@ import { MagneticButtonBody } from './_MagneticButtonBody'
 import { MagneticButtonProps } from './magnetic-button.type'
 
 export const MagneticButton = (props: MagneticButtonProps) => {
+    const { hideLabel = false } = props
     const ref = useRef<HTMLInputElement>(null)
     const { handleMouse, reset, x, y } = useMagneticButton(ref)
 
@@ -13,7 +14,9 @@ export const MagneticButton = (props: MagneticButtonProps) => {
         return (
             <div className='flex flex-col items-center'>
                 <MagneticButtonBody {...props} />
-                <span className='text-xs'>{props.ariaLabel}</span>
+                {!hideLabel && (
+                    <span className='text-xs'>{props.ariaLabel}</span>
+                )}
             </div>
         )
     }
@@ -34,7 +37,7 @@ export const MagneticButton = (props: MagneticButtonProps) => {
             >
                 <MagneticButtonBody {...props} />
             </motion.div>
-            <span className='text-xs'>{props.ariaLabel}</span>
+            {!hideLabel && <span className='text-xs'>{props.ariaLabel}</span>}
         </div>
     )
 }

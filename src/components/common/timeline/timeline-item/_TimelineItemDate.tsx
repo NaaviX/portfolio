@@ -1,3 +1,4 @@
+import { useLanguage } from '@/i18n'
 import { cn } from '@/lib/utils'
 import { formatDurationMonthYear, useLargeScreen } from '@/utils/Utils'
 import { motion } from 'framer-motion'
@@ -12,10 +13,14 @@ type TimelineItemDateProps = {
 }
 
 export const TimelineItemDate = (props: TimelineItemDateProps) => {
+    const { language } = useLanguage()
     const { isReversed, displayDuration, experience } = props
     const { dateFrom, dateTo } = experience
     const isLarge = useLargeScreen()
     const isCurrent = !dateTo
+
+    const currentText = language === 'fr' ? 'En poste' : 'Current'
+    const presentText = language === 'fr' ? 'Présent' : 'Present'
 
     return (
         <div
@@ -53,7 +58,7 @@ export const TimelineItemDate = (props: TimelineItemDateProps) => {
                             }}
                         />
                         <span className='text-xs font-medium text-emerald-400 tracking-wide'>
-                            En poste
+                            {currentText}
                         </span>
                     </motion.div>
                 )}
@@ -61,7 +66,7 @@ export const TimelineItemDate = (props: TimelineItemDateProps) => {
                 <Subtitle className='text-lg font-semibold'>
                     {dateFrom.getFullYear()}
                     {' - '}
-                    {dateTo ? dateTo.getFullYear() : 'Présent'}
+                    {dateTo ? dateTo.getFullYear() : presentText}
                 </Subtitle>
 
                 {displayDuration && (

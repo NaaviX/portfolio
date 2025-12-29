@@ -1,8 +1,10 @@
+import { useLanguage } from '@/i18n'
 import { Section, sectionsData } from '@/pages/sections.data'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
+import { LanguageSwitcher } from './_LanguageSwitcher'
 import { NavLink } from './_NavLink'
 import { SocialButton } from './_SocialButton'
 
@@ -41,6 +43,7 @@ const menuContainerVariants = {
 }
 
 export const NavbarMobile = () => {
+    const { t } = useLanguage()
     const [isOpen, setIsOpen] = useState(false)
     const toggle = () => setIsOpen(!isOpen)
 
@@ -131,6 +134,7 @@ export const NavbarMobile = () => {
                     </motion.button>
                 </div>
                 <div className='flex gap-2'>
+                    <LanguageSwitcher />
                     <SocialButton type='mail' />
                     <SocialButton type='linkedin' />
                 </div>
@@ -159,7 +163,9 @@ export const NavbarMobile = () => {
                                 {sectionsData.map(
                                     (section: Section, index: number) => (
                                         <motion.div
-                                            key={'nav-mobile-' + section.name}
+                                            key={
+                                                'nav-mobile-' + section.nameKey
+                                            }
                                             custom={index}
                                             variants={menuItemVariants}
                                             initial='hidden'
@@ -168,7 +174,10 @@ export const NavbarMobile = () => {
                                             onClick={() => setIsOpen(false)}
                                             className='px-2'
                                         >
-                                            <NavLink section={section} />
+                                            <NavLink
+                                                section={section}
+                                                label={t.nav[section.nameKey]}
+                                            />
                                         </motion.div>
                                     )
                                 )}

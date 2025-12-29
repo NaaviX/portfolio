@@ -5,25 +5,19 @@ interface Address {
     city: string
 }
 
-interface Language {
-    name: string
-    level: string
-    certifications: string[]
-}
-
 export interface User {
     firstname: string
     lastname: string
     birthDate: Date
-    drivingLicence: string
+    drivingLicenceKey: string
     car: boolean
-    jobTitle: string
-    mainDescription1: string
-    mainDescription2: string
-    mainDescription3: string
+    jobTitleKey: string
+    description1Key: string
+    description2Key: string
+    description3Key: string
     email: string
     address: Address
     linkedin: string
     mainSkills: Skill[]
-    languages: Language[]
+    languageKeys: string[]
 }

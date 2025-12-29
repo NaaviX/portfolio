@@ -32,7 +32,7 @@ export const Timeline = (props: TimelineProps) => {
             {experiences.map((exp: TimelineExperience, index: number) => (
                 <TimelineItem
                     experience={exp}
-                    key={exp.title}
+                    key={exp.titleKey}
                     displayDuration={displayDuration}
                     withFrame={withFrame || mode === 'alternate'}
                     isReversed={mode === 'alternate' && index % 2 === 0}

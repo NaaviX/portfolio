@@ -1,3 +1,4 @@
+import { useLanguage } from '@/i18n'
 import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
 import { HTMLAttributes } from 'react'
@@ -35,10 +36,11 @@ const itemVariants = {
 }
 
 export const TimelineItemContent = (props: TimelineItemContentProps) => {
+    const { t } = useLanguage()
     const {
-        title,
-        activities,
-        type,
+        titleKey,
+        activitiesKey,
+        typeKey,
         institution,
         city,
         skills,
@@ -47,6 +49,15 @@ export const TimelineItemContent = (props: TimelineItemContentProps) => {
         className,
         ...divProps
     } = props
+
+    const expData = t.experiences[activitiesKey as keyof typeof t.experiences]
+    const title = expData && 'title' in expData ? expData.title : titleKey
+    const activities: string[] =
+        expData && 'activities' in expData ? [...expData.activities] : []
+    const type =
+        t.experiences.types[typeKey as keyof typeof t.experiences.types] ||
+        typeKey
+
     return (
         <div className={cn(className)} {...divProps}>
             <Fade>
@@ -55,6 +66,7 @@ export const TimelineItemContent = (props: TimelineItemContentProps) => {
                 <TimelineItemContentInfo
                     activities={activities}
                     type={type}
+                    typeKey={typeKey}
                     institution={institution}
                     city={city}
                     dateFrom={dateFrom}
@@ -71,9 +83,9 @@ export const TimelineItemContent = (props: TimelineItemContentProps) => {
                     whileInView='visible'
                     viewport={{ once: true, margin: '-50px' }}
                 >
-                    {activities.map((activity: string) => (
+                    {activities.map((activity: string, idx: number) => (
                         <motion.li
-                            key={activity}
+                            key={idx}
                             variants={itemVariants}
                             className='flex items-start gap-3 group'
                         >

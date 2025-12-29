@@ -1,10 +1,14 @@
+import { useLanguage } from '@/i18n'
 import { Section, sectionsData } from '@/pages/sections.data'
 import { motion } from 'framer-motion'
 import { animateScroll as scroll } from 'react-scroll'
+import { LanguageSwitcher } from './_LanguageSwitcher'
 import { NavLink } from './_NavLink'
 import { SocialButton } from './_SocialButton'
 
 export const NavbarDesktop = () => {
+    const { t } = useLanguage()
+
     return (
         <div className='h-16 items-center justify-between hidden lg:flex'>
             <motion.button
@@ -23,10 +27,15 @@ export const NavbarDesktop = () => {
             </motion.button>
             <nav className='flex items-center gap-1 bg-bg/20 backdrop-blur-sm px-2 py-1.5 rounded-full border border-border/30'>
                 {sectionsData.map((section: Section) => (
-                    <NavLink key={'nav-' + section.name} section={section} />
+                    <NavLink
+                        key={'nav-' + section.nameKey}
+                        section={section}
+                        label={t.nav[section.nameKey]}
+                    />
                 ))}
             </nav>
             <div className='flex gap-2'>
+                <LanguageSwitcher />
                 <SocialButton type='mail' />
                 <SocialButton type='linkedin' />
             </div>

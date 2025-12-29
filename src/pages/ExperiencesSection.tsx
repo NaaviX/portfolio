@@ -1,9 +1,12 @@
 import { Timeline } from '@/components/common'
 import { experiencesData } from '@/components/experiences'
+import { useLanguage } from '@/i18n'
 import { motion } from 'framer-motion'
 import { Briefcase } from 'lucide-react'
 
 export const ExperiencesSection = () => {
+    const { language } = useLanguage()
+
     return (
         <div className='relative w-full'>
             <div className='relative z-10'>
@@ -51,7 +54,9 @@ export const ExperiencesSection = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.3 }}
                     >
-                        Expériences professionnelles
+                        {language === 'fr'
+                            ? 'Expériences professionnelles'
+                            : 'Professional Experience'}
                     </motion.h2>
 
                     <motion.div

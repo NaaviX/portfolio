@@ -1,3 +1,4 @@
+import { useLanguage } from '@/i18n'
 import { cn } from '@/lib/utils'
 import { formatDurationMonthYear, useMediumScreen } from '@/utils/Utils'
 import {
@@ -12,6 +13,7 @@ import { FaBuilding, FaLocationDot } from 'react-icons/fa6'
 type TimelineItemContentInfoProps = {
     activities: string[]
     type: string
+    typeKey: string
     institution?: string
     city: string
     dateFrom: Date
@@ -24,8 +26,8 @@ const InfoItem = ({ children }: { children: React.ReactNode }) => (
     </div>
 )
 
-const getTypeBadgeConfig = (type: string) => {
-    switch (type.toLowerCase()) {
+const getTypeBadgeConfig = (typeKey: string) => {
+    switch (typeKey) {
         case 'cdi':
             return {
                 icon: Briefcase,
@@ -33,14 +35,14 @@ const getTypeBadgeConfig = (type: string) => {
                 textClass: 'text-emerald-400',
                 iconClass: 'text-emerald-400',
             }
-        case 'apprentissage':
+        case 'apprenticeship':
             return {
                 icon: GraduationCap,
                 bgClass: 'bg-sky-500/10 border-sky-500/30',
                 textClass: 'text-sky-400',
                 iconClass: 'text-sky-400',
             }
-        case 'indépendant':
+        case 'freelance':
             return {
                 icon: Sparkles,
                 bgClass: 'bg-violet-500/10 border-violet-500/30',
@@ -57,8 +59,8 @@ const getTypeBadgeConfig = (type: string) => {
     }
 }
 
-const TypeBadge = ({ type }: { type: string }) => {
-    const config = getTypeBadgeConfig(type)
+const TypeBadge = ({ type, typeKey }: { type: string; typeKey: string }) => {
+    const config = getTypeBadgeConfig(typeKey)
     const Icon = config.icon
 
     return (
@@ -79,8 +81,12 @@ const TypeBadge = ({ type }: { type: string }) => {
 export const TimelineItemContentInfo = (
     props: TimelineItemContentInfoProps
 ) => {
-    const { activities, type, institution, city, dateFrom, dateTo } = props
+    const { language } = useLanguage()
+    const { activities, type, typeKey, institution, city, dateFrom, dateTo } =
+        props
     const isMedium = useMediumScreen()
+
+    const presentText = language === 'fr' ? 'Présent' : 'Present'
 
     return (
         <div
@@ -98,7 +104,7 @@ export const TimelineItemContentInfo = (
                         <Calendar className='h-4 w-4 text-primary' />
                         <span className='text-sm'>
                             {dateFrom.getFullYear()} -{' '}
-                            {dateTo ? dateTo.getFullYear() : 'Présent'}
+                            {dateTo ? dateTo.getFullYear() : presentText}
                         </span>
                     </InfoItem>
                     <InfoItem>
@@ -114,7 +120,9 @@ export const TimelineItemContentInfo = (
             )}
 
             <div className='flex flex-wrap items-center gap-3'>
-                {type && type !== '' && <TypeBadge type={type} />}
+                {type && type !== '' && (
+                    <TypeBadge type={type} typeKey={typeKey} />
+                )}
 
                 {institution && institution !== '' && (
                     <InfoItem>

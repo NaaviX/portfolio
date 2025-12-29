@@ -1,12 +1,12 @@
 import { Skill } from '@/components/skills'
 
 export type TimelineExperience = {
-    title: string
-    type: string
+    titleKey: string
+    typeKey: string
     institution?: string
     city: string
     dateFrom: Date
     dateTo?: Date
-    activities: string[]
+    activitiesKey: string
     skills: Skill[]
 }

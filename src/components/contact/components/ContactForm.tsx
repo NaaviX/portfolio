@@ -1,4 +1,5 @@
 import { useContact } from '@/hooks/useContact'
+import { useLanguage } from '@/i18n'
 import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
 import { Loader2, Mail, MessageSquare, Send, User } from 'lucide-react'
@@ -33,6 +34,7 @@ const itemVariants = {
 }
 
 export const ContactForm = () => {
+    const { t } = useLanguage()
     const { handleFormSubmit } = useContact()
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [focusedField, setFocusedField] = useState<string | null>(null)
@@ -74,7 +76,7 @@ export const ContactForm = () => {
                     <motion.div variants={itemVariants}>
                         <label htmlFor='name' className={labelClasses}>
                             <User className='w-4 h-4' />
-                            Nom
+                            {t.contact.name}
                         </label>
                         <motion.div
                             animate={{
@@ -85,7 +87,7 @@ export const ContactForm = () => {
                             <input
                                 name='name'
                                 id='name'
-                                placeholder='Votre nom'
+                                placeholder={t.contact.namePlaceholder}
                                 className={cn(
                                     inputClasses,
                                     focusedField === 'name' && BORDER_FOCUSED
@@ -99,7 +101,7 @@ export const ContactForm = () => {
                     <motion.div variants={itemVariants}>
                         <label htmlFor='email' className={labelClasses}>
                             <Mail className='w-4 h-4' />
-                            Email
+                            {t.contact.email}
                         </label>
                         <motion.div
                             animate={{
@@ -111,7 +113,7 @@ export const ContactForm = () => {
                                 name='email'
                                 id='email'
                                 type='email'
-                                placeholder='votre@email.com'
+                                placeholder={t.contact.emailPlaceholder}
                                 className={cn(
                                     inputClasses,
                                     focusedField === 'email' && BORDER_FOCUSED
@@ -125,7 +127,7 @@ export const ContactForm = () => {
                     <motion.div variants={itemVariants}>
                         <label htmlFor='subject' className={labelClasses}>
                             <MessageSquare className='w-4 h-4' />
-                            Sujet
+                            {t.contact.subject}
                         </label>
                         <motion.div
                             animate={{
@@ -136,7 +138,7 @@ export const ContactForm = () => {
                             <input
                                 name='subject'
                                 id='subject'
-                                placeholder='Le sujet de votre message'
+                                placeholder={t.contact.subjectPlaceholder}
                                 className={cn(
                                     inputClasses,
                                     focusedField === 'subject' && BORDER_FOCUSED
@@ -150,7 +152,7 @@ export const ContactForm = () => {
                     <motion.div variants={itemVariants}>
                         <label htmlFor='message' className={labelClasses}>
                             <MessageSquare className='w-4 h-4' />
-                            Message
+                            {t.contact.message}
                         </label>
                         <motion.div
                             animate={{
@@ -162,7 +164,7 @@ export const ContactForm = () => {
                                 name='message'
                                 id='message'
                                 rows={5}
-                                placeholder='Votre message...'
+                                placeholder={t.contact.messagePlaceholder}
                                 className={cn(
                                     inputClasses,
                                     'resize-none',
@@ -193,11 +195,11 @@ export const ContactForm = () => {
                                 {isSubmitting ? (
                                     <>
                                         <Loader2 className='w-5 h-5 animate-spin' />
-                                        Envoi en cours...
+                                        {t.contact.sending}
                                     </>
                                 ) : (
                                     <>
-                                        Envoyer le message
+                                        {t.contact.send}
                                         <Send className='w-5 h-5 transition-transform duration-300 group-hover:translate-x-1' />
                                     </>
                                 )}

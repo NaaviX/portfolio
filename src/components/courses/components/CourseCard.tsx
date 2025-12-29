@@ -1,5 +1,6 @@
 import { Paper } from '@/components/common/Paper'
 import { Title } from '@/components/common/typography/Title'
+import { useLanguage } from '@/i18n'
 import { cn } from '@/lib/utils'
 import { useMediumScreen } from '@/utils/Utils'
 import { motion, Variants } from 'framer-motion'
@@ -11,16 +12,31 @@ type CourseCardProps = {
     isLast: boolean
 }
 
-const formatYearRange = (dateFrom: Date, dateTo?: Date): string => {
+const formatYearRange = (
+    dateFrom: Date,
+    dateTo: Date | undefined,
+    language: 'fr' | 'en'
+): string => {
     const from = dateFrom.getFullYear()
-    const to = dateTo ? dateTo.getFullYear() : "aujourd'hui"
+    const to = dateTo
+        ? dateTo.getFullYear()
+        : language === 'fr'
+          ? "aujourd'hui"
+          : 'present'
     return `${from} - ${to}`
 }
 
-const getDuration = (dateFrom: Date, dateTo?: Date): string => {
+const getDuration = (
+    dateFrom: Date,
+    dateTo: Date | undefined,
+    language: 'fr' | 'en'
+): string => {
     const end = dateTo || new Date()
     const years = end.getFullYear() - dateFrom.getFullYear()
-    return years === 1 ? '1 an' : `${years} ans`
+    if (language === 'fr') {
+        return years === 1 ? '1 an' : `${years} ans`
+    }
+    return years === 1 ? '1 year' : `${years} years`
 }
 
 const cardVariants: Variants = {
@@ -80,6 +96,11 @@ const dotPulseVariants: Variants = {
 export const CourseCard = (props: CourseCardProps) => {
     const { course, index, isLast } = props
     const isMedium = useMediumScreen()
+    const { t, language } = useLanguage()
+
+    const courseData = t.courses[course.titleKey as keyof typeof t.courses]
+    const title = courseData?.title || course.titleKey
+    const type = courseData?.type || course.typeKey
 
     return (
         <div className='relative'>
@@ -136,11 +157,16 @@ export const CourseCard = (props: CourseCardProps) => {
                             <span className='text-2xl font-bold tracking-tight bg-gradient-to-br from-primary via-primary-dark to-primary-light bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(0,162,199,0.3)]'>
                                 {formatYearRange(
                                     course.dateFrom,
-                                    course.dateTo
+                                    course.dateTo,
+                                    language
                                 )}
                             </span>
                             <span className='text-primary-light/50 mt-2 font-medium tracking-wide uppercase'>
-                                {getDuration(course.dateFrom, course.dateTo)}
+                                {getDuration(
+                                    course.dateFrom,
+                                    course.dateTo,
+                                    language
+                                )}
                             </span>
                         </motion.div>
                     </div>
@@ -184,18 +210,19 @@ export const CourseCard = (props: CourseCardProps) => {
                                 >
                                     <div className='flex flex-wrap items-center gap-3 mb-5'>
                                         <span className='px-4 py-1.5 text-xs font-bold uppercase tracking-widest bg-gradient-to-r from-primary/25 to-primary-dark/25 text-primary-light rounded-full border border-primary/40 shadow-[0_0_15px_-3px_rgba(0,162,199,0.4)]'>
-                                            {course.type}
+                                            {type}
                                         </span>
                                         <span className='md:hidden text-sm text-primary-light/60 font-medium'>
                                             {formatYearRange(
                                                 course.dateFrom,
-                                                course.dateTo
+                                                course.dateTo,
+                                                language
                                             )}
                                         </span>
                                     </div>
 
                                     <Title className='mb-5 text-xl md:text-2xl leading-tight font-semibold tracking-tight'>
-                                        {course.title}
+                                        {title}
                                     </Title>
 
                                     <div className='space-y-3'>

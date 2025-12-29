@@ -7,7 +7,7 @@ export const Courses = () => {
             <div className='relative'>
                 {coursesData.map((course, index) => (
                     <CourseCard
-                        key={course.title}
+                        key={course.titleKey}
                         course={course}
                         index={index}
                         isLast={index === coursesData.length - 1}

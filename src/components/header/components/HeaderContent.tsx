@@ -1,5 +1,6 @@
 import { ChipList, MagneticButton, Paper } from '@/components/common'
 import { Title } from '@/components/common/typography/Title'
+import { useLanguage } from '@/i18n'
 import '@fontsource/space-grotesk/400.css'
 import { motion } from 'framer-motion'
 import { FaBirthdayCake, FaLinkedinIn } from 'react-icons/fa'
@@ -22,6 +23,8 @@ const InfoItem = ({
 )
 
 export const HeaderContent = () => {
+    const { t, language } = useLanguage()
+
     return (
         <motion.div
             initial={{ x: '-100vw' }}
@@ -44,7 +47,7 @@ export const HeaderContent = () => {
                 <div className='flex flex-col gap-6 lg:gap-8'>
                     <div className='flex flex-col gap-3'>
                         <Title className='font-[Space_Grotesk] text-2xl lg:text-3xl p-0'>
-                            {userData.jobTitle}
+                            {t.header.jobTitle}
                         </Title>
                         <ChipList
                             skills={userData.mainSkills}
@@ -53,22 +56,32 @@ export const HeaderContent = () => {
                     </div>
                     <div className='space-y-2'>
                         <p className='font-[Space_Grotesk] text-lg md:text-xl leading-relaxed text-primary-light/90'>
-                            {userData.mainDescription1}
+                            {t.header.description1}
                         </p>
                         <p className='font-[Space_Grotesk] text-base md:text-lg leading-relaxed text-primary-light/70'>
-                            {userData.mainDescription2}
+                            {t.header.description2}
                         </p>
                         <p className='font-[Space_Grotesk] text-base md:text-lg leading-relaxed text-primary-dark mt-4'>
-                            {userData.mainDescription3}
+                            {t.header.description3}
                         </p>
                     </div>
                     <div className='flex flex-wrap justify-center gap-3'>
-                        <InfoItem icon={FaBirthdayCake} label='27 ans' />
+                        <InfoItem
+                            icon={FaBirthdayCake}
+                            label={
+                                language === 'fr' ? '27 ans' : '27 years old'
+                            }
+                        />
                         <InfoItem
                             icon={FaLocationPin}
                             label='Ile-de-France (77)'
                         />
-                        <InfoItem icon={FaBriefcase} label='CDI' />
+                        <InfoItem
+                            icon={FaBriefcase}
+                            label={
+                                language === 'fr' ? 'CDI' : 'Permanent Contract'
+                            }
+                        />
                     </div>
                     <div className='flex justify-center pt-2'>
                         <MagneticButton

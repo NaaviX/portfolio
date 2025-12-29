@@ -99,6 +99,16 @@ export const translations = {
                 mobile: 'Développement mobile',
                 practices: 'Méthodologies et bonnes pratiques',
             },
+            descriptions: {
+                frontend:
+                    "Interfaces utilisateur web ou mobile ergonomiques, optimisation de l'expérience utilisateur.",
+                backend:
+                    'Couche responsable de la gestion de données et de la logique métier.',
+                devtools:
+                    "Divers outils de développement et d'intégration continue utilisés lors de mes précédents projets.",
+                mobile: 'Applications mobiles Android et iOS.',
+                practices: '',
+            },
             names: {
                 uiux: 'Notions UI/UX',
                 solid: 'Principes SOLID',
@@ -227,6 +237,16 @@ export const translations = {
                 devtools: 'Tools & CI/CD',
                 mobile: 'Mobile Development',
                 practices: 'Methodologies & Best Practices',
+            },
+            descriptions: {
+                frontend:
+                    'Ergonomic web and mobile user interfaces, user experience optimization.',
+                backend:
+                    'Layer responsible for data management and business logic.',
+                devtools:
+                    'Various development and continuous integration tools used in my previous projects.',
+                mobile: 'Android and iOS mobile applications.',
+                practices: '',
             },
             names: {
                 uiux: 'UI/UX Knowledge',

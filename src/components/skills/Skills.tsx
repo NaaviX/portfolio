@@ -22,7 +22,7 @@ export const Skills = () => {
                     <SkillsCard
                         skillCategory={skillCategory}
                         i={i}
-                        key={'skill_cat_' + skillCategory.name.toString()}
+                        key={'skill_cat_' + skillCategory.nameKey}
                         progress={scrollYProgress}
                         range={[i * 0.25, 1]}
                         targetScale={targetScale}

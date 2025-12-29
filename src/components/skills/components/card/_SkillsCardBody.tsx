@@ -1,4 +1,5 @@
 import { ChipList, Title } from '@/components/common'
+import { useLanguage } from '@/i18n/LanguageContext'
 import { motion, Variants } from 'framer-motion'
 import { SkillCategory } from '../../skills.type'
 
@@ -25,6 +26,9 @@ const imageVariants: Variants = {
 
 export const SkillsCardBody = (props: SkillCardBodyProps) => {
     const { skillCategory } = props
+    const { t } = useLanguage()
+    const categoryName = t.skills.categories[skillCategory.nameKey]
+    const categoryDescription = t.skills.descriptions[skillCategory.nameKey]
     return (
         <motion.div
             variants={contentVariants}
@@ -33,13 +37,13 @@ export const SkillsCardBody = (props: SkillCardBodyProps) => {
             <div className='flex flex-col flex-1 gap-5'>
                 <div className='flex flex-wrap items-center gap-3'>
                     <span className='px-4 py-1.5 text-xs font-semibold uppercase tracking-widest bg-gradient-to-r from-primary/20 to-primary-dark/20 text-primary-light rounded-full border border-primary/30 shadow-[0_0_12px_-3px_rgba(0,162,199,0.3)]'>
-                        {skillCategory.name.toString()}
+                        {categoryName}
                     </span>
                 </div>
 
-                {skillCategory.description && (
+                {categoryDescription && (
                     <p className='text-primary-dark/80 text-sm leading-relaxed'>
-                        {skillCategory.description}
+                        {categoryDescription}
                     </p>
                 )}
 

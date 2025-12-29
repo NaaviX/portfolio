@@ -1,4 +1,5 @@
 import { ChipList, LazyImage, MagneticButton, Title } from '@/components/common'
+import { useLanguage } from '@/i18n/LanguageContext'
 import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
 import { FaCode, FaPlayCircle } from 'react-icons/fa'
@@ -89,6 +90,8 @@ const FeaturedCard = ({
     project: Project
     index: number
 }) => {
+    const { t } = useLanguage()
+    const description = t.projects[project.descriptionKey]
     return (
         <motion.div
             custom={index}
@@ -142,7 +145,7 @@ const FeaturedCard = ({
                                 <MembersBadge count={project.membersCount} />
                             </div>
                             <p className='text-primary-light/70 text-lg leading-relaxed mb-8 max-w-lg'>
-                                {project.description}
+                                {description}
                             </p>
                             <div className='flex justify-center mb-8'>
                                 <ActionButtons project={project} />
@@ -160,6 +163,8 @@ const FeaturedCard = ({
 }
 
 const LargeCard = ({ project, index }: { project: Project; index: number }) => {
+    const { t } = useLanguage()
+    const description = t.projects[project.descriptionKey]
     return (
         <motion.div
             custom={index}
@@ -214,7 +219,7 @@ const LargeCard = ({ project, index }: { project: Project; index: number }) => {
                             />
                         </div>
                         <p className='text-primary-light/60 text-sm leading-relaxed mb-5 flex-1'>
-                            {project.description}
+                            {description}
                         </p>
                         <div className='flex justify-center mb-5'>
                             <ActionButtons project={project} size='small' />
@@ -237,6 +242,8 @@ const MediumCard = ({
     project: Project
     index: number
 }) => {
+    const { t } = useLanguage()
+    const description = t.projects[project.descriptionKey]
     return (
         <motion.div
             custom={index}
@@ -291,7 +298,7 @@ const MediumCard = ({
                             />
                         </div>
                         <p className='text-primary-light/55 text-sm leading-relaxed mb-5 flex-1 line-clamp-3'>
-                            {project.description}
+                            {description}
                         </p>
                         <div className='flex justify-center mb-4'>
                             <ActionButtons project={project} size='small' />
@@ -314,6 +321,8 @@ const CompactCard = ({
     project: Project
     index: number
 }) => {
+    const { t } = useLanguage()
+    const description = t.projects[project.descriptionKey]
     return (
         <motion.div
             custom={index}
@@ -360,7 +369,7 @@ const CompactCard = ({
                             />
                         </div>
                         <p className='text-primary-light/50 text-xs leading-relaxed line-clamp-2 mb-3'>
-                            {project.description}
+                            {description}
                         </p>
                         <div className='flex justify-center mb-3'>
                             <ActionButtons project={project} size='tiny' />

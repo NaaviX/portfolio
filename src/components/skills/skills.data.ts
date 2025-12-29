@@ -336,9 +336,7 @@ export const MockitoSkill: Skill = {
 }
 
 export const frontSkillCategory: SkillCategory = {
-    name: SKILL_TYPE.WEBFRONT,
-    description:
-        "Interfaces utilisateur web ou mobile ergonomiques, optimisation de l'expérience utilisateur.",
+    nameKey: SKILL_TYPE.WEBFRONT,
     color: 'rgb(43, 93, 108)',
     skills: [
         typescriptSkill,
@@ -356,9 +354,7 @@ export const frontSkillCategory: SkillCategory = {
 }
 
 export const backSkillCategory: SkillCategory = {
-    name: SKILL_TYPE.WEBBACK,
-    description:
-        'Couche responsable de la gestion de données et de la logique métier.',
+    nameKey: SKILL_TYPE.WEBBACK,
     color: '#0f172a',
     skills: [
         javaSkill,
@@ -375,9 +371,7 @@ export const backSkillCategory: SkillCategory = {
 }
 
 export const devToolsSkillCategory: SkillCategory = {
-    name: SKILL_TYPE.DEVTOOLS,
-    description:
-        "Divers outils de développement et d'intégration continue utilisés lors de mes précédents projets.",
+    nameKey: SKILL_TYPE.DEVTOOLS,
     color: '#0f172a',
     skills: [
         gitSkill,
@@ -394,8 +388,7 @@ export const devToolsSkillCategory: SkillCategory = {
 }
 
 export const practicesSkillCategory: SkillCategory = {
-    name: SKILL_TYPE.PRACTICES,
-    description: '',
+    nameKey: SKILL_TYPE.PRACTICES,
     color: '#0f172a',
     skills: [
         agileSkill,
@@ -412,8 +405,7 @@ export const practicesSkillCategory: SkillCategory = {
 }
 
 export const mobileSkillCategory: SkillCategory = {
-    name: SKILL_TYPE.MOBILE,
-    description: 'Applications mobiles Android et iOS.',
+    nameKey: SKILL_TYPE.MOBILE,
     color: '#0f172a',
     skills: [reactNativeSkill, flutterSkill, androidSkill],
     image: SkillMobileImage,

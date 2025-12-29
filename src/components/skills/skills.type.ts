@@ -1,11 +1,11 @@
 import { FC, SVGProps } from 'react'
 
 export enum SKILL_TYPE {
-    WEBFRONT = 'Développement frontend',
-    WEBBACK = 'Développement backend & données',
-    DEVTOOLS = 'Outils & CI/CD',
-    MOBILE = 'Développement mobile',
-    PRACTICES = 'Méthodologies et bonnes pratiques',
+    WEBFRONT = 'frontend',
+    WEBBACK = 'backend',
+    DEVTOOLS = 'devtools',
+    MOBILE = 'mobile',
+    PRACTICES = 'practices',
 }
 
 export enum SKILL_NAME {
@@ -79,8 +79,7 @@ export interface Skill {
 }
 
 export interface SkillCategory {
-    name: SKILL_TYPE | keyof SKILL_TYPE
-    description: string
+    nameKey: SKILL_TYPE
     color: string
     skills: Array<Skill>
     image: FC<SVGProps<SVGSVGElement>>

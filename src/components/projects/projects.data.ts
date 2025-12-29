@@ -55,8 +55,7 @@ export const projectsData: Project[] = [
     {
         name: 'Too Many Cooks',
         type: 'WEB',
-        description:
-            "Dashboard d'analyse des différentes stratégies d'arbitrage de funding rates entre plusieurs échanges décentralisés de cryptomonnaie.",
+        descriptionKey: 'tooManyCooks',
         year: '2025',
         skills: [
             reactSkill,
@@ -79,8 +78,7 @@ export const projectsData: Project[] = [
     {
         name: 'Too Many Cooks - Prediction',
         type: 'WEB',
-        description:
-            "Dashboard d'analyse des différentes stratégies d'arbitrage entre plusieurs plateformes de marché de prédiction, utilisant l'IA.",
+        descriptionKey: 'tooManyCooksPrediction',
         year: '2025',
         skills: [
             reactSkill,
@@ -97,8 +95,7 @@ export const projectsData: Project[] = [
     {
         name: 'At the Mos bar',
         type: 'WEB',
-        description:
-            "Site web de présentation d'une cave à bière. Un backoffice est également disponible pour gérer les produits, les stocks et les évènements.",
+        descriptionKey: 'atTheMosBar',
         year: '2024',
         skills: [
             reactSkill,
@@ -119,8 +116,7 @@ export const projectsData: Project[] = [
     {
         name: 'Portfolio',
         type: 'WEB',
-        description:
-            'Portfolio web personnel, présentant mes compétences, mes projets et mon parcours.',
+        descriptionKey: 'portfolio',
         year: '2024',
         skills: [
             reactSkill,
@@ -136,8 +132,7 @@ export const projectsData: Project[] = [
     {
         name: 'Yams',
         type: 'WEB',
-        description:
-            'Dashboard simple de gestion de points et de parties pour le jeu de Yams (Yahtzee).',
+        descriptionKey: 'yams',
         year: '2025',
         skills: [reactSkill, typescriptSkill, dockerSkill, shadcnSkill],
         images: [Yams],
@@ -147,8 +142,7 @@ export const projectsData: Project[] = [
     {
         name: 'Groom',
         type: 'WEB',
-        description:
-            'Application web de gestion de projet, permettant une communication simplifiée entre les développeurs et les clients.',
+        descriptionKey: 'groom',
         year: '2022',
         skills: [
             vueSkill,
@@ -165,8 +159,7 @@ export const projectsData: Project[] = [
     {
         name: 'FirstCab',
         type: 'WEB',
-        description:
-            'Site vitrine pour une entreprise de transport de personnes',
+        descriptionKey: 'firstcab',
         year: '2023',
         skills: [reactSkill, expressSkill, chakraSkill],
         images: [Firstcab],
@@ -175,7 +168,7 @@ export const projectsData: Project[] = [
     {
         name: 'Teedly',
         type: 'MOBILE',
-        description: "PoC d'une application mobile d'assistant shopping",
+        descriptionKey: 'teedly',
         year: '2024',
         skills: [reactNativeSkill],
         images: [Teedly, Teedly1, Teedly2, Teedly3, Teedly4],
@@ -185,8 +178,7 @@ export const projectsData: Project[] = [
     {
         name: 'ESIEE +',
         type: 'MOBILE',
-        description:
-            "Application mobile du BDE ESIEE Paris, pensée pour tous les étudiants de l'école",
+        descriptionKey: 'esieePlus',
         year: '2019',
         skills: [
             flutterSkill,
@@ -213,7 +205,7 @@ export const projectsData: Project[] = [
     {
         name: 'Ancien portfolio',
         type: 'WEB',
-        description: 'Mon premier portfolio, créé en 2017',
+        descriptionKey: 'oldPortfolio',
         year: '2017',
         skills: [vueSkill, jquerySkill, bootstrapSkill, cssSkill],
         images: [OldPortfolio],

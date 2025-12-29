@@ -7,6 +7,7 @@ import {
     Subtitle,
     Title,
 } from '@/components/common'
+import { useLanguage } from '@/i18n/LanguageContext'
 import { FaCode, FaPlayCircle } from 'react-icons/fa'
 import { FaUserGroup } from 'react-icons/fa6'
 import { GoDeviceDesktop, GoDeviceMobile } from 'react-icons/go'
@@ -19,6 +20,8 @@ interface ProjectCardProps {
 
 export const ProjectCard = (props: ProjectCardProps) => {
     const project: Project = props.project
+    const { t } = useLanguage()
+    const description = t.projects[project.descriptionKey]
     return (
         <motion.div
             className='w-full md:w-[49%] h-full my-2'
@@ -56,7 +59,7 @@ export const ProjectCard = (props: ProjectCardProps) => {
                                 <Subtitle>{project.year}</Subtitle>
                             </div>
                             <div className='text-center flex items-center min-h-24'>
-                                {project.description}
+                                {description}
                             </div>
                             <div className='w-[30%] flex justify-evenly'>
                                 {project.gitLink ? (

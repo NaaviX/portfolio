@@ -3,7 +3,7 @@ import { Skill } from '../skills'
 export interface Project {
     name: string
     type: 'WEB' | 'MOBILE' | 'APP'
-    description: string
+    descriptionKey: keyof typeof import('@/i18n/translations').translations.en.projects
     year: string
     skills: Skill[]
 

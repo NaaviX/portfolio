@@ -26,8 +26,8 @@ export const HeaderSection = () => {
     }, [])
 
     return (
-        <div>
-            <div className='w-full min-h-screen absolute'>
+        <div className='relative min-h-screen'>
+            <div className='absolute inset-0 overflow-hidden'>
                 {showParticles && (
                     <Suspense fallback={null}>
                         <Particles

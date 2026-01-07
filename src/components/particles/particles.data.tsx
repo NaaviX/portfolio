@@ -3,7 +3,6 @@ import {
     AngularParticle,
     CSSParticle,
     DockerParticle,
-    ExpressParticle,
     JavaParticle,
     NodeParticle,
     ReactParticle,
@@ -94,12 +93,23 @@ export const particlesData: RecursivePartial<IOptions> | undefined = {
             enable: true,
             random: true,
             size: false,
-            speed: 3,
-            outMode: 'bounce',
+            speed: 2.3,
+            // Use outModes object for explicit control of all edges
+            // This fixes the teleportation bug when hitting borders
+            outModes: {
+                default: 'bounce',
+                left: 'bounce',
+                right: 'bounce',
+                top: 'bounce',
+                bottom: 'bounce',
+            },
+            straight: false,
+            // Ensure velocity is preserved on bounce
+            decay: 0,
         },
         number: {
             limit: 0,
-            value: isMobile ? 8 : 15,
+            value: isMobile ? 8 : 12,
         },
 
         opacity: {
@@ -142,21 +152,18 @@ export const particlesData: RecursivePartial<IOptions> | undefined = {
                 {
                     src: AngularParticle,
                 },
-                {
-                    src: ExpressParticle,
-                },
             ],
         },
 
         size: {
-            random: {
-                enable: true,
-                minimumValue: 30,
+            value: {
+                min: 20,
+                max: 30,
             },
         },
 
-        // Keep lines as requested
-        lineLinked: {
+        // Modern links configuration (replaces deprecated lineLinked)
+        links: {
             blink: false,
             color: {
                 value: '#aaa',
@@ -164,10 +171,10 @@ export const particlesData: RecursivePartial<IOptions> | undefined = {
             consent: true,
             distance: 120,
             enable: true,
-            // Check less frequently for line connections
-            frequency: 30,
+            frequency: 10,
             opacity: 0.6,
             width: 1,
+            warp: false,
         },
     },
     pauseOnBlur: true,

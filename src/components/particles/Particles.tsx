@@ -20,8 +20,11 @@ export const Particles = (props: ParticlesProps) => {
         <ReactParticles
             id={id}
             style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
                 width: '100%',
-                minHeight: '100vh',
+                height: '100%',
                 zIndex: 10,
             }}
             init={particlesInit}

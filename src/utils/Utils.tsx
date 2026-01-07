@@ -31,7 +31,13 @@ export function formatDurationMonthYear(dateFrom: Date, dateTo: Date): string {
 }
 
 function useMediaQuery(query: string): boolean {
-    const [matches, setMatches] = useState(false)
+    // Initialize with actual value to prevent flash/re-render on mount
+    const [matches, setMatches] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return window.matchMedia(query).matches
+        }
+        return false
+    })
 
     useEffect(() => {
         const media = window.matchMedia(query)

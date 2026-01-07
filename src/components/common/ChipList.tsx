@@ -1,13 +1,13 @@
 import { Skill } from '@/components/skills'
 import { cn } from '@/lib/utils'
-import { HTMLAttributes } from 'react'
+import { HTMLAttributes, memo } from 'react'
 import { Chip } from './Chip'
 
 type ChipListProps = {
     skills: Skill[]
 } & HTMLAttributes<HTMLDivElement>
 
-export const ChipList = (props: ChipListProps) => {
+export const ChipList = memo((props: ChipListProps) => {
     const { skills, className, ...divProps } = props
     return (
         <div
@@ -19,4 +19,6 @@ export const ChipList = (props: ChipListProps) => {
             ))}
         </div>
     )
-}
+})
+
+ChipList.displayName = 'ChipList'

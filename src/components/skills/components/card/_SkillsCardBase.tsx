@@ -8,15 +8,6 @@ type SkillsCardBaseProps = {
     skillCategory: SkillCategory
 }
 
-const glowVariants: Variants = {
-    rest: { opacity: 0, scale: 0.98 },
-    hover: {
-        opacity: 1,
-        scale: 1.01,
-        transition: { duration: 0.4, ease: 'easeOut' },
-    },
-}
-
 const shimmerVariants: Variants = {
     rest: { x: '-100%', opacity: 0 },
     hover: {
@@ -35,10 +26,6 @@ export const SkillsCardBase = (props: SkillsCardBaseProps) => {
             animate='rest'
             className='relative rounded-2xl overflow-hidden cursor-default'
         >
-            <motion.div
-                variants={glowVariants}
-                className='absolute -inset-2 bg-gradient-to-br from-primary/30 via-primary-dark/15 to-primary/30 rounded-3xl blur-xl'
-            />
 
             <Paper
                 animateScroll={false}

@@ -7,9 +7,9 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { ScrollProgress } from './components/common'
 import { Navbar } from './components/navbar'
 import { LanguageProvider } from './i18n'
+import './index.css'
 import { FooterSection } from './pages/FooterSection'
 import { initGA } from './utils/analytics'
-import './index.css'
 
 initGA()
 

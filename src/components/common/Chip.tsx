@@ -1,12 +1,12 @@
 import { Skill } from '@/components/skills'
 import { cn } from '@/lib/utils'
-import { HTMLAttributes } from 'react'
+import { HTMLAttributes, memo } from 'react'
 
 type ChipProps = {
     skill: Skill
 } & HTMLAttributes<HTMLSpanElement>
 
-export const Chip = (props: ChipProps) => {
+export const Chip = memo((props: ChipProps) => {
     const { skill, className, ...spanProps } = props
     return (
         <span
@@ -34,4 +34,6 @@ export const Chip = (props: ChipProps) => {
             </span>
         </span>
     )
-}
+})
+
+Chip.displayName = 'Chip'

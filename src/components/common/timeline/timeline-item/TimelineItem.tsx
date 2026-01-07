@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
 import { useLargeScreen, useMediumScreen } from '@/utils/Utils'
 import { motion, Variants } from 'framer-motion'
-import { CSSProperties } from 'react'
+import { CSSProperties, memo } from 'react'
 import { Paper } from '../../Paper'
 import { TimelineExperience } from '../timeline.type'
 import { TimelineItemContent } from './_TimelineItemContent'
@@ -34,7 +34,7 @@ const itemVariants: Variants = {
     },
 }
 
-export const TimelineItem = (props: TimelineItemProps) => {
+export const TimelineItem = memo((props: TimelineItemProps) => {
     const {
         experience,
         sx,
@@ -84,4 +84,6 @@ export const TimelineItem = (props: TimelineItemProps) => {
             </div>
         </motion.li>
     )
-}
+})
+
+TimelineItem.displayName = 'TimelineItem'

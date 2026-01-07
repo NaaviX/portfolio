@@ -1,16 +1,20 @@
 import { cn } from '@/lib/utils'
 import { motion, Variants } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 
 interface LazyImageProps {
     src: string
     alt: string
     className?: string
     variants?: Variants
+    /** Width hint to prevent layout shift */
+    width?: number | string
+    /** Height hint to prevent layout shift */
+    height?: number | string
 }
 
-export const LazyImage = (props: LazyImageProps) => {
-    const { src, alt, className, variants } = props
+export const LazyImage = memo((props: LazyImageProps) => {
+    const { src, alt, className, variants, width, height } = props
     const [isLoaded, setIsLoaded] = useState(false)
     const [isInView, setIsInView] = useState(false)
     const imgRef = useRef<HTMLDivElement>(null)
@@ -43,6 +47,10 @@ export const LazyImage = (props: LazyImageProps) => {
                     src={src}
                     alt={alt}
                     variants={variants}
+                    width={width}
+                    height={height}
+                    loading='lazy'
+                    decoding='async'
                     onLoad={() => setIsLoaded(true)}
                     className={cn(
                         'w-full h-full object-cover object-top transition-opacity duration-500',
@@ -52,4 +60,6 @@ export const LazyImage = (props: LazyImageProps) => {
             )}
         </div>
     )
-}
+})
+
+LazyImage.displayName = 'LazyImage'

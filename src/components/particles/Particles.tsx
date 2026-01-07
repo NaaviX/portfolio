@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { Particles as ReactParticles } from 'react-particles'
-import { loadFull } from 'tsparticles'
+import { loadSlim } from 'tsparticles-slim'
 import type { Engine, IOptions, RecursivePartial } from 'tsparticles-engine'
 
 interface ParticlesProps {
@@ -11,7 +11,9 @@ interface ParticlesProps {
 export const Particles = (props: ParticlesProps) => {
     const { id, particlesOptions } = props
     const particlesInit = useCallback(async (engine: Engine) => {
-        await loadFull(engine)
+        // Use slim version for 60-70% bundle size reduction
+        // Includes: image shapes, links, collisions, bounce, bubble, grab modes
+        await loadSlim(engine)
     }, [])
 
     return (

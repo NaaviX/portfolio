@@ -1,15 +1,16 @@
 import {
     AndroidParticle,
+    AngularParticle,
     CSSParticle,
     DockerParticle,
-    FlutterParticle,
+    ExpressParticle,
     JavaParticle,
-    JsParticle,
+    NodeParticle,
     ReactParticle,
     SpringParticle,
     TailwindParticle,
     TsParticle,
-    VueParticle,
+    VueParticle
 } from '@/assets/icons'
 import { isMobile } from 'react-device-detect'
 import type { IOptions, RecursivePartial } from 'tsparticles-engine'
@@ -23,7 +24,8 @@ export const particlesData: RecursivePartial<IOptions> | undefined = {
     },
 
     detectRetina: true,
-    fpsLimit: 60,
+    // Reduce FPS for better performance - particles don't need 60fps
+    fpsLimit: 30,
 
     interactivity: {
         detectsOn: 'window',
@@ -120,13 +122,7 @@ export const particlesData: RecursivePartial<IOptions> | undefined = {
                     src: TailwindParticle,
                 },
                 {
-                    src: FlutterParticle,
-                },
-                {
                     src: JavaParticle,
-                },
-                {
-                    src: JsParticle,
                 },
                 {
                     src: ReactParticle,
@@ -140,6 +136,15 @@ export const particlesData: RecursivePartial<IOptions> | undefined = {
                 {
                     src: SpringParticle,
                 },
+                {
+                    src: NodeParticle,
+                },
+                {
+                    src: AngularParticle,
+                },
+                {
+                    src: ExpressParticle,
+                },
             ],
         },
 
@@ -150,6 +155,7 @@ export const particlesData: RecursivePartial<IOptions> | undefined = {
             },
         },
 
+        // Keep lines as requested
         lineLinked: {
             blink: false,
             color: {
@@ -158,7 +164,8 @@ export const particlesData: RecursivePartial<IOptions> | undefined = {
             consent: true,
             distance: 120,
             enable: true,
-            frequency: 15,
+            // Check less frequently for line connections
+            frequency: 30,
             opacity: 0.6,
             width: 1,
         },

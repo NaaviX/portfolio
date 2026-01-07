@@ -4,6 +4,7 @@ import {
     useCallback,
     useContext,
     useEffect,
+    useMemo,
     useState,
 } from 'react'
 import { Language, translations, Translations } from './translations'
@@ -40,11 +41,15 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
         document.documentElement.lang = language
     }, [language])
 
-    const value: LanguageContextType = {
-        language,
-        setLanguage,
-        t: translations[language],
-    }
+    // Memoize context value to prevent unnecessary re-renders
+    const value = useMemo<LanguageContextType>(
+        () => ({
+            language,
+            setLanguage,
+            t: translations[language],
+        }),
+        [language, setLanguage]
+    )
 
     return (
         <LanguageContext.Provider value={value}>

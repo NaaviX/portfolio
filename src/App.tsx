@@ -3,12 +3,24 @@ import { ReactLenis } from '@studio-freight/react-lenis'
 import dayjs from 'dayjs'
 import 'dayjs/locale/en'
 import 'dayjs/locale/fr'
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import { Toaster } from 'react-hot-toast'
 import { Element } from 'react-scroll'
 import { SectionLayout } from './pages/components/SectionLayout'
 import { HeaderSection } from './pages/HeaderSection'
 import { Section, sectionsData } from './pages/sections.data'
+
+// Extracted style constant to prevent object recreation on each render
+const ELEMENT_STYLE = {
+    marginTop: '1px',
+    paddingTop: '150px',
+    position: 'relative',
+} as const
+
+// Loading skeleton for lazy-loaded sections
+const SectionSkeleton = () => (
+    <div className='w-full min-h-[200px] animate-pulse bg-bg-subtle/30 rounded-lg' />
+)
 
 const App = () => {
     const { language, t } = useLanguage()
@@ -27,14 +39,12 @@ const App = () => {
                     name={section.target}
                     key={section.nameKey}
                     className='element'
-                    style={{
-                        marginTop: '1px',
-                        paddingTop: '150px',
-                        position: 'relative',
-                    }}
+                    style={ELEMENT_STYLE}
                 >
                     <SectionLayout title={t.nav[section.nameKey]}>
-                        <section.element />
+                        <Suspense fallback={<SectionSkeleton />}>
+                            <section.element />
+                        </Suspense>
                     </SectionLayout>
                 </Element>
             ))}

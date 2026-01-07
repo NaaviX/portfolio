@@ -1,6 +1,12 @@
 import { Skills } from '@/components/skills/Skills'
 import { motion } from 'framer-motion'
 import { Layers } from 'lucide-react'
+import {
+    GRADIENT_DIVIDER_LEFT,
+    GRADIENT_DIVIDER_RIGHT,
+    GRADIENT_LINE_LEFT,
+    GRADIENT_LINE_RIGHT,
+} from './components/section-header.styles'
 
 export const SkillsSection = () => {
     return (
@@ -22,10 +28,7 @@ export const SkillsSection = () => {
                     >
                         <div
                             className='h-px w-12 lg:w-20'
-                            style={{
-                                background:
-                                    'linear-gradient(to right, transparent, var(--color-primary))',
-                            }}
+                            style={GRADIENT_LINE_LEFT}
                         />
                         <motion.div
                             className='p-3 rounded-xl border border-border bg-bg-hover/50 backdrop-blur-sm'
@@ -36,10 +39,7 @@ export const SkillsSection = () => {
                         </motion.div>
                         <div
                             className='h-px w-12 lg:w-20'
-                            style={{
-                                background:
-                                    'linear-gradient(to left, transparent, var(--color-primary))',
-                            }}
+                            style={GRADIENT_LINE_RIGHT}
                         />
                     </motion.div>
 
@@ -62,29 +62,12 @@ export const SkillsSection = () => {
                     >
                         <div
                             className='h-px w-8 lg:w-16'
-                            style={{
-                                background:
-                                    'linear-gradient(to right, transparent, var(--color-border))',
-                            }}
+                            style={GRADIENT_DIVIDER_LEFT}
                         />
-                        <motion.div
-                            className='w-1.5 h-1.5 rounded-full bg-primary'
-                            animate={{
-                                scale: [1, 1.3, 1],
-                                opacity: [0.5, 1, 0.5],
-                            }}
-                            transition={{
-                                duration: 2,
-                                repeat: Infinity,
-                                ease: 'easeInOut',
-                            }}
-                        />
+                        <div className='w-1.5 h-1.5 rounded-full bg-primary animate-pulse-dot' />
                         <div
                             className='h-px w-8 lg:w-16'
-                            style={{
-                                background:
-                                    'linear-gradient(to left, transparent, var(--color-border))',
-                            }}
+                            style={GRADIENT_DIVIDER_RIGHT}
                         />
                     </motion.div>
                 </motion.div>

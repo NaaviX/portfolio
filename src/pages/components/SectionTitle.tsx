@@ -15,7 +15,7 @@ const titleVariants = {
         opacity: 1,
         y: 0,
         transition: {
-            type: 'spring',
+            type: 'spring' as const,
             damping: 20,
             stiffness: 100,
             duration: 0.8,
@@ -29,7 +29,7 @@ const lineVariants = {
         scaleX: 1,
         opacity: 1,
         transition: {
-            type: 'spring',
+            type: 'spring' as const,
             damping: 25,
             stiffness: 80,
             delay: 0.2,

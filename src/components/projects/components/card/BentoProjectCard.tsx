@@ -23,7 +23,7 @@ const cardVariants = {
         y: 0,
         scale: 1,
         transition: {
-            type: 'spring',
+            type: 'spring' as const,
             damping: 25,
             stiffness: 80,
             delay: i * 0.1,
@@ -36,13 +36,13 @@ const imageVariants = {
     hover: {
         scale: 1.06,
         filter: 'brightness(1.02) saturate(1.1)',
-        transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+        transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
     },
 }
 
 const contentVariants = {
     rest: { y: 0 },
-    hover: { y: -4, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } },
+    hover: { y: -4, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 }
 
 const glowVariants = {
@@ -50,7 +50,7 @@ const glowVariants = {
     hover: {
         opacity: 1,
         scale: 1.02,
-        transition: { duration: 0.5, ease: 'easeOut' },
+        transition: { duration: 0.5, ease: 'easeOut' as const },
     },
 }
 
@@ -59,7 +59,7 @@ const shimmerVariants = {
     hover: {
         x: '100%',
         opacity: 0.3,
-        transition: { duration: 1.2, ease: 'easeInOut' },
+        transition: { duration: 1.2, ease: 'easeInOut' as const },
     },
 }
 

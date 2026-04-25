@@ -1,37 +1,24 @@
 import { motion } from 'framer-motion'
 import { userData } from '../../user/user.data'
 
+const easeOutQuart = [0.25, 1, 0.5, 1] as [number, number, number, number]
+
 export const HeaderTitle = () => {
     return (
-        <motion.div
-            initial={{ x: '100vw', opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{
-                type: 'spring',
-                duration: 2,
-                bounce: 0.3,
-                delay: 0.1,
-            }}
-            viewport={{ once: true }}
+        <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.1, ease: easeOutQuart, delay: 0.1 }}
+            className='font-heading font-semibold text-primary-light leading-[0.88] tracking-[-0.045em] text-[clamp(3.75rem,11vw,9.5rem)]'
+            style={{ fontStretch: '85%' }}
         >
-            <div className='relative'>
-                <h1 className='text-center text-4xl md:text-6xl lg:text-8xl font-[Space_Grotesk] font-bold tracking-tight bg-gradient-to-r from-primary via-primary-dark to-primary-light bg-clip-text text-transparent bg-[length:200%_200%] animate-gradient-shift drop-shadow-[0_0_30px_rgba(0,162,199,0.3)]'>
-                    {userData.firstname} {userData.lastname}
-                </h1>
-                <motion.div
-                    animate={{
-                        opacity: [0.4, 0.8, 0.4],
-                        scale: [1, 1.05, 1],
-                    }}
-                    transition={{
-                        duration: 4,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
-                    }}
-                    className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(ellipse,rgba(0,162,199,0.2)_0%,rgba(76,204,230,0.1)_30%,transparent_70%)] blur-[60px] pointer-events-none -z-10'
-                />
-                <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-1/2 bg-[radial-gradient(ellipse,rgba(182,236,247,0.08)_0%,transparent_60%)] blur-[30px] pointer-events-none -z-10' />
-            </div>
-        </motion.div>
+            <span className='block'>{userData.firstname}</span>
+            <span className='block'>
+                {userData.lastname}
+                <span className='text-primary align-super text-[0.35em] ml-1'>
+                    .
+                </span>
+            </span>
+        </motion.h1>
     )
 }

@@ -1,97 +1,99 @@
-import { ChipList, MagneticButton, Paper } from '@/components/common'
-import { Title } from '@/components/common/typography/Title'
 import { useLanguage } from '@/i18n'
-import '@fontsource/space-grotesk/400.css'
 import { motion } from 'framer-motion'
-import { FaBirthdayCake, FaLinkedinIn } from 'react-icons/fa'
-import { FaBriefcase, FaLocationPin } from 'react-icons/fa6'
+import { FaArrowRight, FaLinkedinIn } from 'react-icons/fa6'
+import { Link } from 'react-scroll'
 import { userData } from '../../user'
 
-const InfoItem = ({
-    icon: Icon,
-    label,
-}: {
-    icon: React.ComponentType<{ className?: string }>
-    label: string
-}) => (
-    <div className='flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/5 border border-primary/10 backdrop-blur-sm transition-all duration-300 hover:bg-primary/10 hover:border-primary/20 group'>
-        <Icon className='text-primary/70 text-sm group-hover:text-primary transition-colors' />
-        <span className='text-xs text-primary-light/80 group-hover:text-primary-light transition-colors whitespace-nowrap'>
-            {label}
-        </span>
-    </div>
-)
+const easeOutQuart = [0.25, 1, 0.5, 1] as [number, number, number, number]
 
 export const HeaderContent = () => {
     const { t, language } = useLanguage()
 
     return (
         <motion.div
-            initial={{ x: '-100vw' }}
-            animate={{ x: 0 }}
-            transition={{
-                type: 'spring',
-                duration: 2,
-                bounce: 0.2,
-                delay: 0.4,
-            }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.1, ease: easeOutQuart, delay: 0.35 }}
+            className='grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-end'
         >
-            <Paper
-                style={{
-                    alignItems: 'center',
-                    paddingLeft: '0.5rem',
-                    paddingRight: '0.5rem',
-                }}
-            >
-                <div className='flex flex-col gap-6 lg:gap-8'>
-                    <div className='flex flex-col gap-3'>
-                        <Title className='font-[Space_Grotesk] text-2xl lg:text-3xl p-0'>
-                            {t.header.jobTitle}
-                        </Title>
-                        <ChipList
-                            skills={userData.mainSkills}
-                            className='justify-center'
-                        />
-                    </div>
-                    <div className='space-y-2'>
-                        <p className='font-[Space_Grotesk] text-lg md:text-xl leading-relaxed text-primary-light/90'>
-                            {t.header.description1}
-                        </p>
-                        <p className='font-[Space_Grotesk] text-base md:text-lg leading-relaxed text-primary-light/70'>
-                            {t.header.description2}
-                        </p>
-                        <p className='font-[Space_Grotesk] text-base md:text-lg leading-relaxed text-primary-dark mt-4'>
-                            {t.header.description3}
-                        </p>
-                    </div>
-                    <div className='flex flex-wrap justify-center gap-3'>
-                        <InfoItem
-                            icon={FaBirthdayCake}
-                            label={
-                                language === 'fr' ? '27 ans' : '27 years old'
-                            }
-                        />
-                        <InfoItem
-                            icon={FaLocationPin}
-                            label='Ile-de-France (77)'
-                        />
-                        <InfoItem
-                            icon={FaBriefcase}
-                            label={
-                                language === 'fr' ? 'CDI' : 'Permanent Contract'
-                            }
-                        />
-                    </div>
-                    <div className='flex justify-center pt-2'>
-                        <MagneticButton
-                            icon={FaLinkedinIn}
-                            ariaLabel='LinkedIn'
-                            href={userData.linkedin}
-                        />
-                    </div>
+            <div className='lg:col-span-7 flex flex-col gap-7'>
+                <p className='text-sm md:text-base font-medium text-primary-light/70 tracking-wide'>
+                    {t.header.metaLine}
+                </p>
+
+                <p className='text-base md:text-lg leading-relaxed text-primary-light/55 max-w-xl'>
+                    {t.header.tagline}
+                </p>
+
+                <div className='flex flex-wrap items-center gap-3 pt-2'>
+                    <Link
+                        to='contact'
+                        smooth
+                        className='inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-bg-app transition-all duration-300 hover:bg-primary-hover hover:gap-3 cursor-pointer'
+                    >
+                        {t.header.ctaContact}
+                        <FaArrowRight className='text-xs' />
+                    </Link>
+
+                    <a
+                        href={userData.linkedin}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        aria-label={t.header.ctaLinkedin}
+                        className='inline-flex h-11 w-11 items-center justify-center rounded-full border border-border-subtle text-primary-light/70 transition-all duration-300 hover:border-border-hover hover:text-primary-light'
+                    >
+                        <FaLinkedinIn className='text-sm' />
+                    </a>
                 </div>
-            </Paper>
+            </div>
+
+            <aside className='lg:col-span-5 hidden lg:flex flex-col gap-6 border-l border-border-subtle/40 pl-10'>
+                <div className='flex items-center gap-2.5'>
+                    <span className='relative flex h-2 w-2'>
+                        <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60' />
+                        <span className='relative inline-flex h-2 w-2 rounded-full bg-primary' />
+                    </span>
+                    <span className='text-xs tracking-[0.2em] uppercase text-primary-light/70 font-mono'>
+                        {language === 'fr'
+                            ? 'Disponible · Freelance & CDI'
+                            : 'Available · Freelance & Full-time'}
+                    </span>
+                </div>
+
+                <dl className='grid grid-cols-[auto_1fr] gap-x-6 gap-y-3 text-sm'>
+                    <dt className='text-primary-light/40 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
+                        {language === 'fr' ? 'Basé à' : 'Based in'}
+                    </dt>
+                    <dd className='text-primary-light/80'>
+                        {language === 'fr' ? 'Paris, France' : 'Paris, France'}
+                    </dd>
+
+                    <dt className='text-primary-light/40 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
+                        {language === 'fr' ? 'Poste' : 'Role'}
+                    </dt>
+                    <dd className='text-primary-light/80'>
+                        {language === 'fr'
+                            ? 'Ingénieur Java chez Amundi'
+                            : 'Java Engineer at Amundi'}
+                    </dd>
+
+                    <dt className='text-primary-light/40 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
+                        {language === 'fr' ? 'Stack' : 'Stack'}
+                    </dt>
+                    <dd className='text-primary-light/80'>
+                        Java, TypeScript, React, Node, SQL
+                    </dd>
+
+                    <dt className='text-primary-light/40 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
+                        {language === 'fr' ? 'Langues' : 'Languages'}
+                    </dt>
+                    <dd className='text-primary-light/80'>
+                        {language === 'fr'
+                            ? 'Français · Anglais (C1)'
+                            : 'French · English (C1)'}
+                    </dd>
+                </dl>
+            </aside>
         </motion.div>
     )
 }

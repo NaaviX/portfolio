@@ -29,7 +29,7 @@ export const MagneticButton = (props: MagneticButtonProps) => {
                 onMouseLeave={reset}
                 animate={{ x, y }}
                 transition={{
-                    type: 'spring',
+                    type: 'spring' as const,
                     stiffness: 150,
                     damping: 15,
                     mass: 0.1,

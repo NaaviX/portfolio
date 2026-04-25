@@ -22,7 +22,7 @@ export const NavbarDesktop = () => {
                     className='absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-primary via-primary-dark to-primary rounded-full'
                     initial={{ width: 0 }}
                     whileHover={{ width: '100%' }}
-                    transition={{ duration: 0.3, ease: 'easeOut' }}
+                    transition={{ duration: 0.3, ease: 'easeOut' as const }}
                 />
             </motion.button>
             <nav className='flex items-center gap-1 bg-bg/20 backdrop-blur-sm px-2 py-1.5 rounded-full border border-border/30'>

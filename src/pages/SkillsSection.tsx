@@ -17,7 +17,7 @@ export const SkillsSection = () => {
                     initial={{ opacity: 0, y: -20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, ease: 'easeOut' }}
+                    transition={{ duration: 0.6, ease: 'easeOut' as const }}
                 >
                     <motion.div
                         className='flex items-center gap-4 mb-4'
@@ -33,7 +33,7 @@ export const SkillsSection = () => {
                         <motion.div
                             className='p-3 rounded-xl border border-border bg-bg-hover/50 backdrop-blur-sm'
                             whileHover={{ scale: 1.05, rotate: 5 }}
-                            transition={{ type: 'spring', stiffness: 400 }}
+                            transition={{ type: 'spring' as const, stiffness: 400 }}
                         >
                             <Layers className='w-6 h-6 text-primary' />
                         </motion.div>
@@ -44,7 +44,7 @@ export const SkillsSection = () => {
                     </motion.div>
 
                     <motion.h2
-                        className='text-2xl lg:text-3xl font-heading font-medium text-primary-light tracking-wide text-center'
+                        className='text-4xl lg:text-5xl font-heading font-semibold text-primary-light tracking-[-0.03em] text-center'
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -72,7 +72,7 @@ export const SkillsSection = () => {
                     </motion.div>
                 </motion.div>
 
-                <div className='max-w-4xl mx-auto px-4'>
+                <div className='max-w-6xl mx-auto px-4'>
                     <Skills />
                 </div>
             </div>

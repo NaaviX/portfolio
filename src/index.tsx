@@ -1,6 +1,4 @@
 import App from '@/App'
-import '@fontsource/roboto/latin.css'
-import '@fontsource/space-grotesk/400.css'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'

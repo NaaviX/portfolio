@@ -16,7 +16,7 @@ const menuItemVariants = {
         transition: {
             delay: i * 0.06,
             duration: 0.25,
-            ease: [0.25, 0.46, 0.45, 0.94],
+            ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
         },
     }),
     exit: { opacity: 0, y: -5, transition: { duration: 0.12 } },
@@ -28,7 +28,7 @@ const menuContainerVariants = {
         opacity: 1,
         height: 'auto',
         transition: {
-            height: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] },
+            height: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] },
             opacity: { duration: 0.2 },
         },
     },
@@ -36,7 +36,7 @@ const menuContainerVariants = {
         opacity: 0,
         height: 0,
         transition: {
-            height: { duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] },
+            height: { duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] },
             opacity: { duration: 0.15 },
         },
     },
@@ -89,7 +89,7 @@ export const NavbarMobile = () => {
                                     }}
                                     transition={{
                                         duration: 0.15,
-                                        ease: 'easeOut',
+                                        ease: 'easeOut' as const,
                                     }}
                                 >
                                     <X className='h-5 w-5' />
@@ -114,7 +114,7 @@ export const NavbarMobile = () => {
                                     }}
                                     transition={{
                                         duration: 0.15,
-                                        ease: 'easeOut',
+                                        ease: 'easeOut' as const,
                                     }}
                                 >
                                     <Menu className='h-5 w-5' />

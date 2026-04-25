@@ -1,19 +1,16 @@
-import { coursesData } from './courses.data'
 import { CourseCard } from './components/CourseCard'
+import { coursesData } from './courses.data'
 
 export const Courses = () => {
     return (
-        <div className='max-w-5xl mx-auto px-4 md:px-8 py-12'>
-            <div className='relative'>
-                {coursesData.map((course, index) => (
-                    <CourseCard
-                        key={course.titleKey}
-                        course={course}
-                        index={index}
-                        isLast={index === coursesData.length - 1}
-                    />
-                ))}
-            </div>
-        </div>
+        <ul className='border-t border-border-subtle/60'>
+            {coursesData.map((course, index) => (
+                <CourseCard
+                    key={course.titleKey}
+                    course={course}
+                    index={index}
+                />
+            ))}
+        </ul>
     )
 }

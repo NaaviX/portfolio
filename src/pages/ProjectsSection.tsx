@@ -22,7 +22,7 @@ export const ProjectsSection = () => {
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: 'easeOut' }}
+                transition={{ duration: 0.6, ease: 'easeOut' as const }}
             >
                 <motion.div
                     className='flex items-center gap-4 mb-4'
@@ -38,7 +38,7 @@ export const ProjectsSection = () => {
                     <motion.div
                         className='p-3 rounded-xl border border-border bg-bg-hover/50 backdrop-blur-sm'
                         whileHover={{ scale: 1.05, rotate: 5 }}
-                        transition={{ type: 'spring', stiffness: 400 }}
+                        transition={{ type: 'spring' as const, stiffness: 400 }}
                     >
                         <FolderKanban className='w-6 h-6 text-primary' />
                     </motion.div>
@@ -49,7 +49,7 @@ export const ProjectsSection = () => {
                 </motion.div>
 
                 <motion.h2
-                    className='text-2xl lg:text-3xl font-heading font-medium text-primary-light tracking-wide text-center'
+                    className='text-4xl lg:text-5xl font-heading font-semibold text-primary-light tracking-[-0.03em] text-center'
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -97,7 +97,7 @@ export const ProjectsSection = () => {
                     <BentoProjectCard
                         key={project.name}
                         project={project}
-                        variant='medium'
+                        variant={i === 0 ? 'medium' : 'large'}
                         index={i + 3}
                     />
                 ))}

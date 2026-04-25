@@ -24,7 +24,7 @@ export const MagneticButtonBody = (props: MagneticButtonProps) => {
             animate={{ scale: [1, 1.1, 1] }}
             transition={{
                 duration: 0.8,
-                ease: 'easeInOut',
+                ease: 'easeInOut' as const,
                 repeat: Infinity,
                 repeatDelay: 4,
             }}

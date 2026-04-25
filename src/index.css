@@ -14,8 +14,10 @@
     --color-primary-light: #b6ecf7;
     --color-primary-dark: #4ccce6;
 
-    --font-family-body: 'Roboto', system-ui, sans-serif;
-    --font-family-heading: 'Roboto', 'Space Grotesk', serif;
+    --font-family-body:
+        'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-family-heading:
+        'Bricolage Grotesque', 'Inter', system-ui, sans-serif;
 
     --font-size-3xs: 0.45rem;
     --font-size-2xs: 0.625rem;
@@ -99,6 +101,23 @@
     color: var(--color-primary-light);
     accent-color: var(--color-border);
     font-family: var(--font-family-body);
+    font-feature-settings:
+        'cv11' on,
+        'ss01' on,
+        'ss03' on;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-family-heading);
+    font-optical-sizing: auto;
 }
 
 input,

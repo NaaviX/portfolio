@@ -51,7 +51,7 @@ export const TimelineItemDate = (props: TimelineItemDateProps) => {
                             transition={{
                                 duration: 1.5,
                                 repeat: Infinity,
-                                ease: 'easeInOut',
+                                ease: 'easeInOut' as const,
                             }}
                             style={{
                                 boxShadow: '0 0 8px rgba(52, 211, 153, 0.6)',

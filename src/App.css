@@ -2,5 +2,4 @@
     background-image: url('/src/assets/background.svg');
     color: var(--chakra-colors-primary-light);
     accent-color: var(--chakra-colors-border);
-    font-family: 'Roboto', sans-serif !important;
 }

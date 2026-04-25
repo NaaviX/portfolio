@@ -13,7 +13,7 @@ const shimmerVariants: Variants = {
     hover: {
         x: '100%',
         opacity: 0.15,
-        transition: { duration: 0.8, ease: 'easeInOut' },
+        transition: { duration: 0.8, ease: 'easeInOut' as const },
     },
 }
 

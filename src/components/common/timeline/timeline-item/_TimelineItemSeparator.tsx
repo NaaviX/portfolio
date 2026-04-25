@@ -6,7 +6,7 @@ const lineVariants = {
         scaleY: 1,
         opacity: 1,
         transition: {
-            type: 'spring',
+            type: 'spring' as const,
             damping: 25,
             stiffness: 100,
             duration: 0.6,
@@ -20,7 +20,7 @@ const dotVariants = {
         scale: 1,
         opacity: 1,
         transition: {
-            type: 'spring',
+            type: 'spring' as const,
             damping: 15,
             stiffness: 200,
             delay: 0.2,
@@ -36,7 +36,7 @@ const pulseVariants = {
         transition: {
             duration: 2.5,
             repeat: Infinity,
-            ease: 'easeInOut',
+            ease: 'easeInOut' as const,
             delay: 0.5,
         },
     },

@@ -22,7 +22,7 @@ export const ScrollIndicator = () => {
                             transition={{
                                 duration: 1.5,
                                 repeat: Infinity,
-                                ease: 'easeInOut',
+                                ease: 'easeInOut' as const,
                             }}
                             className='text-primary-dark group-hover:text-primary transition-colors duration-300'
                         >
@@ -36,7 +36,7 @@ export const ScrollIndicator = () => {
                             transition={{
                                 duration: 1.5,
                                 repeat: Infinity,
-                                ease: 'easeInOut',
+                                ease: 'easeInOut' as const,
                                 delay: 0.15,
                             }}
                             className='absolute top-3 left-0 text-primary-dark/50'

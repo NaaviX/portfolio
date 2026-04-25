@@ -11,7 +11,7 @@ const contentVariants: Variants = {
     rest: { y: 0 },
     hover: {
         y: -2,
-        transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
+        transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
     },
 }
 
@@ -20,7 +20,7 @@ const imageVariants: Variants = {
     hover: {
         scale: 1.02,
         opacity: 1,
-        transition: { duration: 0.4, ease: 'easeOut' },
+        transition: { duration: 0.4, ease: 'easeOut' as const },
     },
 }
 

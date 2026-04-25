@@ -56,7 +56,7 @@ export const Fade = (props: FadeProps) => {
             whileInView='visible'
             variants={variants}
             transition={{
-                type: 'spring',
+                type: 'spring' as const,
                 damping: 25,
                 stiffness: 100,
                 duration,

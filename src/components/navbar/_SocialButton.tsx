@@ -26,7 +26,7 @@ export const SocialButton = (props: SocialButtonProps) => {
                 className='absolute inset-0 bg-gradient-to-t from-primary/25 via-primary/10 to-transparent'
                 initial={{ opacity: 0, y: '100%' }}
                 whileHover={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.25, ease: 'easeOut' }}
+                transition={{ duration: 0.25, ease: 'easeOut' as const }}
             />
         </motion.a>
     )

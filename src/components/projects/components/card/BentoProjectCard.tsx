@@ -16,54 +16,33 @@ interface BentoProjectCardProps {
     index?: number
 }
 
+const EASE_OUT_QUART = [0.25, 1, 0.5, 1] as [number, number, number, number]
+
 const cardVariants = {
-    hidden: { opacity: 0, y: 60, scale: 0.95 },
+    hidden: { opacity: 0, y: 32 },
     visible: (i: number) => ({
         opacity: 1,
         y: 0,
-        scale: 1,
         transition: {
-            type: 'spring' as const,
-            damping: 25,
-            stiffness: 80,
-            delay: i * 0.1,
+            duration: 0.7,
+            ease: EASE_OUT_QUART,
+            delay: i * 0.08,
         },
     }),
 }
 
 const imageVariants = {
-    rest: { scale: 1, filter: 'brightness(0.95) saturate(1)' },
+    rest: { scale: 1 },
     hover: {
-        scale: 1.06,
-        filter: 'brightness(1.02) saturate(1.1)',
-        transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+        scale: 1.04,
+        transition: { duration: 0.9, ease: EASE_OUT_QUART },
     },
 }
 
-const contentVariants = {
-    rest: { y: 0 },
-    hover: { y: -4, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
-}
-
-const glowVariants = {
-    rest: { opacity: 0, scale: 0.92 },
-    hover: {
-        opacity: 1,
-        scale: 1.02,
-        transition: { duration: 0.5, ease: 'easeOut' as const },
-    },
-}
-
-const shimmerVariants = {
-    rest: { x: '-100%', opacity: 0 },
-    hover: {
-        x: '100%',
-        opacity: 0.3,
-        transition: { duration: 1.2, ease: 'easeInOut' as const },
-    },
-}
-
-const TRANSITION_ALL_300 = 'transition-all duration-300'
+const SURFACE =
+    'relative bg-bg-subtle border border-border-subtle rounded-2xl overflow-hidden ' +
+    'transition-[border-color,transform] duration-500 ease-out ' +
+    'group-hover:border-border'
 
 export const BentoProjectCard = (props: BentoProjectCardProps) => {
     const { project, variant = 'medium', index = 0 } = props
@@ -82,6 +61,69 @@ export const BentoProjectCard = (props: BentoProjectCardProps) => {
 
     return <MediumCard project={project} index={index} />
 }
+
+const MetaRow = ({
+    project,
+    size = 'normal',
+}: {
+    project: Project
+    size?: 'large' | 'normal' | 'small'
+}) => {
+    const Icon = project.type === 'WEB' ? GoDeviceDesktop : GoDeviceMobile
+    const typeLabel = project.type === 'WEB' ? 'Web' : 'Mobile'
+    const members =
+        project.membersCount === 1 ? 'Solo' : `Team of ${project.membersCount}`
+
+    const config = {
+        large: { text: 'text-sm', icon: 14, gap: 'gap-3' },
+        normal: { text: 'text-xs', icon: 12, gap: 'gap-2.5' },
+        small: { text: 'text-[11px]', icon: 11, gap: 'gap-2' },
+    }
+    const c = config[size]
+
+    return (
+        <div
+            className={cn(
+                'flex items-center text-primary-light/55 font-medium tabular-nums tracking-wide uppercase',
+                c.text,
+                c.gap
+            )}
+        >
+            <span>{project.year}</span>
+            <span className='h-3 w-px bg-border-subtle' aria-hidden />
+            <span className='inline-flex items-center gap-1.5'>
+                <Icon size={c.icon} />
+                {typeLabel}
+            </span>
+            <span className='h-3 w-px bg-border-subtle' aria-hidden />
+            <span className='inline-flex items-center gap-1.5'>
+                <FaUserGroup size={c.icon - 1} />
+                {members}
+            </span>
+        </div>
+    )
+}
+
+const TitleWithRule = ({
+    children,
+    className,
+}: {
+    children: React.ReactNode
+    className?: string
+}) => (
+    <div className='relative inline-flex flex-col items-start'>
+        <Title className={className}>{children}</Title>
+        <span
+            className={cn(
+                'mt-3 h-px bg-primary/50 origin-left',
+                'transition-transform duration-700 ease-out',
+                'scale-x-[0.18] group-hover:scale-x-100',
+                'w-full'
+            )}
+            aria-hidden
+        />
+    </div>
+)
 
 const FeaturedCard = ({
     project,
@@ -105,56 +147,49 @@ const FeaturedCard = ({
                 initial='rest'
                 whileHover='hover'
                 animate='rest'
-                className='relative rounded-[2rem] overflow-hidden group cursor-default'
+                className='group cursor-default'
             >
-                <motion.div
-                    variants={glowVariants}
-                    className='absolute -inset-3 bg-gradient-to-br from-primary/60 via-primary-dark/40 to-primary/60 rounded-[2.5rem] blur-3xl'
-                />
-                <motion.div
-                    variants={glowVariants}
-                    className='absolute -inset-1 bg-gradient-conic from-primary/40 via-primary-dark/20 to-primary/40 rounded-[2rem] blur-xl animate-spin-slow'
-                    style={{ animationDuration: '8s' }}
-                />
-                <div className='relative bg-gradient-to-br from-bg-subtle/98 via-bg-subtle/95 to-bg-hover/90 backdrop-blur-2xl border border-border/60 rounded-[2rem] overflow-hidden shadow-[0_32px_64px_-12px_rgba(0,0,0,0.5)]'>
-                    <motion.div
-                        variants={shimmerVariants}
-                        className='absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12'
-                    />
-                    <div className='relative grid grid-cols-1 lg:grid-cols-2 gap-0'>
-                        <div className='relative h-[340px] lg:h-auto min-h-[400px] overflow-hidden'>
+                <div
+                    className={cn(
+                        SURFACE,
+                        'rounded-[1.75rem] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.6)]'
+                    )}
+                >
+                    <div className='grid grid-cols-1 lg:grid-cols-12'>
+                        <div className='relative h-[320px] lg:h-auto lg:col-span-7 overflow-hidden lg:border-r lg:border-border-subtle'>
                             <LazyImage
                                 src={project.images[0]}
                                 alt={project.name}
                                 className='w-full h-full lg:absolute lg:inset-0'
                                 variants={imageVariants}
                             />
-                            <div className='absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-bg-subtle/70 lg:opacity-70 opacity-0' />
+                            <div className='absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-bg-subtle/70 to-transparent lg:hidden' />
                         </div>
-                        <motion.div
-                            variants={contentVariants}
-                            className='p-10 lg:p-14 flex flex-col justify-center relative'
-                        >
-                            <Title className='text-4xl lg:text-5xl xl:text-6xl mb-4 font-bold tracking-tight'>
-                                {project.name}
-                            </Title>
-                            <div className='h-1.5 w-20 bg-gradient-to-r from-primary via-primary-dark to-transparent rounded-full mb-6' />
-                            <div className='flex flex-wrap items-center gap-3 mb-6'>
-                                <YearBadge year={project.year} size='large' />
-                                <ProjectTypeBadge type={project.type} />
-                                <MembersBadge count={project.membersCount} />
+                        <div className='relative lg:col-span-5 p-8 lg:p-12 flex flex-col justify-between gap-10'>
+                            <div className='flex items-start justify-end gap-6'>
+                                <span className='text-[10px] tracking-[0.2em] uppercase text-primary/70 font-medium pt-3'>
+                                    Featured
+                                </span>
                             </div>
-                            <p className='text-primary-light/70 text-lg leading-relaxed mb-8 max-w-lg'>
-                                {description}
-                            </p>
-                            <div className='flex justify-center mb-8'>
-                                <ActionButtons project={project} />
+                            <div>
+                                <TitleWithRule className='text-3xl lg:text-4xl xl:text-5xl font-semibold tracking-tight leading-[1.05]'>
+                                    {project.name}
+                                </TitleWithRule>
+                                <p className='mt-6 text-primary-light/65 text-base lg:text-lg leading-relaxed max-w-md'>
+                                    {description}
+                                </p>
                             </div>
-                            <ChipList
-                                skills={project.skills.slice(0, 6)}
-                                className='justify-start'
-                            />
-                        </motion.div>
+                            <div className='flex flex-col gap-6'>
+                                <MetaRow project={project} size='large' />
+                                <ChipList
+                                    skills={project.skills.slice(0, 6)}
+                                    className='justify-start'
+                                />
+                                <div className='pt-2'>
+                                    <ActionButtons project={project} />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </motion.div>
@@ -178,57 +213,40 @@ const LargeCard = ({ project, index }: { project: Project; index: number }) => {
                 initial='rest'
                 whileHover='hover'
                 animate='rest'
-                className='relative rounded-3xl overflow-hidden group h-full cursor-default'
+                className='group h-full cursor-default'
             >
-                <motion.div
-                    variants={glowVariants}
-                    className='absolute -inset-2 bg-gradient-to-br from-primary/50 via-transparent to-primary/50 rounded-[1.75rem] blur-2xl'
-                />
-                <div className='relative bg-gradient-to-br from-bg-subtle/95 via-bg-subtle/90 to-bg-hover/80 backdrop-blur-xl border border-border/50 rounded-3xl overflow-hidden h-full flex flex-col shadow-[0_24px_48px_-12px_rgba(0,0,0,0.4)]'>
-                    <div className='absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--color-primary)_0%,_transparent_55%)] opacity-[0.06]' />
-                    <motion.div
-                        variants={shimmerVariants}
-                        className='absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12'
-                    />
-                    <div className='relative h-[280px] overflow-hidden'>
+                <div
+                    className={cn(
+                        SURFACE,
+                        'h-full flex flex-col shadow-[0_14px_44px_-22px_rgba(0,0,0,0.55)]'
+                    )}
+                >
+                    <div className='relative h-[240px] overflow-hidden border-b border-border-subtle'>
                         <LazyImage
                             src={project.images[0]}
                             alt={project.name}
                             className='w-full h-full'
                             variants={imageVariants}
                         />
-                        <div className='absolute inset-0 bg-gradient-to-t from-bg-subtle via-bg-subtle/40 to-transparent opacity-35' />
-                        <div className='absolute inset-0 bg-gradient-to-b from-bg-subtle/40 via-transparent to-transparent' />
                     </div>
-                    <motion.div
-                        variants={contentVariants}
-                        className='p-7 lg:p-8 flex flex-col flex-1 relative'
-                    >
-                        <Title className='text-2xl lg:text-3xl font-semibold mb-3 tracking-tight'>
-                            {project.name}
-                        </Title>
-                        <div className='flex flex-wrap items-center gap-2 mb-4'>
-                            <YearBadge year={project.year} />
-                            <ProjectTypeBadge
-                                type={project.type}
-                                size='small'
-                            />
-                            <MembersBadge
-                                count={project.membersCount}
-                                size='small'
-                            />
+                    <div className='p-7 lg:p-8 flex flex-col flex-1 gap-5'>
+                        <div className='flex items-start justify-end gap-4'>
+                            <MetaRow project={project} />
                         </div>
-                        <p className='text-primary-light/60 text-sm leading-relaxed mb-5 flex-1'>
+                        <TitleWithRule className='text-2xl lg:text-[1.75rem] font-semibold tracking-tight leading-tight'>
+                            {project.name}
+                        </TitleWithRule>
+                        <p className='text-primary-light/60 text-sm lg:text-[15px] leading-relaxed flex-1'>
                             {description}
                         </p>
-                        <div className='flex justify-center mb-5'>
-                            <ActionButtons project={project} size='small' />
-                        </div>
                         <ChipList
                             skills={project.skills.slice(0, 5)}
                             className='justify-start'
                         />
-                    </motion.div>
+                        <div className='pt-1'>
+                            <ActionButtons project={project} size='small' />
+                        </div>
+                    </div>
                 </div>
             </motion.div>
         </motion.div>
@@ -257,57 +275,40 @@ const MediumCard = ({
                 initial='rest'
                 whileHover='hover'
                 animate='rest'
-                className='relative rounded-2xl overflow-hidden group h-full cursor-default'
+                className='group h-full cursor-default'
             >
-                <motion.div
-                    variants={glowVariants}
-                    className='absolute -inset-1.5 bg-gradient-to-br from-primary/40 via-transparent to-primary-dark/40 rounded-[1.25rem] blur-xl'
-                />
-                <div className='relative bg-gradient-to-br from-bg-subtle/90 via-bg-subtle/85 to-bg-hover/70 backdrop-blur-lg border border-border/50 rounded-2xl overflow-hidden h-full flex flex-col shadow-[0_16px_32px_-8px_rgba(0,0,0,0.35)]'>
-                    <div className='absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--color-primary)_0%,_transparent_65%)] opacity-[0.05]' />
-                    <motion.div
-                        variants={shimmerVariants}
-                        className='absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12'
-                    />
-                    <div className='relative h-[200px] overflow-hidden'>
+                <div
+                    className={cn(
+                        SURFACE,
+                        'h-full flex flex-col shadow-[0_12px_36px_-20px_rgba(0,0,0,0.5)]'
+                    )}
+                >
+                    <div className='relative h-[210px] overflow-hidden border-b border-border-subtle'>
                         <LazyImage
                             src={project.images[0]}
                             alt={project.name}
                             className='w-full h-full'
                             variants={imageVariants}
                         />
-                        <div className='absolute inset-0 bg-gradient-to-t from-bg-subtle via-bg-subtle/30 to-transparent opacity-80' />
-                        <div className='absolute inset-0 bg-gradient-to-b from-bg-subtle/30 via-transparent to-transparent' />
                     </div>
-                    <motion.div
-                        variants={contentVariants}
-                        className='p-5 lg:p-6 flex flex-col flex-1 relative'
-                    >
-                        <Title className='text-xl lg:text-2xl font-semibold mb-3 tracking-tight'>
-                            {project.name}
-                        </Title>
-                        <div className='flex flex-wrap items-center gap-2 mb-4'>
-                            <YearBadge year={project.year} />
-                            <ProjectTypeBadge
-                                type={project.type}
-                                size='small'
-                            />
-                            <MembersBadge
-                                count={project.membersCount}
-                                size='small'
-                            />
+                    <div className='p-6 flex flex-col flex-1 gap-4'>
+                        <div className='flex items-start justify-end gap-4'>
+                            <MetaRow project={project} size='small' />
                         </div>
-                        <p className='text-primary-light/55 text-sm leading-relaxed mb-5 flex-1 line-clamp-3'>
+                        <TitleWithRule className='text-xl lg:text-[1.375rem] font-semibold tracking-tight leading-tight'>
+                            {project.name}
+                        </TitleWithRule>
+                        <p className='text-primary-light/55 text-sm leading-relaxed flex-1 line-clamp-3'>
                             {description}
                         </p>
-                        <div className='flex justify-center mb-4'>
-                            <ActionButtons project={project} size='small' />
-                        </div>
                         <ChipList
                             skills={project.skills.slice(0, 4)}
                             className='justify-start'
                         />
-                    </motion.div>
+                        <div className='pt-1'>
+                            <ActionButtons project={project} size='small' />
+                        </div>
+                    </div>
                 </div>
             </motion.div>
         </motion.div>
@@ -336,163 +337,45 @@ const CompactCard = ({
                 initial='rest'
                 whileHover='hover'
                 animate='rest'
-                className='relative rounded-xl overflow-hidden group h-full cursor-default'
+                className='group h-full cursor-default'
             >
-                <motion.div
-                    variants={glowVariants}
-                    className='absolute -inset-1 bg-gradient-to-br from-primary/30 via-transparent to-primary-dark/30 rounded-[0.875rem] blur-lg'
-                />
-                <div className='relative bg-gradient-to-br from-bg-subtle/85 via-bg-subtle/75 to-bg-hover/60 backdrop-blur-md border border-border/40 rounded-xl overflow-hidden h-full shadow-[0_12px_24px_-6px_rgba(0,0,0,0.3)]'>
-                    <motion.div
-                        variants={shimmerVariants}
-                        className='absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12'
-                    />
-                    <div className='relative h-[150px] overflow-hidden'>
+                <div
+                    className={cn(
+                        SURFACE,
+                        'h-full flex flex-col rounded-xl shadow-[0_10px_28px_-16px_rgba(0,0,0,0.45)]'
+                    )}
+                >
+                    <div className='relative h-[150px] overflow-hidden border-b border-border-subtle'>
                         <LazyImage
                             src={project.images[0]}
                             alt={project.name}
                             className='w-full h-full'
                             variants={imageVariants}
                         />
-                        <div className='absolute inset-0 bg-gradient-to-t from-bg-subtle via-bg-subtle/40 to-transparent opacity-90' />
                     </div>
-                    <motion.div variants={contentVariants} className='p-4'>
-                        <Title className='text-base font-semibold mb-2 tracking-tight'>
-                            {project.name}
-                        </Title>
-                        <div className='flex flex-wrap items-center gap-1.5 mb-3'>
-                            <YearBadge year={project.year} size='small' />
-                            <ProjectTypeBadge type={project.type} size='tiny' />
-                            <MembersBadge
-                                count={project.membersCount}
-                                size='small'
-                            />
+                    <div className='p-4 flex flex-col flex-1 gap-3'>
+                        <div className='flex items-start justify-end gap-3'>
+                            <span className='text-[10px] uppercase tracking-wider text-primary-light/50 tabular-nums pt-1'>
+                                {project.year}
+                            </span>
                         </div>
-                        <p className='text-primary-light/50 text-xs leading-relaxed line-clamp-2 mb-3'>
+                        <TitleWithRule className='text-base font-semibold tracking-tight leading-tight'>
+                            {project.name}
+                        </TitleWithRule>
+                        <p className='text-primary-light/50 text-xs leading-relaxed line-clamp-2 flex-1'>
                             {description}
                         </p>
-                        <div className='flex justify-center mb-3'>
-                            <ActionButtons project={project} size='tiny' />
-                        </div>
                         <ChipList
                             skills={project.skills.slice(0, 2)}
                             className='justify-start gap-1.5'
                         />
-                    </motion.div>
+                        <div className='pt-1'>
+                            <ActionButtons project={project} size='tiny' />
+                        </div>
+                    </div>
                 </div>
             </motion.div>
         </motion.div>
-    )
-}
-
-const ProjectTypeBadge = ({
-    type,
-    size = 'normal',
-}: {
-    type: Project['type']
-    size?: 'normal' | 'small' | 'tiny'
-}) => {
-    const Icon = type === 'WEB' ? GoDeviceDesktop : GoDeviceMobile
-    const label = type === 'WEB' ? 'Web' : 'Mobile'
-    const config = {
-        normal: { padding: 'px-3 py-1.5', icon: '1rem', text: 'text-xs' },
-        small: { padding: 'px-2.5 py-1', icon: '0.875rem', text: 'text-xs' },
-        tiny: { padding: 'px-2 py-0.5', icon: '0.75rem', text: 'text-[10px]' },
-    }
-
-    return (
-        <div
-            className={cn(
-                'flex items-center gap-1.5 rounded-full',
-                'bg-gradient-to-r from-bg-hover/80 to-bg-active/60',
-                'backdrop-blur-md border border-border/30',
-                'shadow-sm',
-                TRANSITION_ALL_300,
-                'group-hover:border-border/50 group-hover:shadow-md',
-                config[size].padding
-            )}
-        >
-            <Icon
-                size={config[size].icon}
-                className='text-primary-light/80 transition-colors group-hover:text-primary-light'
-            />
-            <span
-                className={cn(
-                    'font-medium text-primary-light/70 transition-colors group-hover:text-primary-light/90',
-                    config[size].text
-                )}
-            >
-                {label}
-            </span>
-        </div>
-    )
-}
-
-const YearBadge = ({
-    year,
-    size = 'normal',
-}: {
-    year: string
-    size?: 'large' | 'normal' | 'small'
-}) => {
-    const config = {
-        large: 'px-4 py-1.5 text-sm',
-        normal: 'px-3 py-1 text-xs',
-        small: 'px-2 py-0.5 text-[10px]',
-    }
-
-    return (
-        <span
-            className={cn(
-                'rounded-full font-semibold tracking-wide',
-                'bg-gradient-to-r from-primary/20 via-primary/15 to-primary-dark/20',
-                'backdrop-blur-md text-primary-light',
-                'border border-primary/30',
-                'shadow-[0_0_12px_-3px_var(--color-primary)]',
-                TRANSITION_ALL_300,
-                'group-hover:shadow-[0_0_20px_-3px_var(--color-primary)] group-hover:border-primary/50',
-                config[size]
-            )}
-        >
-            {year}
-        </span>
-    )
-}
-
-const MembersBadge = ({
-    count,
-    size = 'normal',
-}: {
-    count: number
-    size?: 'normal' | 'small'
-}) => {
-    const config = {
-        normal: { icon: '0.85rem', text: 'text-sm', padding: 'p-1.5' },
-        small: { icon: '0.7rem', text: 'text-xs', padding: 'p-1' },
-    }
-
-    return (
-        <div
-            className={cn(
-                'flex items-center gap-1.5 text-primary-dark/70',
-                'transition-colors duration-300 group-hover:text-primary-dark',
-                config[size].text
-            )}
-        >
-            <div
-                className={cn(
-                    'rounded-lg bg-bg/60 border border-border/30',
-                    TRANSITION_ALL_300,
-                    'group-hover:bg-bg/80 group-hover:border-border/50',
-                    config[size].padding
-                )}
-            >
-                <FaUserGroup size={config[size].icon} />
-            </div>
-            <span className='font-medium'>
-                {count === 1 ? 'Solo' : `×${count}`}
-            </span>
-        </div>
     )
 }
 

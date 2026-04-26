@@ -17,7 +17,7 @@ export const translations = {
             description3: 'Actuellement en mission chez Amundi',
             metaLine: 'Ingénieur Java & TypeScript · 5 ans · Amundi · Paris',
             tagline:
-                "Je construis des interfaces et des backends pour le secteur financier. Actuellement en mission chez Amundi, disponible pour de nouvelles opportunités.",
+                'Je construis des interfaces et des backends pour le secteur financier. Actuellement en mission chez Amundi, disponible pour de nouvelles opportunités.',
             ctaContact: 'Me contacter',
             ctaLinkedin: 'LinkedIn',
         },
@@ -135,6 +135,10 @@ export const translations = {
             },
         },
         contact: {
+            headlineLead: 'Travaillons',
+            headlineHighlight: 'ensemble',
+            intro: "Disponible pour une mission freelance, à l'écoute d'opportunités en CDI ou de collaborations sur vos projets.",
+            responseTime: 'Réponse sous 24 heures.',
             name: 'Nom',
             namePlaceholder: 'Votre nom',
             email: 'Email',
@@ -279,6 +283,10 @@ export const translations = {
             },
         },
         contact: {
+            headlineLead: "Let's work",
+            headlineHighlight: 'together',
+            intro: 'Available for freelance missions, open to permanent positions or collaborations on your projects.',
+            responseTime: 'Reply within 24 hours.',
             name: 'Name',
             namePlaceholder: 'Your name',
             email: 'Email',

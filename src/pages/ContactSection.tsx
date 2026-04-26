@@ -1,92 +1,110 @@
 import { ContactForm } from '@/components/contact'
+import { useLanguage } from '@/i18n'
 import { motion } from 'framer-motion'
-import { Mail } from 'lucide-react'
-import {
-    GRADIENT_DIVIDER_LEFT,
-    GRADIENT_DIVIDER_RIGHT,
-    GRADIENT_LINE_LEFT,
-    GRADIENT_LINE_RIGHT,
-} from './components/section-header.styles'
+import { ArrowUpRight, Mail } from 'lucide-react'
+import { FaLinkedinIn } from 'react-icons/fa6'
+
+const easeOutExpo = [0.16, 1, 0.3, 1] as const
+
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: { staggerChildren: 0.08, delayChildren: 0.12 },
+    },
+}
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.7, ease: easeOutExpo },
+    },
+}
+
+const directLinks = [
+    {
+        label: 'antoine.legrand77@gmail.com',
+        href: 'mailto:antoine.legrand77@gmail.com',
+        icon: Mail,
+        external: false,
+    },
+    {
+        label: 'linkedin.com/in/antoine-legrand1',
+        href: 'https://linkedin.com/in/antoine-legrand1',
+        icon: FaLinkedinIn,
+        external: true,
+    },
+]
 
 export const ContactSection = () => {
+    const { t } = useLanguage()
+
     return (
         <div className='w-full relative'>
-            <div className='flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16'>
-                <div className='flex-1 flex justify-center lg:justify-end'>
+            <div className='grid lg:grid-cols-[1.05fr_1fr] gap-14 lg:gap-20 items-start'>
+                <motion.aside
+                    className='flex flex-col gap-9 lg:pt-4'
+                    initial='hidden'
+                    whileInView='visible'
+                    viewport={{ once: true, margin: '-80px' }}
+                    variants={containerVariants}
+                >
+                    <div className='flex flex-col gap-6'>
+                        <motion.h2
+                            variants={itemVariants}
+                            className='font-heading text-5xl md:text-6xl lg:text-7xl font-semibold tracking-[-0.04em] leading-[0.95] text-primary-light'
+                        >
+                            {t.contact.headlineLead}{' '}
+                            <span className='font-normal italic text-primary'>
+                                {t.contact.headlineHighlight}
+                            </span>
+                            .
+                        </motion.h2>
+
+                        <motion.p
+                            variants={itemVariants}
+                            className='text-base lg:text-lg text-primary-light/65 leading-relaxed max-w-[52ch]'
+                        >
+                            {t.contact.intro}
+                            <br />
+                            {t.contact.responseTime}
+                        </motion.p>
+                    </div>
+
+                    <motion.ul
+                        variants={itemVariants}
+                        className='flex flex-col rounded-2xl border border-border-subtle/80 overflow-hidden divide-y divide-border-subtle/60'
+                    >
+                        {directLinks.map((link) => (
+                            <li key={link.href}>
+                                <a
+                                    href={link.href}
+                                    target={
+                                        link.external ? '_blank' : undefined
+                                    }
+                                    rel={
+                                        link.external
+                                            ? 'noopener noreferrer'
+                                            : undefined
+                                    }
+                                    className='group flex items-center gap-4 px-5 py-4 transition-colors hover:bg-bg-hover/35'
+                                >
+                                    <link.icon className='w-4 h-4 text-primary shrink-0' />
+                                    <span className='flex-1 text-sm lg:text-[15px] text-primary-light/85 font-medium tracking-tight truncate'>
+                                        {link.label}
+                                    </span>
+                                    <ArrowUpRight className='w-4 h-4 text-primary-light/35 transition-all duration-500 ease-out group-hover:text-primary group-hover:-translate-y-0.5 group-hover:translate-x-0.5' />
+                                </a>
+                            </li>
+                        ))}
+                    </motion.ul>
+                </motion.aside>
+
+                <div className='w-full'>
                     <ContactForm />
                 </div>
-                <motion.div
-                    className='flex flex-col items-center flex-1 mb-12 lg:mb-0'
-                    initial={{ opacity: 0, y: -20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, ease: 'easeOut' as const }}
-                >
-                    <motion.div
-                        className='flex items-center gap-4 mb-4'
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
-                    >
-                        <div
-                            className='h-px w-12 lg:w-20'
-                            style={GRADIENT_LINE_LEFT}
-                        />
-                        <motion.div
-                            className='p-3 rounded-xl border border-border bg-bg-hover/50 backdrop-blur-sm'
-                            whileHover={{ scale: 1.05, rotate: 5 }}
-                            transition={{
-                                type: 'spring' as const,
-                                stiffness: 400,
-                            }}
-                        >
-                            <Mail className='w-6 h-6 text-primary' />
-                        </motion.div>
-                        <div
-                            className='h-px w-12 lg:w-20'
-                            style={GRADIENT_LINE_RIGHT}
-                        />
-                    </motion.div>
-
-                    <motion.h2
-                        className='text-4xl lg:text-5xl font-heading font-semibold text-primary-light tracking-[-0.03em] text-center'
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.3 }}
-                    >
-                        Me contacter
-                    </motion.h2>
-
-                    <motion.p
-                        className='text-primary-dark text-sm lg:text-base mt-2 text-center'
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.4 }}
-                    >
-                        Une question ou un projet ? N&apos;hésitez pas !
-                    </motion.p>
-
-                    <motion.div
-                        className='flex items-center gap-2 mt-6'
-                        initial={{ opacity: 0, scaleX: 0 }}
-                        whileInView={{ opacity: 1, scaleX: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.5 }}
-                    >
-                        <div
-                            className='h-px w-8 lg:w-16'
-                            style={GRADIENT_DIVIDER_LEFT}
-                        />
-                        <div className='w-1.5 h-1.5 rounded-full bg-primary animate-pulse-dot' />
-                        <div
-                            className='h-px w-8 lg:w-16'
-                            style={GRADIENT_DIVIDER_RIGHT}
-                        />
-                    </motion.div>
-                </motion.div>
             </div>
         </div>
     )

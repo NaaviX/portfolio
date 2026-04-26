@@ -72,9 +72,7 @@ export const SkillsSection = () => {
                     </motion.div>
                 </motion.div>
 
-                <div className='max-w-6xl mx-auto px-4'>
-                    <Skills />
-                </div>
+                <Skills />
             </div>
         </div>
     )

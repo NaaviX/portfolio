@@ -1,3 +1,3 @@
-export * from './components/card/SkillsCard'
+export * from './Skills'
 export * from './skills.data'
 export * from './skills.type'

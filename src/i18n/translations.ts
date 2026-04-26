@@ -22,9 +22,10 @@ export const translations = {
             description2:
                 "Passionné d'informatique et de nouvelles technologies",
             description3: 'Actuellement en mission chez Amundi',
-            metaLine: 'Ingénieur Java & TypeScript · 5 ans · Amundi · Paris',
+            metaLine:
+                'Ingénieur développeur web & mobile · 8 ans d’expérience · Paris',
             tagline:
-                'Je construis des interfaces et des backends pour le secteur financier. Actuellement en mission chez Amundi, disponible pour de nouvelles opportunités.',
+                'Passionné par l’informatique et le développement depuis bientôt 15 ans. Je recherche des opportunités de missions freelance et reste à l’écoute du marché pour un CDI.',
             ctaContact: 'Me contacter',
             ctaLinkedin: 'LinkedIn',
         },
@@ -178,9 +179,10 @@ export const translations = {
             description1: 'Full Stack Software Engineer',
             description2: 'Passionate about IT and new technologies',
             description3: 'Currently on assignment at Amundi',
-            metaLine: 'Java & TypeScript Engineer · 5 yrs · Amundi · Paris',
+            metaLine:
+                'Web & Mobile Software Engineer · 8 years of experience · Paris',
             tagline:
-                'I build interfaces and backends for the financial sector. Currently on assignment at Amundi, open to new opportunities.',
+                'Passionate about IT and development for nearly 15 years. Looking for freelance opportunities and open to permanent (CDI) positions.',
             ctaContact: 'Get in touch',
             ctaLinkedin: 'LinkedIn',
         },

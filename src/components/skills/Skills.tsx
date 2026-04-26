@@ -47,7 +47,12 @@ const MAG_RADIUS = 140
 const MAG_STRENGTH = 0.35
 
 type FlatSkill = Skill & { category: SKILL_TYPE; palette: Palette }
-type Group = { category: SKILL_TYPE; palette: Palette; label: string; skills: FlatSkill[] }
+type Group = {
+    category: SKILL_TYPE
+    palette: Palette
+    label: string
+    skills: FlatSkill[]
+}
 
 const buildGroups = (): Group[] => {
     const seen = new Set<string>()
@@ -125,12 +130,12 @@ export const Skills = () => {
 
     const totalChips = useMemo(
         () => groups.reduce((acc, g) => acc + g.skills.length, 0),
-        [groups],
+        [groups]
     )
 
     const recomputeRects = useCallback(() => {
         rectsRef.current = chipRefs.current.map(
-            (el) => el?.getBoundingClientRect() ?? new DOMRect(),
+            (el) => el?.getBoundingClientRect() ?? new DOMRect()
         )
     }, [])
 
@@ -217,7 +222,10 @@ export const Skills = () => {
                                 {group.skills.map((skill, i) => {
                                     const idx = start + i
                                     return (
-                                        <motion.li key={skill.name} variants={chipVariants}>
+                                        <motion.li
+                                            key={skill.name}
+                                            variants={chipVariants}
+                                        >
                                             <SkillChip
                                                 skill={skill}
                                                 setRef={(el) => {
@@ -254,7 +262,10 @@ const GroupHeader = ({
                 aria-hidden
                 variants={dotVariants}
                 className='inline-block h-1.5 w-1.5 rounded-full'
-                style={{ background: palette.hue, boxShadow: `0 0 10px ${palette.hue}` }}
+                style={{
+                    background: palette.hue,
+                    boxShadow: `0 0 10px ${palette.hue}`,
+                }}
             />
             <span
                 className='text-2xs uppercase'
@@ -295,7 +306,9 @@ const SkillChip = ({ skill, setRef }: ChipProps) => {
                 fontSize: important ? '0.98rem' : '0.82rem',
                 fontWeight: important ? 600 : 500,
                 color: important ? palette.ink : 'rgba(214, 240, 247, 0.78)',
-                background: important ? palette.tint : 'rgba(255, 255, 255, 0.022)',
+                background: important
+                    ? palette.tint
+                    : 'rgba(255, 255, 255, 0.022)',
                 borderColor: important ? palette.hue : `${palette.hue}30`,
                 boxShadow: important
                     ? `0 0 0 1px ${palette.hue}33, 0 14px 36px -24px ${palette.hue}`

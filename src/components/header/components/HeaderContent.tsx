@@ -6,8 +6,16 @@ import { userData } from '../../user'
 
 const easeOutQuart = [0.25, 1, 0.5, 1] as [number, number, number, number]
 
+const AvailabilityDot = () => (
+    <span className='relative flex h-2 w-2'>
+        <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60' />
+        <span className='relative inline-flex h-2 w-2 rounded-full bg-primary' />
+    </span>
+)
+
 export const HeaderContent = () => {
-    const { t, language } = useLanguage()
+    const { t } = useLanguage()
+    const aside = t.header.aside
 
     return (
         <motion.div
@@ -24,6 +32,20 @@ export const HeaderContent = () => {
                 <p className='text-base md:text-lg leading-relaxed text-primary-light/55 max-w-xl'>
                     {t.header.tagline}
                 </p>
+
+                <div className='flex flex-col gap-3 lg:hidden'>
+                    <div className='flex items-center gap-2.5'>
+                        <AvailabilityDot />
+                        <span className='text-[0.7rem] tracking-[0.2em] uppercase text-primary-light/80 font-mono'>
+                            {aside.availability}
+                        </span>
+                    </div>
+                    <p className='text-[0.7rem] tracking-[0.2em] uppercase text-primary-light/55 font-mono leading-relaxed'>
+                        {aside.roleValue}
+                        <span className='text-primary-light/30'> · </span>
+                        {aside.basedInValue}
+                    </p>
+                </div>
 
                 <div className='flex flex-wrap items-center gap-3 pt-2'>
                     <Link
@@ -49,49 +71,32 @@ export const HeaderContent = () => {
 
             <aside className='lg:col-span-5 hidden lg:flex flex-col gap-6 border-l border-border-subtle/40 pl-10'>
                 <div className='flex items-center gap-2.5'>
-                    <span className='relative flex h-2 w-2'>
-                        <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60' />
-                        <span className='relative inline-flex h-2 w-2 rounded-full bg-primary' />
-                    </span>
+                    <AvailabilityDot />
                     <span className='text-xs tracking-[0.2em] uppercase text-primary-light/70 font-mono'>
-                        {language === 'fr'
-                            ? 'Disponible · Freelance & CDI'
-                            : 'Available · Freelance & Full-time'}
+                        {aside.availability}
                     </span>
                 </div>
 
                 <dl className='grid grid-cols-[auto_1fr] gap-x-6 gap-y-3 text-sm'>
                     <dt className='text-primary-light/40 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
-                        {language === 'fr' ? 'Basé à' : 'Based in'}
+                        {aside.basedInLabel}
                     </dt>
-                    <dd className='text-primary-light/80'>
-                        {language === 'fr' ? 'Paris, France' : 'Paris, France'}
-                    </dd>
+                    <dd className='text-primary-light/80'>{aside.basedInValue}</dd>
 
                     <dt className='text-primary-light/40 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
-                        {language === 'fr' ? 'Poste' : 'Role'}
+                        {aside.roleLabel}
                     </dt>
-                    <dd className='text-primary-light/80'>
-                        {language === 'fr'
-                            ? 'Ingénieur Java chez Amundi'
-                            : 'Java Engineer at Amundi'}
-                    </dd>
+                    <dd className='text-primary-light/80'>{aside.roleValue}</dd>
 
                     <dt className='text-primary-light/40 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
-                        {language === 'fr' ? 'Stack' : 'Stack'}
+                        {aside.stackLabel}
                     </dt>
-                    <dd className='text-primary-light/80'>
-                        Java, TypeScript, React, Node, SQL
-                    </dd>
+                    <dd className='text-primary-light/80'>{aside.stackValue}</dd>
 
                     <dt className='text-primary-light/40 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
-                        {language === 'fr' ? 'Langues' : 'Languages'}
+                        {aside.languagesLabel}
                     </dt>
-                    <dd className='text-primary-light/80'>
-                        {language === 'fr'
-                            ? 'Français · Anglais (C1)'
-                            : 'French · English (C1)'}
-                    </dd>
+                    <dd className='text-primary-light/80'>{aside.languagesValue}</dd>
                 </dl>
             </aside>
         </motion.div>

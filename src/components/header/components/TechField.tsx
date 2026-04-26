@@ -22,6 +22,7 @@ import {
 } from '@/assets/icons'
 import {
     motion,
+    useMotionTemplate,
     useMotionValue,
     useReducedMotion,
     useSpring,
@@ -70,6 +71,24 @@ const NODES: Node[] = [
 ]
 
 const PARALLAX_RANGE_PX = 36
+const ADJACENCY_THRESHOLD = 24 // % Euclidean distance — DESIGN.md spec
+const SPOTLIGHT_RADIUS = 22 // % of viewport min dimension
+
+type Edge = { a: number; b: number }
+
+const EDGES: Edge[] = (() => {
+    const out: Edge[] = []
+    for (let i = 0; i < NODES.length; i++) {
+        for (let j = i + 1; j < NODES.length; j++) {
+            const dx = NODES[i].x - NODES[j].x
+            const dy = NODES[i].y - NODES[j].y
+            if (Math.hypot(dx, dy) < ADJACENCY_THRESHOLD) {
+                out.push({ a: i, b: j })
+            }
+        }
+    }
+    return out
+})()
 
 type TechIconProps = {
     node: Node
@@ -121,12 +140,56 @@ const TechIcon = memo(({ node, px, py, reduce }: TechIconProps) => {
 })
 TechIcon.displayName = 'TechIcon'
 
+const EdgeMesh = ({ variant }: { variant: 'base' | 'spotlight' }) => {
+    const isBase = variant === 'base'
+    return (
+        <svg
+            className='absolute inset-0 h-full w-full'
+            viewBox='0 0 100 100'
+            preserveAspectRatio='none'
+            aria-hidden
+        >
+            {!isBase && (
+                <defs>
+                    <linearGradient id='edge-spotlight' x1='0' y1='0' x2='1' y2='1'>
+                        <stop offset='0%' stopColor='#00a2c7' />
+                        <stop offset='50%' stopColor='#4ccce6' />
+                        <stop offset='100%' stopColor='#00a2c7' />
+                    </linearGradient>
+                </defs>
+            )}
+            {EDGES.map(({ a, b }, i) => {
+                const A = NODES[a]
+                const B = NODES[b]
+                return (
+                    <line
+                        key={i}
+                        x1={A.x}
+                        y1={A.y}
+                        x2={B.x}
+                        y2={B.y}
+                        stroke={isBase ? '#00a2c7' : 'url(#edge-spotlight)'}
+                        strokeOpacity={isBase ? 0.06 : 0.55}
+                        strokeWidth={isBase ? 0.12 : 0.22}
+                        strokeLinecap='round'
+                        vectorEffect='non-scaling-stroke'
+                    />
+                )
+            })}
+        </svg>
+    )
+}
+
 export const TechField = () => {
     const reduce = useReducedMotion() ?? false
     const mx = useMotionValue(0)
     const my = useMotionValue(0)
     const sx = useSpring(mx, { damping: 28, stiffness: 70, mass: 0.8 })
     const sy = useSpring(my, { damping: 28, stiffness: 70, mass: 0.8 })
+
+    const spotX = useTransform(sx, (v) => (v + 0.5) * 100)
+    const spotY = useTransform(sy, (v) => (v + 0.5) * 100)
+    const spotlightMask = useMotionTemplate`radial-gradient(circle ${SPOTLIGHT_RADIUS}vmin at ${spotX}% ${spotY}%, #000 30%, rgba(0,0,0,0.4) 65%, transparent 100%)`
 
     useEffect(() => {
         if (reduce) return
@@ -138,7 +201,7 @@ export const TechField = () => {
         return () => window.removeEventListener('pointermove', onMove)
     }, [mx, my, reduce])
 
-    const mask =
+    const fieldMask =
         'radial-gradient(ellipse 70% 55% at 32% 52%, transparent 0%, rgba(0,0,0,0.45) 38%, #000 72%)'
 
     return (
@@ -146,10 +209,24 @@ export const TechField = () => {
             aria-hidden
             className='pointer-events-none absolute inset-0 overflow-hidden'
             style={{
-                maskImage: mask,
-                WebkitMaskImage: mask,
+                maskImage: fieldMask,
+                WebkitMaskImage: fieldMask,
             }}
         >
+            <EdgeMesh variant='base' />
+
+            {!reduce && (
+                <motion.div
+                    className='absolute inset-0'
+                    style={{
+                        maskImage: spotlightMask,
+                        WebkitMaskImage: spotlightMask,
+                    }}
+                >
+                    <EdgeMesh variant='spotlight' />
+                </motion.div>
+            )}
+
             {NODES.map((node, i) => (
                 <TechIcon
                     key={i}

@@ -21,11 +21,11 @@ export const HeaderContent = () => {
         <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.1, ease: easeOutQuart, delay: 0.35 }}
+            transition={{ duration: 0.9, ease: easeOutQuart, delay: 0.2 }}
             className='grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-end'
         >
             <div className='lg:col-span-7 flex flex-col gap-7'>
-                <p className='text-sm md:text-base font-medium text-primary-light/70 tracking-wide'>
+                <p className='text-sm md:text-base font-medium text-primary-light/70 tracking-wide max-w-2xl'>
                     {t.header.metaLine}
                 </p>
 
@@ -78,22 +78,22 @@ export const HeaderContent = () => {
                 </div>
 
                 <dl className='grid grid-cols-[auto_1fr] gap-x-6 gap-y-3 text-sm'>
-                    <dt className='text-primary-light/40 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
+                    <dt className='text-primary-light/55 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
                         {aside.basedInLabel}
                     </dt>
                     <dd className='text-primary-light/80'>{aside.basedInValue}</dd>
 
-                    <dt className='text-primary-light/40 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
+                    <dt className='text-primary-light/55 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
                         {aside.roleLabel}
                     </dt>
                     <dd className='text-primary-light/80'>{aside.roleValue}</dd>
 
-                    <dt className='text-primary-light/40 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
+                    <dt className='text-primary-light/55 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
                         {aside.stackLabel}
                     </dt>
                     <dd className='text-primary-light/80'>{aside.stackValue}</dd>
 
-                    <dt className='text-primary-light/40 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
+                    <dt className='text-primary-light/55 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
                         {aside.languagesLabel}
                     </dt>
                     <dd className='text-primary-light/80'>{aside.languagesValue}</dd>

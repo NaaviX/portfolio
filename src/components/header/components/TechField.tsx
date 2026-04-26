@@ -29,7 +29,14 @@ import {
     useTransform,
     type MotionValue,
 } from 'framer-motion'
-import { memo, useEffect, type ComponentType, type SVGProps } from 'react'
+import {
+    memo,
+    useCallback,
+    useEffect,
+    useState,
+    type ComponentType,
+    type SVGProps,
+} from 'react'
 
 type SvgIcon = ComponentType<SVGProps<SVGSVGElement>>
 
@@ -112,7 +119,6 @@ const NODES: Node[] = [
         duration: 8.5,
         delay: 2,
     },
-
     {
         Icon: JsIcon,
         x: 14,
@@ -190,7 +196,6 @@ const NODES: Node[] = [
         duration: 9.5,
         delay: 1.4,
     },
-
     {
         Icon: PostgresqlIcon,
         x: 26,
@@ -273,6 +278,14 @@ const NODES: Node[] = [
 const PARALLAX_RANGE_PX = 36
 const ADJACENCY_THRESHOLD = 24 // % Euclidean distance — DESIGN.md spec
 const SPOTLIGHT_RADIUS = 22 // % of viewport min dimension
+const CURSOR_PULL_RADIUS = 22 // %
+const CURSOR_PULL_MAX_PX = 4
+const PULSE_TRAVEL_MS = 1200
+const PULSE_SPAWN_MIN_MS = 2500
+const PULSE_SPAWN_MAX_MS = 4500
+const PULSE_MAX_HOPS = 2
+const PULSE_MAX_CONCURRENT = 3
+const PULSE_HOP_PROBABILITY = 0.5
 
 type Edge = { a: number; b: number }
 
@@ -290,6 +303,16 @@ const EDGES: Edge[] = (() => {
     return out
 })()
 
+const ADJACENCY_BY_NODE: Record<number, number[]> = (() => {
+    const map: Record<number, number[]> = {}
+    for (let i = 0; i < NODES.length; i++) map[i] = []
+    EDGES.forEach(({ a, b }) => {
+        map[a].push(b)
+        map[b].push(a)
+    })
+    return map
+})()
+
 type TechIconProps = {
     node: Node
     px: MotionValue<number>
@@ -298,8 +321,34 @@ type TechIconProps = {
 }
 
 const TechIcon = memo(({ node, px, py, reduce }: TechIconProps) => {
-    const tx = useTransform(px, (v) => v * PARALLAX_RANGE_PX * node.depth)
-    const ty = useTransform(py, (v) => v * PARALLAX_RANGE_PX * node.depth)
+    const tx = useTransform<number, number>([px, py], ([vx, vy]) => {
+        const parallax = vx * PARALLAX_RANGE_PX * node.depth
+        if (reduce) return parallax
+        const cursorXPct = (vx + 0.5) * 100
+        const cursorYPct = (vy + 0.5) * 100
+        const ddx = cursorXPct - node.x
+        const ddy = cursorYPct - node.y
+        const dist = Math.hypot(ddx, ddy)
+        if (dist > CURSOR_PULL_RADIUS) return parallax
+        const falloff = (1 - dist / CURSOR_PULL_RADIUS) ** 2
+        const pull =
+            (ddx / Math.max(dist, 0.0001)) * CURSOR_PULL_MAX_PX * falloff
+        return parallax + pull
+    })
+    const ty = useTransform<number, number>([px, py], ([vx, vy]) => {
+        const parallax = vy * PARALLAX_RANGE_PX * node.depth
+        if (reduce) return parallax
+        const cursorXPct = (vx + 0.5) * 100
+        const cursorYPct = (vy + 0.5) * 100
+        const ddx = cursorXPct - node.x
+        const ddy = cursorYPct - node.y
+        const dist = Math.hypot(ddx, ddy)
+        if (dist > CURSOR_PULL_RADIUS) return parallax
+        const falloff = (1 - dist / CURSOR_PULL_RADIUS) ** 2
+        const pull =
+            (ddy / Math.max(dist, 0.0001)) * CURSOR_PULL_MAX_PX * falloff
+        return parallax + pull
+    })
     const { Icon, x, y, size, opacity, drift, duration, delay } = node
 
     return (
@@ -383,6 +432,131 @@ const EdgeMesh = ({ variant }: { variant: 'base' | 'spotlight' }) => {
     )
 }
 
+type Pulse = {
+    id: number
+    fromIdx: number
+    toIdx: number
+    hopsLeft: number
+}
+
+let pulseIdCounter = 0
+const easeOutQuartTimes = [0, 0.18, 0.82, 1]
+
+const EdgePulses = () => {
+    const [pulses, setPulses] = useState<Pulse[]>([])
+
+    const removePulse = useCallback((id: number) => {
+        setPulses((prev) => prev.filter((p) => p.id !== id))
+    }, [])
+
+    const onPulseArrive = useCallback(
+        (pulse: Pulse) => {
+            removePulse(pulse.id)
+            if (pulse.hopsLeft <= 0) return
+            if (Math.random() > PULSE_HOP_PROBABILITY) return
+            const adj = ADJACENCY_BY_NODE[pulse.toIdx].filter(
+                (n) => n !== pulse.fromIdx
+            )
+            if (adj.length === 0) return
+            const nextIdx = adj[Math.floor(Math.random() * adj.length)]
+            setPulses((prev) => {
+                if (prev.length >= PULSE_MAX_CONCURRENT) return prev
+                return [
+                    ...prev,
+                    {
+                        id: ++pulseIdCounter,
+                        fromIdx: pulse.toIdx,
+                        toIdx: nextIdx,
+                        hopsLeft: pulse.hopsLeft - 1,
+                    },
+                ]
+            })
+        },
+        [removePulse]
+    )
+
+    useEffect(() => {
+        let cancelled = false
+        let timer: ReturnType<typeof setTimeout>
+        const tick = () => {
+            if (cancelled) return
+            setPulses((prev) => {
+                if (prev.length >= PULSE_MAX_CONCURRENT) return prev
+                const edge = EDGES[Math.floor(Math.random() * EDGES.length)]
+                const dir = Math.random() < 0.5
+                return [
+                    ...prev,
+                    {
+                        id: ++pulseIdCounter,
+                        fromIdx: dir ? edge.a : edge.b,
+                        toIdx: dir ? edge.b : edge.a,
+                        hopsLeft: PULSE_MAX_HOPS,
+                    },
+                ]
+            })
+            const next =
+                PULSE_SPAWN_MIN_MS +
+                Math.random() * (PULSE_SPAWN_MAX_MS - PULSE_SPAWN_MIN_MS)
+            timer = setTimeout(tick, next)
+        }
+        timer = setTimeout(tick, 1500)
+        return () => {
+            cancelled = true
+            clearTimeout(timer)
+        }
+    }, [])
+
+    return (
+        <svg
+            className='absolute inset-0 h-full w-full pointer-events-none'
+            viewBox='0 0 100 100'
+            preserveAspectRatio='none'
+            aria-hidden
+        >
+            {pulses.map((p) => {
+                const from = NODES[p.fromIdx]
+                const to = NODES[p.toIdx]
+                const layers = [
+                    { r: 1.2, fill: '#4ccce6', maxOpacity: 0.18 },
+                    { r: 0.7, fill: '#4ccce6', maxOpacity: 0.45 },
+                    { r: 0.32, fill: '#b6ecf7', maxOpacity: 0.95 },
+                ]
+                return layers.map((l, i) => (
+                    <motion.circle
+                        key={`${p.id}-${i}`}
+                        r={l.r}
+                        fill={l.fill}
+                        initial={{ cx: from.x, cy: from.y, opacity: 0 }}
+                        animate={{
+                            cx: to.x,
+                            cy: to.y,
+                            opacity: [0, l.maxOpacity, l.maxOpacity, 0],
+                        }}
+                        transition={{
+                            cx: {
+                                duration: PULSE_TRAVEL_MS / 1000,
+                                ease: 'linear',
+                            },
+                            cy: {
+                                duration: PULSE_TRAVEL_MS / 1000,
+                                ease: 'linear',
+                            },
+                            opacity: {
+                                duration: PULSE_TRAVEL_MS / 1000,
+                                times: easeOutQuartTimes,
+                                ease: [0.25, 1, 0.5, 1],
+                            },
+                        }}
+                        onAnimationComplete={
+                            i === 0 ? () => onPulseArrive(p) : undefined
+                        }
+                    />
+                ))
+            })}
+        </svg>
+    )
+}
+
 export const TechField = () => {
     const reduce = useReducedMotion() ?? false
     const mx = useMotionValue(0)
@@ -429,6 +603,8 @@ export const TechField = () => {
                     <EdgeMesh variant='spotlight' />
                 </motion.div>
             )}
+
+            {!reduce && <EdgePulses />}
 
             {NODES.map((node, i) => (
                 <TechIcon key={i} node={node} px={sx} py={sy} reduce={reduce} />

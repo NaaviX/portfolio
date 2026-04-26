@@ -3,9 +3,12 @@ import { TechField } from '@/components/header/components/TechField'
 
 export const HeaderSection = () => {
     return (
-        <div className='relative min-h-screen'>
+        <section
+            aria-labelledby='hero-name'
+            className='relative'
+        >
             <TechField />
             <Header />
-        </div>
+        </section>
     )
 }

@@ -6,6 +6,7 @@ const easeOutQuart = [0.25, 1, 0.5, 1] as [number, number, number, number]
 export const HeaderTitle = () => {
     return (
         <motion.h1
+            id='hero-name'
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.1, ease: easeOutQuart, delay: 0.1 }}

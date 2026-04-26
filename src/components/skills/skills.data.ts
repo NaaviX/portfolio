@@ -26,6 +26,7 @@ import {
     JsIcon,
     KarmaIcon,
     LinuxIcon,
+    NextjsIcon,
     NodeIcon,
     NuxtIcon,
     PostgresqlIcon,
@@ -109,6 +110,12 @@ export const nuxtSkill: Skill = {
 export const reactSkill: Skill = {
     name: SKILL_NAME.REACT,
     icon: ReactIcon,
+    isImportant: true,
+}
+
+export const nextjsSkill: Skill = {
+    name: SKILL_NAME.NEXTJS,
+    icon: NextjsIcon,
     isImportant: true,
 }
 
@@ -342,6 +349,7 @@ export const frontSkillCategory: SkillCategory = {
         typescriptSkill,
         javascriptSkill,
         reactSkill,
+        nextjsSkill,
         vueSkill,
         angularSkill,
         cssSkill,

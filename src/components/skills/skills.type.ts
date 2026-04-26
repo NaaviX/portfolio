@@ -19,6 +19,7 @@ export enum SKILL_NAME {
     TYPESCRIPT = 'Typescript',
     VUE = 'Vue',
     NUXT = 'Nuxt',
+    NEXTJS = 'Next.js',
     REACT = 'React',
     ANGULAR = 'Angular',
     NODE = 'Node',

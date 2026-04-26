@@ -22,12 +22,6 @@ export default defineConfig({
                     vendor: ['react', 'react-dom', 'react-router-dom'],
                     // Animation library
                     'framer-motion': ['framer-motion'],
-                    // Particles (heavy, loaded separately)
-                    particles: [
-                        'tsparticles-slim',
-                        'tsparticles-engine',
-                        'react-particles',
-                    ],
                     // Swiper carousel
                     swiper: ['swiper'],
                     // UI utilities

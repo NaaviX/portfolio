@@ -8,27 +8,29 @@ import { LanguageSwitcher } from './_LanguageSwitcher'
 import { NavLink } from './_NavLink'
 import { SocialButton } from './_SocialButton'
 
-const menuItemVariants = {
-    hidden: { opacity: 0, y: 10 },
+const easeOutQuart = [0.22, 1, 0.36, 1] as [number, number, number, number]
+
+const itemVariants = {
+    hidden: { opacity: 0, x: -8 },
     visible: (i: number) => ({
         opacity: 1,
-        y: 0,
+        x: 0,
         transition: {
-            delay: i * 0.06,
-            duration: 0.25,
-            ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
+            delay: 0.05 + i * 0.04,
+            duration: 0.35,
+            ease: easeOutQuart,
         },
     }),
-    exit: { opacity: 0, y: -5, transition: { duration: 0.12 } },
+    exit: { opacity: 0, transition: { duration: 0.1 } },
 }
 
-const menuContainerVariants = {
+const panelVariants = {
     hidden: { opacity: 0, height: 0 },
     visible: {
         opacity: 1,
         height: 'auto',
         transition: {
-            height: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] },
+            height: { duration: 0.4, ease: easeOutQuart },
             opacity: { duration: 0.2 },
         },
     },
@@ -36,7 +38,7 @@ const menuContainerVariants = {
         opacity: 0,
         height: 0,
         transition: {
-            height: { duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] },
+            height: { duration: 0.3, ease: easeOutQuart },
             opacity: { duration: 0.15 },
         },
     },
@@ -45,14 +47,9 @@ const menuContainerVariants = {
 export const NavbarMobile = () => {
     const { t } = useLanguage()
     const [isOpen, setIsOpen] = useState(false)
-    const toggle = () => setIsOpen(!isOpen)
 
     useEffect(() => {
-        if (isOpen) {
-            document.body.style.overflow = 'hidden'
-        } else {
-            document.body.style.overflow = ''
-        }
+        document.body.style.overflow = isOpen ? 'hidden' : ''
         return () => {
             document.body.style.overflow = ''
         }
@@ -61,82 +58,51 @@ export const NavbarMobile = () => {
     return (
         <div className='lg:hidden'>
             <div className='h-16 flex items-center justify-between'>
-                <div className='flex items-center gap-3'>
-                    <motion.button
-                        className='relative p-2.5 border border-border/40 rounded-xl bg-bg/40 backdrop-blur-md text-primary-light/90 transition-all duration-300 hover:border-primary/60 hover:text-primary hover:bg-primary/10 active:scale-95'
-                        aria-label={isOpen ? 'Close Menu' : 'Open Menu'}
-                        onClick={toggle}
-                        whileTap={{ scale: 0.92 }}
-                    >
-                        <AnimatePresence mode='wait'>
-                            {isOpen ? (
-                                <motion.div
-                                    key='close'
-                                    initial={{
-                                        rotate: -90,
-                                        opacity: 0,
-                                        scale: 0.8,
-                                    }}
-                                    animate={{
-                                        rotate: 0,
-                                        opacity: 1,
-                                        scale: 1,
-                                    }}
-                                    exit={{
-                                        rotate: 90,
-                                        opacity: 0,
-                                        scale: 0.8,
-                                    }}
-                                    transition={{
-                                        duration: 0.15,
-                                        ease: 'easeOut' as const,
-                                    }}
-                                >
-                                    <X className='h-5 w-5' />
-                                </motion.div>
-                            ) : (
-                                <motion.div
-                                    key='menu'
-                                    initial={{
-                                        rotate: 90,
-                                        opacity: 0,
-                                        scale: 0.8,
-                                    }}
-                                    animate={{
-                                        rotate: 0,
-                                        opacity: 1,
-                                        scale: 1,
-                                    }}
-                                    exit={{
-                                        rotate: -90,
-                                        opacity: 0,
-                                        scale: 0.8,
-                                    }}
-                                    transition={{
-                                        duration: 0.15,
-                                        ease: 'easeOut' as const,
-                                    }}
-                                >
-                                    <Menu className='h-5 w-5' />
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </motion.button>
-                    <motion.button
-                        className='font-heading font-bold text-base tracking-wider text-primary-light/90'
-                        onClick={() => {
-                            scroll.scrollToTop()
-                            setIsOpen(false)
-                        }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        ANTOINE
-                    </motion.button>
-                </div>
-                <div className='flex gap-2'>
+                <motion.button
+                    whileTap={{ scale: 0.96 }}
+                    onClick={() => {
+                        scroll.scrollToTop()
+                        setIsOpen(false)
+                    }}
+                    className='font-heading font-semibold text-base text-primary-light bg-transparent border-none cursor-pointer'
+                >
+                    Antoine<span className='text-primary'>.</span>
+                </motion.button>
+                <div className='flex items-center'>
                     <LanguageSwitcher />
                     <SocialButton type='mail' />
                     <SocialButton type='linkedin' />
+                    <motion.button
+                        aria-label={isOpen ? 'Close Menu' : 'Open Menu'}
+                        aria-expanded={isOpen}
+                        onClick={() => setIsOpen(!isOpen)}
+                        whileTap={{ scale: 0.92 }}
+                        className='inline-flex items-center justify-center w-10 h-10 ml-1 text-primary-light/70 hover:text-primary transition-colors duration-200 bg-transparent border-none cursor-pointer'
+                    >
+                        <AnimatePresence mode='wait' initial={false}>
+                            {isOpen ? (
+                                <motion.span
+                                    key='x'
+                                    initial={{ rotate: -45, opacity: 0 }}
+                                    animate={{ rotate: 0, opacity: 1 }}
+                                    exit={{ rotate: 45, opacity: 0 }}
+                                    transition={{ duration: 0.15 }}
+                                >
+                                    <X className='h-5 w-5' />
+                                </motion.span>
+                            ) : (
+                                <motion.span
+                                    key='m'
+                                    initial={{ rotate: 45, opacity: 0 }}
+                                    animate={{ rotate: 0, opacity: 1 }}
+                                    exit={{ rotate: -45, opacity: 0 }}
+                                    transition={{ duration: 0.15 }}
+                                >
+                                    <Menu className='h-5 w-5' />
+                                </motion.span>
+                            )}
+                        </AnimatePresence>
+                    </motion.button>
                 </div>
             </div>
 
@@ -144,45 +110,40 @@ export const NavbarMobile = () => {
                 {isOpen && (
                     <>
                         <motion.div
-                            className='fixed inset-0 top-16 bg-bg-app/80 backdrop-blur-sm z-40'
+                            className='fixed inset-0 top-16 bg-bg-app/70 backdrop-blur-sm z-40'
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.2 }}
                             onClick={() => setIsOpen(false)}
                         />
-                        <motion.div
-                            variants={menuContainerVariants}
+                        <motion.nav
+                            variants={panelVariants}
                             initial='hidden'
                             animate='visible'
                             exit='exit'
-                            className='relative z-50 overflow-hidden'
+                            className='relative z-50 overflow-hidden flex flex-col py-3'
                         >
-                            <div className='h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent' />
-                            <nav className='flex flex-col py-4 px-2 bg-bg/60 backdrop-blur-lg rounded-b-2xl border-x border-b border-border/20'>
-                                {sectionsData.map(
-                                    (section: Section, index: number) => (
-                                        <motion.div
-                                            key={
-                                                'nav-mobile-' + section.nameKey
-                                            }
-                                            custom={index}
-                                            variants={menuItemVariants}
-                                            initial='hidden'
-                                            animate='visible'
-                                            exit='exit'
-                                            onClick={() => setIsOpen(false)}
-                                            className='px-2'
-                                        >
-                                            <NavLink
-                                                section={section}
-                                                label={t.nav[section.nameKey]}
-                                            />
-                                        </motion.div>
-                                    )
-                                )}
-                            </nav>
-                        </motion.div>
+                            {sectionsData.map(
+                                (section: Section, index: number) => (
+                                    <motion.div
+                                        key={'nav-mobile-' + section.nameKey}
+                                        custom={index}
+                                        variants={itemVariants}
+                                        initial='hidden'
+                                        animate='visible'
+                                        exit='exit'
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        <NavLink
+                                            section={section}
+                                            label={t.nav[section.nameKey]}
+                                            variant='mobile'
+                                        />
+                                    </motion.div>
+                                )
+                            )}
+                        </motion.nav>
                     </>
                 )}
             </AnimatePresence>

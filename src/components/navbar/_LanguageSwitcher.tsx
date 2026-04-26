@@ -3,26 +3,36 @@ import { motion } from 'framer-motion'
 
 export const LanguageSwitcher = () => {
     const { language, setLanguage } = useLanguage()
+    const next = language === 'fr' ? 'en' : 'fr'
 
     return (
         <motion.button
-            onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
-            className='relative inline-flex items-center justify-center w-10 h-10 rounded-xl border border-border/40 bg-bg/40 backdrop-blur-md text-primary-light/80 transition-all duration-300 group overflow-hidden hover:border-primary/60 hover:text-white hover:shadow-[0_0_20px_rgba(0,162,199,0.15)] font-medium text-sm'
-            whileHover={{ scale: 1.08, y: -2 }}
-            whileTap={{ scale: 0.92 }}
+            onClick={() => setLanguage(next)}
+            whileTap={{ scale: 0.95 }}
             aria-label={
-                language === 'fr' ? 'Switch to English' : 'Passer en français'
+                next === 'en' ? 'Switch to English' : 'Passer en français'
             }
+            className='inline-flex items-center gap-1 px-2 h-10 text-xs font-medium uppercase tracking-[0.12em] text-primary-light/50 transition-colors duration-200 cursor-pointer bg-transparent border-none hover:text-primary-light'
         >
-            <span className='relative z-10 uppercase'>
-                {language === 'fr' ? 'EN' : 'FR'}
+            <span
+                className={
+                    language === 'fr'
+                        ? 'text-primary'
+                        : 'text-primary-light/40'
+                }
+            >
+                FR
             </span>
-            <motion.span
-                className='absolute inset-0 bg-gradient-to-t from-primary/25 via-primary/10 to-transparent'
-                initial={{ opacity: 0, y: '100%' }}
-                whileHover={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.25, ease: 'easeOut' as const }}
-            />
+            <span className='text-primary-light/25'>/</span>
+            <span
+                className={
+                    language === 'en'
+                        ? 'text-primary'
+                        : 'text-primary-light/40'
+                }
+            >
+                EN
+            </span>
         </motion.button>
     )
 }

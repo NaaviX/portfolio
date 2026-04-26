@@ -52,16 +52,16 @@ export const ContactSection = () => {
                     variants={containerVariants}
                 >
                     <div className='flex flex-col gap-6'>
-                        <motion.h2
+                        <motion.h3
                             variants={itemVariants}
-                            className='font-heading text-5xl md:text-6xl lg:text-7xl font-semibold tracking-[-0.04em] leading-[0.95] text-primary-light'
+                            className='font-heading text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.04em] leading-[0.95] text-primary-light'
                         >
                             {t.contact.headlineLead}{' '}
                             <span className='font-normal italic text-primary'>
                                 {t.contact.headlineHighlight}
                             </span>
                             .
-                        </motion.h2>
+                        </motion.h3>
 
                         <motion.p
                             variants={itemVariants}

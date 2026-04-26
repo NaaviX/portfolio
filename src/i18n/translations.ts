@@ -9,6 +9,13 @@ export const translations = {
             courses: 'Formations & Diplômes',
             contact: 'Me contacter',
         },
+        sectionSubtitles: {
+            experiences: 'Parcours et missions',
+            projects: 'Sélection de réalisations',
+            skills: 'Stack technique et outils',
+            courses: 'Diplômes et parcours académique',
+            contact: 'Disponible pour collaborer',
+        },
         header: {
             jobTitle: 'Ingénieur conception & développement',
             description1: 'Ingénieur conception & développement full stack',
@@ -158,6 +165,13 @@ export const translations = {
             skills: 'Skills & Technologies',
             courses: 'Education',
             contact: 'Contact Me',
+        },
+        sectionSubtitles: {
+            experiences: 'Career and missions',
+            projects: 'Selected work',
+            skills: 'Technical stack and tooling',
+            courses: 'Degrees and academic background',
+            contact: 'Available to collaborate',
         },
         header: {
             jobTitle: 'Software Design & Development Engineer',

@@ -5,26 +5,36 @@ export const useNavbar = () => {
     const { scrollY } = useScroll()
     const springY = useSpring(scrollY)
 
-    // Call hooks unconditionally (React hooks rules)
     const navbarBgTransform = useTransform(
         springY,
         [0, screen.height],
-        ['rgba(8, 44, 54, 0.3)', 'rgba(8, 44, 54, 0.8)']
+        ['rgba(8, 44, 54, 0.3)', 'rgba(8, 44, 54, 0.85)']
     )
 
-    // Apply conditional logic after hook is called
-    const navbarBg = isDesktop ? navbarBgTransform : 'rgba(8, 44, 54, 0.95)'
+    const navbarBg = isDesktop ? navbarBgTransform : 'rgba(8, 44, 54, 0.92)'
 
     const navbarElevation = useTransform(
         springY,
-        [0, 500],
+        [0, 200],
         [
-            '0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)',
-            '0px 10px 13px -6px rgba(0,0,0,0.2),0px 20px 31px 3px rgba(0,0,0,0.14),0px 8px 38px 7px rgba(0,0,0,0.12)',
+            '0 0 0 0 rgba(0,0,0,0)',
+            '0 1px 0 0 rgba(0,0,0,0.04), 0 12px 32px -16px rgba(0,0,0,0.4)',
         ]
     )
+
+    const borderColorTransform = useTransform(
+        springY,
+        [0, 200],
+        ['rgba(18, 103, 126, 0)', 'rgba(18, 103, 126, 0.25)']
+    )
+
+    const borderColor = isDesktop
+        ? borderColorTransform
+        : 'rgba(18, 103, 126, 0.25)'
+
     return {
         backgroundColor: navbarBg,
         boxShadow: navbarElevation,
+        borderColor,
     }
 }

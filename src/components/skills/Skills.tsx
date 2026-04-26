@@ -1,19 +1,39 @@
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
-import { useId, useRef } from 'react'
+import { motion, useReducedMotion, type Variants } from 'framer-motion'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { skillsData } from './skills.data'
-import { SKILL_TYPE, type SkillCategory } from './skills.type'
+import { SKILL_TYPE, type Skill } from './skills.type'
 
-type CategoryKey = SKILL_TYPE
+type Palette = { hue: string; tint: string; ink: string }
 
-const CATEGORY_PALETTE: Record<CategoryKey, { hue: string; tint: string; ink: string }> = {
-    [SKILL_TYPE.WEBFRONT]: { hue: '#06b6d4', tint: 'rgba(6, 182, 212, 0.16)', ink: '#cffafe' },
-    [SKILL_TYPE.WEBBACK]: { hue: '#f59e0b', tint: 'rgba(245, 158, 11, 0.14)', ink: '#fef3c7' },
-    [SKILL_TYPE.DEVTOOLS]: { hue: '#a78bfa', tint: 'rgba(167, 139, 250, 0.14)', ink: '#ede9fe' },
-    [SKILL_TYPE.MOBILE]: { hue: '#34d399', tint: 'rgba(52, 211, 153, 0.14)', ink: '#d1fae5' },
-    [SKILL_TYPE.PRACTICES]: { hue: '#fb7185', tint: 'rgba(251, 113, 133, 0.14)', ink: '#ffe4e6' },
+const CATEGORY_PALETTE: Record<SKILL_TYPE, Palette> = {
+    [SKILL_TYPE.WEBFRONT]: {
+        hue: '#22d3ee',
+        tint: 'rgba(34, 211, 238, 0.14)',
+        ink: '#cffafe',
+    },
+    [SKILL_TYPE.WEBBACK]: {
+        hue: '#f59e0b',
+        tint: 'rgba(245, 158, 11, 0.13)',
+        ink: '#fef3c7',
+    },
+    [SKILL_TYPE.DEVTOOLS]: {
+        hue: '#a78bfa',
+        tint: 'rgba(167, 139, 250, 0.13)',
+        ink: '#ede9fe',
+    },
+    [SKILL_TYPE.MOBILE]: {
+        hue: '#34d399',
+        tint: 'rgba(52, 211, 153, 0.13)',
+        ink: '#d1fae5',
+    },
+    [SKILL_TYPE.PRACTICES]: {
+        hue: '#fb7185',
+        tint: 'rgba(251, 113, 133, 0.13)',
+        ink: '#ffe4e6',
+    },
 }
 
-const CATEGORY_LABEL_FR: Record<CategoryKey, string> = {
+const CATEGORY_LABEL_FR: Record<SKILL_TYPE, string> = {
     [SKILL_TYPE.WEBFRONT]: 'Frontend',
     [SKILL_TYPE.WEBBACK]: 'Backend',
     [SKILL_TYPE.DEVTOOLS]: 'DevTools',
@@ -21,250 +41,204 @@ const CATEGORY_LABEL_FR: Record<CategoryKey, string> = {
     [SKILL_TYPE.PRACTICES]: 'Pratiques',
 }
 
-const CATEGORY_TAGLINE_FR: Record<CategoryKey, string> = {
-    [SKILL_TYPE.WEBFRONT]: 'Construire pour le navigateur.',
-    [SKILL_TYPE.WEBBACK]: 'Tenir la couche serveur.',
-    [SKILL_TYPE.DEVTOOLS]: 'Industrialiser la livraison.',
-    [SKILL_TYPE.MOBILE]: 'Porter le produit à la main.',
-    [SKILL_TYPE.PRACTICES]: 'Écrire du code qui dure.',
-}
-
 const TRACK_LABEL = '0.28em'
-const TRACK_NUM = '0.22em'
-const TRACK_TICKER = '0.24em'
 const EASE_OUT_QUART = [0.22, 1, 0.36, 1] as const
+const MAG_RADIUS = 140
+const MAG_STRENGTH = 0.35
 
-type LaneProps = {
-    category: SkillCategory
-    index: number
-    total: number
-    isLast: boolean
+type FlatSkill = Skill & { category: SKILL_TYPE; palette: Palette }
+
+const flattenSkills = (): FlatSkill[] => {
+    const seen = new Set<string>()
+    const out: FlatSkill[] = []
+    for (const cat of skillsData) {
+        const palette = CATEGORY_PALETTE[cat.nameKey]
+        for (const skill of cat.skills) {
+            if (seen.has(skill.name)) continue
+            seen.add(skill.name)
+            out.push({ ...skill, category: cat.nameKey, palette })
+        }
+    }
+    return out.sort((a, b) => {
+        if (a.isImportant !== b.isImportant) return a.isImportant ? -1 : 1
+        return a.name.localeCompare(b.name)
+    })
 }
 
-const Lane = ({ category, index, total, isLast }: LaneProps) => {
-    const ref = useRef<HTMLElement | null>(null)
-    const reduce = useReducedMotion() ?? false
-    const palette = CATEGORY_PALETTE[category.nameKey]
-    const label = CATEGORY_LABEL_FR[category.nameKey]
-    const tagline = CATEGORY_TAGLINE_FR[category.nameKey]
-    const tickerSkills = [...category.skills, ...category.skills]
-    const number = String(index + 1).padStart(2, '0')
-    const headingId = useId()
+const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: { staggerChildren: 0.018, delayChildren: 0.1 },
+    },
+}
 
-    const { scrollYProgress } = useScroll({
-        target: ref,
-        offset: ['start end', 'end start'],
-    })
-    const tickerX = useTransform(scrollYProgress, [0, 1], reduce ? ['0%', '0%'] : ['8%', '-32%'])
-    const numberY = useTransform(scrollYProgress, [0, 1], reduce ? ['0px', '0px'] : ['30px', '-60px'])
-    const titleX = useTransform(scrollYProgress, [0, 1], reduce ? ['0px', '0px'] : ['0px', '-32px'])
-    const drenchOpacity = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [0, 0.72, 0.72, 0])
-
-    return (
-        <section
-            ref={ref}
-            aria-labelledby={headingId}
-            className={`relative w-full overflow-hidden ${isLast ? '' : 'border-b border-border-subtle/30'}`}
-            style={{
-                minHeight: 'clamp(420px, 70vh, 640px)',
-                background: '#06181d',
-            }}
-        >
-            <motion.div
-                aria-hidden
-                className='pointer-events-none absolute inset-0'
-                style={{
-                    opacity: drenchOpacity,
-                    background: `radial-gradient(60% 80% at 80% 50%, ${palette.hue}33, transparent 70%), linear-gradient(120deg, ${palette.hue}1a 0%, transparent 55%)`,
-                }}
-            />
-            <motion.div
-                aria-hidden
-                className='absolute -left-2 top-2 select-none'
-                style={{
-                    y: numberY,
-                    fontFamily: 'var(--font-family-heading)',
-                    fontWeight: 700,
-                    fontSize: 'clamp(140px, 28vw, 320px)',
-                    lineHeight: 1,
-                    color: palette.hue,
-                    opacity: 0.08,
-                    letterSpacing: '-0.06em',
-                }}
-            >
-                {number}
-            </motion.div>
-
-            <div className='relative z-10 mx-auto max-w-6xl px-6 lg:px-10 pt-20 lg:pt-28 pb-10 grid grid-cols-12 gap-6'>
-                <div className='col-span-12 lg:col-span-4 flex flex-col gap-4'>
-                    <div
-                        className='text-2xs uppercase'
-                        style={{ color: palette.hue, letterSpacing: TRACK_LABEL }}
-                    >
-                        Chapitre {number}
-                    </div>
-                    <motion.h3
-                        id={headingId}
-                        className='font-heading font-semibold text-primary-light'
-                        style={{
-                            x: titleX,
-                            fontSize: 'clamp(2.5rem, 7vw, 5rem)',
-                            lineHeight: 0.95,
-                            letterSpacing: '-0.04em',
-                        }}
-                    >
-                        {label}
-                    </motion.h3>
-                    <p
-                        className='text-primary-dark/80 max-w-[28ch]'
-                        style={{ fontSize: 'clamp(0.95rem, 1.2vw, 1.05rem)' }}
-                    >
-                        {tagline}
-                    </p>
-                    <div className='mt-2 flex items-center gap-3'>
-                        <div
-                            aria-hidden
-                            className='h-px flex-1'
-                            style={{ background: palette.hue, opacity: 0.4 }}
-                        />
-                        <div
-                            className='text-2xs tabular-nums uppercase'
-                            style={{ color: palette.hue, letterSpacing: TRACK_LABEL }}
-                        >
-                            {String(category.skills.length).padStart(2, '0')} technologies
-                        </div>
-                    </div>
-                </div>
-
-                <div className='col-span-12 lg:col-span-8 flex flex-col gap-4 justify-end'>
-                    <ul className='flex flex-wrap gap-x-4 gap-y-3 items-baseline'>
-                        {category.skills.map((skill, i) => (
-                            <motion.li
-                                key={skill.name}
-                                className='font-heading'
-                                initial={reduce ? false : { opacity: 0, y: 14 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: '-100px' }}
-                                transition={{ duration: 0.55, delay: i * 0.035, ease: EASE_OUT_QUART }}
-                                style={{
-                                    fontSize: skill.isImportant
-                                        ? 'clamp(1.6rem, 3.2vw, 2.6rem)'
-                                        : 'clamp(1rem, 1.8vw, 1.5rem)',
-                                    lineHeight: 1,
-                                    fontWeight: skill.isImportant ? 600 : 400,
-                                    letterSpacing: '-0.02em',
-                                    color: skill.isImportant ? palette.ink : 'rgba(182,236,247,0.55)',
-                                }}
-                            >
-                                {skill.name}
-                                {i < category.skills.length - 1 && (
-                                    <span
-                                        aria-hidden
-                                        className='ml-4 align-middle inline-block'
-                                        style={{
-                                            width: 5,
-                                            height: 5,
-                                            borderRadius: 9999,
-                                            background: palette.hue,
-                                            opacity: 0.45,
-                                        }}
-                                    />
-                                )}
-                            </motion.li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-
-            <motion.div
-                aria-hidden
-                className='relative z-10 flex gap-10 items-center pb-8 pt-2 pl-6 lg:pl-10'
-                style={{ x: tickerX }}
-            >
-                {tickerSkills.map((s, i) => {
-                    const isLastTicker = i === tickerSkills.length - 1
-                    return (
-                        <div
-                            key={`${s.name}-${i}`}
-                            className='flex items-center gap-3 shrink-0 opacity-70'
-                        >
-                            {s.icon && (
-                                <s.icon
-                                    width={24}
-                                    height={24}
-                                    style={{ filter: 'saturate(0.85)' }}
-                                />
-                            )}
-                            <span
-                                className='text-xs uppercase'
-                                style={{
-                                    color: palette.ink,
-                                    opacity: 0.7,
-                                    letterSpacing: TRACK_TICKER,
-                                }}
-                            >
-                                {s.name}
-                            </span>
-                            {!isLastTicker && (
-                                <span
-                                    className='inline-block'
-                                    style={{
-                                        width: 4,
-                                        height: 4,
-                                        borderRadius: 9999,
-                                        background: palette.hue,
-                                        opacity: 0.6,
-                                    }}
-                                />
-                            )}
-                        </div>
-                    )
-                })}
-            </motion.div>
-
-            <div
-                aria-hidden
-                className='pointer-events-none absolute right-6 top-7 flex items-center gap-1.5'
-            >
-                {Array.from({ length: total }).map((_, i) => {
-                    const active = i === index
-                    return (
-                        <span
-                            key={i}
-                            className='inline-block transition-all'
-                            style={{
-                                width: active ? 18 : 4,
-                                height: 4,
-                                borderRadius: 9999,
-                                background: palette.hue,
-                                opacity: active ? 0.9 : 0.25,
-                            }}
-                        />
-                    )
-                })}
-                <span
-                    className='ml-2 text-2xs tabular-nums'
-                    style={{ color: palette.hue, opacity: 0.7, letterSpacing: TRACK_NUM }}
-                >
-                    {number}
-                </span>
-            </div>
-        </section>
-    )
+const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.5, ease: EASE_OUT_QUART },
+    },
 }
 
 export const Skills = () => {
+    const skills = useMemo(flattenSkills, [])
+    const reduce = useReducedMotion() ?? false
+    const chipRefs = useRef<Array<HTMLDivElement | null>>([])
+    const rectsRef = useRef<DOMRect[]>([])
+    const rafRef = useRef<number | null>(null)
+
+    const recomputeRects = useCallback(() => {
+        rectsRef.current = chipRefs.current.map(
+            (el) => el?.getBoundingClientRect() ?? new DOMRect()
+        )
+    }, [])
+
+    useEffect(() => {
+        recomputeRects()
+        const onResize = () => recomputeRects()
+        window.addEventListener('resize', onResize)
+        window.addEventListener('scroll', onResize, { passive: true })
+        return () => {
+            window.removeEventListener('resize', onResize)
+            window.removeEventListener('scroll', onResize)
+            if (rafRef.current) cancelAnimationFrame(rafRef.current)
+        }
+    }, [recomputeRects])
+
+    const applyMagnet = useCallback((clientX: number, clientY: number) => {
+        chipRefs.current.forEach((el, i) => {
+            if (!el) return
+            const r = rectsRef.current[i]
+            if (!r || r.width === 0) return
+            const cx = r.left + r.width / 2
+            const cy = r.top + r.height / 2
+            const dx = clientX - cx
+            const dy = clientY - cy
+            const dist = Math.hypot(dx, dy)
+            if (dist < MAG_RADIUS) {
+                const t = 1 - dist / MAG_RADIUS
+                const ease = t * t
+                el.style.transform = `translate3d(${dx * ease * MAG_STRENGTH}px, ${dy * ease * MAG_STRENGTH}px, 0)`
+            } else if (el.style.transform !== 'translate3d(0px, 0px, 0px)') {
+                el.style.transform = 'translate3d(0px, 0px, 0px)'
+            }
+        })
+    }, [])
+
+    const onMove = (e: React.MouseEvent<HTMLUListElement>) => {
+        if (reduce) return
+        const x = e.clientX
+        const y = e.clientY
+        if (rafRef.current) cancelAnimationFrame(rafRef.current)
+        rafRef.current = requestAnimationFrame(() => applyMagnet(x, y))
+    }
+
+    const onLeave = () => {
+        if (rafRef.current) cancelAnimationFrame(rafRef.current)
+        chipRefs.current.forEach((el) => {
+            if (el) el.style.transform = 'translate3d(0px, 0px, 0px)'
+        })
+    }
+
     return (
-        <div className='w-full'>
-            {skillsData.map((cat, i) => (
-                <Lane
-                    key={cat.nameKey}
-                    category={cat}
-                    index={i}
-                    total={skillsData.length}
-                    isLast={i === skillsData.length - 1}
+        <div className='w-full max-w-6xl mx-auto px-4 lg:px-6'>
+            <motion.ul
+                onMouseMove={onMove}
+                onMouseLeave={onLeave}
+                variants={containerVariants}
+                initial={reduce ? 'visible' : 'hidden'}
+                whileInView='visible'
+                viewport={{ once: true, amount: 0.15 }}
+                className='flex flex-wrap items-center gap-x-2.5 gap-y-3'
+            >
+                {skills.map((skill, i) => (
+                    <motion.li key={skill.name} variants={itemVariants}>
+                        <SkillChip
+                            skill={skill}
+                            ref={(el) => {
+                                chipRefs.current[i] = el
+                            }}
+                        />
+                    </motion.li>
+                ))}
+            </motion.ul>
+        </div>
+    )
+}
+
+const CHIP_TRANSITION =
+    'transform 520ms cubic-bezier(0.22, 1, 0.36, 1), background-color 240ms ease, color 240ms ease, border-color 240ms ease, box-shadow 280ms ease'
+
+type ChipProps = {
+    skill: FlatSkill
+    ref: (el: HTMLDivElement | null) => void
+}
+
+const SkillChip = ({ skill, ref }: ChipProps) => {
+    const Icon = skill.icon
+    const important = !!skill.isImportant
+    const { palette } = skill
+
+    return (
+        <div
+            ref={ref}
+            className='group/chip relative inline-flex items-center gap-2 rounded-full border'
+            style={{
+                paddingInline: important ? '1.05rem' : '0.78rem',
+                paddingBlock: important ? '0.55rem' : '0.4rem',
+                fontSize: important ? '0.98rem' : '0.82rem',
+                fontWeight: important ? 600 : 500,
+                color: important ? palette.ink : 'rgba(214, 240, 247, 0.78)',
+                background: important
+                    ? palette.tint
+                    : 'rgba(255, 255, 255, 0.022)',
+                borderColor: important ? palette.hue : `${palette.hue}30`,
+                boxShadow: important
+                    ? `0 0 0 1px ${palette.hue}33, 0 14px 36px -24px ${palette.hue}`
+                    : undefined,
+                letterSpacing: '-0.005em',
+                transition: CHIP_TRANSITION,
+                willChange: 'transform',
+            }}
+        >
+            {Icon ? (
+                <Icon
+                    aria-hidden
+                    style={{
+                        width: important ? 18 : 14,
+                        height: important ? 18 : 14,
+                        opacity: important ? 1 : 0.85,
+                    }}
                 />
-            ))}
+            ) : (
+                <span
+                    aria-hidden
+                    className='inline-block rounded-full'
+                    style={{
+                        width: 6,
+                        height: 6,
+                        background: palette.hue,
+                        opacity: important ? 1 : 0.6,
+                    }}
+                />
+            )}
+            <span className='whitespace-nowrap'>{skill.name}</span>
+            {skill.about && (
+                <span
+                    role='tooltip'
+                    className='pointer-events-none absolute left-1/2 top-full z-30 mt-2.5 -translate-x-1/2 translate-y-1 whitespace-nowrap rounded-md border px-2.5 py-1 text-2xs uppercase opacity-0 transition-[opacity,transform] duration-200 group-hover/chip:translate-y-0 group-hover/chip:opacity-100'
+                    style={{
+                        background: 'rgba(6, 24, 29, 0.96)',
+                        borderColor: `${palette.hue}55`,
+                        color: palette.ink,
+                        letterSpacing: '0.18em',
+                    }}
+                >
+                    {skill.about}
+                </span>
+            )}
         </div>
     )
 }

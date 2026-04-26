@@ -4,14 +4,14 @@ import { NavbarDesktop } from './_NavbarDesktop'
 import { NavbarMobile } from './_NavbarMobile'
 
 export const Navbar = () => {
-    const { backgroundColor, boxShadow } = useNavbar()
+    const { backgroundColor, boxShadow, borderColor } = useNavbar()
     return (
         <motion.header
-            className='fixed w-full z-[1000] px-4 sm:px-6 lg:px-8 backdrop-blur-md border-b border-transparent transition-[border-color] duration-500'
+            className='fixed w-full z-[1000] px-4 sm:px-6 lg:px-8 backdrop-blur-md border-b'
             style={{
                 backgroundColor,
                 boxShadow,
-                borderBottomColor: 'rgba(18, 103, 126, 0.2)',
+                borderBottomColor: borderColor,
             }}
         >
             <div className='max-w-[1440px] mx-auto'>

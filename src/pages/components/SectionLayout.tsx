@@ -1,19 +1,23 @@
 import { ReactNode } from 'react'
-import { SectionTitle } from './SectionTitle'
+import { SectionHeader } from './SectionHeader'
 
 interface SectionLayoutProps {
     children: ReactNode
-    title?: string
+    number: string
+    title: string
+    subtitle?: string
 }
 
 export const SectionLayout = (props: SectionLayoutProps) => {
-    const { children, title } = props
+    const { children, number, title, subtitle } = props
     return (
-        <div className='max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20'>
-            <div className='flex flex-col items-center'>
-                <SectionTitle text={title} />
-                {children}
-            </div>
+        <div className='w-full max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20'>
+            <SectionHeader
+                number={number}
+                title={title}
+                subtitle={subtitle}
+            />
+            {children}
         </div>
     )
 }

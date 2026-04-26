@@ -34,14 +34,18 @@ const App = () => {
             <HeaderSection />
             <Toaster />
 
-            {sectionsData.map((section: Section) => (
+            {sectionsData.map((section: Section, index: number) => (
                 <Element
                     name={section.target}
                     key={section.nameKey}
                     className='element'
                     style={ELEMENT_STYLE}
                 >
-                    <SectionLayout title={t.nav[section.nameKey]}>
+                    <SectionLayout
+                        number={String(index + 1).padStart(2, '0')}
+                        title={t.nav[section.nameKey]}
+                        subtitle={t.sectionSubtitles[section.nameKey]}
+                    >
                         <Suspense fallback={<SectionSkeleton />}>
                             <section.element />
                         </Suspense>

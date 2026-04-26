@@ -1,6 +1,5 @@
 import { HeaderContent } from './components/HeaderContent'
 import { HeaderTitle } from './components/HeaderTitle'
-import { ScrollIndicator } from './components/ScrollIndicator'
 
 export const Header = () => {
     return (
@@ -11,7 +10,6 @@ export const Header = () => {
                     <HeaderContent />
                 </div>
             </div>
-            <ScrollIndicator />
         </div>
     )
 }

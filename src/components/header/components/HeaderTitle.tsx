@@ -9,7 +9,7 @@ export const HeaderTitle = () => {
             id='hero-name'
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.1, ease: easeOutQuart, delay: 0.1 }}
+            transition={{ duration: 0.9, ease: easeOutQuart, delay: 0.05 }}
             className='font-heading font-semibold text-primary-light leading-[0.88] tracking-[-0.045em] text-[clamp(3.75rem,11vw,9.5rem)]'
             style={{ fontStretch: '85%' }}
         >

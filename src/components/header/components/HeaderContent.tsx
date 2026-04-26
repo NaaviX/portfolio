@@ -81,7 +81,9 @@ export const HeaderContent = () => {
                     <dt className='text-primary-light/55 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
                         {aside.basedInLabel}
                     </dt>
-                    <dd className='text-primary-light/80'>{aside.basedInValue}</dd>
+                    <dd className='text-primary-light/80'>
+                        {aside.basedInValue}
+                    </dd>
 
                     <dt className='text-primary-light/55 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
                         {aside.roleLabel}
@@ -91,12 +93,16 @@ export const HeaderContent = () => {
                     <dt className='text-primary-light/55 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
                         {aside.stackLabel}
                     </dt>
-                    <dd className='text-primary-light/80'>{aside.stackValue}</dd>
+                    <dd className='text-primary-light/80'>
+                        {aside.stackValue}
+                    </dd>
 
                     <dt className='text-primary-light/55 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
                         {aside.languagesLabel}
                     </dt>
-                    <dd className='text-primary-light/80'>{aside.languagesValue}</dd>
+                    <dd className='text-primary-light/80'>
+                        {aside.languagesValue}
+                    </dd>
                 </dl>
             </aside>
         </motion.div>

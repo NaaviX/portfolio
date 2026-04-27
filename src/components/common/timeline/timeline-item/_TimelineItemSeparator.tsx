@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { EASE_OUT_QUART } from '@/lib/motion'
 
 const lineVariants = {
     hidden: { scaleY: 0, opacity: 0 },
@@ -6,10 +7,8 @@ const lineVariants = {
         scaleY: 1,
         opacity: 1,
         transition: {
-            type: 'spring' as const,
-            damping: 25,
-            stiffness: 100,
             duration: 0.6,
+            ease: EASE_OUT_QUART,
         },
     },
 }
@@ -20,9 +19,8 @@ const dotVariants = {
         scale: 1,
         opacity: 1,
         transition: {
-            type: 'spring' as const,
-            damping: 15,
-            stiffness: 200,
+            duration: 0.5,
+            ease: EASE_OUT_QUART,
             delay: 0.2,
         },
     },

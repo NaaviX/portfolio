@@ -6,7 +6,7 @@ export const translations = {
             experiences: 'Expériences',
             projects: 'Projets principaux',
             skills: 'Compétences & technos',
-            courses: 'Formations & Diplômes',
+            courses: 'Formations',
             contact: 'Me contacter',
         },
         sectionSubtitles: {
@@ -168,6 +168,20 @@ export const translations = {
             messagePlaceholder: 'Votre message...',
             sending: 'Envoi en cours...',
             send: 'Envoyer le message',
+            helper: 'Réponse sous 24 heures, ou écrivez-moi directement à antoine.legrand77@gmail.com.',
+            errors: {
+                nameRequired: 'Merci d’indiquer votre nom.',
+                emailRequired: 'Merci d’indiquer votre email.',
+                emailInvalid: 'Cet email ne semble pas valide.',
+                subjectRequired: 'Merci de préciser un sujet.',
+                messageRequired: 'Merci d’écrire un message.',
+                generic: 'L’envoi a échoué. Vous pouvez réessayer ou m’écrire directement à antoine.legrand77@gmail.com.',
+            },
+            success: {
+                title: 'Message envoyé.',
+                body: 'Merci, je vous réponds sous 24 heures.',
+                again: 'Envoyer un autre message',
+            },
         },
     },
     en: {
@@ -335,6 +349,20 @@ export const translations = {
             messagePlaceholder: 'Your message...',
             sending: 'Sending...',
             send: 'Send message',
+            helper: 'Reply within 24 hours, or email me directly at antoine.legrand77@gmail.com.',
+            errors: {
+                nameRequired: 'Please share your name.',
+                emailRequired: 'Please add your email.',
+                emailInvalid: 'That email does not look valid.',
+                subjectRequired: 'Please add a subject.',
+                messageRequired: 'Please write a message.',
+                generic: 'Sending failed. Please retry or email me directly at antoine.legrand77@gmail.com.',
+            },
+            success: {
+                title: 'Message sent.',
+                body: 'Thanks, I’ll get back to you within 24 hours.',
+                again: 'Send another message',
+            },
         },
     },
 }

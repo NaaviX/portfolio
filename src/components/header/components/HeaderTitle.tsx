@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
+import { EASE_OUT_QUART as easeOutQuart } from '@/lib/motion'
 import { userData } from '../../user/user.data'
-
-const easeOutQuart = [0.25, 1, 0.5, 1] as [number, number, number, number]
 
 export const HeaderTitle = () => {
     return (

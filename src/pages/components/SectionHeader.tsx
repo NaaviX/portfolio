@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
-
-const easeOutQuart = [0.25, 1, 0.5, 1] as [number, number, number, number]
+import { EASE_OUT_QUART as easeOutQuart } from '@/lib/motion'
 
 interface SectionHeaderProps {
     number: string

@@ -1,6 +1,7 @@
 import { useLanguage } from '@/i18n'
 import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
+import { EASE_OUT_QUART } from '@/lib/motion'
 import { HTMLAttributes } from 'react'
 import { ChipList } from '../../ChipList'
 import { Fade } from '../../effects/Fade'
@@ -28,9 +29,8 @@ const itemVariants = {
         opacity: 1,
         x: 0,
         transition: {
-            type: 'spring' as const,
-            damping: 25,
-            stiffness: 200,
+            duration: 0.42,
+            ease: EASE_OUT_QUART,
         },
     },
 }

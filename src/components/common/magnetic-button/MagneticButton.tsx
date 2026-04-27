@@ -1,4 +1,5 @@
 import { useMagneticButton } from '@/hooks/useMagneticButton'
+import { EASE_OUT_QUART } from '@/lib/motion'
 import { motion } from 'framer-motion'
 import { useRef } from 'react'
 import { isDesktop } from 'react-device-detect'
@@ -29,10 +30,8 @@ export const MagneticButton = (props: MagneticButtonProps) => {
                 onMouseLeave={reset}
                 animate={{ x, y }}
                 transition={{
-                    type: 'spring' as const,
-                    stiffness: 150,
-                    damping: 15,
-                    mass: 0.1,
+                    duration: 0.4,
+                    ease: EASE_OUT_QUART,
                 }}
             >
                 <MagneticButtonBody {...props} />

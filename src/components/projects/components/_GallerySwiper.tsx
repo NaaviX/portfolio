@@ -21,8 +21,8 @@ export const GallerySwiper = (props: GallerySwiperProps) => {
         <Swiper
             style={{
                 // @ts-expect-error CSS custom properties for Swiper
-                '--swiper-navigation-color': '#fff',
-                '--swiper-pagination-color': '#fff',
+                '--swiper-navigation-color': 'var(--color-primary-light)',
+                '--swiper-pagination-color': 'var(--color-primary-light)',
             }}
             spaceBetween={80}
             navigation={true}

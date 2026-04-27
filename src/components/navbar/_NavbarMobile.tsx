@@ -7,8 +7,7 @@ import { animateScroll as scroll } from 'react-scroll'
 import { LanguageSwitcher } from './_LanguageSwitcher'
 import { NavLink } from './_NavLink'
 import { SocialButton } from './_SocialButton'
-
-const easeOutQuart = [0.22, 1, 0.36, 1] as [number, number, number, number]
+import { EASE_OUT_QUART as easeOutQuart } from '@/lib/motion'
 
 const itemVariants = {
     hidden: { opacity: 0, x: -8 },
@@ -77,7 +76,7 @@ export const NavbarMobile = () => {
                         aria-expanded={isOpen}
                         onClick={() => setIsOpen(!isOpen)}
                         whileTap={{ scale: 0.92 }}
-                        className='inline-flex items-center justify-center w-10 h-10 ml-1 text-primary-light/70 hover:text-primary transition-colors duration-200 bg-transparent border-none cursor-pointer'
+                        className='inline-flex items-center justify-center w-11 h-11 ml-1 text-primary-light/70 hover:text-primary transition-colors duration-200 bg-transparent border-none cursor-pointer'
                     >
                         <AnimatePresence mode='wait' initial={false}>
                             {isOpen ? (

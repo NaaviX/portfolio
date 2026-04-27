@@ -12,7 +12,7 @@ export const LanguageSwitcher = () => {
             aria-label={
                 next === 'en' ? 'Switch to English' : 'Passer en français'
             }
-            className='inline-flex items-center gap-1 px-2 h-10 text-xs font-medium uppercase tracking-[0.12em] text-primary-light/50 transition-colors duration-200 cursor-pointer bg-transparent border-none hover:text-primary-light'
+            className='inline-flex items-center gap-1 px-2 h-11 text-xs font-medium uppercase tracking-[0.12em] text-primary-light/50 transition-colors duration-200 cursor-pointer bg-transparent border-none hover:text-primary-light'
         >
             <span
                 className={

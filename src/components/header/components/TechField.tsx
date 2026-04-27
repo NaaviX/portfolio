@@ -271,7 +271,7 @@ const NODES: Node[] = [
 ]
 
 const PARALLAX_RANGE_PX = 36
-const ADJACENCY_THRESHOLD = 24 // % Euclidean distance — DESIGN.md spec
+const ADJACENCY_THRESHOLD = 24 // % Euclidean distance, per DESIGN.md spec
 const SPOTLIGHT_RADIUS = 22 // % of viewport min dimension
 
 type Edge = { a: number; b: number }
@@ -404,17 +404,10 @@ export const TechField = () => {
         return () => window.removeEventListener('pointermove', onMove)
     }, [mx, my, reduce])
 
-    const fieldMask =
-        'radial-gradient(ellipse 70% 55% at 32% 52%, transparent 0%, rgba(0,0,0,0.45) 38%, #000 72%)'
-
     return (
         <div
             aria-hidden
             className='pointer-events-none absolute inset-0 overflow-hidden'
-            style={{
-                maskImage: fieldMask,
-                WebkitMaskImage: fieldMask,
-            }}
         >
             <EdgeMesh variant='base' />
 

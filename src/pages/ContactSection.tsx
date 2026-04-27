@@ -3,8 +3,7 @@ import { useLanguage } from '@/i18n'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, Mail } from 'lucide-react'
 import { FaLinkedinIn } from 'react-icons/fa6'
-
-const easeOutExpo = [0.16, 1, 0.3, 1] as const
+import { EASE_OUT_QUART } from '@/lib/motion'
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -19,7 +18,7 @@ const itemVariants = {
     visible: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.7, ease: easeOutExpo },
+        transition: { duration: 0.7, ease: EASE_OUT_QUART },
     },
 }
 

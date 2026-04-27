@@ -1,10 +1,9 @@
 import { useLanguage } from '@/i18n'
+import { EASE_OUT_QUART as easeOutQuart } from '@/lib/motion'
 import { motion } from 'framer-motion'
 import { FaArrowRight, FaLinkedinIn } from 'react-icons/fa6'
 import { Link } from 'react-scroll'
 import { userData } from '../../user'
-
-const easeOutQuart = [0.25, 1, 0.5, 1] as [number, number, number, number]
 
 const AvailabilityDot = () => (
     <span className='relative flex h-2 w-2'>

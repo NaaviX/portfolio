@@ -41,8 +41,9 @@ const CATEGORY_LABEL_FR: Record<SKILL_TYPE, string> = {
     [SKILL_TYPE.PRACTICES]: 'Pratiques',
 }
 
+import { EASE_OUT_QUART, EASE_OUT_QUART_CSS } from '@/lib/motion'
+
 const TRACK_LABEL = '0.28em'
-const EASE_OUT_QUART = [0.22, 1, 0.36, 1] as const
 const MAG_RADIUS = 140
 const MAG_STRENGTH = 0.35
 
@@ -77,13 +78,6 @@ const buildGroups = (): Group[] => {
         })
     }
     return groups
-}
-
-const sectionVariants: Variants = {
-    hidden: {},
-    visible: {
-        transition: { staggerChildren: 0.13, delayChildren: 0.05 },
-    },
 }
 
 const groupVariants: Variants = {
@@ -141,12 +135,20 @@ export const Skills = () => {
 
     useEffect(() => {
         recomputeRects()
-        const onResize = () => recomputeRects()
+        let scheduled = 0
+        const onResize = () => {
+            if (scheduled) return
+            scheduled = requestAnimationFrame(() => {
+                scheduled = 0
+                recomputeRects()
+            })
+        }
         window.addEventListener('resize', onResize)
         window.addEventListener('scroll', onResize, { passive: true })
         return () => {
             window.removeEventListener('resize', onResize)
             window.removeEventListener('scroll', onResize)
+            if (scheduled) cancelAnimationFrame(scheduled)
             if (rafRef.current) cancelAnimationFrame(rafRef.current)
         }
     }, [recomputeRects])
@@ -191,14 +193,10 @@ export const Skills = () => {
 
     return (
         <div className='w-full max-w-6xl mx-auto px-4 lg:px-6'>
-            <motion.div
+            <div
                 onMouseEnter={recomputeRects}
                 onMouseMove={onMove}
                 onMouseLeave={onLeave}
-                variants={sectionVariants}
-                initial={reduce ? 'visible' : 'hidden'}
-                whileInView='visible'
-                viewport={{ once: true, amount: 0.12 }}
                 className='flex flex-col gap-9 lg:gap-11'
             >
                 {groups.map((group) => {
@@ -208,6 +206,9 @@ export const Skills = () => {
                         <motion.section
                             key={group.category}
                             variants={groupVariants}
+                            initial={reduce ? 'visible' : 'hidden'}
+                            whileInView='visible'
+                            viewport={{ once: true, amount: 0.25, margin: '-40px' }}
                             className='grid grid-cols-1 gap-x-8 gap-y-3 lg:grid-cols-[10rem_1fr] lg:items-baseline'
                         >
                             <GroupHeader
@@ -239,7 +240,7 @@ export const Skills = () => {
                         </motion.section>
                     )
                 })}
-            </motion.div>
+            </div>
         </div>
     )
 }
@@ -283,8 +284,7 @@ const GroupHeader = ({
     </motion.div>
 )
 
-const CHIP_TRANSITION =
-    'transform 520ms cubic-bezier(0.22, 1, 0.36, 1), background-color 240ms ease, color 240ms ease, border-color 240ms ease, box-shadow 280ms ease'
+const CHIP_TRANSITION = `transform 520ms ${EASE_OUT_QUART_CSS}, background-color 240ms ease, color 240ms ease, border-color 240ms ease, box-shadow 280ms ease`
 
 type ChipProps = {
     skill: FlatSkill

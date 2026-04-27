@@ -1,44 +1,31 @@
-import { FormEvent } from 'react'
-import toast from 'react-hot-toast'
-
 const SEND_EMAIL_API_URL = 'https://antoine-legrand.dev/api/'
 
+export type ContactPayload = {
+    name: string
+    email: string
+    subject: string
+    message: string
+}
+
+export type ContactResult =
+    | { ok: true }
+    | { ok: false; reason: 'network' | 'server' }
+
 export const useContact = () => {
-    async function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault()
-        const data = new FormData(event.currentTarget)
-
-        const subject = data.get('subject')
-        const message = data.get('message')
-
-        if (!subject && !message) {
-            return
-        }
-
+    async function sendContact(payload: ContactPayload): Promise<ContactResult> {
         try {
             const response = await fetch(SEND_EMAIL_API_URL, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ subject, message }),
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
                 redirect: 'follow',
             })
-
-            if (!response.ok) {
-                toast.error("L'envoi a échoué")
-                throw new Error("L'envoi a échoué")
-            }
-
-            const data = await response.json()
-            toast.success("L'email a bien été envoyé")
-            return data
-        } catch (error) {
-            throw new Error((error as Error).message)
+            if (!response.ok) return { ok: false, reason: 'server' }
+            return { ok: true }
+        } catch {
+            return { ok: false, reason: 'network' }
         }
     }
 
-    return {
-        handleFormSubmit,
-    }
+    return { sendContact }
 }

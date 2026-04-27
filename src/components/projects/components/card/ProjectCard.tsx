@@ -8,6 +8,7 @@ import {
     Title,
 } from '@/components/common'
 import { useLanguage } from '@/i18n/LanguageContext'
+import { EASE_OUT_QUART } from '@/lib/motion'
 import { FaCode, FaPlayCircle } from 'react-icons/fa'
 import { FaUserGroup } from 'react-icons/fa6'
 import { GoDeviceDesktop, GoDeviceMobile } from 'react-icons/go'
@@ -26,7 +27,7 @@ export const ProjectCard = (props: ProjectCardProps) => {
         <motion.div
             className='w-full md:w-[49%] h-full my-2'
             whileHover={{ scale: 1.02 }}
-            transition={{ type: 'spring' as const, stiffness: 300, damping: 20 }}
+            transition={{ duration: 0.45, ease: EASE_OUT_QUART }}
         >
             <div className='relative rounded-2xl overflow-hidden group'>
                 <div className='project-glow absolute -inset-0.5 bg-gradient-to-br from-[rgba(0,162,199,0.4)] via-[rgba(76,204,230,0.2)] to-[rgba(0,162,199,0.4)] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-400 z-0 blur-lg' />

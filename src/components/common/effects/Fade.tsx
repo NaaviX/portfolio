@@ -1,4 +1,5 @@
-import { motion, Variants } from 'framer-motion'
+import { motion, useReducedMotion, Variants } from 'framer-motion'
+import { EASE_OUT_QUART } from '@/lib/motion'
 
 type FadeDirection = 'up' | 'down' | 'left' | 'right' | 'none'
 
@@ -38,6 +39,16 @@ export const Fade = (props: FadeProps) => {
         distance = 40,
     } = props
 
+    const reduce = useReducedMotion() ?? false
+
+    if (reduce) {
+        return (
+            <div className={className} style={style}>
+                {children}
+            </div>
+        )
+    }
+
     const variants: Variants = {
         hidden: {
             opacity: 0,
@@ -56,11 +67,9 @@ export const Fade = (props: FadeProps) => {
             whileInView='visible'
             variants={variants}
             transition={{
-                type: 'spring' as const,
-                damping: 25,
-                stiffness: 100,
                 duration,
                 delay,
+                ease: EASE_OUT_QUART,
             }}
             viewport={{ once: true, margin: '-50px' }}
             className={className}

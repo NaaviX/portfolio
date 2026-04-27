@@ -23,7 +23,7 @@ export const SocialButton = (props: SocialButtonProps) => {
             rel={isExternal ? 'noopener noreferrer' : undefined}
             whileHover={{ y: -1 }}
             whileTap={{ scale: 0.92 }}
-            className='inline-flex items-center justify-center w-10 h-10 text-primary-light/55 hover:text-primary transition-colors duration-200'
+            className='inline-flex items-center justify-center w-11 h-11 text-primary-light/55 hover:text-primary transition-colors duration-200'
         >
             <Icon className='text-lg' />
         </motion.a>

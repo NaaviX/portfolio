@@ -1,3 +1,4 @@
+import { GlobalTechField } from '@/components/common/GlobalTechField'
 import { useLanguage } from '@/i18n'
 import { ReactLenis } from '@studio-freight/react-lenis'
 import dayjs from 'dayjs'
@@ -31,6 +32,7 @@ const App = () => {
 
     return (
         <ReactLenis root>
+            <GlobalTechField />
             <HeaderSection />
             <Toaster />
 

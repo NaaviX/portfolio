@@ -1,4 +1,5 @@
 import { useLanguage } from '@/i18n'
+import { EASE_OUT_QUART as easeOutQuart } from '@/lib/motion'
 import { motion } from 'framer-motion'
 import { TimelineExperience } from '../../common/timeline/timeline.type'
 
@@ -6,8 +7,6 @@ type CourseCardProps = {
     course: TimelineExperience
     index: number
 }
-
-const easeOutQuart = [0.25, 1, 0.5, 1] as [number, number, number, number]
 
 const formatYearRange = (
     dateFrom: Date,
@@ -20,7 +19,7 @@ const formatYearRange = (
         : language === 'fr'
           ? "aujourd'hui"
           : 'present'
-    return `${from} — ${to}`
+    return `${from} - ${to}`
 }
 
 const getDuration = (
@@ -72,7 +71,7 @@ export const CourseCard = (props: CourseCardProps) => {
                 <span className='text-[0.65rem] tracking-[0.2em] uppercase text-primary-light/40 font-mono'>
                     {type}
                 </span>
-                <h3 className='text-2xl md:text-3xl font-medium text-primary-light leading-tight tracking-tight transition-colors duration-300 group-hover:text-white'>
+                <h3 className='text-2xl md:text-3xl font-medium text-primary-light leading-tight tracking-tight transition-colors duration-300 group-hover:text-primary-light'>
                     {title}
                 </h3>
                 {course.institution && (

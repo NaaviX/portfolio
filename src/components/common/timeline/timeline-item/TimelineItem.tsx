@@ -1,3 +1,4 @@
+import { EASE_OUT_QUART } from '@/lib/motion'
 import { cn } from '@/lib/utils'
 import { useLargeScreen, useMediumScreen } from '@/utils/Utils'
 import { motion, Variants } from 'framer-motion'
@@ -27,9 +28,8 @@ const itemVariants: Variants = {
         opacity: 1,
         x: 0,
         transition: {
-            type: 'spring' as const,
-            damping: 25,
-            stiffness: 90,
+            duration: 0.9,
+            ease: EASE_OUT_QUART,
         },
     },
 }

@@ -19,7 +19,7 @@ export const Chip = memo((props: ChipProps) => {
                 'hover:from-bg-active hover:to-bg-hover',
                 'hover:border-border-hover hover:scale-105',
                 'hover:shadow-[0_0_16px_rgba(0,162,199,0.35),0_0_4px_rgba(0,162,199,0.2)]',
-                'hover:text-white',
+                'hover:text-primary-light',
                 className
             )}
             {...spanProps}

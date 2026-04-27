@@ -1,5 +1,6 @@
 import { ChipList, LazyImage, MagneticButton, Title } from '@/components/common'
 import { useLanguage } from '@/i18n/LanguageContext'
+import { EASE_OUT_QUART } from '@/lib/motion'
 import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
 import { FaCode, FaPlayCircle } from 'react-icons/fa'
@@ -15,8 +16,6 @@ interface BentoProjectCardProps {
     variant?: CardVariant
     index?: number
 }
-
-const EASE_OUT_QUART = [0.25, 1, 0.5, 1] as [number, number, number, number]
 
 const cardVariants = {
     hidden: { opacity: 0, y: 32 },

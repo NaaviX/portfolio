@@ -1,6 +1,7 @@
 import { useLanguage } from '@/i18n'
 import { EASE_OUT_QUART as easeOutQuart } from '@/lib/motion'
 import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import { FaArrowRight, FaLinkedinIn } from 'react-icons/fa6'
 import { Link } from 'react-scroll'
 import { userData } from '../../user'
@@ -12,9 +13,40 @@ const AvailabilityDot = () => (
     </span>
 )
 
+const formatParisTime = () =>
+    new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Europe/Paris',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+    }).format(new Date())
+
+const useParisTime = () => {
+    const [time, setTime] = useState(formatParisTime)
+
+    useEffect(() => {
+        const tick = () => setTime(formatParisTime())
+        const now = new Date()
+        const msToNextMinute =
+            (60 - now.getSeconds()) * 1000 - now.getMilliseconds()
+        let interval: ReturnType<typeof setInterval> | undefined
+        const timeout = setTimeout(() => {
+            tick()
+            interval = setInterval(tick, 60_000)
+        }, msToNextMinute)
+        return () => {
+            clearTimeout(timeout)
+            if (interval) clearInterval(interval)
+        }
+    }, [])
+
+    return time
+}
+
 export const HeaderContent = () => {
     const { t } = useLanguage()
     const aside = t.header.aside
+    const parisTime = useParisTime()
 
     return (
         <motion.div
@@ -94,6 +126,24 @@ export const HeaderContent = () => {
                     </dt>
                     <dd className='text-primary-light/80'>
                         {aside.stackValue}
+                    </dd>
+
+                    <dt className='text-primary-light/55 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
+                        {aside.localTimeLabel}
+                    </dt>
+                    <dd
+                        className='text-primary-light/80 font-mono tabular-nums tracking-tight'
+                        aria-live='off'
+                    >
+                        <motion.span
+                            key={parisTime}
+                            initial={{ opacity: 0.55 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.6, ease: easeOutQuart }}
+                            className='inline-block'
+                        >
+                            {parisTime}
+                        </motion.span>
                     </dd>
 
                     <dt className='text-primary-light/55 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>

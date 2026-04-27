@@ -23,12 +23,55 @@ const SectionSkeleton = () => (
     <div className='w-full min-h-[200px] animate-pulse bg-bg-subtle/30 rounded-lg' />
 )
 
+const useActiveSectionTitle = (
+    baseTitle: string,
+    sectionTitle: (target: string) => { num: string; title: string } | null
+) => {
+    useEffect(() => {
+        document.title = baseTitle
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const visible = entries
+                    .filter((e) => e.isIntersecting)
+                    .sort(
+                        (a, b) => b.intersectionRatio - a.intersectionRatio
+                    )[0]
+                if (!visible) {
+                    document.title = baseTitle
+                    return
+                }
+                const name = visible.target.getAttribute('name')
+                if (!name) return
+                const match = sectionTitle(name)
+                if (!match) {
+                    document.title = baseTitle
+                    return
+                }
+                document.title = `${match.num} · ${match.title} — Antoine Legrand`
+            },
+            { rootMargin: '-30% 0px -50% 0px', threshold: [0.05, 0.5, 0.9] }
+        )
+        const elements = document.querySelectorAll('[name].element')
+        elements.forEach((el) => observer.observe(el))
+        return () => observer.disconnect()
+    }, [baseTitle, sectionTitle])
+}
+
 const App = () => {
     const { language, t } = useLanguage()
 
     useEffect(() => {
         dayjs.locale(language)
     }, [language])
+
+    useActiveSectionTitle(t.meta.baseTitle, (target) => {
+        const idx = sectionsData.findIndex((s) => s.target === target)
+        if (idx === -1) return null
+        return {
+            num: String(idx + 1).padStart(2, '0'),
+            title: t.nav[sectionsData[idx].nameKey],
+        }
+    })
 
     return (
         <ReactLenis root>

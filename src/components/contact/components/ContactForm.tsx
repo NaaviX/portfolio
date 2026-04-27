@@ -5,7 +5,6 @@ import { cn } from '@/lib/utils'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import {
     AlertCircle,
-    Check,
     Loader2,
     Mail,
     MessageSquare,
@@ -102,6 +101,7 @@ export const ContactForm = () => {
                 title={t.contact.success.title}
                 body={t.contact.success.body}
                 again={t.contact.success.again}
+                eta={t.contact.success.eta}
                 onAgain={() => {
                     setIsSent(false)
                     setErrors({})
@@ -209,9 +209,7 @@ export const ContactForm = () => {
                             <motion.div
                                 key='submit-error'
                                 role='alert'
-                                initial={
-                                    reduce ? false : { opacity: 0, y: -4 }
-                                }
+                                initial={reduce ? false : { opacity: 0, y: -4 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0 }}
                                 transition={{
@@ -288,6 +286,7 @@ const SuccessPanel = (props: {
     title: string
     body: string
     again: string
+    eta: string
     onAgain: () => void
     reduce: boolean
 }) => (
@@ -299,11 +298,9 @@ const SuccessPanel = (props: {
         transition={{ duration: 0.5, ease: EASE_OUT_QUART }}
         className='w-full max-w-2xl px-4 md:px-0'
     >
-        <div className='relative p-8 md:p-10 rounded-2xl border border-primary/40 bg-gradient-to-br from-primary/10 to-bg/40 backdrop-blur-md'>
+        <div className='relative p-8 md:p-10 rounded-2xl border border-primary/40 bg-gradient-to-br from-primary/10 to-bg/40 backdrop-blur-md overflow-hidden'>
             <div className='flex items-start gap-4'>
-                <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-primary/60 text-primary'>
-                    <Check className='h-5 w-5' />
-                </div>
+                <SuccessMark reduce={props.reduce} />
                 <div className='flex-1'>
                     <p className='font-heading text-xl md:text-2xl font-semibold tracking-tight text-primary-light'>
                         {props.title}
@@ -311,15 +308,62 @@ const SuccessPanel = (props: {
                     <p className='mt-1 text-primary-light/70 leading-relaxed'>
                         {props.body}
                     </p>
-                    <button
-                        type='button'
-                        onClick={props.onAgain}
-                        className='mt-5 inline-flex items-center gap-2 text-sm text-primary hover:text-primary-light transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary/40 rounded-md px-1 -mx-1'
-                    >
-                        {props.again}
-                    </button>
+                    <div className='mt-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-2.5 py-1 font-mono text-[0.65rem] uppercase tracking-[0.2em] text-primary-light/70'>
+                        <span className='h-1 w-1 rounded-full bg-primary' />
+                        {props.eta}
+                    </div>
+                    <div>
+                        <button
+                            type='button'
+                            onClick={props.onAgain}
+                            className='mt-5 inline-flex items-center gap-2 text-sm text-primary hover:text-primary-light transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary/40 rounded-md px-1 -mx-1'
+                        >
+                            {props.again}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </motion.div>
+)
+
+const SuccessMark = ({ reduce }: { reduce: boolean }) => (
+    <div className='relative flex h-10 w-10 shrink-0 items-center justify-center'>
+        {!reduce && (
+            <motion.span
+                aria-hidden='true'
+                className='absolute inset-0 rounded-full border border-primary/60'
+                initial={{ scale: 0.6, opacity: 0.7 }}
+                animate={{ scale: 1.8, opacity: 0 }}
+                transition={{ duration: 1.2, ease: EASE_OUT_QUART }}
+            />
+        )}
+        <div className='relative flex h-10 w-10 items-center justify-center rounded-full border border-primary/60 text-primary'>
+            <svg
+                viewBox='0 0 24 24'
+                className='h-5 w-5'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth={2.25}
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                aria-hidden='true'
+            >
+                <motion.path
+                    d='M5 12.5l4.5 4.5L19 7'
+                    initial={
+                        reduce
+                            ? { pathLength: 1, opacity: 1 }
+                            : { pathLength: 0, opacity: 0 }
+                    }
+                    animate={{ pathLength: 1, opacity: 1 }}
+                    transition={{
+                        duration: 0.7,
+                        ease: EASE_OUT_QUART,
+                        delay: 0.15,
+                    }}
+                />
+            </svg>
+        </div>
+    </div>
 )

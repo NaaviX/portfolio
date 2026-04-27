@@ -25,7 +25,7 @@ export const translations = {
             metaLine:
                 'Ingénieur développeur web & mobile · 8 ans d’expérience · Paris',
             tagline:
-                'Passionné par l’informatique et le développement depuis bientôt 15 ans. Je recherche des opportunités de missions freelance et reste à l’écoute du marché pour un CDI.',
+                'Passionné par l’informatique et le développement depuis bientôt 15 ans. Je recherche des opportunités de missions freelance et reste à l’écoute du marché.',
             ctaContact: 'Me contacter',
             ctaLinkedin: 'LinkedIn',
             aside: {
@@ -38,6 +38,7 @@ export const translations = {
                 stackValue: 'Java, TypeScript, React, Node, SQL',
                 languagesLabel: 'Langues',
                 languagesValue: 'Français · Anglais (C1)',
+                localTimeLabel: 'Heure locale',
             },
         },
         user: {
@@ -175,13 +176,26 @@ export const translations = {
                 emailInvalid: 'Cet email ne semble pas valide.',
                 subjectRequired: 'Merci de préciser un sujet.',
                 messageRequired: 'Merci d’écrire un message.',
-                generic: 'L’envoi a échoué. Vous pouvez réessayer ou m’écrire directement à antoine.legrand77@gmail.com.',
+                generic:
+                    'L’envoi a échoué. Vous pouvez réessayer ou m’écrire directement à antoine.legrand77@gmail.com.',
             },
             success: {
                 title: 'Message envoyé.',
                 body: 'Merci, je vous réponds sous 24 heures.',
                 again: 'Envoyer un autre message',
+                eta: 'ETA · 24 H',
             },
+        },
+        footer: {
+            wordmark: 'ANTOINE LEGRAND',
+            yearRange: '2023 — {year}',
+            madeIn: 'CONÇU & CODÉ À PARIS',
+            statusLive: 'EN LIGNE',
+            backToTop: 'Haut de page',
+            backToTopShort: 'TOP',
+        },
+        meta: {
+            baseTitle: 'Antoine Legrand · Ingénieur full-stack',
         },
     },
     en: {
@@ -207,7 +221,7 @@ export const translations = {
             metaLine:
                 'Web & Mobile Software Engineer · 8 years of experience · Paris',
             tagline:
-                'Passionate about IT and development for nearly 15 years. Looking for freelance opportunities and open to permanent (CDI) positions.',
+                'Passionate about IT and development for nearly 15 years. Looking for freelance opportunities.',
             ctaContact: 'Get in touch',
             ctaLinkedin: 'LinkedIn',
             aside: {
@@ -220,6 +234,7 @@ export const translations = {
                 stackValue: 'Java, TypeScript, React, Node, SQL',
                 languagesLabel: 'Languages',
                 languagesValue: 'French · English (C1)',
+                localTimeLabel: 'Local time',
             },
         },
         user: {
@@ -356,13 +371,26 @@ export const translations = {
                 emailInvalid: 'That email does not look valid.',
                 subjectRequired: 'Please add a subject.',
                 messageRequired: 'Please write a message.',
-                generic: 'Sending failed. Please retry or email me directly at antoine.legrand77@gmail.com.',
+                generic:
+                    'Sending failed. Please retry or email me directly at antoine.legrand77@gmail.com.',
             },
             success: {
                 title: 'Message sent.',
                 body: 'Thanks, I’ll get back to you within 24 hours.',
                 again: 'Send another message',
+                eta: 'ETA · 24 H',
             },
+        },
+        footer: {
+            wordmark: 'ANTOINE LEGRAND',
+            yearRange: '2023 — {year}',
+            madeIn: 'DESIGNED & CODED IN PARIS',
+            statusLive: 'LIVE',
+            backToTop: 'Back to top',
+            backToTopShort: 'TOP',
+        },
+        meta: {
+            baseTitle: 'Antoine Legrand · Full-stack engineer',
         },
     },
 }

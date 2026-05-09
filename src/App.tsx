@@ -1,4 +1,8 @@
+import { GlobalBackground } from '@/components/common/GlobalBackground'
 import { GlobalTechField } from '@/components/common/GlobalTechField'
+// Side-effect import: triggers the module-level GitLab fetch at app boot,
+// so data is in flight while the lazy Skills chunk is still being downloaded.
+import '@/hooks/useGitLabStats'
 import { useLanguage } from '@/i18n'
 import { ReactLenis } from '@studio-freight/react-lenis'
 import dayjs from 'dayjs'
@@ -14,7 +18,6 @@ import { Section, sectionsData } from './pages/sections.data'
 // Extracted style constant to prevent object recreation on each render
 const ELEMENT_STYLE = {
     marginTop: '1px',
-    paddingTop: '150px',
     position: 'relative',
 } as const
 
@@ -75,6 +78,7 @@ const App = () => {
 
     return (
         <ReactLenis root>
+            <GlobalBackground />
             <GlobalTechField />
             <HeaderSection />
             <Toaster />
@@ -83,7 +87,7 @@ const App = () => {
                 <Element
                     name={section.target}
                     key={section.nameKey}
-                    className='element'
+                    className='element pt-20 md:pt-[150px]'
                     style={ELEMENT_STYLE}
                 >
                     <SectionLayout

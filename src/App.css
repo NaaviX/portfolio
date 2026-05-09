@@ -1,5 +1,5 @@
 #root {
-    background-image: url('/src/assets/background.svg');
-    color: var(--chakra-colors-primary-light);
-    accent-color: var(--chakra-colors-border);
+    background-color: var(--color-bg-app);
+    color: var(--color-primary-light);
+    accent-color: var(--color-border);
 }

@@ -42,7 +42,7 @@ export const ContactSection = () => {
 
     return (
         <div className='w-full relative'>
-            <div className='grid lg:grid-cols-[1.05fr_1fr] gap-14 lg:gap-20 items-start'>
+            <div className='grid lg:grid-cols-[1.05fr_1fr] gap-10 lg:gap-20 items-start'>
                 <motion.aside
                     className='flex flex-col gap-9 lg:pt-4'
                     initial='hidden'

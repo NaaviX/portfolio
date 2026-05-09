@@ -7,7 +7,7 @@ export const Navbar = () => {
     const { backgroundColor, boxShadow, borderColor } = useNavbar()
     return (
         <motion.header
-            className='fixed w-full z-[1000] px-4 sm:px-6 lg:px-8 backdrop-blur-md border-b'
+            className='fixed w-full z-[1000] px-3 sm:px-6 lg:px-8 backdrop-blur-md border-b'
             style={{
                 backgroundColor,
                 boxShadow,

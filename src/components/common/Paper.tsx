@@ -22,7 +22,7 @@ export const Paper = (props: PaperProps) => {
         'transition-all duration-500 ease-out',
         'hover:bg-[rgba(8,44,54,0.6)] hover:border-border-hover',
         'hover:shadow-[0_0_30px_rgba(0,162,199,0.15),0_0_60px_rgba(0,162,199,0.08),inset_0_1px_0_rgba(255,255,255,0.08)]',
-        isMedium ? 'p-10' : 'p-5',
+        isMedium ? 'p-10' : 'p-4',
         className
     )
 

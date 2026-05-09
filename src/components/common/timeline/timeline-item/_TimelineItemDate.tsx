@@ -25,7 +25,7 @@ export const TimelineItemDate = (props: TimelineItemDateProps) => {
     return (
         <div
             className={cn(
-                'grow-[0.3] lg:grow shrink basis-0 mr-auto p-4 flex flex-col gap-2.5',
+                'grow-[0.3] lg:grow shrink basis-0 mr-auto p-2 md:p-4 flex flex-col gap-2.5',
                 isLarge && isReversed
                     ? 'text-left items-start'
                     : 'text-right items-end'

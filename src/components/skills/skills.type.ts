@@ -3,8 +3,9 @@ import { FC, SVGProps } from 'react'
 export enum SKILL_TYPE {
     WEBFRONT = 'frontend',
     WEBBACK = 'backend',
-    DEVTOOLS = 'devtools',
     MOBILE = 'mobile',
+    TESTING = 'testing',
+    DEVTOOLS = 'devtools',
     PRACTICES = 'practices',
 }
 

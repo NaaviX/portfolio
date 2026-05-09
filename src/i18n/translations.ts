@@ -38,7 +38,15 @@ export const translations = {
                 stackValue: 'Java, TypeScript, React, Node, SQL',
                 languagesLabel: 'Langues',
                 languagesValue: 'Français · Anglais (C1)',
-                localTimeLabel: 'Heure locale',
+                timeOfDay: {
+                    late: 'Paris · Tard',
+                    early: 'Paris · Tôt',
+                    morning: 'Paris · Matin',
+                    midday: 'Paris · Midi',
+                    afternoon: 'Paris · Après-midi',
+                    evening: 'Paris · Soir',
+                    night: 'Paris · Nuit',
+                },
             },
         },
         user: {
@@ -101,6 +109,7 @@ export const translations = {
         projects: {
             tooManyCooks:
                 "Dashboard d'analyse des différentes stratégies d'arbitrage de funding rates entre plusieurs échanges décentralisés de cryptomonnaie.",
+            ogSpot: "Trouve des spots près de toi, connecte-toi avec d'autres sportifs",
             tooManyCooksPrediction:
                 "Dashboard d'analyse des différentes stratégies d'arbitrage entre plusieurs plateformes de marché de prédiction, utilisant l'IA.",
             atTheMosBar:
@@ -119,19 +128,22 @@ export const translations = {
         skills: {
             categories: {
                 frontend: 'Développement frontend',
-                backend: 'Développement backend & données',
-                devtools: 'Outils & CI/CD',
+                backend: 'Backend & données',
                 mobile: 'Développement mobile',
+                testing: 'Tests & qualité',
+                devtools: 'DevOps & outils',
                 practices: 'Méthodologies et bonnes pratiques',
             },
             descriptions: {
                 frontend:
                     "Interfaces utilisateur web ou mobile ergonomiques, optimisation de l'expérience utilisateur.",
                 backend:
-                    'Couche responsable de la gestion de données et de la logique métier.',
-                devtools:
-                    "Divers outils de développement et d'intégration continue utilisés lors de mes précédents projets.",
+                    'Couche responsable de la gestion de données, de la logique métier et de la persistance.',
                 mobile: 'Applications mobiles Android et iOS.',
+                testing:
+                    "Frameworks de tests unitaires, d'intégration et de mocking côté front et back.",
+                devtools:
+                    "Outils d'intégration continue, conteneurisation, reverse proxy et environnements de développement.",
                 practices: '',
             },
             names: {
@@ -189,13 +201,45 @@ export const translations = {
         footer: {
             wordmark: 'ANTOINE LEGRAND',
             yearRange: '2023 — {year}',
-            madeIn: 'CONÇU & CODÉ À PARIS',
-            statusLive: 'EN LIGNE',
+            madeIn: '',
+            statusLive: '',
             backToTop: 'Haut de page',
             backToTopShort: 'TOP',
         },
         meta: {
             baseTitle: 'Antoine Legrand · Ingénieur full-stack',
+        },
+        gitlab: {
+            title: 'Pulse GitLab',
+            aria: 'Activité GitLab',
+            commits30d: 'commits / 30j',
+            activeDays: 'jours actifs',
+            linesDiff: 'lignes / 30j',
+            linesDiffAria:
+                'Lignes ajoutées et supprimées sur les 30 derniers jours',
+            publicProjects: 'projets publics',
+            calendarTitle: 'Activité 12 derniers mois',
+            calendarAria:
+                'Heat calendar de mes contributions sur les 12 derniers mois',
+            contributions: 'contributions',
+            commitSingular: 'commit',
+            commitPlural: 'commits',
+            less: 'moins',
+            more: 'plus',
+            languages: 'Langages',
+            languagesAria: 'Répartition des langages utilisés',
+            otherLanguages: 'autres',
+            topProjects: 'Top projets',
+            memberSince: 'membre depuis',
+            refresh: 'Rafraîchir',
+            refreshAria: 'Rafraîchir les statistiques GitLab',
+        },
+        gitlabProject: {
+            aria: 'Statistiques GitLab du projet',
+            commits: 'commits',
+            lastUpdate: 'dernière màj',
+            topLanguage: 'top langage',
+            commitsAria: 'Activité des commits sur les 26 dernières semaines',
         },
     },
     en: {
@@ -234,7 +278,15 @@ export const translations = {
                 stackValue: 'Java, TypeScript, React, Node, SQL',
                 languagesLabel: 'Languages',
                 languagesValue: 'French · English (C1)',
-                localTimeLabel: 'Local time',
+                timeOfDay: {
+                    late: 'Paris · Late',
+                    early: 'Paris · Early',
+                    morning: 'Paris · Morning',
+                    midday: 'Paris · Midday',
+                    afternoon: 'Paris · Afternoon',
+                    evening: 'Paris · Evening',
+                    night: 'Paris · Night',
+                },
             },
         },
         user: {
@@ -297,6 +349,7 @@ export const translations = {
         projects: {
             tooManyCooks:
                 'Analytics dashboard for various funding rate arbitrage strategies across multiple decentralized cryptocurrency exchanges.',
+            ogSpot: 'Find spots near you and connect with other athletes.',
             tooManyCooksPrediction:
                 'Analytics dashboard for various arbitrage strategies across multiple prediction market platforms, using AI.',
             atTheMosBar:
@@ -314,19 +367,22 @@ export const translations = {
         skills: {
             categories: {
                 frontend: 'Frontend Development',
-                backend: 'Backend Development & Data',
-                devtools: 'Tools & CI/CD',
+                backend: 'Backend & Data',
                 mobile: 'Mobile Development',
+                testing: 'Testing & Quality',
+                devtools: 'DevOps & Tooling',
                 practices: 'Methodologies & Best Practices',
             },
             descriptions: {
                 frontend:
                     'Ergonomic web and mobile user interfaces, user experience optimization.',
                 backend:
-                    'Layer responsible for data management and business logic.',
-                devtools:
-                    'Various development and continuous integration tools used in my previous projects.',
+                    'Data management, business logic, persistence and APIs.',
                 mobile: 'Android and iOS mobile applications.',
+                testing:
+                    'Unit, integration and mocking frameworks across frontend and backend.',
+                devtools:
+                    'Continuous integration, containerization, reverse proxies and development environments.',
                 practices: '',
             },
             names: {
@@ -384,13 +440,44 @@ export const translations = {
         footer: {
             wordmark: 'ANTOINE LEGRAND',
             yearRange: '2023 — {year}',
-            madeIn: 'DESIGNED & CODED IN PARIS',
-            statusLive: 'LIVE',
+            madeIn: '',
+            statusLive: '',
             backToTop: 'Back to top',
             backToTopShort: 'TOP',
         },
         meta: {
             baseTitle: 'Antoine Legrand · Full-stack engineer',
+        },
+        gitlab: {
+            title: 'GitLab pulse',
+            aria: 'GitLab activity',
+            commits30d: 'commits / 30d',
+            activeDays: 'active days',
+            linesDiff: 'lines / 30d',
+            linesDiffAria: 'Lines added and removed over the last 30 days',
+            publicProjects: 'public repos',
+            calendarTitle: 'Last 12 months',
+            calendarAria:
+                'Heat calendar of my contributions over the last 12 months',
+            contributions: 'contributions',
+            commitSingular: 'commit',
+            commitPlural: 'commits',
+            less: 'less',
+            more: 'more',
+            languages: 'Languages',
+            languagesAria: 'Breakdown of languages used',
+            otherLanguages: 'other',
+            topProjects: 'Top repos',
+            memberSince: 'member since',
+            refresh: 'Refresh',
+            refreshAria: 'Refresh GitLab stats',
+        },
+        gitlabProject: {
+            aria: 'GitLab project statistics',
+            commits: 'commits',
+            lastUpdate: 'last update',
+            topLanguage: 'top language',
+            commitsAria: 'Commit activity over the last 26 weeks',
         },
     },
 }

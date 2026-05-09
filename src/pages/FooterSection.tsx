@@ -15,7 +15,7 @@ export const FooterSection = () => {
     const yearRange = t.footer.yearRange.replace('{year}', String(BUILD_YEAR))
 
     return (
-        <footer className='relative mt-24 px-6 md:px-12 lg:px-20'>
+        <footer className='relative mt-16 md:mt-24 px-4 sm:px-6 md:px-12 lg:px-20'>
             <div className='mx-auto max-w-[1440px]'>
                 <div
                     aria-hidden='true'

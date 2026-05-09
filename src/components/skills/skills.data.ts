@@ -65,7 +65,7 @@ export const sqlSkill: Skill = {
 
 export const noSqlSkill: Skill = {
     name: SKILL_NAME.NOSQL,
-    icon: SqlIcon,
+    icon: undefined,
     isImportant: true,
 }
 
@@ -351,12 +351,16 @@ export const frontSkillCategory: SkillCategory = {
         reactSkill,
         nextjsSkill,
         vueSkill,
+        nuxtSkill,
         angularSkill,
         cssSkill,
         tailwindSkill,
-        jestSkill,
-        jasmineSkill,
-        karmaSkill,
+        shadcnSkill,
+        chakraSkill,
+        bootstrapSkill,
+        bulmaSkill,
+        jquerySkill,
+        UXSkill,
     ],
     image: SkillFrontImage,
 }
@@ -367,14 +371,32 @@ export const backSkillCategory: SkillCategory = {
     skills: [
         javaSkill,
         springbootSkill,
+        quarkusSkill,
         nodeSkill,
         expressSkill,
+        restSkill,
         sqlSkill,
+        postgresqlSkill,
+        jpqlSkill,
         noSqlSkill,
         elasticsearchSkill,
-        JUnitSkill,
-        MockitoSkill,
+        firebaseSkill,
+        supabaseSkill,
     ],
+    image: SkillBackImage,
+}
+
+export const mobileSkillCategory: SkillCategory = {
+    nameKey: SKILL_TYPE.MOBILE,
+    color: '#0f172a',
+    skills: [reactNativeSkill, flutterSkill, androidSkill],
+    image: SkillMobileImage,
+}
+
+export const testingSkillCategory: SkillCategory = {
+    nameKey: SKILL_TYPE.TESTING,
+    color: '#0f172a',
+    skills: [jestSkill, jasmineSkill, karmaSkill, JUnitSkill, MockitoSkill],
     image: SkillBackImage,
 }
 
@@ -383,11 +405,13 @@ export const devToolsSkillCategory: SkillCategory = {
     color: '#0f172a',
     skills: [
         gitSkill,
+        dockerSkill,
         jenkinsSkill,
         sonarSkill,
-        dockerSkill,
-        firebaseSkill,
-        supabaseSkill,
+        CICDSkill,
+        traefikSkill,
+        nginxSkill,
+        linuxSkill,
         intellijSkill,
         vscodeSkill,
         cursorSkill,
@@ -412,44 +436,11 @@ export const practicesSkillCategory: SkillCategory = {
     image: SkillMobileImage,
 }
 
-export const mobileSkillCategory: SkillCategory = {
-    nameKey: SKILL_TYPE.MOBILE,
-    color: '#0f172a',
-    skills: [reactNativeSkill, flutterSkill, androidSkill],
-    image: SkillMobileImage,
-}
-
 export const skillsData: SkillCategory[] = [
     frontSkillCategory,
     backSkillCategory,
-    devToolsSkillCategory,
     mobileSkillCategory,
+    testingSkillCategory,
+    devToolsSkillCategory,
     practicesSkillCategory,
-    /* javaSkill,
-  springbootSkill,
-  UXSkill,
-  javascriptSkill,
-  typescriptSkill,
-  vueSkill,
-  nuxtSkill,
-  reactSkill,
-  cssSkill,
-  bootstrapSkill,
-  bulmaSkill,
-  tailwindSkill,
-  muiSkill,
-  postgresqlSkill,
-  jpqlSkill,
-  firebaseSkill,
-  flutterSkill,
-  androidSkill,
-  restSkill,
-  swaggerSkill,
-  postmanSkill,
-  gitSkill,
-  linuxSkill,
-  jenkinsSkill,
-  sonarSkill,
-  nexusSkill,
-  solidSkill,*/
 ]

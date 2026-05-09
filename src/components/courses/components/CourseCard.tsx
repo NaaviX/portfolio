@@ -56,7 +56,7 @@ export const CourseCard = (props: CourseCardProps) => {
                 ease: easeOutQuart,
                 delay: index * 0.08,
             }}
-            className='border-b border-border-subtle/60 py-10 md:py-14 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 group'
+            className='border-b border-border-subtle/60 py-7 md:py-14 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-10 group'
         >
             <div className='md:col-span-3 flex flex-col'>
                 <span className='font-heading font-medium text-primary text-2xl md:text-[1.75rem] leading-none tracking-[-0.02em] tabular-nums'>

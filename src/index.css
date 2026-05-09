@@ -94,10 +94,41 @@
     }
 
     --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
+
+    @keyframes tech-float {
+        0%,
+        100% {
+            transform: translate3d(0, 0, 0) rotate(0deg);
+        }
+        25% {
+            transform: translate3d(0, calc(var(--drift) * -1), 0) rotate(1.2deg);
+        }
+        50% {
+            transform: translate3d(0, 0, 0) rotate(0deg);
+        }
+        75% {
+            transform: translate3d(0, var(--drift-rev), 0) rotate(-1.2deg);
+        }
+    }
+}
+
+html,
+body {
+    overflow-x: clip;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
 }
 
 #root {
-    background-image: url('/src/assets/background.svg');
+    background-color: var(--color-bg-app);
     color: var(--color-primary-light);
     accent-color: var(--color-border);
     font-family: var(--font-family-body);

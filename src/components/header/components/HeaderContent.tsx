@@ -43,10 +43,31 @@ const useParisTime = () => {
     return time
 }
 
+type TimeOfDayKey =
+    | 'late'
+    | 'early'
+    | 'morning'
+    | 'midday'
+    | 'afternoon'
+    | 'evening'
+    | 'night'
+
+const bucketForHour = (hour: number): TimeOfDayKey => {
+    if (hour < 5) return 'late'
+    if (hour < 9) return 'early'
+    if (hour < 12) return 'morning'
+    if (hour < 14) return 'midday'
+    if (hour < 18) return 'afternoon'
+    if (hour < 22) return 'evening'
+    return 'night'
+}
+
 export const HeaderContent = () => {
     const { t } = useLanguage()
     const aside = t.header.aside
     const parisTime = useParisTime()
+    const parisHour = Number.parseInt(parisTime.slice(0, 2), 10)
+    const timeOfDayLabel = aside.timeOfDay[bucketForHour(parisHour)]
 
     return (
         <motion.div
@@ -129,7 +150,15 @@ export const HeaderContent = () => {
                     </dd>
 
                     <dt className='text-primary-light/55 font-mono text-[0.7rem] tracking-[0.2em] uppercase pt-0.5'>
-                        {aside.localTimeLabel}
+                        <motion.span
+                            key={timeOfDayLabel}
+                            initial={{ opacity: 0.4 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.9, ease: easeOutQuart }}
+                            className='inline-block'
+                        >
+                            {timeOfDayLabel}
+                        </motion.span>
                     </dt>
                     <dd
                         className='text-primary-light/80 font-mono tabular-nums tracking-tight'

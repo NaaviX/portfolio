@@ -15,6 +15,9 @@ import {
     EsieePlus9,
     Firstcab,
     Groom1,
+    OgSpot1,
+    OgSpot2,
+    OgSpot3,
     OldPortfolio,
     Portfolio1,
     Prediction,
@@ -72,9 +75,26 @@ export const projectsData: Project[] = [
         ],
         images: [TooManyCooks],
         previewLink: 'https://toomanycooks.app',
+        gitStatsPath: 'NaaviX/funding-rates-dashboard',
         membersCount: 1,
     },
-
+    {
+        name: 'OG Spot',
+        type: 'WEB',
+        descriptionKey: 'ogSpot',
+        year: '2025',
+        skills: [
+            reactSkill,
+            typescriptSkill,
+            shadcnSkill,
+            nodeSkill,
+            supabaseSkill,
+            dockerSkill,
+        ],
+        images: [OgSpot1, OgSpot2, OgSpot3],
+        previewLink: 'https://ogspot.app',
+        membersCount: 1,
+    },
     {
         name: 'Too Many Cooks - Prediction',
         type: 'WEB',
@@ -90,6 +110,7 @@ export const projectsData: Project[] = [
         ],
         images: [Prediction],
         previewLink: 'https://prediction.toomanycooks.app',
+        gitStatsPath: 'NaaviX/too-many-cooks-prediction-markets',
         membersCount: 1,
     },
     {
@@ -110,7 +131,7 @@ export const projectsData: Project[] = [
         ],
         images: [AtTheMosBar1],
         previewLink: 'https://www.atthemosbar.fr/accueil',
-        //gitLink: 'https://gitlab.com/NaaviX/at-the-mos-web',
+        gitStatsPath: 'NaaviX/at-the-mos-front',
         membersCount: 1,
     },
     {
@@ -127,6 +148,7 @@ export const projectsData: Project[] = [
             chakraSkill,
         ],
         images: [Portfolio1],
+        gitLink: 'https://gitlab.com/NaaviX/portfolio',
         membersCount: 1,
     },
     {
@@ -137,6 +159,7 @@ export const projectsData: Project[] = [
         skills: [reactSkill, typescriptSkill, dockerSkill, shadcnSkill],
         images: [Yams],
         previewLink: 'https://yams.antoine-legrand.dev/',
+        gitStatsPath: 'NaaviX/yams',
         membersCount: 1,
     },
     {

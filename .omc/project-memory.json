@@ -1,0 +1,245 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1778221710441,
+  "projectRoot": "/home/navix/portfolio/portfolio-front",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "react",
+        "version": "18.2.0",
+        "category": "frontend"
+      },
+      {
+        "name": "react-dom",
+        "version": "18.2.0",
+        "category": "frontend"
+      },
+      {
+        "name": "jest",
+        "version": "30.3.0",
+        "category": "testing"
+      },
+      {
+        "name": "vite",
+        "version": "5.0.12",
+        "category": "build"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "npx tsc --noEmit 2>&1 | head -40",
+    "testCommand": "npm test",
+    "lintCommand": "npm run lint",
+    "devCommand": "npm run start",
+    "scripts": {
+      "start": "vite --host",
+      "build": "tsc && vite build",
+      "serve": "vite preview --port 3000 --host",
+      "lint": "eslint -c .eslintrc.json --ext .js,.jsx,.ts,.tsx .",
+      "lint:fix": "npm run lint -- --fix",
+      "test": "jest",
+      "test:watch": "jest --watch",
+      "test:coverage": "jest --coverage",
+      "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,md}\" --config ./.prettierrc.json"
+    }
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": "type-based"
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "src"
+    ],
+    "gitBranches": {
+      "defaultBranch": "master",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "build": {
+      "path": "build",
+      "purpose": "Build output",
+      "fileCount": 1,
+      "lastAccessed": 1778221710327,
+      "keyFiles": [
+        "index.html"
+      ]
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 5,
+      "lastAccessed": 1778221710331,
+      "keyFiles": [
+        "App.css",
+        "App.tsx",
+        "index.css",
+        "index.tsx",
+        "vite-env.d.ts"
+      ]
+    },
+    "build/assets": {
+      "path": "build/assets",
+      "purpose": "Static assets",
+      "fileCount": 37,
+      "lastAccessed": 1778221710387,
+      "keyFiles": [
+        "ContactSection-Cc5KdWzZ.js",
+        "CoursesSection-iEPcc43X.js",
+        "ExperiencesSection-DHSwI0bn.js"
+      ]
+    },
+    "src/assets": {
+      "path": "src/assets",
+      "purpose": "Static assets",
+      "fileCount": 5,
+      "lastAccessed": 1778221710408,
+      "keyFiles": [
+        "WIREFRAM.TTF",
+        "background.svg",
+        "favicon.png"
+      ]
+    },
+    "src/components": {
+      "path": "src/components",
+      "purpose": "UI components",
+      "fileCount": 0,
+      "lastAccessed": 1778221710411,
+      "keyFiles": []
+    },
+    "src/lib": {
+      "path": "src/lib",
+      "purpose": "Library code",
+      "fileCount": 2,
+      "lastAccessed": 1778221710413,
+      "keyFiles": [
+        "motion.ts",
+        "utils.ts"
+      ]
+    },
+    "src/pages": {
+      "path": "src/pages",
+      "purpose": "Page components",
+      "fileCount": 8,
+      "lastAccessed": 1778221710418,
+      "keyFiles": [
+        "ContactSection.tsx",
+        "CoursesSection.tsx",
+        "ExperiencesSection.tsx"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "src/components/skills/_HeatCalendar.tsx",
+      "accessCount": 11,
+      "lastAccessed": 1778285102001,
+      "type": "file"
+    },
+    {
+      "path": "src/components/skills/GitLabPulse.tsx",
+      "accessCount": 4,
+      "lastAccessed": 1778284981026,
+      "type": "file"
+    },
+    {
+      "path": "src/components/projects/components/card/BentoProjectCard.tsx",
+      "accessCount": 4,
+      "lastAccessed": 1778285112334,
+      "type": "file"
+    },
+    {
+      "path": "src/i18n/translations.ts",
+      "accessCount": 4,
+      "lastAccessed": 1778288415338,
+      "type": "file"
+    },
+    {
+      "path": "src/components/projects/components/OtherProjects.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1778285117787,
+      "type": "file"
+    },
+    {
+      "path": "src/components/projects/projects.data.ts",
+      "accessCount": 3,
+      "lastAccessed": 1778288430544,
+      "type": "file"
+    },
+    {
+      "path": "src/pages/SkillsSection.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1778221798312,
+      "type": "file"
+    },
+    {
+      "path": "src/assets/images/index.ts",
+      "accessCount": 2,
+      "lastAccessed": 1778288400975,
+      "type": "file"
+    },
+    {
+      "path": "src/components/skills/Skills.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1778221758942,
+      "type": "file"
+    },
+    {
+      "path": "src/pages/components/SectionLayout.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1778221764094,
+      "type": "file"
+    },
+    {
+      "path": "src/components/skills/_TopProjects.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1778284884799,
+      "type": "file"
+    },
+    {
+      "path": "src/hooks/useGitLabStats.ts",
+      "accessCount": 1,
+      "lastAccessed": 1778284885548,
+      "type": "file"
+    },
+    {
+      "path": "src/hooks/useGitLabProjectStats.ts",
+      "accessCount": 1,
+      "lastAccessed": 1778284885993,
+      "type": "file"
+    },
+    {
+      "path": "src/components/projects/projects.type.ts",
+      "accessCount": 1,
+      "lastAccessed": 1778288356440,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

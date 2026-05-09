@@ -27,13 +27,13 @@ export const Modal = (props: ModalProps) => {
                     data-lenis-prevent
                 />
                 <DialogPrimitive.Content
-                    className='fixed left-1/2 top-1/2 z-50 w-full max-w-xl -translate-x-1/2 -translate-y-1/2 rounded-lg border border-border bg-bg p-6 shadow-lg'
+                    className='fixed left-1/2 top-1/2 z-50 w-[calc(100vw-1.5rem)] max-w-6xl -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl border border-border bg-[rgba(8,44,54,0.88)] p-4 shadow-[0_0_30px_rgba(0,162,199,0.14),0_0_80px_rgba(0,162,199,0.08),inset_0_1px_0_rgba(182,236,247,0.08)] sm:p-6'
                     data-lenis-prevent
                 >
-                    <DialogPrimitive.Title className='text-lg font-medium text-primary-light'>
+                    <DialogPrimitive.Title className='pr-10 font-mono text-[0.7rem] font-normal uppercase tracking-[0.2em] text-primary-light/70'>
                         {title}
                     </DialogPrimitive.Title>
-                    <DialogPrimitive.Close className='absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none'>
+                    <DialogPrimitive.Close className='absolute right-4 top-4 rounded-full border border-border-subtle p-2 opacity-70 transition-[border-color,opacity] duration-300 hover:border-border-hover hover:opacity-100 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary'>
                         <X className='h-4 w-4 text-primary-light' />
                         <span className='sr-only'>Close</span>
                     </DialogPrimitive.Close>

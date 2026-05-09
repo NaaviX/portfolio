@@ -9,7 +9,7 @@ export const ProjectsSection = () => {
 
     return (
         <div className='w-full flex flex-col items-center gap-6'>
-            <div className='grid grid-cols-12 gap-4 lg:gap-6 w-full'>
+            <div className='grid grid-cols-12 gap-3 sm:gap-4 lg:gap-6 w-full'>
                 <BentoProjectCard
                     project={featuredProject}
                     variant='featured'

@@ -115,14 +115,14 @@ export const ContactForm = () => {
         <motion.form
             noValidate
             onSubmit={onSubmit}
-            className='w-full max-w-2xl px-4 md:px-0'
+            className='w-full max-w-2xl'
             initial={reduce ? false : { opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: EASE_OUT_QUART }}
             aria-busy={isSubmitting}
         >
-            <div className='relative p-6 md:p-8 rounded-2xl border border-border bg-gradient-to-br from-bg-hover/40 to-bg/40 backdrop-blur-md'>
+            <div className='relative p-4 sm:p-6 md:p-8 rounded-2xl border border-border bg-gradient-to-br from-bg-hover/40 to-bg/40 backdrop-blur-md'>
                 <div className='relative space-y-6'>
                     <FieldRow
                         id='name'
@@ -296,7 +296,7 @@ const SuccessPanel = (props: {
         initial={props.reduce ? false : { opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: EASE_OUT_QUART }}
-        className='w-full max-w-2xl px-4 md:px-0'
+        className='w-full max-w-2xl'
     >
         <div className='relative p-8 md:p-10 rounded-2xl border border-primary/40 bg-gradient-to-br from-primary/10 to-bg/40 backdrop-blur-md overflow-hidden'>
             <div className='flex items-start gap-4'>

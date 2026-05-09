@@ -69,8 +69,10 @@ export const NavbarMobile = () => {
                 </motion.button>
                 <div className='flex items-center'>
                     <LanguageSwitcher />
-                    <SocialButton type='mail' />
-                    <SocialButton type='linkedin' />
+                    <div className='hidden sm:flex items-center'>
+                        <SocialButton type='mail' />
+                        <SocialButton type='linkedin' />
+                    </div>
                     <motion.button
                         aria-label={isOpen ? 'Close Menu' : 'Open Menu'}
                         aria-expanded={isOpen}

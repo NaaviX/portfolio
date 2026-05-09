@@ -10,6 +10,7 @@ export interface Project {
     images: string[]
     previewLink?: string
     gitLink?: string
+    gitStatsPath?: string
     membersCount: number
 }
 

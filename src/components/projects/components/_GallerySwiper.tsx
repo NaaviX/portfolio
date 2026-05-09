@@ -1,4 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { useLanguage } from '@/i18n/LanguageContext'
 
 // Import Swiper styles
 import 'swiper/css'
@@ -17,26 +18,42 @@ type GallerySwiperProps = {
 
 export const GallerySwiper = (props: GallerySwiperProps) => {
     const { images, name } = props
+    const { language } = useLanguage()
+    const captureLabel = language === 'fr' ? 'capture' : 'screenshot'
+    const total = String(images.length).padStart(2, '0')
+
     return (
         <Swiper
+            className='project-gallery-swiper'
             style={{
                 // @ts-expect-error CSS custom properties for Swiper
                 '--swiper-navigation-color': 'var(--color-primary-light)',
                 '--swiper-pagination-color': 'var(--color-primary-light)',
             }}
-            spaceBetween={80}
+            spaceBetween={56}
             navigation={true}
-            pagination={true}
+            pagination={{ clickable: true }}
             modules={[Navigation, Pagination]}
         >
-            {images.map((image) => (
+            {images.map((image, index) => (
                 <SwiperSlide key={image}>
-                    <img
-                        src={image}
-                        alt={name}
-                        loading='lazy'
-                        className='w-full'
-                    />
+                    <figure className='gallery-slide'>
+                        <div className='gallery-slide-shell'>
+                            <img
+                                src={image}
+                                alt={`${name} ${captureLabel} ${index + 1}`}
+                                loading={index === 0 ? 'eager' : 'lazy'}
+                                className='gallery-slide-image'
+                            />
+                            <figcaption className='gallery-slide-index'>
+                                <span>
+                                    {String(index + 1).padStart(2, '0')}
+                                </span>
+                                <span aria-hidden>/</span>
+                                <span>{total}</span>
+                            </figcaption>
+                        </div>
+                    </figure>
                 </SwiperSlide>
             ))}
         </Swiper>

@@ -73,7 +73,7 @@ export const TimelineItem = memo((props: TimelineItemProps) => {
                     <TimelineItemSeparator />
                 </>
             ) : null}
-            <div className='m-0 flex-1 p-4'>
+            <div className='m-0 flex-1 p-2 md:p-4'>
                 {withFrame ? (
                     <Paper style={{ margin: '0', flex: '1 1 0%' }}>
                         <TimelineItemContent {...experience} />

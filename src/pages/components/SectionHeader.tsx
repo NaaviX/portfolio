@@ -16,7 +16,7 @@ export const SectionHeader = (props: SectionHeaderProps) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.8, ease: easeOutQuart }}
-            className='w-full mb-16 md:mb-24'
+            className='w-full mb-10 md:mb-24'
         >
             <div className='flex items-baseline gap-4 md:gap-6'>
                 <span className='text-[0.65rem] md:text-xs font-mono tracking-[0.2em] text-primary/70 pt-1'>

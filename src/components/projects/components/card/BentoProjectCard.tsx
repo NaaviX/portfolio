@@ -8,6 +8,7 @@ import { FaUserGroup } from 'react-icons/fa6'
 import { GoDeviceDesktop, GoDeviceMobile } from 'react-icons/go'
 import { Project } from '../../projects.type'
 import { Gallery } from '../Gallery'
+import { GitLabProjectStrip } from '../_GitLabProjectStrip'
 
 type CardVariant = 'featured' | 'large' | 'medium' | 'compact'
 
@@ -155,7 +156,7 @@ const FeaturedCard = ({
                     )}
                 >
                     <div className='grid grid-cols-1 lg:grid-cols-12'>
-                        <div className='relative h-[320px] lg:h-auto lg:col-span-7 overflow-hidden lg:border-r lg:border-border-subtle'>
+                        <div className='relative h-[220px] sm:h-[300px] lg:h-auto lg:col-span-7 overflow-hidden lg:border-r lg:border-border-subtle'>
                             <LazyImage
                                 src={project.images[0]}
                                 alt={project.name}
@@ -164,7 +165,7 @@ const FeaturedCard = ({
                             />
                             <div className='absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-bg-subtle/70 to-transparent lg:hidden' />
                         </div>
-                        <div className='relative lg:col-span-5 p-8 lg:p-12 flex flex-col justify-between gap-10'>
+                        <div className='relative lg:col-span-5 p-5 sm:p-7 lg:p-12 flex flex-col justify-between gap-8 lg:gap-10'>
                             <div className='flex items-start justify-end gap-6'>
                                 <span className='text-[10px] tracking-[0.2em] uppercase text-primary/70 font-medium pt-3'>
                                     Featured
@@ -184,6 +185,7 @@ const FeaturedCard = ({
                                     skills={project.skills.slice(0, 6)}
                                     className='justify-start'
                                 />
+                                <GitLabProjectStrip project={project} />
                                 <div className='pt-2'>
                                     <ActionButtons project={project} />
                                 </div>
@@ -220,7 +222,7 @@ const LargeCard = ({ project, index }: { project: Project; index: number }) => {
                         'h-full flex flex-col shadow-[0_14px_44px_-22px_rgba(0,0,0,0.55)]'
                     )}
                 >
-                    <div className='relative h-[240px] overflow-hidden border-b border-border-subtle'>
+                    <div className='relative h-[200px] sm:h-[240px] overflow-hidden border-b border-border-subtle'>
                         <LazyImage
                             src={project.images[0]}
                             alt={project.name}
@@ -228,7 +230,7 @@ const LargeCard = ({ project, index }: { project: Project; index: number }) => {
                             variants={imageVariants}
                         />
                     </div>
-                    <div className='p-7 lg:p-8 flex flex-col flex-1 gap-5'>
+                    <div className='p-5 sm:p-7 lg:p-8 flex flex-col flex-1 gap-5'>
                         <div className='flex items-start justify-end gap-4'>
                             <MetaRow project={project} />
                         </div>
@@ -242,6 +244,7 @@ const LargeCard = ({ project, index }: { project: Project; index: number }) => {
                             skills={project.skills.slice(0, 5)}
                             className='justify-start'
                         />
+                        <GitLabProjectStrip project={project} />
                         <div className='pt-1'>
                             <ActionButtons project={project} size='small' />
                         </div>
@@ -282,7 +285,7 @@ const MediumCard = ({
                         'h-full flex flex-col shadow-[0_12px_36px_-20px_rgba(0,0,0,0.5)]'
                     )}
                 >
-                    <div className='relative h-[210px] overflow-hidden border-b border-border-subtle'>
+                    <div className='relative h-[170px] sm:h-[210px] overflow-hidden border-b border-border-subtle'>
                         <LazyImage
                             src={project.images[0]}
                             alt={project.name}
@@ -290,7 +293,7 @@ const MediumCard = ({
                             variants={imageVariants}
                         />
                     </div>
-                    <div className='p-6 flex flex-col flex-1 gap-4'>
+                    <div className='p-4 sm:p-6 flex flex-col flex-1 gap-4'>
                         <div className='flex items-start justify-end gap-4'>
                             <MetaRow project={project} size='small' />
                         </div>
@@ -304,6 +307,7 @@ const MediumCard = ({
                             skills={project.skills.slice(0, 4)}
                             className='justify-start'
                         />
+                        <GitLabProjectStrip project={project} />
                         <div className='pt-1'>
                             <ActionButtons project={project} size='small' />
                         </div>
@@ -330,13 +334,13 @@ const CompactCard = ({
             whileInView='visible'
             viewport={{ once: true, margin: '-40px' }}
             variants={cardVariants}
-            className='min-w-[320px] flex-shrink-0'
+            className='w-[min(320px,calc(100vw-2.5rem))] flex-shrink-0 h-full flex'
         >
             <motion.div
                 initial='rest'
                 whileHover='hover'
                 animate='rest'
-                className='group h-full cursor-default'
+                className='group h-full w-full cursor-default'
             >
                 <div
                     className={cn(
@@ -368,6 +372,7 @@ const CompactCard = ({
                             skills={project.skills.slice(0, 2)}
                             className='justify-start gap-1.5'
                         />
+                        <GitLabProjectStrip project={project} size='compact' />
                         <div className='pt-1'>
                             <ActionButtons project={project} size='tiny' />
                         </div>
@@ -385,6 +390,8 @@ const ActionButtons = ({
     project: Project
     size?: 'normal' | 'small' | 'tiny'
 }) => {
+    const buttonSize = size === 'normal' ? 'normal' : 'small'
+
     if (size === 'tiny') {
         return (
             <div className='flex gap-2'>
@@ -406,7 +413,7 @@ const ActionButtons = ({
                         hideLabel
                     />
                 )}
-                <Gallery {...project} />
+                <Gallery {...project} size='small' hideLabel />
             </div>
         )
     }
@@ -418,6 +425,7 @@ const ActionButtons = ({
                     href={project.gitLink}
                     ariaLabel='Code'
                     icon={FaCode}
+                    size={buttonSize}
                 />
             )}
             {project.previewLink && (
@@ -425,9 +433,10 @@ const ActionButtons = ({
                     href={project.previewLink}
                     ariaLabel='Démo'
                     icon={FaPlayCircle}
+                    size={buttonSize}
                 />
             )}
-            <Gallery {...project} />
+            <Gallery {...project} size={buttonSize} />
         </div>
     )
 }

@@ -26,6 +26,11 @@ const CATEGORY_PALETTE: Record<SKILL_TYPE, Palette> = {
         tint: 'rgba(52, 211, 153, 0.13)',
         ink: '#d1fae5',
     },
+    [SKILL_TYPE.TESTING]: {
+        hue: '#facc15',
+        tint: 'rgba(250, 204, 21, 0.13)',
+        ink: '#fef9c3',
+    },
     [SKILL_TYPE.PRACTICES]: {
         hue: '#fb7185',
         tint: 'rgba(251, 113, 133, 0.13)',
@@ -38,6 +43,7 @@ const CATEGORY_LABEL_FR: Record<SKILL_TYPE, string> = {
     [SKILL_TYPE.WEBBACK]: 'Backend',
     [SKILL_TYPE.DEVTOOLS]: 'DevTools',
     [SKILL_TYPE.MOBILE]: 'Mobile',
+    [SKILL_TYPE.TESTING]: 'Testing',
     [SKILL_TYPE.PRACTICES]: 'Pratiques',
 }
 

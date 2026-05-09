@@ -26,53 +26,31 @@ const InfoItem = ({ children }: { children: React.ReactNode }) => (
     </div>
 )
 
-const getTypeBadgeConfig = (typeKey: string) => {
+const getTypeIcon = (typeKey: string) => {
     switch (typeKey) {
         case 'cdi':
-            return {
-                icon: Briefcase,
-                bgClass: 'bg-emerald-500/10 border-emerald-500/30',
-                textClass: 'text-emerald-400',
-                iconClass: 'text-emerald-400',
-            }
+            return Briefcase
         case 'apprenticeship':
-            return {
-                icon: GraduationCap,
-                bgClass: 'bg-sky-500/10 border-sky-500/30',
-                textClass: 'text-sky-400',
-                iconClass: 'text-sky-400',
-            }
+            return GraduationCap
         case 'freelance':
-            return {
-                icon: Sparkles,
-                bgClass: 'bg-violet-500/10 border-violet-500/30',
-                textClass: 'text-violet-400',
-                iconClass: 'text-violet-400',
-            }
+            return Sparkles
         default:
-            return {
-                icon: Briefcase,
-                bgClass: 'bg-primary/10 border-primary/30',
-                textClass: 'text-primary',
-                iconClass: 'text-primary',
-            }
+            return Briefcase
     }
 }
 
 const TypeBadge = ({ type, typeKey }: { type: string; typeKey: string }) => {
-    const config = getTypeBadgeConfig(typeKey)
-    const Icon = config.icon
-
+    const Icon = getTypeIcon(typeKey)
     return (
         <span
             className={cn(
-                'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium tracking-wide border',
-                'transition-all duration-300 hover:scale-105',
-                config.bgClass,
-                config.textClass
+                'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border',
+                'border-primary/25 bg-primary/10 text-primary',
+                'font-mono text-[0.6rem] tracking-[0.18em] uppercase',
+                'transition-all duration-300 hover:scale-105 hover:bg-primary/15'
             )}
         >
-            <Icon className={cn('w-3.5 h-3.5', config.iconClass)} />
+            <Icon className='w-3 h-3' />
             {type}
         </span>
     )

@@ -47,7 +47,7 @@
     "runtime": null
   },
   "build": {
-    "buildCommand": "npm run build",
+    "buildCommand": "npm run build 2>&1 | tail -15",
     "testCommand": "npm test",
     "lintCommand": "npm run lint",
     "devCommand": "npm run start",
@@ -164,20 +164,26 @@
     },
     {
       "path": "src/components/skills/GitLabPulse.tsx",
-      "accessCount": 4,
-      "lastAccessed": 1778284981026,
+      "accessCount": 8,
+      "lastAccessed": 1778346473991,
       "type": "file"
     },
     {
       "path": "src/components/projects/components/card/BentoProjectCard.tsx",
-      "accessCount": 4,
-      "lastAccessed": 1778285112334,
+      "accessCount": 5,
+      "lastAccessed": 1778346384249,
       "type": "file"
     },
     {
       "path": "src/i18n/translations.ts",
       "accessCount": 4,
       "lastAccessed": 1778288415338,
+      "type": "file"
+    },
+    {
+      "path": "src/components/skills/Skills.tsx",
+      "accessCount": 4,
+      "lastAccessed": 1778346479977,
       "type": "file"
     },
     {
@@ -193,6 +199,18 @@
       "type": "file"
     },
     {
+      "path": "src/components/common/timeline/timeline-item/_TimelineItemDate.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1778345620233,
+      "type": "file"
+    },
+    {
+      "path": "src/components/common/timeline/timeline-item/_TimelineItemContent.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1778346410813,
+      "type": "file"
+    },
+    {
       "path": "src/pages/SkillsSection.tsx",
       "accessCount": 2,
       "lastAccessed": 1778221798312,
@@ -205,9 +223,21 @@
       "type": "file"
     },
     {
-      "path": "src/components/skills/Skills.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1778221758942,
+      "path": "src/pages/sections.data.ts",
+      "accessCount": 2,
+      "lastAccessed": 1778344839775,
+      "type": "file"
+    },
+    {
+      "path": "src/components/common/timeline/timeline-item/_TimelineItemContentInfo.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1778345629479,
+      "type": "file"
+    },
+    {
+      "path": "src/components/common/timeline/timeline-item/_TimelineItemSeparator.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1778345640981,
       "type": "file"
     },
     {
@@ -250,6 +280,42 @@
       "path": ".superpowers/brainstorm/1391860-1778340506/content/waiting.html",
       "accessCount": 1,
       "lastAccessed": 1778341076093,
+      "type": "file"
+    },
+    {
+      "path": "src/components/common/timeline/Timeline.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1778345451393,
+      "type": "file"
+    },
+    {
+      "path": "src/components/common/timeline/timeline-item/TimelineItem.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1778345451809,
+      "type": "file"
+    },
+    {
+      "path": "src/components/experiences/experiences.data.ts",
+      "accessCount": 1,
+      "lastAccessed": 1778345452145,
+      "type": "file"
+    },
+    {
+      "path": "src/components/common/timeline/timeline.type.ts",
+      "accessCount": 1,
+      "lastAccessed": 1778345452477,
+      "type": "file"
+    },
+    {
+      "path": "src/components/common/Chip.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1778346410334,
+      "type": "file"
+    },
+    {
+      "path": "src/index.css",
+      "accessCount": 1,
+      "lastAccessed": 1778347254930,
       "type": "file"
     }
   ],

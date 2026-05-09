@@ -66,9 +66,7 @@ export const LanguageDonut = ({ languages }: LanguageDonutProps) => {
                         strokeWidth={STROKE}
                         strokeDashoffset={s.dashoffset}
                         initial={
-                            reduce
-                                ? false
-                                : { strokeDasharray: `0 ${CIRCUM}` }
+                            reduce ? false : { strokeDasharray: `0 ${CIRCUM}` }
                         }
                         animate={
                             inView || reduce
@@ -94,9 +92,7 @@ export const LanguageDonut = ({ languages }: LanguageDonutProps) => {
                     <motion.li
                         key={s.name}
                         className='flex items-center gap-2.5 tabular-nums'
-                        initial={
-                            reduce ? false : { opacity: 0, x: -8 }
-                        }
+                        initial={reduce ? false : { opacity: 0, x: -8 }}
                         animate={
                             inView || reduce ? { opacity: 1, x: 0 } : undefined
                         }

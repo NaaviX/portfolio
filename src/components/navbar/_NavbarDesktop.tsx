@@ -14,7 +14,7 @@ export const NavbarDesktop = () => {
             <motion.button
                 onClick={() => scroll.scrollToTop()}
                 whileTap={{ scale: 0.96 }}
-                className='font-heading font-semibold text-lg text-primary-light hover:text-white transition-colors duration-200 bg-transparent border-none cursor-pointer justify-self-start'
+                className='font-heading font-semibold text-lg text-primary-light hover:text-primary-light transition-colors duration-200 bg-transparent border-none cursor-pointer justify-self-start'
             >
                 Antoine<span className='text-primary'>.</span>
             </motion.button>

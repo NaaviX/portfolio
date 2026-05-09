@@ -89,14 +89,9 @@ export const TimelineItemContent = (props: TimelineItemContentProps) => {
                             variants={itemVariants}
                             className='flex items-start gap-3 group'
                         >
-                            <span
-                                className='mt-2 w-1.5 h-1.5 rounded-full bg-primary shrink-0
-                                           group-hover:scale-150 group-hover:bg-primary-light
-                                           transition-all duration-300'
-                                style={{
-                                    boxShadow: '0 0 6px var(--color-primary)',
-                                }}
-                            />
+                            <span className='font-mono text-[0.6rem] tracking-[0.1em] text-primary/60 shrink-0 mt-[0.35rem] group-hover:text-primary transition-colors duration-300'>
+                                {String(idx + 1).padStart(2, '0')}
+                            </span>
                             <span className='text-primary-light/90 leading-relaxed group-hover:text-primary-light transition-colors duration-300'>
                                 {activity}
                             </span>

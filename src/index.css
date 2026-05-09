@@ -114,6 +114,7 @@
 
 html,
 body {
+    background-color: var(--color-bg-app);
     overflow-x: clip;
 }
 
@@ -152,14 +153,12 @@ h6 {
 }
 
 input,
-textarea,
-button {
+textarea {
     border-color: var(--color-border) !important;
 }
 
 input:hover,
-textarea:hover,
-button:hover {
+textarea:hover {
     border-color: var(--color-border-hover) !important;
     background-color: transparent !important;
 }
@@ -167,4 +166,9 @@ button:hover {
 input:focus,
 textarea:focus {
     background-color: transparent !important;
+}
+
+:where(a, button, input, textarea, [role='button']):focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
 }

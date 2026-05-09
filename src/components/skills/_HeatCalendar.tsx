@@ -31,10 +31,21 @@ const SCALE = [
     'oklch(0.82 0.150 200)',
 ] as const
 
-const BREATH_AMP_BY_BUCKET = [0.0, 0.04, 0.07, 0.10, 0.14] as const
-const SPOTLIGHT_BY_BUCKET = [0.18, 0.30, 0.40, 0.50, 0.60] as const
+const BREATH_AMP_BY_BUCKET = [0.0, 0.04, 0.07, 0.1, 0.14] as const
+const SPOTLIGHT_BY_BUCKET = [0.18, 0.3, 0.4, 0.5, 0.6] as const
 
 type Rgb = [number, number, number]
+type CursorPoint = { x: number; y: number }
+type HeatCell = {
+    week: number
+    dow: number
+    count: number
+    additions: number
+    deletions: number
+    day: string
+    inFuture: boolean
+    bucket: number
+}
 
 let CACHED_PALETTE: Rgb[] | null = null
 const resolvePalette = (): Rgb[] => {
@@ -75,12 +86,32 @@ const isoDay = (d: Date): string =>
     `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
 
 const MONTHS_FR = [
-    'janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin',
-    'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.',
+    'janv.',
+    'févr.',
+    'mars',
+    'avr.',
+    'mai',
+    'juin',
+    'juil.',
+    'août',
+    'sept.',
+    'oct.',
+    'nov.',
+    'déc.',
 ]
 const MONTHS_EN = [
-    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
 ]
 
 const WEEKDAYS_FR = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam']
@@ -134,6 +165,155 @@ const drawRoundRect = (
     ctx.fill()
 }
 
+const revealForCell = (
+    cell: HeatCell,
+    elapsed: number,
+    reduce: boolean
+): number => {
+    if (reduce) return 1
+    const localT = (elapsed - cell.week * REVEAL_STAGGER) / REVEAL_DURATION
+    return easeOutQuart(Math.max(0, Math.min(1, localT)))
+}
+
+const breatheColor = (
+    color: Rgb,
+    cell: HeatCell,
+    x: number,
+    y: number,
+    elapsed: number,
+    reduce: boolean
+): Rgb => {
+    if (reduce) return color
+    const phase = x * 0.04 + y * 0.07
+    const breath =
+        1 +
+        BREATH_AMP_BY_BUCKET[cell.bucket] *
+            Math.sin((elapsed / BREATH_PERIOD) * Math.PI * 2 + phase)
+    return color.map((v) => Math.min(255, v * breath)) as Rgb
+}
+
+const spotlightColor = (
+    color: Rgb,
+    cell: HeatCell,
+    cursor: CursorPoint | null,
+    centerX: number,
+    centerY: number,
+    spotlightRadius: number,
+    reduce: boolean
+): Rgb => {
+    if (!cursor || reduce) return color
+    const dx = cursor.x - centerX
+    const dy = cursor.y - centerY
+    const dist = Math.sqrt(dx * dx + dy * dy)
+    const lift =
+        smoothstep(spotlightRadius, 0, dist) * SPOTLIGHT_BY_BUCKET[cell.bucket]
+    return color.map((v) => v + (255 - v) * lift) as Rgb
+}
+
+const paintCell = ({
+    ctx,
+    cell,
+    palette,
+    step,
+    cellSize,
+    cursor,
+    elapsed,
+    reduce,
+    spotlightRadius,
+}: {
+    ctx: CanvasRenderingContext2D
+    cell: HeatCell
+    palette: Rgb[]
+    step: number
+    cellSize: number
+    cursor: CursorPoint | null
+    elapsed: number
+    reduce: boolean
+    spotlightRadius: number
+}) => {
+    if (cell.inFuture) return
+
+    const revealEase = revealForCell(cell, elapsed, reduce)
+    if (revealEase <= 0) return
+
+    const x = cell.week * step
+    const y = cell.dow * step
+    const paintY = y + HEADER_OFFSET
+    const centerX = x + cellSize / 2
+    const centerY = paintY + cellSize / 2
+    const breathed = breatheColor(
+        palette[cell.bucket],
+        cell,
+        x,
+        y,
+        elapsed,
+        reduce
+    )
+    const spotlighted = spotlightColor(
+        breathed,
+        cell,
+        cursor,
+        centerX,
+        centerY,
+        spotlightRadius,
+        reduce
+    )
+    const [r, g, b] = spotlighted.map((v) => v * revealEase)
+
+    ctx.fillStyle = `rgb(${r | 0}, ${g | 0}, ${b | 0})`
+    drawRoundRect(ctx, x, paintY, cellSize, cellSize, 2)
+}
+
+const drawCalendarFrame = ({
+    ctx,
+    cells,
+    palette,
+    width,
+    height,
+    step,
+    cellSize,
+    cursor,
+    startedAt,
+    now,
+    reduce,
+    intersecting,
+    spotlightRadius,
+}: {
+    ctx: CanvasRenderingContext2D
+    cells: HeatCell[]
+    palette: Rgb[]
+    width: number
+    height: number
+    step: number
+    cellSize: number
+    cursor: CursorPoint | null
+    startedAt: { current: number | null }
+    now: number
+    reduce: boolean
+    intersecting: boolean
+    spotlightRadius: number
+}) => {
+    if (startedAt.current == null) startedAt.current = now
+    const elapsed = (now - startedAt.current) / 1000
+
+    ctx.clearRect(0, 0, width, height)
+    for (const c of cells) {
+        paintCell({
+            ctx,
+            cell: c,
+            palette,
+            step,
+            cellSize,
+            cursor,
+            elapsed,
+            reduce,
+            spotlightRadius,
+        })
+    }
+
+    return !reduce && intersecting
+}
+
 export const HeatCalendar = ({ calendar }: HeatCalendarProps) => {
     const { language, t } = useLanguage()
     const reduce = useReducedMotion() ?? false
@@ -173,16 +353,7 @@ export const HeatCalendar = ({ calendar }: HeatCalendarProps) => {
         const firstSunday = startOfWeekSunday(start)
         const totalDays = WEEKS * ROWS
 
-        const cells: Array<{
-            week: number
-            dow: number
-            count: number
-            additions: number
-            deletions: number
-            day: string
-            inFuture: boolean
-            bucket: number
-        }> = []
+        const cells: HeatCell[] = []
         let total = 0
         const cursor = new Date(firstSunday)
         for (let i = 0; i < totalDays; i++) {
@@ -273,75 +444,22 @@ export const HeatCalendar = ({ calendar }: HeatCalendarProps) => {
 
         const draw = (now: number) => {
             if (!alive) return
-            if (startedAtRef.current == null) startedAtRef.current = now
-            const elapsed = (now - startedAtRef.current) / 1000
-
-            ctx.clearRect(0, 0, width, height)
-            const cursor = cursorRef.current
-
-            for (const c of cells) {
-                if (c.inFuture) continue
-
-                const cx0 = c.week * step
-                const cy0 = c.dow * step
-                const cellPaintY = cy0 + HEADER_OFFSET
-
-                let revealEase = 1
-                if (!reduce) {
-                    const localT =
-                        (elapsed - c.week * REVEAL_STAGGER) / REVEAL_DURATION
-                    revealEase = easeOutQuart(
-                        Math.max(0, Math.min(1, localT))
-                    )
-                }
-                if (revealEase <= 0) continue
-
-                const [br, bg, bb] = palette[c.bucket]
-
-                let outR = br
-                let outG = bg
-                let outB = bb
-
-                if (!reduce) {
-                    const phase = cx0 * 0.04 + cy0 * 0.07
-                    const breath =
-                        1 +
-                        BREATH_AMP_BY_BUCKET[c.bucket] *
-                            Math.sin(
-                                (elapsed / BREATH_PERIOD) * Math.PI * 2 + phase
-                            )
-                    outR = Math.min(255, br * breath)
-                    outG = Math.min(255, bg * breath)
-                    outB = Math.min(255, bb * breath)
-                }
-
-                if (cursor && !reduce) {
-                    const ccx = cx0 + cell / 2
-                    const ccy = cellPaintY + cell / 2
-                    const dx = cursor.x - ccx
-                    const dy = cursor.y - ccy
-                    const dist = Math.sqrt(dx * dx + dy * dy)
-                    const lift =
-                        smoothstep(spotlightRadius, 0, dist) *
-                        SPOTLIGHT_BY_BUCKET[c.bucket]
-                    if (lift > 0) {
-                        outR = outR + (255 - outR) * lift
-                        outG = outG + (255 - outG) * lift
-                        outB = outB + (255 - outB) * lift
-                    }
-                }
-
-                outR = outR * revealEase
-                outG = outG * revealEase
-                outB = outB * revealEase
-
-                ctx.fillStyle = `rgb(${outR | 0}, ${outG | 0}, ${outB | 0})`
-                drawRoundRect(ctx, cx0, cellPaintY, cell, cell, 2)
-            }
-
-            if (!reduce && intersecting) {
-                raf = requestAnimationFrame(draw)
-            }
+            const shouldContinue = drawCalendarFrame({
+                ctx,
+                cells,
+                palette,
+                width,
+                height,
+                step,
+                cellSize: cell,
+                cursor: cursorRef.current,
+                startedAt: startedAtRef,
+                now,
+                reduce,
+                intersecting,
+                spotlightRadius,
+            })
+            if (shouldContinue) raf = requestAnimationFrame(draw)
         }
 
         if (reduce) {
@@ -358,7 +476,16 @@ export const HeatCalendar = ({ calendar }: HeatCalendarProps) => {
             alive = false
             if (raf) cancelAnimationFrame(raf)
         }
-    }, [cells, width, height, intersecting, reduce, step, cell, spotlightRadius])
+    }, [
+        cells,
+        width,
+        height,
+        intersecting,
+        reduce,
+        step,
+        cell,
+        spotlightRadius,
+    ])
 
     const handlePointerMove = (e: ReactPointerEvent<SVGSVGElement>) => {
         const rect = e.currentTarget.getBoundingClientRect()
@@ -433,7 +560,9 @@ export const HeatCalendar = ({ calendar }: HeatCalendarProps) => {
                     {t.gitlab.calendarTitle}
                 </h4>
                 <span className='text-[0.65rem] tracking-[0.2em] uppercase text-primary-light/40 font-mono tabular-nums'>
-                    {total.toLocaleString(language === 'fr' ? 'fr-FR' : 'en-US')}{' '}
+                    {total.toLocaleString(
+                        language === 'fr' ? 'fr-FR' : 'en-US'
+                    )}{' '}
                     {t.gitlab.contributions}
                 </span>
             </header>
@@ -502,74 +631,86 @@ export const HeatCalendar = ({ calendar }: HeatCalendarProps) => {
                     </svg>
 
                     <AnimatePresence>
-                        {hovered && (() => {
-                            const flipDown = hovered.cy < 60
-                            return (
-                            <motion.div
-                                key='heat-tooltip'
-                                initial={{ opacity: 0, y: flipDown ? -4 : 4 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: flipDown ? -4 : 4 }}
-                                transition={{
-                                    duration: 0.18,
-                                    ease: [0.25, 1, 0.5, 1],
-                                }}
-                                role='tooltip'
-                                className={`pointer-events-none absolute z-10 -translate-x-1/2 ${
-                                    flipDown ? '' : '-translate-y-full'
-                                } whitespace-nowrap rounded-md border border-border-subtle bg-bg/85 px-3 py-2 backdrop-blur-sm shadow-[0_0_18px_rgba(0,162,199,0.18),0_0_4px_rgba(0,162,199,0.12)]`}
-                                style={{
-                                    left: Math.max(
-                                        56,
-                                        Math.min(width - 56, hovered.cx)
-                                    ),
-                                    top: flipDown
-                                        ? hovered.cy + cell / 2 + 6
-                                        : hovered.cy - 6,
-                                }}
-                            >
-                                <div className='font-mono text-[0.6rem] uppercase tracking-[0.18em] text-primary-light/55'>
-                                    {formatTooltipDate(hovered.day, language)}
-                                </div>
-                                <div className='mt-0.5 text-[0.85rem] tabular-nums text-primary-light/90'>
-                                    <span
-                                        className={
-                                            hovered.count > 0
-                                                ? 'text-primary'
-                                                : 'text-primary-light/55'
-                                        }
+                        {hovered &&
+                            (() => {
+                                const flipDown = hovered.cy < 60
+                                return (
+                                    <motion.div
+                                        key='heat-tooltip'
+                                        initial={{
+                                            opacity: 0,
+                                            y: flipDown ? -4 : 4,
+                                        }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{
+                                            opacity: 0,
+                                            y: flipDown ? -4 : 4,
+                                        }}
+                                        transition={{
+                                            duration: 0.18,
+                                            ease: [0.25, 1, 0.5, 1],
+                                        }}
+                                        role='tooltip'
+                                        className={`pointer-events-none absolute z-10 -translate-x-1/2 ${
+                                            flipDown ? '' : '-translate-y-full'
+                                        } whitespace-nowrap rounded-md border border-border-subtle bg-bg/85 px-3 py-2 backdrop-blur-sm shadow-[0_0_18px_rgba(0,162,199,0.18),0_0_4px_rgba(0,162,199,0.12)]`}
+                                        style={{
+                                            left: Math.max(
+                                                56,
+                                                Math.min(width - 56, hovered.cx)
+                                            ),
+                                            top: flipDown
+                                                ? hovered.cy + cell / 2 + 6
+                                                : hovered.cy - 6,
+                                        }}
                                     >
-                                        {hovered.count}
-                                    </span>{' '}
-                                    <span className='text-primary-light/55'>
-                                        {hovered.count === 1
-                                            ? t.gitlab.commitSingular
-                                            : t.gitlab.commitPlural}
-                                    </span>
-                                </div>
-                                {hovered.count > 0 &&
-                                    (hovered.additions > 0 ||
-                                        hovered.deletions > 0) && (
-                                        <div className='mt-0.5 font-mono text-[0.7rem] tabular-nums flex items-center gap-2'>
-                                            <span className='text-emerald-400/85'>
-                                                +{hovered.additions.toLocaleString(
-                                                    language === 'fr'
-                                                        ? 'fr-FR'
-                                                        : 'en-US'
-                                                )}
-                                            </span>
-                                            <span className='text-rose-400/75'>
-                                                −{hovered.deletions.toLocaleString(
-                                                    language === 'fr'
-                                                        ? 'fr-FR'
-                                                        : 'en-US'
-                                                )}
+                                        <div className='font-mono text-[0.6rem] uppercase tracking-[0.18em] text-primary-light/55'>
+                                            {formatTooltipDate(
+                                                hovered.day,
+                                                language
+                                            )}
+                                        </div>
+                                        <div className='mt-0.5 text-[0.85rem] tabular-nums text-primary-light/90'>
+                                            <span
+                                                className={
+                                                    hovered.count > 0
+                                                        ? 'text-primary'
+                                                        : 'text-primary-light/55'
+                                                }
+                                            >
+                                                {hovered.count}
+                                            </span>{' '}
+                                            <span className='text-primary-light/55'>
+                                                {hovered.count === 1
+                                                    ? t.gitlab.commitSingular
+                                                    : t.gitlab.commitPlural}
                                             </span>
                                         </div>
-                                    )}
-                            </motion.div>
-                            )
-                        })()}
+                                        {hovered.count > 0 &&
+                                            (hovered.additions > 0 ||
+                                                hovered.deletions > 0) && (
+                                                <div className='mt-0.5 font-mono text-[0.7rem] tabular-nums flex items-center gap-2'>
+                                                    <span className='text-emerald-400/85'>
+                                                        +
+                                                        {hovered.additions.toLocaleString(
+                                                            language === 'fr'
+                                                                ? 'fr-FR'
+                                                                : 'en-US'
+                                                        )}
+                                                    </span>
+                                                    <span className='text-rose-400/75'>
+                                                        −
+                                                        {hovered.deletions.toLocaleString(
+                                                            language === 'fr'
+                                                                ? 'fr-FR'
+                                                                : 'en-US'
+                                                        )}
+                                                    </span>
+                                                </div>
+                                            )}
+                                    </motion.div>
+                                )
+                            })()}
                     </AnimatePresence>
                 </div>
             </div>

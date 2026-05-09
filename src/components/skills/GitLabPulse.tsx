@@ -12,12 +12,14 @@ import { TopProjects } from './_TopProjects'
 const formatRelative = (
     iso: string,
     language: 'fr' | 'en',
-    nowMs: number,
+    nowMs: number
 ): string => {
     const diffMs = nowMs - new Date(iso).getTime()
     const minutes = Math.max(1, Math.round(diffMs / 60_000))
     if (minutes < 60) {
-        return language === 'fr' ? `il y a ${minutes} min` : `${minutes} min ago`
+        return language === 'fr'
+            ? `il y a ${minutes} min`
+            : `${minutes} min ago`
     }
     const hours = Math.round(minutes / 60)
     if (hours < 24) {
@@ -27,7 +29,8 @@ const formatRelative = (
     return language === 'fr' ? `il y a ${days} j` : `${days}d ago`
 }
 
-const formatYear = (iso: string): string => new Date(iso).getFullYear().toString()
+const formatYear = (iso: string): string =>
+    new Date(iso).getFullYear().toString()
 
 const useNowTick = (intervalMs: number) => {
     const [now, setNow] = useState(() => Date.now())
@@ -53,7 +56,8 @@ export const GitLabPulse = () => {
 
     const labels = t.gitlab
 
-    if (loading || !stats) return <GitLabPulseSkeleton labels={labels} reduce={reduce} />
+    if (loading || !stats)
+        return <GitLabPulseSkeleton labels={labels} reduce={reduce} />
 
     const visibleTopProjects = stats.topProjects.filter(
         (p) => !p.name.toLowerCase().includes('deletion')
@@ -103,7 +107,11 @@ export const GitLabPulse = () => {
                     {stats.lastActivity && (
                         <span>
                             <span className='text-primary-light/75'>
-                                {formatRelative(stats.lastActivity, language, now)}
+                                {formatRelative(
+                                    stats.lastActivity,
+                                    language,
+                                    now
+                                )}
                             </span>
                         </span>
                     )}
@@ -120,12 +128,19 @@ export const GitLabPulse = () => {
                             className={`text-[0.8rem] ${refreshing ? 'animate-spin' : ''}`}
                         />
                     </button>
-                    <FaGitlab aria-hidden className='text-primary-light/35 text-base' />
+                    <FaGitlab
+                        aria-hidden
+                        className='text-primary-light/35 text-base'
+                    />
                 </div>
             </header>
 
             <section className='grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-6'>
-                <Stat value={stats.commits30d} label={labels.commits30d} reduce={reduce} />
+                <Stat
+                    value={stats.commits30d}
+                    label={labels.commits30d}
+                    reduce={reduce}
+                />
                 <Stat
                     value={stats.activeDays30d}
                     suffix='/30'
@@ -148,9 +163,9 @@ export const GitLabPulse = () => {
                 <section className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 pt-2 border-t border-border-subtle/40'>
                     {stats.languages.length > 0 && (
                         <div className='flex flex-col gap-3'>
-                            <h4 className='text-[0.65rem] tracking-[0.2em] uppercase text-primary-light/55 font-mono'>
+                            <h3 className='text-[0.65rem] tracking-[0.2em] uppercase text-primary-light/55 font-mono'>
                                 {labels.languages}
-                            </h4>
+                            </h3>
                             <LanguageDonut languages={stats.languages} />
                         </div>
                     )}
@@ -167,7 +182,7 @@ const useCountUp = (
     target: number,
     reduce: boolean,
     inView: boolean,
-    durationMs = 1100,
+    durationMs = 1100
 ) => {
     const [n, setN] = useState(reduce ? target : 0)
     useEffect(() => {
@@ -244,7 +259,10 @@ const GitLabPulseSkeleton = ({
                     {labels.title}
                 </span>
             </div>
-            <SkeletonBlock className='h-3 w-32 hidden sm:block' reduce={reduce} />
+            <SkeletonBlock
+                className='h-3 w-32 hidden sm:block'
+                reduce={reduce}
+            />
         </header>
 
         <section className='grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-6'>
@@ -256,7 +274,10 @@ const GitLabPulseSkeleton = ({
                         (i === 2 ? 'col-span-2 sm:col-span-1' : '')
                     }
                 >
-                    <SkeletonBlock className='h-7 sm:h-8 w-24' reduce={reduce} />
+                    <SkeletonBlock
+                        className='h-7 sm:h-8 w-24'
+                        reduce={reduce}
+                    />
                     <SkeletonBlock className='h-2 w-24' reduce={reduce} />
                 </div>
             ))}
@@ -317,9 +338,7 @@ const Stat = ({
             ref={ref}
             className='flex flex-col gap-1.5 border-l border-border-subtle/60 pl-3 sm:pl-4'
         >
-            <span
-                className='font-heading text-2xl sm:text-3xl font-semibold tabular-nums leading-none text-primary-light'
-            >
+            <span className='font-heading text-2xl sm:text-3xl font-semibold tabular-nums leading-none text-primary-light'>
                 {display}
                 {suffix && (
                     <span className='text-primary-light/40 text-base sm:text-lg ml-0.5'>

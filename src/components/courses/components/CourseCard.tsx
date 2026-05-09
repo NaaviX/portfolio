@@ -28,10 +28,7 @@ const getDuration = (
     language: 'fr' | 'en'
 ): string => {
     const end = dateTo || new Date()
-    const years = Math.max(
-        1,
-        end.getFullYear() - dateFrom.getFullYear()
-    )
+    const years = Math.max(1, end.getFullYear() - dateFrom.getFullYear())
     if (language === 'fr') {
         return years === 1 ? '1 AN' : `${years} ANS`
     }

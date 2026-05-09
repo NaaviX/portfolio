@@ -8,7 +8,7 @@ import { MagneticButtonProps } from './magnetic-button.type'
 
 export const MagneticButton = (props: MagneticButtonProps) => {
     const { hideLabel = false } = props
-    const ref = useRef<HTMLInputElement>(null)
+    const ref = useRef<HTMLDivElement>(null)
     const { handleMouse, reset, x, y } = useMagneticButton(ref)
 
     if (!isDesktop) {

@@ -113,7 +113,11 @@ const ProjectRow = ({
                     <span className='truncate'>{p.name}</span>
                     {!isPublic && (
                         <span className='sr-only'>
-                            ({language === 'fr' ? 'projet privé' : 'private project'})
+                            (
+                            {language === 'fr'
+                                ? 'projet privé'
+                                : 'private project'}
+                            )
                         </span>
                     )}
                 </span>
@@ -164,11 +168,13 @@ const ProjectRow = ({
                 href={p.url}
                 target='_blank'
                 rel='noopener noreferrer'
-                aria-label={`${p.name} — ${p.commits} ${commitCountLabel} (${formatPercent(
+                aria-label={`${p.name}: ${p.commits} ${commitCountLabel} (${formatPercent(
                     share,
                     language
                 )}%)`}
-                className={'transition-colors hover:bg-bg-hover/20 ' + baseClasses}
+                className={
+                    'transition-colors hover:bg-bg-hover/20 ' + baseClasses
+                }
             >
                 {inner}
             </a>

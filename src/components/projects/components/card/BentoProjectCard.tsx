@@ -152,7 +152,7 @@ const FeaturedCard = ({
                 <div
                     className={cn(
                         SURFACE,
-                        'rounded-[1.75rem] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.6)]'
+                        'rounded-[1.75rem] shadow-[0_0_34px_rgba(0,162,199,0.1),0_0_76px_rgba(0,162,199,0.05),inset_0_1px_0_rgba(182,236,247,0.05)]'
                     )}
                 >
                     <div className='grid grid-cols-1 lg:grid-cols-12'>
@@ -219,7 +219,7 @@ const LargeCard = ({ project, index }: { project: Project; index: number }) => {
                 <div
                     className={cn(
                         SURFACE,
-                        'h-full flex flex-col shadow-[0_14px_44px_-22px_rgba(0,0,0,0.55)]'
+                        'h-full flex flex-col shadow-[0_0_26px_rgba(0,162,199,0.08),inset_0_1px_0_rgba(182,236,247,0.04)]'
                     )}
                 >
                     <div className='relative h-[200px] sm:h-[240px] overflow-hidden border-b border-border-subtle'>
@@ -282,7 +282,7 @@ const MediumCard = ({
                 <div
                     className={cn(
                         SURFACE,
-                        'h-full flex flex-col shadow-[0_12px_36px_-20px_rgba(0,0,0,0.5)]'
+                        'h-full flex flex-col shadow-[0_0_22px_rgba(0,162,199,0.07),inset_0_1px_0_rgba(182,236,247,0.04)]'
                     )}
                 >
                     <div className='relative h-[170px] sm:h-[210px] overflow-hidden border-b border-border-subtle'>
@@ -345,7 +345,7 @@ const CompactCard = ({
                 <div
                     className={cn(
                         SURFACE,
-                        'h-full flex flex-col rounded-xl shadow-[0_10px_28px_-16px_rgba(0,0,0,0.45)]'
+                        'h-full flex flex-col rounded-xl shadow-[0_0_18px_rgba(0,162,199,0.07),inset_0_1px_0_rgba(182,236,247,0.04)]'
                     )}
                 >
                     <div className='relative h-[180px] sm:h-[210px] overflow-hidden border-b border-border-subtle'>

@@ -1,6 +1,6 @@
 import { MouseEventHandler, RefObject, useState } from 'react'
 
-export const useMagneticButton = (ref: RefObject<HTMLInputElement>) => {
+export const useMagneticButton = (ref: RefObject<HTMLElement>) => {
     const [position, setPosition] = useState({ x: 0, y: 0 })
     const handleMouse: MouseEventHandler = (e) => {
         const { clientX, clientY } = e

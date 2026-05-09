@@ -181,7 +181,7 @@ export const translations = {
             messagePlaceholder: 'Votre message...',
             sending: 'Envoi en cours...',
             send: 'Envoyer le message',
-            helper: 'Réponse sous 24 heures, ou écrivez-moi directement à antoine.legrand77@gmail.com.',
+            helper: 'Ou écrivez-moi directement à antoine.legrand77@gmail.com.',
             errors: {
                 nameRequired: 'Merci d’indiquer votre nom.',
                 emailRequired: 'Merci d’indiquer votre email.',
@@ -200,7 +200,7 @@ export const translations = {
         },
         footer: {
             wordmark: 'ANTOINE LEGRAND',
-            yearRange: '2023 — {year}',
+            yearRange: '2023 - {year}',
             madeIn: '',
             statusLive: '',
             backToTop: 'Haut de page',
@@ -420,7 +420,7 @@ export const translations = {
             messagePlaceholder: 'Your message...',
             sending: 'Sending...',
             send: 'Send message',
-            helper: 'Reply within 24 hours, or email me directly at antoine.legrand77@gmail.com.',
+            helper: 'Or email me directly at antoine.legrand77@gmail.com.',
             errors: {
                 nameRequired: 'Please share your name.',
                 emailRequired: 'Please add your email.',
@@ -439,7 +439,7 @@ export const translations = {
         },
         footer: {
             wordmark: 'ANTOINE LEGRAND',
-            yearRange: '2023 — {year}',
+            yearRange: '2023 - {year}',
             madeIn: '',
             statusLive: '',
             backToTop: 'Back to top',

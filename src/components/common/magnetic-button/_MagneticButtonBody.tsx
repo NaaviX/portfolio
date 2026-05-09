@@ -1,5 +1,4 @@
 import { cn } from '@/lib/utils'
-import { motion } from 'framer-motion'
 import { MagneticButtonProps } from './magnetic-button.type'
 
 const baseClasses =
@@ -19,27 +18,23 @@ export const MagneticButtonBody = (props: MagneticButtonProps) => {
 
     const buttonClasses = cn(baseClasses, sizeClasses[size])
 
+    if (href) {
+        return (
+            <a
+                href={href}
+                target='_blank'
+                rel='noopener noreferrer'
+                className={buttonClasses}
+                aria-label={ariaLabel}
+            >
+                {iconElement}
+            </a>
+        )
+    }
+
     return (
-        <motion.div
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{
-                duration: 0.8,
-                ease: 'easeInOut' as const,
-                repeat: Infinity,
-                repeatDelay: 4,
-            }}
-        >
-            {href ? (
-                <a href={href} target='_blank' rel='noopener noreferrer'>
-                    <button className={buttonClasses} aria-label={ariaLabel}>
-                        {iconElement}
-                    </button>
-                </a>
-            ) : (
-                <button className={buttonClasses} aria-label={ariaLabel}>
-                    {iconElement}
-                </button>
-            )}
-        </motion.div>
+        <button type='button' className={buttonClasses} aria-label={ariaLabel}>
+            {iconElement}
+        </button>
     )
 }

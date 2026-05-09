@@ -1,4 +1,4 @@
-const SEND_EMAIL_API_URL = 'https://antoine-legrand.dev/api/'
+const SEND_EMAIL_API_URL = 'https://api.antoine-legrand.dev/'
 
 export type ContactPayload = {
     name: string
@@ -12,7 +12,9 @@ export type ContactResult =
     | { ok: false; reason: 'network' | 'server' }
 
 export const useContact = () => {
-    async function sendContact(payload: ContactPayload): Promise<ContactResult> {
+    async function sendContact(
+        payload: ContactPayload
+    ): Promise<ContactResult> {
         try {
             const response = await fetch(SEND_EMAIL_API_URL, {
                 method: 'POST',

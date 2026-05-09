@@ -43,4 +43,3 @@ export { default as VsCodeIcon } from './visual-studio-code-svgrepo-com.svg?reac
 export { default as ViteIcon } from './vitejs-svgrepo-com.svg?react'
 export { default as VueIcon } from './vue-svgrepo-com.svg?react'
 export { default as WebstormIcon } from './webstorm-svgrepo-com.svg?react'
-

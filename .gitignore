@@ -27,3 +27,8 @@ package-lock.json
 .vscode
 .env
 *.code-workspace
+
+# Impeccable live runtime state
+.impeccable/live/server.json
+.impeccable/live/sessions/
+.impeccable/live/annotations/

@@ -33,7 +33,7 @@ export const Header = () => {
     return (
         <div className='relative'>
             <div className='max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12 lg:px-20'>
-                <div className='min-h-dvh py-[12dvh] md:py-[14dvh] flex flex-col justify-center gap-8 md:gap-14'>
+                <div className='min-h-[min(720px,calc(100svh-4rem))] py-20 sm:min-h-dvh sm:py-[12dvh] md:py-[14dvh] flex flex-col justify-center gap-8 md:gap-14'>
                     <HeaderTitle />
                     <HeaderContent />
                 </div>

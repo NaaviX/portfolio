@@ -74,25 +74,25 @@ export const HeaderContent = () => {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: easeOutQuart, delay: 0.2 }}
-            className='grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-end'
+            className='grid min-w-0 grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-end'
         >
-            <div className='lg:col-span-7 flex flex-col gap-7'>
-                <p className='text-sm md:text-base font-medium text-primary-light/70 tracking-wide max-w-2xl'>
+            <div className='lg:col-span-7 flex min-w-0 flex-col gap-7'>
+                <p className='max-w-2xl text-sm md:text-base font-medium text-primary-light/70 tracking-wide'>
                     {t.header.metaLine}
                 </p>
 
-                <p className='text-base md:text-lg leading-relaxed text-primary-light/55 max-w-xl'>
+                <p className='max-w-xl text-base md:text-lg leading-relaxed text-primary-light/55'>
                     {t.header.tagline}
                 </p>
 
                 <div className='flex flex-col gap-3 lg:hidden'>
-                    <div className='flex items-center gap-2.5'>
+                    <div className='flex flex-wrap items-center gap-2.5'>
                         <AvailabilityDot />
-                        <span className='text-[0.7rem] tracking-[0.2em] uppercase text-primary-light/80 font-mono'>
+                        <span className='text-[0.7rem] tracking-[0.16em] sm:tracking-[0.2em] uppercase text-primary-light/80 font-mono'>
                             {aside.availability}
                         </span>
                     </div>
-                    <p className='text-[0.7rem] tracking-[0.2em] uppercase text-primary-light/55 font-mono leading-relaxed'>
+                    <p className='text-[0.7rem] tracking-[0.14em] sm:tracking-[0.2em] uppercase text-primary-light/55 font-mono leading-relaxed'>
                         {aside.roleValue}
                         <span className='text-primary-light/30'> · </span>
                         {aside.basedInValue}

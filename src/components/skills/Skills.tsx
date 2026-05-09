@@ -52,6 +52,7 @@ import { EASE_OUT_QUART, EASE_OUT_QUART_CSS } from '@/lib/motion'
 const TRACK_LABEL = '0.28em'
 const MAG_RADIUS = 140
 const MAG_STRENGTH = 0.35
+const RESET_TRANSFORM = 'translate3d(0px, 0px, 0px)'
 
 type FlatSkill = Skill & { category: SKILL_TYPE; palette: Palette }
 type Group = {
@@ -173,8 +174,8 @@ export const Skills = () => {
                 const t = 1 - dist / MAG_RADIUS
                 const ease = t * t
                 el.style.transform = `translate3d(${dx * ease * MAG_STRENGTH}px, ${dy * ease * MAG_STRENGTH}px, 0)`
-            } else if (el.style.transform !== 'translate3d(0px, 0px, 0px)') {
-                el.style.transform = 'translate3d(0px, 0px, 0px)'
+            } else if (el.style.transform !== RESET_TRANSFORM) {
+                el.style.transform = RESET_TRANSFORM
             }
         })
     }, [])
@@ -190,7 +191,7 @@ export const Skills = () => {
     const onLeave = () => {
         if (rafRef.current) cancelAnimationFrame(rafRef.current)
         chipRefs.current.forEach((el) => {
-            if (el) el.style.transform = 'translate3d(0px, 0px, 0px)'
+            if (el) el.style.transform = RESET_TRANSFORM
         })
     }
 
@@ -214,7 +215,11 @@ export const Skills = () => {
                             variants={groupVariants}
                             initial={reduce ? 'visible' : 'hidden'}
                             whileInView='visible'
-                            viewport={{ once: true, amount: 0.25, margin: '-40px' }}
+                            viewport={{
+                                once: true,
+                                amount: 0.25,
+                                margin: '-40px',
+                            }}
                             className='grid grid-cols-1 gap-x-8 gap-y-3 lg:grid-cols-[10rem_1fr] lg:items-baseline'
                         >
                             <GroupHeader
@@ -297,6 +302,42 @@ type ChipProps = {
     setRef: (el: HTMLDivElement | null) => void
 }
 
+const getChipStyle = (important: boolean, palette: Palette) => ({
+    paddingInline: important ? '1.05rem' : '0.78rem',
+    paddingBlock: important ? '0.55rem' : '0.4rem',
+    fontSize: important ? '0.98rem' : '0.82rem',
+    fontWeight: important ? 600 : 500,
+    color: important ? palette.ink : 'rgba(214, 240, 247, 0.78)',
+    background: important ? palette.tint : 'rgba(255, 255, 255, 0.022)',
+    borderColor: important ? palette.hue : `${palette.hue}30`,
+    boxShadow: important
+        ? `0 0 0 1px ${palette.hue}33, 0 14px 36px -24px ${palette.hue}`
+        : undefined,
+    letterSpacing: '-0.005em',
+    transition: CHIP_TRANSITION,
+    willChange: 'transform',
+})
+
+const getIconStyle = (important: boolean) => ({
+    width: important ? 18 : 14,
+    height: important ? 18 : 14,
+    opacity: important ? 1 : 0.85,
+})
+
+const getFallbackDotStyle = (important: boolean, palette: Palette) => ({
+    width: 6,
+    height: 6,
+    background: palette.hue,
+    opacity: important ? 1 : 0.6,
+})
+
+const getTooltipStyle = (palette: Palette) => ({
+    background: 'rgba(6, 24, 29, 0.96)',
+    borderColor: `${palette.hue}55`,
+    color: palette.ink,
+    letterSpacing: '0.18em',
+})
+
 const SkillChip = ({ skill, setRef }: ChipProps) => {
     const Icon = skill.icon
     const important = !!skill.isImportant
@@ -306,56 +347,23 @@ const SkillChip = ({ skill, setRef }: ChipProps) => {
         <div
             ref={setRef}
             className='group/chip relative inline-flex items-center gap-2 rounded-full border'
-            style={{
-                paddingInline: important ? '1.05rem' : '0.78rem',
-                paddingBlock: important ? '0.55rem' : '0.4rem',
-                fontSize: important ? '0.98rem' : '0.82rem',
-                fontWeight: important ? 600 : 500,
-                color: important ? palette.ink : 'rgba(214, 240, 247, 0.78)',
-                background: important
-                    ? palette.tint
-                    : 'rgba(255, 255, 255, 0.022)',
-                borderColor: important ? palette.hue : `${palette.hue}30`,
-                boxShadow: important
-                    ? `0 0 0 1px ${palette.hue}33, 0 14px 36px -24px ${palette.hue}`
-                    : undefined,
-                letterSpacing: '-0.005em',
-                transition: CHIP_TRANSITION,
-                willChange: 'transform',
-            }}
+            style={getChipStyle(important, palette)}
         >
             {Icon ? (
-                <Icon
-                    aria-hidden
-                    style={{
-                        width: important ? 18 : 14,
-                        height: important ? 18 : 14,
-                        opacity: important ? 1 : 0.85,
-                    }}
-                />
+                <Icon aria-hidden style={getIconStyle(important)} />
             ) : (
                 <span
                     aria-hidden
                     className='inline-block rounded-full'
-                    style={{
-                        width: 6,
-                        height: 6,
-                        background: palette.hue,
-                        opacity: important ? 1 : 0.6,
-                    }}
+                    style={getFallbackDotStyle(important, palette)}
                 />
             )}
             <span className='whitespace-nowrap'>{skill.name}</span>
             {skill.about && (
                 <span
                     role='tooltip'
-                    className='pointer-events-none absolute left-1/2 top-full z-30 mt-2.5 -translate-x-1/2 translate-y-1 whitespace-nowrap rounded-md border px-2.5 py-1 text-2xs uppercase opacity-0 transition-[opacity,transform] duration-200 group-hover/chip:translate-y-0 group-hover/chip:opacity-100'
-                    style={{
-                        background: 'rgba(6, 24, 29, 0.96)',
-                        borderColor: `${palette.hue}55`,
-                        color: palette.ink,
-                        letterSpacing: '0.18em',
-                    }}
+                    className='pointer-events-none absolute left-1/2 top-full z-30 mt-2.5 -translate-x-1/2 translate-y-1 whitespace-nowrap rounded-md border px-2.5 py-1.5 text-2xs opacity-0 transition-[opacity,transform] duration-200 group-hover/chip:translate-y-0 group-hover/chip:opacity-100'
+                    style={getTooltipStyle(palette)}
                 >
                     {skill.about}
                 </span>

@@ -34,7 +34,7 @@ const pulseVariants = {
         transition: {
             duration: 2.5,
             repeat: Infinity,
-            ease: 'easeInOut' as const,
+            ease: EASE_OUT_QUART,
             delay: 0.5,
         },
     },

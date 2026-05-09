@@ -90,8 +90,9 @@ export const ContactForm = () => {
     const onFieldChange = (field: Field) => () => {
         if (!errors[field]) return
         setErrors((prev) => {
-            const { [field]: _removed, ...rest } = prev
-            return rest
+            const next = { ...prev }
+            delete next[field]
+            return next
         })
     }
 

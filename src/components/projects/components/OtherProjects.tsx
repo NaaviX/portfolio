@@ -1,4 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import {
+    useCallback,
+    useEffect,
+    useLayoutEffect,
+    useRef,
+    useState,
+} from 'react'
 import { Project } from '../projects.type'
 import { BentoProjectCard } from './card/BentoProjectCard'
 
@@ -6,11 +12,278 @@ interface OtherProjectsProps {
     projects: Project[]
 }
 
+type FilmstripItemA11yProps = React.HTMLAttributes<HTMLDivElement> & {
+    inert?: ''
+}
+
+const getFilmstripItems = (viewport: HTMLDivElement) =>
+    Array.from(viewport.querySelectorAll<HTMLElement>('[data-filmstrip-item]'))
+
+const getItemTargetLeft = (viewport: HTMLDivElement, item: HTMLElement) =>
+    item.offsetLeft + item.offsetWidth / 2 - viewport.clientWidth / 2
+
+const getClosestTrackIndex = (
+    viewport: HTMLDivElement,
+    items = getFilmstripItems(viewport)
+) => {
+    if (!items.length) return -1
+
+    const center = viewport.scrollLeft + viewport.clientWidth / 2
+    return items.reduce(
+        (best, item, i) => {
+            const itemCenter = item.offsetLeft + item.offsetWidth / 2
+            const distance = Math.abs(itemCenter - center)
+            return distance < best.distance ? { index: i, distance } : best
+        },
+        { index: 0, distance: Infinity }
+    ).index
+}
+
+const getCloneA11yProps = (isClone: boolean): FilmstripItemA11yProps =>
+    isClone ? { 'aria-hidden': true, inert: '' } : {}
+
+type DragState = {
+    isDown: boolean
+    engaged: boolean
+    startX: number
+    startScroll: number
+    lastX: number
+    lastT: number
+    velocity: number
+    momentumRaf: number
+    pointerId: number
+}
+
+const DRAG_THRESHOLD_PX = 6
+const MOMENTUM_FRAME_MS = 16
+const MOMENTUM_STOP_VELOCITY = 0.15
+const MOMENTUM_FRICTION = 0.93
+
+const createDragState = (): DragState => ({
+    isDown: false,
+    engaged: false,
+    startX: 0,
+    startScroll: 0,
+    lastX: 0,
+    lastT: 0,
+    velocity: 0,
+    momentumRaf: 0,
+    pointerId: -1,
+})
+
+const stopFilmstripMomentum = (state: DragState) => {
+    if (!state.momentumRaf) return
+    cancelAnimationFrame(state.momentumRaf)
+    state.momentumRaf = 0
+}
+
+const decayFilmstripMomentum = (viewport: HTMLDivElement, state: DragState) => {
+    if (Math.abs(state.velocity) < MOMENTUM_STOP_VELOCITY) {
+        state.momentumRaf = 0
+        return
+    }
+    viewport.scrollLeft -= state.velocity
+    state.velocity *= MOMENTUM_FRICTION
+    state.momentumRaf = requestAnimationFrame(() =>
+        decayFilmstripMomentum(viewport, state)
+    )
+}
+
+const beginFilmstripDrag = (
+    event: PointerEvent,
+    viewport: HTMLDivElement,
+    state: DragState,
+    pointerActiveRef: React.MutableRefObject<boolean>
+) => {
+    if (event.pointerType === 'mouse' && event.button !== 0) return
+
+    stopFilmstripMomentum(state)
+    pointerActiveRef.current = true
+    state.isDown = true
+    state.engaged = false
+    state.startX = event.clientX
+    state.startScroll = viewport.scrollLeft
+    state.lastX = event.clientX
+    state.lastT = performance.now()
+    state.velocity = 0
+    state.pointerId = event.pointerId
+}
+
+const captureFilmstripPointer = (
+    viewport: HTMLDivElement,
+    pointerId: number
+) => {
+    try {
+        viewport.setPointerCapture(pointerId)
+    } catch {
+        // Pointer capture can fail if the pointer has already been released.
+    }
+}
+
+const engageFilmstripDrag = (
+    viewport: HTMLDivElement,
+    state: DragState,
+    dx: number
+) => {
+    if (state.engaged) return true
+    if (Math.abs(dx) < DRAG_THRESHOLD_PX) return false
+
+    state.engaged = true
+    viewport.dataset.dragging = 'true'
+    captureFilmstripPointer(viewport, state.pointerId)
+    return true
+}
+
+const updateFilmstripVelocity = (event: PointerEvent, state: DragState) => {
+    const now = performance.now()
+    const dt = Math.max(1, now - state.lastT)
+    state.velocity = ((event.clientX - state.lastX) / dt) * MOMENTUM_FRAME_MS
+    state.lastX = event.clientX
+    state.lastT = now
+}
+
+const moveFilmstripDrag = (
+    event: PointerEvent,
+    viewport: HTMLDivElement,
+    state: DragState
+) => {
+    if (!state.isDown) return
+
+    const dx = event.clientX - state.startX
+    if (!engageFilmstripDrag(viewport, state, dx)) return
+
+    viewport.scrollLeft = state.startScroll - dx
+    updateFilmstripVelocity(event, state)
+}
+
+const releaseFilmstripDrag = (
+    viewport: HTMLDivElement,
+    state: DragState,
+    pointerActiveRef: React.MutableRefObject<boolean>,
+    normalizeLoopPosition: () => void,
+    scheduleLoopReset: () => void
+) => {
+    if (!state.isDown) return
+
+    state.isDown = false
+    const shouldStartMomentum = state.engaged
+    state.engaged = false
+    pointerActiveRef.current = false
+    viewport.dataset.dragging = 'false'
+
+    if (shouldStartMomentum) {
+        state.momentumRaf = requestAnimationFrame(() =>
+            decayFilmstripMomentum(viewport, state)
+        )
+        scheduleLoopReset()
+        return
+    }
+
+    normalizeLoopPosition()
+}
+
 export const OtherProjects = (props: OtherProjectsProps) => {
     const { projects } = props
     const viewportRef = useRef<HTMLDivElement>(null)
     const rootRef = useRef<HTMLElement>(null)
+    const pointerActiveRef = useRef(false)
+    const loopResetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
     const [activeIndex, setActiveIndex] = useState(0)
+    const total = projects.length
+    const isLooping = total > 1
+    const slides = isLooping
+        ? [
+              {
+                  project: projects[total - 1],
+                  projectIndex: total - 1,
+                  key: `loop-start-${projects[total - 1].name}`,
+                  isClone: true,
+              },
+              ...projects.map((project, i) => ({
+                  project,
+                  projectIndex: i,
+                  key: `project-${project.name}`,
+                  isClone: false,
+              })),
+              {
+                  project: projects[0],
+                  projectIndex: 0,
+                  key: `loop-end-${projects[0].name}`,
+                  isClone: true,
+              },
+          ]
+        : projects.map((project, i) => ({
+              project,
+              projectIndex: i,
+              key: `project-${project.name}`,
+              isClone: false,
+          }))
+
+    const getProjectIndexFromTrackIndex = useCallback(
+        (trackIndex: number) => {
+            if (!isLooping) return trackIndex
+            if (trackIndex === 0) return total - 1
+            if (trackIndex === total + 1) return 0
+            return trackIndex - 1
+        },
+        [isLooping, total]
+    )
+
+    const getTrackIndexFromTarget = useCallback(
+        (target: number) => {
+            if (!total) return 0
+            if (!isLooping) return Math.max(0, Math.min(total - 1, target))
+            if (target < 0) return 0
+            if (target >= total) return total + 1
+            return target + 1
+        },
+        [isLooping, total]
+    )
+
+    const centerTrackItem = useCallback(
+        (trackIndex: number, behavior: ScrollBehavior = 'smooth') => {
+            const viewport = viewportRef.current
+            if (!viewport) return
+
+            const items = getFilmstripItems(viewport)
+            const item = items[trackIndex]
+            if (!item) return
+
+            const targetLeft = getItemTargetLeft(viewport, item)
+            if (behavior === 'auto') {
+                viewport.scrollLeft = targetLeft
+                return
+            }
+            viewport.scrollTo({ left: targetLeft, behavior })
+        },
+        []
+    )
+
+    const normalizeLoopPosition = useCallback(() => {
+        const viewport = viewportRef.current
+        if (!viewport || !isLooping) return
+
+        const best = getClosestTrackIndex(viewport)
+        if (best < 0) return
+
+        if (best === 0) centerTrackItem(total, 'auto')
+        if (best === total + 1) centerTrackItem(1, 'auto')
+    }, [centerTrackItem, isLooping, total])
+
+    const scheduleLoopReset = useCallback(() => {
+        if (!isLooping) return
+        if (loopResetTimerRef.current) clearTimeout(loopResetTimerRef.current)
+        loopResetTimerRef.current = setTimeout(() => {
+            loopResetTimerRef.current = null
+            if (!pointerActiveRef.current) normalizeLoopPosition()
+        }, 140)
+    }, [isLooping, normalizeLoopPosition])
+
+    useLayoutEffect(() => {
+        if (!isLooping) return
+        centerTrackItem(1, 'auto')
+        setActiveIndex(0)
+    }, [centerTrackItem, isLooping, total])
 
     useEffect(() => {
         const viewport = viewportRef.current
@@ -20,32 +293,21 @@ export const OtherProjects = (props: OtherProjectsProps) => {
         let raf = 0
         const compute = () => {
             raf = 0
-            const items = Array.from(
-                viewport.querySelectorAll<HTMLElement>('[data-filmstrip-item]')
-            )
-            if (!items.length) return
+            const items = getFilmstripItems(viewport)
+            const best = getClosestTrackIndex(viewport, items)
+            if (best < 0) return
 
-            const center = viewport.scrollLeft + viewport.clientWidth / 2
-            let best = 0
-            let bestDist = Infinity
-            for (let i = 0; i < items.length; i++) {
-                const item = items[i]
-                const itemCenter = item.offsetLeft + item.offsetWidth / 2
-                const d = Math.abs(itemCenter - center)
-                if (d < bestDist) {
-                    bestDist = d
-                    best = i
-                }
-            }
-            setActiveIndex(best)
+            const projectIndex = getProjectIndexFromTrackIndex(best)
+            setActiveIndex(projectIndex)
 
-            const max = viewport.scrollWidth - viewport.clientWidth
-            const progress = max > 0 ? viewport.scrollLeft / max : 0
+            const progress =
+                total > 1 ? projectIndex / Math.max(1, total - 1) : 0
             root.style.setProperty('--filmstrip-p', progress.toFixed(4))
         }
 
         const onScroll = () => {
             if (!raf) raf = requestAnimationFrame(compute)
+            scheduleLoopReset()
         }
 
         compute()
@@ -56,80 +318,30 @@ export const OtherProjects = (props: OtherProjectsProps) => {
             viewport.removeEventListener('scroll', onScroll)
             window.removeEventListener('resize', onScroll)
             if (raf) cancelAnimationFrame(raf)
+            if (loopResetTimerRef.current) {
+                clearTimeout(loopResetTimerRef.current)
+                loopResetTimerRef.current = null
+            }
         }
-    }, [projects.length])
+    }, [getProjectIndexFromTrackIndex, scheduleLoopReset, total])
 
     useEffect(() => {
         const viewport = viewportRef.current
         if (!viewport) return
 
-        let isDown = false
-        let engaged = false
-        let startX = 0
-        let startScroll = 0
-        let lastX = 0
-        let lastT = 0
-        let velocity = 0
-        let momentumRaf = 0
-        let pointerId = -1
-
-        const stopMomentum = () => {
-            if (momentumRaf) {
-                cancelAnimationFrame(momentumRaf)
-                momentumRaf = 0
-            }
-        }
-
-        const decay = () => {
-            if (Math.abs(velocity) < 0.15) {
-                momentumRaf = 0
-                return
-            }
-            viewport.scrollLeft -= velocity
-            velocity *= 0.93
-            momentumRaf = requestAnimationFrame(decay)
-        }
-
-        const onDown = (e: PointerEvent) => {
-            if (e.pointerType === 'mouse' && e.button !== 0) return
-            stopMomentum()
-            isDown = true
-            engaged = false
-            startX = e.clientX
-            startScroll = viewport.scrollLeft
-            lastX = e.clientX
-            lastT = performance.now()
-            velocity = 0
-            pointerId = e.pointerId
-        }
-
-        const onMove = (e: PointerEvent) => {
-            if (!isDown) return
-            const dx = e.clientX - startX
-            if (!engaged) {
-                if (Math.abs(dx) < 6) return
-                engaged = true
-                viewport.dataset.dragging = 'true'
-                try {
-                    viewport.setPointerCapture(pointerId)
-                } catch {}
-            }
-            viewport.scrollLeft = startScroll - dx
-            const now = performance.now()
-            const dt = Math.max(1, now - lastT)
-            velocity = ((e.clientX - lastX) / dt) * 16
-            lastX = e.clientX
-            lastT = now
-        }
-
-        const release = () => {
-            if (!isDown) return
-            isDown = false
-            const wasEngaged = engaged
-            engaged = false
-            viewport.dataset.dragging = 'false'
-            if (wasEngaged) momentumRaf = requestAnimationFrame(decay)
-        }
+        const dragState = createDragState()
+        const onDown = (e: PointerEvent) =>
+            beginFilmstripDrag(e, viewport, dragState, pointerActiveRef)
+        const onMove = (e: PointerEvent) =>
+            moveFilmstripDrag(e, viewport, dragState)
+        const release = () =>
+            releaseFilmstripDrag(
+                viewport,
+                dragState,
+                pointerActiveRef,
+                normalizeLoopPosition,
+                scheduleLoopReset
+            )
 
         viewport.addEventListener('pointerdown', onDown)
         viewport.addEventListener('pointermove', onMove)
@@ -138,27 +350,19 @@ export const OtherProjects = (props: OtherProjectsProps) => {
         viewport.addEventListener('pointerleave', release)
 
         return () => {
-            stopMomentum()
+            stopFilmstripMomentum(dragState)
             viewport.removeEventListener('pointerdown', onDown)
             viewport.removeEventListener('pointermove', onMove)
             viewport.removeEventListener('pointerup', release)
             viewport.removeEventListener('pointercancel', release)
             viewport.removeEventListener('pointerleave', release)
         }
-    }, [])
+    }, [normalizeLoopPosition, scheduleLoopReset])
 
     const goTo = (target: number) => {
-        const viewport = viewportRef.current
-        if (!viewport) return
-        const items = viewport.querySelectorAll<HTMLElement>(
-            '[data-filmstrip-item]'
-        )
-        const clamped = Math.max(0, Math.min(items.length - 1, target))
-        const item = items[clamped]
-        if (!item) return
-        const target_left =
-            item.offsetLeft + item.offsetWidth / 2 - viewport.clientWidth / 2
-        viewport.scrollTo({ left: target_left, behavior: 'smooth' })
+        if (!total) return
+        centerTrackItem(getTrackIndexFromTarget(target))
+        scheduleLoopReset()
     }
 
     const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -177,7 +381,6 @@ export const OtherProjects = (props: OtherProjectsProps) => {
         }
     }
 
-    const total = projects.length
     const fmt = (n: number) => String(n).padStart(2, '0')
 
     return (
@@ -195,18 +398,32 @@ export const OtherProjects = (props: OtherProjectsProps) => {
                 tabIndex={0}
                 onKeyDown={onKeyDown}
             >
-                {projects.map((project, i) => (
+                {slides.map((slide) => (
                     <div
-                        key={project.name}
+                        key={slide.key}
                         data-filmstrip-item
-                        data-active={i === activeIndex ? 'true' : 'false'}
-                        aria-label={`${project.name}, project ${i + 1} of ${total}`}
-                        aria-roledescription='slide'
+                        data-loop-clone={slide.isClone ? 'true' : undefined}
+                        data-active={
+                            slide.projectIndex === activeIndex
+                                ? 'true'
+                                : 'false'
+                        }
+                        {...getCloneA11yProps(slide.isClone)}
+                        aria-label={
+                            slide.isClone
+                                ? undefined
+                                : `${slide.project.name}, project ${
+                                      slide.projectIndex + 1
+                                  } of ${total}`
+                        }
+                        aria-roledescription={
+                            slide.isClone ? undefined : 'slide'
+                        }
                     >
                         <BentoProjectCard
-                            project={project}
+                            project={slide.project}
                             variant='compact'
-                            index={i}
+                            index={slide.projectIndex}
                         />
                     </div>
                 ))}
@@ -217,7 +434,7 @@ export const OtherProjects = (props: OtherProjectsProps) => {
                     type='button'
                     className='filmstrip__nav'
                     onClick={() => goTo(activeIndex - 1)}
-                    disabled={activeIndex === 0}
+                    disabled={total < 2}
                     aria-label='Previous project'
                 >
                     <span aria-hidden>←</span>
@@ -249,7 +466,7 @@ export const OtherProjects = (props: OtherProjectsProps) => {
                     type='button'
                     className='filmstrip__nav'
                     onClick={() => goTo(activeIndex + 1)}
-                    disabled={activeIndex === total - 1}
+                    disabled={total < 2}
                     aria-label='Next project'
                 >
                     <span aria-hidden>→</span>
@@ -273,7 +490,11 @@ const FILMSTRIP_CSS = `
     overflow-x: clip;
     margin-top: 2rem;
     --filmstrip-p: 0;
-    timeline-scope: --filmstrip-track;
+    --filmstrip-card-width: min(26rem, calc(100vw - 2rem));
+    --filmstrip-edge-pad: max(
+        1rem,
+        calc((100% - var(--filmstrip-card-width)) / 2)
+    );
 }
 
 .filmstrip__viewport {
@@ -286,11 +507,10 @@ const FILMSTRIP_CSS = `
     scrollbar-width: none;
     -ms-overflow-style: none;
     padding-block: 3rem;
-    padding-inline: calc(50% - 10rem);
+    padding-inline: var(--filmstrip-edge-pad);
     cursor: grab;
     touch-action: pan-y;
     outline: none;
-    scroll-timeline: --filmstrip-track inline;
 }
 
 .filmstrip__viewport::-webkit-scrollbar {
@@ -313,7 +533,8 @@ const FILMSTRIP_CSS = `
 }
 
 [data-filmstrip-item] {
-    flex: 0 0 auto;
+    flex: 0 0 var(--filmstrip-card-width);
+    width: var(--filmstrip-card-width);
     display: flex;
     align-items: stretch;
     scroll-snap-align: center;
@@ -505,23 +726,6 @@ const FILMSTRIP_CSS = `
     will-change: transform;
 }
 
-@supports (animation-timeline: scroll()) {
-    .filmstrip__progress {
-        animation: filmstrip-progress linear both;
-        animation-timeline: --filmstrip-track;
-        transform: scaleX(0);
-    }
-
-    @keyframes filmstrip-progress {
-        from {
-            transform: scaleX(0);
-        }
-        to {
-            transform: scaleX(1);
-        }
-    }
-}
-
 .filmstrip__hint {
     grid-column: 2;
     grid-row: 2;
@@ -542,9 +746,8 @@ const FILMSTRIP_CSS = `
     .filmstrip__viewport {
         gap: 0.875rem;
         padding-block: 2rem;
-        padding-inline: 1rem;
-        padding-inline-end: max(1rem, calc(100% - 21rem));
-        scroll-padding-inline: 1rem;
+        padding-inline: var(--filmstrip-edge-pad);
+        scroll-padding-inline: var(--filmstrip-edge-pad);
     }
 
     [data-filmstrip-item] {

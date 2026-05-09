@@ -86,14 +86,14 @@ export const projectsData: Project[] = [
         skills: [
             reactSkill,
             typescriptSkill,
-            shadcnSkill,
             nodeSkill,
             supabaseSkill,
             dockerSkill,
         ],
-        images: [OgSpot1, OgSpot2, OgSpot3],
+        images: [OgSpot2, OgSpot1, OgSpot3],
+        gitStatsPath: 'NaaviX/OgSpot',
         previewLink: 'https://ogspot.app',
-        membersCount: 1,
+        membersCount: 3,
     },
     {
         name: 'Too Many Cooks - Prediction',

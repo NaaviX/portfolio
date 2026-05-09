@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1778221710441,
+  "lastScanned": 1778339774614,
   "projectRoot": "/home/navix/portfolio/portfolio-front",
   "techStack": {
     "languages": [
@@ -47,7 +47,7 @@
     "runtime": null
   },
   "build": {
-    "buildCommand": "npx tsc --noEmit 2>&1 | head -40",
+    "buildCommand": "npm run build",
     "testCommand": "npm test",
     "lintCommand": "npm run lint",
     "devCommand": "npm run start",
@@ -86,7 +86,7 @@
       "path": "build",
       "purpose": "Build output",
       "fileCount": 1,
-      "lastAccessed": 1778221710327,
+      "lastAccessed": 1778339774582,
       "keyFiles": [
         "index.html"
       ]
@@ -95,7 +95,7 @@
       "path": "src",
       "purpose": "Source code",
       "fileCount": 5,
-      "lastAccessed": 1778221710331,
+      "lastAccessed": 1778339774585,
       "keyFiles": [
         "App.css",
         "App.tsx",
@@ -107,19 +107,19 @@
     "build/assets": {
       "path": "build/assets",
       "purpose": "Static assets",
-      "fileCount": 37,
-      "lastAccessed": 1778221710387,
+      "fileCount": 40,
+      "lastAccessed": 1778339774602,
       "keyFiles": [
-        "ContactSection-Cc5KdWzZ.js",
-        "CoursesSection-iEPcc43X.js",
-        "ExperiencesSection-DHSwI0bn.js"
+        "ContactSection-DSaU4jWP.js",
+        "CoursesSection-wcXxd38o.js",
+        "ExperiencesSection-DapGPDqg.js"
       ]
     },
     "src/assets": {
       "path": "src/assets",
       "purpose": "Static assets",
       "fileCount": 5,
-      "lastAccessed": 1778221710408,
+      "lastAccessed": 1778339774606,
       "keyFiles": [
         "WIREFRAM.TTF",
         "background.svg",
@@ -130,14 +130,14 @@
       "path": "src/components",
       "purpose": "UI components",
       "fileCount": 0,
-      "lastAccessed": 1778221710411,
+      "lastAccessed": 1778339774607,
       "keyFiles": []
     },
     "src/lib": {
       "path": "src/lib",
       "purpose": "Library code",
       "fileCount": 2,
-      "lastAccessed": 1778221710413,
+      "lastAccessed": 1778339774608,
       "keyFiles": [
         "motion.ts",
         "utils.ts"
@@ -147,7 +147,7 @@
       "path": "src/pages",
       "purpose": "Page components",
       "fileCount": 8,
-      "lastAccessed": 1778221710418,
+      "lastAccessed": 1778339774609,
       "keyFiles": [
         "ContactSection.tsx",
         "CoursesSection.tsx",
@@ -238,6 +238,18 @@
       "path": "src/components/projects/projects.type.ts",
       "accessCount": 1,
       "lastAccessed": 1778288356440,
+      "type": "file"
+    },
+    {
+      "path": ".superpowers/brainstorm/1391860-1778340506/content/direction.html",
+      "accessCount": 1,
+      "lastAccessed": 1778340537357,
+      "type": "file"
+    },
+    {
+      "path": ".superpowers/brainstorm/1391860-1778340506/content/waiting.html",
+      "accessCount": 1,
+      "lastAccessed": 1778341076093,
       "type": "file"
     }
   ],

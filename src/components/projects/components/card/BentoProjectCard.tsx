@@ -334,7 +334,7 @@ const CompactCard = ({
             whileInView='visible'
             viewport={{ once: true, margin: '-40px' }}
             variants={cardVariants}
-            className='w-[min(320px,calc(100vw-2.5rem))] flex-shrink-0 h-full flex'
+            className='w-full flex-shrink-0 h-full flex'
         >
             <motion.div
                 initial='rest'
@@ -348,7 +348,7 @@ const CompactCard = ({
                         'h-full flex flex-col rounded-xl shadow-[0_10px_28px_-16px_rgba(0,0,0,0.45)]'
                     )}
                 >
-                    <div className='relative h-[150px] overflow-hidden border-b border-border-subtle'>
+                    <div className='relative h-[180px] sm:h-[210px] overflow-hidden border-b border-border-subtle'>
                         <LazyImage
                             src={project.images[0]}
                             alt={project.name}
@@ -356,20 +356,20 @@ const CompactCard = ({
                             variants={imageVariants}
                         />
                     </div>
-                    <div className='p-4 flex flex-col flex-1 gap-3'>
+                    <div className='p-5 flex flex-col flex-1 gap-4'>
                         <div className='flex items-start justify-end gap-3'>
                             <span className='text-[10px] uppercase tracking-wider text-primary-light/50 tabular-nums pt-1'>
                                 {project.year}
                             </span>
                         </div>
-                        <TitleWithRule className='text-base font-semibold tracking-tight leading-tight'>
+                        <TitleWithRule className='text-lg font-semibold tracking-tight leading-tight'>
                             {project.name}
                         </TitleWithRule>
-                        <p className='text-primary-light/50 text-xs leading-relaxed line-clamp-2 flex-1'>
+                        <p className='text-primary-light/55 text-sm leading-relaxed line-clamp-3 flex-1'>
                             {description}
                         </p>
                         <ChipList
-                            skills={project.skills.slice(0, 2)}
+                            skills={project.skills.slice(0, 3)}
                             className='justify-start gap-1.5'
                         />
                         <GitLabProjectStrip project={project} size='compact' />

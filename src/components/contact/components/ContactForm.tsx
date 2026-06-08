@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import {
     AlertCircle,
+    Check,
     Loader2,
     Mail,
     MessageSquare,
@@ -14,7 +15,7 @@ import {
 import { useState } from 'react'
 
 const inputClasses =
-    'w-full px-4 py-3 text-base rounded-xl border bg-bg-hover/30 backdrop-blur-sm focus:outline-none transition-colors duration-300 placeholder:text-primary-dark/50'
+    'w-full px-4 py-3 text-base rounded-lg border bg-bg-hover/34 backdrop-blur-sm focus:outline-none transition-colors duration-300 placeholder:text-primary-light/42'
 const labelClasses =
     'flex items-center gap-2 mb-2 text-sm font-medium text-primary-light/80'
 
@@ -123,7 +124,7 @@ export const ContactForm = () => {
             transition={{ duration: 0.5, ease: EASE_OUT_QUART }}
             aria-busy={isSubmitting}
         >
-            <div className='relative p-4 sm:p-6 md:p-8 rounded-2xl border border-border bg-gradient-to-br from-bg-hover/40 to-bg/40 backdrop-blur-md'>
+            <div className='relative p-4 sm:p-6 md:p-8 rounded-lg border border-border-subtle/80 bg-bg-subtle/68 backdrop-blur-md'>
                 <div className='relative space-y-6'>
                     <FieldRow
                         id='name'
@@ -229,7 +230,7 @@ export const ContactForm = () => {
                         <button
                             type='submit'
                             disabled={isSubmitting}
-                            className='group relative w-full py-4 px-6 rounded-xl border border-primary bg-primary/10 text-primary-light font-medium overflow-hidden transition-colors duration-300 hover:bg-primary/20 hover:border-primary-light focus:outline-none focus:ring-2 focus:ring-primary/60 focus:border-primary-light disabled:opacity-50 disabled:cursor-not-allowed'
+                            className='group relative w-full py-4 px-6 rounded-full border border-primary bg-primary text-bg-app font-semibold overflow-hidden transition-colors duration-300 hover:bg-primary-hover hover:border-primary-hover focus:outline-none focus:ring-2 focus:ring-primary/60 disabled:opacity-50 disabled:cursor-not-allowed active:translate-y-px'
                         >
                             <span className='relative flex items-center justify-center gap-2'>
                                 {isSubmitting ? (
@@ -299,18 +300,17 @@ const SuccessPanel = (props: {
         transition={{ duration: 0.5, ease: EASE_OUT_QUART }}
         className='w-full max-w-2xl'
     >
-        <div className='relative p-8 md:p-10 rounded-2xl border border-primary/40 bg-gradient-to-br from-primary/10 to-bg/40 backdrop-blur-md overflow-hidden'>
+        <div className='relative p-8 md:p-10 rounded-lg border border-primary/40 bg-bg-subtle/68 backdrop-blur-md overflow-hidden'>
             <div className='flex items-start gap-4'>
                 <SuccessMark reduce={props.reduce} />
                 <div className='flex-1'>
-                    <p className='font-heading text-xl md:text-2xl font-semibold tracking-tight text-primary-light'>
+                    <p className='font-heading text-xl md:text-2xl font-semibold tracking-normal text-primary-light'>
                         {props.title}
                     </p>
                     <p className='mt-1 text-primary-light/70 leading-relaxed'>
                         {props.body}
                     </p>
-                    <div className='mt-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-2.5 py-1 font-mono text-[0.65rem] uppercase tracking-[0.2em] text-primary-light/70'>
-                        <span className='h-1 w-1 rounded-full bg-primary' />
+                    <div className='mt-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs text-primary-light/70'>
                         {props.eta}
                     </div>
                     <div>
@@ -340,31 +340,17 @@ const SuccessMark = ({ reduce }: { reduce: boolean }) => (
             />
         )}
         <div className='relative flex h-10 w-10 items-center justify-center rounded-full border border-primary/60 text-primary'>
-            <svg
-                viewBox='0 0 24 24'
-                className='h-5 w-5'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth={2.25}
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                aria-hidden='true'
+            <motion.span
+                initial={reduce ? false : { scale: 0.72, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{
+                    duration: 0.45,
+                    ease: EASE_OUT_QUART,
+                    delay: 0.12,
+                }}
             >
-                <motion.path
-                    d='M5 12.5l4.5 4.5L19 7'
-                    initial={
-                        reduce
-                            ? { pathLength: 1, opacity: 1 }
-                            : { pathLength: 0, opacity: 0 }
-                    }
-                    animate={{ pathLength: 1, opacity: 1 }}
-                    transition={{
-                        duration: 0.7,
-                        ease: EASE_OUT_QUART,
-                        delay: 0.15,
-                    }}
-                />
-            </svg>
+                <Check className='h-5 w-5' aria-hidden='true' />
+            </motion.span>
         </div>
     </div>
 )

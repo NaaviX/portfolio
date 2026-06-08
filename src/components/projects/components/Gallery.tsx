@@ -20,27 +20,22 @@ type GalleryProps = Project & {
     hideLabel?: boolean
 }
 
-const frameMarks = [0, 1, 2]
-
 const sizes = {
     normal: {
         button: 'h-12 w-12 m-1.5 text-xl',
         badge: 'right-0 top-0 h-4 min-w-4 px-1 text-[9px]',
         label: 'text-xs',
-        mark: 'h-2.5 w-px',
     },
     small: {
         button: 'h-8 w-8 m-1 text-sm',
         badge: '-right-0.5 -top-0.5 h-3.5 min-w-3.5 px-0.5 text-[8px]',
         label: 'text-[10px]',
-        mark: 'h-2 w-px',
     },
 }
 
 export const Gallery = (props: GalleryProps) => {
     const { size = 'normal', hideLabel = false, ...project } = props
     const [isOpen, setIsOpen] = useState(false)
-    const [hasOpened, setHasOpened] = useState(false)
     const { language } = useLanguage()
     const reduce = useReducedMotion() ?? false
     const imageCount = project.images.length
@@ -58,7 +53,6 @@ export const Gallery = (props: GalleryProps) => {
 
     const onOpen = () => {
         setIsOpen(true)
-        setHasOpened(true)
     }
     const onClose = () => setIsOpen(false)
 
@@ -75,12 +69,10 @@ export const Gallery = (props: GalleryProps) => {
                     onClick={onOpen}
                     className={cn(
                         'relative inline-flex items-center justify-center overflow-hidden rounded-full border border-border text-primary-light outline-none',
-                        'transition-[border-color,color,box-shadow] duration-500 ease-out',
+                        'transition-[border-color,color,background-color] duration-500 ease-out',
                         'hover:border-border-hover hover:text-primary',
                         'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary',
-                        sizeClasses.button,
-                        !hasOpened &&
-                            'shadow-[0_0_18px_rgba(0,162,199,0.14),0_0_36px_rgba(0,162,199,0.06)]'
+                        sizeClasses.button
                     )}
                     whileHover={reduce ? undefined : { y: -2, scale: 1.04 }}
                     whileTap={reduce ? undefined : { scale: 0.97 }}
@@ -90,40 +82,10 @@ export const Gallery = (props: GalleryProps) => {
                         className='absolute inset-0 rounded-full bg-bg-subtle transition-colors duration-500 group-hover/gallery:bg-bg-hover'
                         aria-hidden
                     />
-                    {!reduce && !hasOpened && (
-                        <motion.span
-                            className='absolute inset-0 rounded-full border border-primary/25'
-                            aria-hidden
-                            animate={{
-                                scale: [1, 1.22],
-                                opacity: [0.35, 0],
-                            }}
-                            transition={{
-                                duration: 1.4,
-                                ease: EASE_OUT_QUART,
-                                repeat: Infinity,
-                                repeatDelay: 3.6,
-                            }}
-                        />
-                    )}
                     <span
                         className='absolute inset-1 rounded-full border border-primary/0 transition-colors duration-500 group-hover/gallery:border-primary/30'
                         aria-hidden
                     />
-                    <span
-                        className='absolute inset-x-3 bottom-2 flex justify-between opacity-0 transition-opacity duration-500 group-hover/gallery:opacity-70'
-                        aria-hidden
-                    >
-                        {frameMarks.map((mark) => (
-                            <span
-                                key={mark}
-                                className={cn(
-                                    'bg-primary/60',
-                                    sizeClasses.mark
-                                )}
-                            />
-                        ))}
-                    </span>
                     <IoMdImages className='relative z-10 transition-transform duration-500 group-hover/gallery:-translate-y-0.5 group-hover/gallery:scale-110' />
                     <span
                         className={cn(

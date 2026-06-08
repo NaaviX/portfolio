@@ -1,6 +1,4 @@
 import { useLanguage } from '@/i18n'
-import { EASE_OUT_QUART } from '@/lib/motion'
-import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowUp } from 'lucide-react'
 
 const BUILD_YEAR = new Date().getFullYear()
@@ -11,51 +9,21 @@ const scrollTop = () => {
 
 export const FooterSection = () => {
     const { t } = useLanguage()
-    const reduce = useReducedMotion() ?? false
     const yearRange = t.footer.yearRange.replace('{year}', String(BUILD_YEAR))
 
     return (
-        <footer className='relative mt-16 md:mt-24 px-4 sm:px-6 md:px-12 lg:px-20'>
+        <footer className='relative px-4 sm:px-6 md:px-12 lg:px-20'>
             <div className='mx-auto max-w-[1440px]'>
                 <div
                     aria-hidden='true'
                     className='h-px w-full bg-gradient-to-r from-transparent via-border-subtle/60 to-transparent'
                 />
-                <div className='flex flex-wrap items-center justify-between gap-x-8 gap-y-4 py-8 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-primary-light/55'>
+                <div className='flex flex-wrap items-center justify-between gap-x-8 gap-y-4 py-8 text-sm text-primary-light/52'>
                     <div className='flex items-center gap-3'>
                         <span className='text-primary-light/80'>
                             {t.footer.wordmark}
                         </span>
-                        <span className='text-primary-light/25'>·</span>
                         <span>{yearRange}</span>
-                    </div>
-
-                    <div
-                        className='flex items-center gap-2'
-                        aria-label={t.footer.statusLive}
-                    >
-                        <span className='relative flex h-1.5 w-1.5'>
-                            {!reduce && (
-                                <motion.span
-                                    aria-hidden='true'
-                                    className='absolute inset-0 rounded-full bg-primary'
-                                    initial={{ scale: 1, opacity: 0.6 }}
-                                    animate={{ scale: 2.6, opacity: 0 }}
-                                    transition={{
-                                        duration: 2.4,
-                                        ease: EASE_OUT_QUART,
-                                        repeat: Infinity,
-                                        repeatDelay: 0.4,
-                                    }}
-                                />
-                            )}
-                            <span className='relative inline-flex h-1.5 w-1.5 rounded-full bg-primary' />
-                        </span>
-                        <span className='text-primary-light/70'>
-                            {t.footer.statusLive}
-                        </span>
-                        <span className='text-primary-light/25'>·</span>
-                        <span>{t.footer.madeIn}</span>
                     </div>
 
                     <button

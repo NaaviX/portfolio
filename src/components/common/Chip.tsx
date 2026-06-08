@@ -12,13 +12,12 @@ export const Chip = memo((props: ChipProps) => {
         <span
             className={cn(
                 'group inline-flex items-center gap-2 rounded-full px-3 py-1.5',
-                'bg-gradient-to-r from-bg-hover to-bg-active',
-                'border border-border-subtle',
-                'text-sm font-normal tracking-widest text-primary-light',
+                'bg-primary-light/[0.035]',
+                'border border-border-subtle/70',
+                'text-sm font-normal text-primary-light/82',
                 'cursor-default transition-all duration-300 ease-out',
-                'hover:from-bg-active hover:to-bg-hover',
-                'hover:border-border-hover hover:scale-105',
-                'hover:shadow-[0_0_16px_rgba(0,162,199,0.35),0_0_4px_rgba(0,162,199,0.2)]',
+                'hover:bg-primary-light/[0.055]',
+                'hover:border-primary/70',
                 'hover:text-primary-light',
                 className
             )}

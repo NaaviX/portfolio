@@ -556,10 +556,10 @@ export const HeatCalendar = ({ calendar }: HeatCalendarProps) => {
     return (
         <div ref={wrapperRef} className='flex flex-col gap-3'>
             <header className='flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1'>
-                <h4 className='text-[0.65rem] tracking-[0.2em] uppercase text-primary-light/55 font-mono'>
+                <h4 className='text-sm font-semibold text-primary-light/62'>
                     {t.gitlab.calendarTitle}
                 </h4>
-                <span className='text-[0.65rem] tracking-[0.2em] uppercase text-primary-light/40 font-mono tabular-nums'>
+                <span className='text-xs text-primary-light/45 tabular-nums'>
                     {total.toLocaleString(
                         language === 'fr' ? 'fr-FR' : 'en-US'
                     )}{' '}
@@ -664,7 +664,7 @@ export const HeatCalendar = ({ calendar }: HeatCalendarProps) => {
                                                 : hovered.cy - 6,
                                         }}
                                     >
-                                        <div className='font-mono text-[0.6rem] uppercase tracking-[0.18em] text-primary-light/55'>
+                                        <div className='font-mono text-[0.65rem] text-primary-light/55'>
                                             {formatTooltipDate(
                                                 hovered.day,
                                                 language
@@ -715,7 +715,7 @@ export const HeatCalendar = ({ calendar }: HeatCalendarProps) => {
                 </div>
             </div>
 
-            <footer className='flex items-center justify-end gap-2 text-[0.6rem] tracking-[0.18em] uppercase text-primary-light/45 font-mono'>
+            <footer className='flex items-center justify-end gap-2 text-xs text-primary-light/45'>
                 <span>{t.gitlab.less}</span>
                 <span className='flex items-center gap-1'>
                     {SCALE.map((color, i) => (

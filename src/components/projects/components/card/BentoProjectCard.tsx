@@ -40,9 +40,9 @@ const imageVariants = {
 }
 
 const SURFACE =
-    'relative bg-bg-subtle border border-border-subtle rounded-2xl overflow-hidden ' +
+    'relative bg-bg-subtle/78 border border-border-subtle/70 rounded-lg overflow-hidden ' +
     'transition-[border-color,transform] duration-500 ease-out ' +
-    'group-hover:border-border'
+    'group-hover:border-primary/70'
 
 export const BentoProjectCard = (props: BentoProjectCardProps) => {
     const { project, variant = 'medium', index = 0 } = props
@@ -84,7 +84,7 @@ const MetaRow = ({
     return (
         <div
             className={cn(
-                'flex items-center text-primary-light/55 font-medium tabular-nums tracking-wide uppercase',
+                'flex items-center text-primary-light/52 font-medium tabular-nums',
                 c.text,
                 c.gap
             )}
@@ -115,7 +115,7 @@ const TitleWithRule = ({
         <Title className={className}>{children}</Title>
         <span
             className={cn(
-                'mt-3 h-px bg-primary/50 origin-left',
+                'mt-3 h-px bg-primary/44 origin-left',
                 'transition-transform duration-700 ease-out',
                 'scale-x-[0.18] group-hover:scale-x-100',
                 'w-full'
@@ -152,7 +152,7 @@ const FeaturedCard = ({
                 <div
                     className={cn(
                         SURFACE,
-                        'rounded-[1.75rem] shadow-[0_0_34px_rgba(0,162,199,0.1),0_0_76px_rgba(0,162,199,0.05),inset_0_1px_0_rgba(182,236,247,0.05)]'
+                        'shadow-[0_28px_90px_-70px_rgba(47,199,223,0.65),inset_0_1px_0_rgba(215,245,247,0.06)]'
                     )}
                 >
                     <div className='grid grid-cols-1 lg:grid-cols-12'>
@@ -166,13 +166,8 @@ const FeaturedCard = ({
                             <div className='absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-bg-subtle/70 to-transparent lg:hidden' />
                         </div>
                         <div className='relative lg:col-span-5 p-5 sm:p-7 lg:p-12 flex flex-col justify-between gap-8 lg:gap-10'>
-                            <div className='flex items-start justify-end gap-6'>
-                                <span className='text-[10px] tracking-[0.2em] uppercase text-primary/70 font-medium pt-3'>
-                                    Featured
-                                </span>
-                            </div>
                             <div>
-                                <TitleWithRule className='text-3xl lg:text-4xl xl:text-5xl font-semibold tracking-tight leading-[1.05]'>
+                                <TitleWithRule className='text-3xl lg:text-4xl xl:text-5xl font-semibold tracking-normal leading-[1.05]'>
                                     {project.name}
                                 </TitleWithRule>
                                 <p className='mt-6 text-primary-light/65 text-base lg:text-lg leading-relaxed max-w-md'>
@@ -219,7 +214,7 @@ const LargeCard = ({ project, index }: { project: Project; index: number }) => {
                 <div
                     className={cn(
                         SURFACE,
-                        'h-full flex flex-col shadow-[0_0_26px_rgba(0,162,199,0.08),inset_0_1px_0_rgba(182,236,247,0.04)]'
+                        'h-full flex flex-col shadow-[0_24px_80px_-68px_rgba(47,199,223,0.58),inset_0_1px_0_rgba(215,245,247,0.05)]'
                     )}
                 >
                     <div className='relative h-[200px] sm:h-[240px] overflow-hidden border-b border-border-subtle'>
@@ -234,7 +229,7 @@ const LargeCard = ({ project, index }: { project: Project; index: number }) => {
                         <div className='flex items-start justify-end gap-4'>
                             <MetaRow project={project} />
                         </div>
-                        <TitleWithRule className='text-2xl lg:text-[1.75rem] font-semibold tracking-tight leading-tight'>
+                        <TitleWithRule className='text-2xl lg:text-[1.75rem] font-semibold tracking-normal leading-tight'>
                             {project.name}
                         </TitleWithRule>
                         <p className='text-primary-light/60 text-sm lg:text-[15px] leading-relaxed flex-1'>
@@ -282,7 +277,7 @@ const MediumCard = ({
                 <div
                     className={cn(
                         SURFACE,
-                        'h-full flex flex-col shadow-[0_0_22px_rgba(0,162,199,0.07),inset_0_1px_0_rgba(182,236,247,0.04)]'
+                        'h-full flex flex-col shadow-[0_20px_70px_-64px_rgba(47,199,223,0.5),inset_0_1px_0_rgba(215,245,247,0.05)]'
                     )}
                 >
                     <div className='relative h-[170px] sm:h-[210px] overflow-hidden border-b border-border-subtle'>
@@ -297,7 +292,7 @@ const MediumCard = ({
                         <div className='flex items-start justify-end gap-4'>
                             <MetaRow project={project} size='small' />
                         </div>
-                        <TitleWithRule className='text-xl lg:text-[1.375rem] font-semibold tracking-tight leading-tight'>
+                        <TitleWithRule className='text-xl lg:text-[1.375rem] font-semibold tracking-normal leading-tight'>
                             {project.name}
                         </TitleWithRule>
                         <p className='text-primary-light/55 text-sm leading-relaxed flex-1 line-clamp-3'>
@@ -345,7 +340,7 @@ const CompactCard = ({
                 <div
                     className={cn(
                         SURFACE,
-                        'h-full flex flex-col rounded-xl shadow-[0_0_18px_rgba(0,162,199,0.07),inset_0_1px_0_rgba(182,236,247,0.04)]'
+                        'h-full flex flex-col shadow-[0_18px_60px_-56px_rgba(47,199,223,0.48),inset_0_1px_0_rgba(215,245,247,0.05)]'
                     )}
                 >
                     <div className='relative h-[180px] sm:h-[210px] overflow-hidden border-b border-border-subtle'>
@@ -358,11 +353,11 @@ const CompactCard = ({
                     </div>
                     <div className='p-5 flex flex-col flex-1 gap-4'>
                         <div className='flex items-start justify-end gap-3'>
-                            <span className='text-[10px] uppercase tracking-wider text-primary-light/50 tabular-nums pt-1'>
+                            <span className='text-[11px] text-primary-light/50 tabular-nums pt-1'>
                                 {project.year}
                             </span>
                         </div>
-                        <TitleWithRule className='text-lg font-semibold tracking-tight leading-tight'>
+                        <TitleWithRule className='text-lg font-semibold tracking-normal leading-tight'>
                             {project.name}
                         </TitleWithRule>
                         <p className='text-primary-light/55 text-sm leading-relaxed line-clamp-3 flex-1'>

@@ -20,8 +20,7 @@ export const NavLink = (props: NavLinkProps) => {
                 isDynamic
                 className='group block'
             >
-                <button className='relative w-full text-left pl-7 pr-4 py-3 text-base font-medium text-primary-light/70 transition-colors duration-200 hover:text-primary-light group-[.nav-active]:text-primary-light bg-transparent border-none cursor-pointer'>
-                    <span className='absolute left-2 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-primary scale-0 transition-transform duration-300 ease-out group-[.nav-active]:scale-100' />
+                <button className='relative w-full text-left px-4 py-3 text-base font-medium text-primary-light/68 transition-colors duration-200 hover:text-primary-light group-[.nav-active]:text-primary bg-transparent border-none cursor-pointer'>
                     {label}
                 </button>
             </Link>
@@ -37,9 +36,9 @@ export const NavLink = (props: NavLinkProps) => {
             isDynamic
             className='group'
         >
-            <button className='relative px-3 py-2 text-sm font-medium text-primary-light/70 transition-colors duration-200 hover:text-primary-light group-[.nav-active]:text-primary-light bg-transparent border-none cursor-pointer'>
+            <button className='relative whitespace-nowrap px-2.5 py-2 text-[13px] font-medium text-primary-light/68 transition-colors duration-200 hover:text-primary-light group-[.nav-active]:text-primary-light bg-transparent border-none cursor-pointer xl:px-3'>
                 {label}
-                <span className='absolute left-3 right-3 bottom-1 h-px bg-primary origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-50 group-[.nav-active]:scale-x-100' />
+                <span className='absolute left-2.5 right-2.5 bottom-1 h-px bg-primary origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-50 group-[.nav-active]:scale-x-100 xl:left-3 xl:right-3' />
             </button>
         </Link>
     )

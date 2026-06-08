@@ -56,7 +56,7 @@ export const NavbarMobile = () => {
 
     return (
         <div className='lg:hidden'>
-            <div className='h-16 flex items-center justify-between'>
+            <div className='h-[68px] flex items-center justify-between'>
                 <motion.button
                     whileTap={{ scale: 0.96 }}
                     onClick={() => {
@@ -78,7 +78,7 @@ export const NavbarMobile = () => {
                         aria-expanded={isOpen}
                         onClick={() => setIsOpen(!isOpen)}
                         whileTap={{ scale: 0.92 }}
-                        className='inline-flex items-center justify-center w-11 h-11 ml-1 text-primary-light/70 hover:text-primary transition-colors duration-200 bg-transparent border-none cursor-pointer'
+                        className='inline-flex items-center justify-center w-11 h-11 ml-1 rounded-full border border-border-subtle/60 text-primary-light/70 hover:text-primary transition-colors duration-200 bg-bg-subtle/40 cursor-pointer'
                     >
                         <AnimatePresence mode='wait' initial={false}>
                             {isOpen ? (
@@ -111,7 +111,7 @@ export const NavbarMobile = () => {
                 {isOpen && (
                     <>
                         <motion.div
-                            className='fixed inset-0 top-16 bg-bg-app/70 backdrop-blur-sm z-40'
+                            className='fixed inset-0 top-[68px] bg-bg-app/78 backdrop-blur-sm z-40'
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
@@ -123,7 +123,7 @@ export const NavbarMobile = () => {
                             initial='hidden'
                             animate='visible'
                             exit='exit'
-                            className='relative z-50 overflow-hidden flex flex-col py-3'
+                            className='relative z-50 overflow-hidden flex flex-col py-3 border-t border-border-subtle/50'
                         >
                             {sectionsData.map(
                                 (section: Section, index: number) => (

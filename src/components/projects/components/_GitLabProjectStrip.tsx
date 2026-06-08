@@ -130,7 +130,7 @@ const Stat = ({
         </span>
         <span
             className={cn(
-                'tracking-[0.18em] uppercase font-mono text-primary-light/45 leading-none whitespace-nowrap',
+                'font-mono text-primary-light/45 leading-none whitespace-nowrap',
                 isCompact ? 'text-[8px]' : 'text-[9px]'
             )}
         >

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 // True when the device has a precise pointer (mouse, trackpad, stylus).
-// False on touch-primary devices — used to skip cursor-bound effects
+// False on touch-primary devices, used to skip cursor-bound effects.
 // (parallax, spotlight masks) that would mount with no payoff on touch.
 export const useFinePointer = (): boolean => {
     const [fine, setFine] = useState(() => {

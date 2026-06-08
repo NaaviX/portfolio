@@ -1,50 +1,41 @@
-import { useMediaQuery } from '@/hooks/useMediaQuery'
 import {
     motion,
     useReducedMotion,
     useScroll,
     useTransform,
 } from 'framer-motion'
-import backgroundUrl from '@/assets/background.svg'
 
 export const GlobalBackground = () => {
     const reduce = useReducedMotion() ?? false
-    const isCompact = useMediaQuery('(max-width: 767px)')
-    const { scrollY } = useScroll()
+    const { scrollYProgress } = useScroll()
+    const y = useTransform(scrollYProgress, [0, 1], [0, -120])
 
-    // On mobile we drop the scale transform — scaling a fixed viewport-sized
-    // backdrop on every scroll tick is the most expensive part of the
-    // parallax. The y-translate keeps a hint of motion without the repaint.
-    const y = useTransform(scrollY, [0, 8000], [0, isCompact ? -80 : -200])
-    const scale = useTransform(scrollY, [0, 8000], [1, 1.06])
-
-    const sharedStyle = {
-        top: '-20vh',
-        height: '140vh',
-        backgroundImage: `url(${backgroundUrl})`,
-        backgroundRepeat: 'repeat',
-        backgroundSize: 'auto',
-    } as const
+    const content = (
+        <>
+            <div className='absolute left-0 top-[12vh] h-px w-full bg-gradient-to-r from-transparent via-primary/24 to-transparent' />
+            <div className='absolute left-[12vw] top-0 h-full w-px bg-gradient-to-b from-transparent via-primary/16 to-transparent' />
+            <div className='absolute right-[18vw] top-0 h-full w-px bg-gradient-to-b from-transparent via-primary-light/8 to-transparent' />
+        </>
+    )
 
     if (reduce) {
         return (
             <div
                 aria-hidden
-                className='pointer-events-none fixed left-0 right-0 z-[-1]'
-                style={sharedStyle}
-            />
+                className='pointer-events-none fixed inset-0 z-[-1] overflow-hidden'
+            >
+                {content}
+            </div>
         )
     }
 
     return (
         <motion.div
             aria-hidden
-            className='pointer-events-none fixed left-0 right-0 z-[-1]'
-            style={
-                isCompact
-                    ? { ...sharedStyle, y, transformOrigin: '50% 50%' }
-                    : { ...sharedStyle, y, scale, transformOrigin: '50% 50%' }
-            }
-        />
+            className='pointer-events-none fixed inset-0 z-[-1] overflow-hidden'
+            style={{ y }}
+        >
+            {content}
+        </motion.div>
     )
 }

@@ -1,5 +1,4 @@
 export * from './components/OtherProjects'
 export * from './components/card/BentoProjectCard'
-export * from './components/card/ProjectCard'
 export * from './projects.data'
 export * from './projects.type'

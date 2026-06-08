@@ -1,5 +1,4 @@
 import { GlobalBackground } from '@/components/common/GlobalBackground'
-import { GlobalTechField } from '@/components/common/GlobalTechField'
 // Side-effect import: triggers the module-level GitLab fetch at app boot,
 // so data is in flight while the lazy Skills chunk is still being downloaded.
 import '@/hooks/useGitLabStats'
@@ -15,16 +14,20 @@ import { SectionLayout } from './pages/components/SectionLayout'
 import { HeaderSection } from './pages/HeaderSection'
 import { Section, sectionsData } from './pages/sections.data'
 
-// Extracted style constant to prevent object recreation on each render
-const ELEMENT_STYLE = {
-    marginTop: '1px',
-    position: 'relative',
-} as const
-
 // Loading skeleton for lazy-loaded sections
 const SectionSkeleton = () => (
-    <div className='w-full min-h-[200px] animate-pulse bg-bg-subtle/30 rounded-lg' />
+    <div className='w-full min-h-[220px] animate-pulse rounded-lg border border-border-subtle/40 bg-primary-light/5' />
 )
+
+const SECTION_STYLES: Record<Section['target'], string> = {
+    skills: 'pt-12 pb-16 md:pt-16 md:pb-24',
+    experiences:
+        'py-16 md:py-24 bg-[linear-gradient(180deg,rgba(47,199,223,0.055),rgba(47,199,223,0.015))]',
+    projects: 'py-16 md:py-28',
+    courses:
+        'py-16 md:py-24 bg-[linear-gradient(180deg,rgba(215,245,247,0.035),rgba(215,245,247,0.012))]',
+    contact: 'py-16 md:py-28',
+}
 
 const useActiveSectionTitle = (
     baseTitle: string,
@@ -50,7 +53,7 @@ const useActiveSectionTitle = (
                     document.title = baseTitle
                     return
                 }
-                document.title = `${match.num} · ${match.title} · Antoine Legrand`
+                document.title = `${match.title} | Antoine Legrand`
             },
             { rootMargin: '-30% 0px -50% 0px', threshold: [0.05, 0.5, 0.9] }
         )
@@ -78,29 +81,30 @@ const App = () => {
 
     return (
         <ReactLenis root>
-            <GlobalBackground />
-            <GlobalTechField />
-            <HeaderSection />
-            <Toaster />
+            <main className='page-shell'>
+                <GlobalBackground />
+                <HeaderSection />
+                <Toaster />
 
-            {sectionsData.map((section: Section, index: number) => (
-                <Element
-                    name={section.target}
-                    key={section.nameKey}
-                    className='element pt-20 md:pt-[150px]'
-                    style={ELEMENT_STYLE}
-                >
-                    <SectionLayout
-                        number={String(index + 1).padStart(2, '0')}
-                        title={t.nav[section.nameKey]}
-                        subtitle={t.sectionSubtitles[section.nameKey]}
+                {sectionsData.map((section: Section) => (
+                    <Element
+                        name={section.target}
+                        key={section.nameKey}
+                        className='element relative scroll-mt-24'
                     >
-                        <Suspense fallback={<SectionSkeleton />}>
-                            <section.element />
-                        </Suspense>
-                    </SectionLayout>
-                </Element>
-            ))}
+                        <section className={SECTION_STYLES[section.target]}>
+                            <SectionLayout
+                                title={t.nav[section.nameKey]}
+                                subtitle={t.sectionSubtitles[section.nameKey]}
+                            >
+                                <Suspense fallback={<SectionSkeleton />}>
+                                    <section.element />
+                                </Suspense>
+                            </SectionLayout>
+                        </section>
+                    </Element>
+                ))}
+            </main>
         </ReactLenis>
     )
 }

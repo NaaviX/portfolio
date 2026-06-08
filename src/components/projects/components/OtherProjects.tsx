@@ -54,7 +54,7 @@ type DragState = {
     pointerId: number
 }
 
-const DRAG_THRESHOLD_PX = 6
+const POINTER_THRESHOLD_PX = 6
 const MOMENTUM_FRAME_MS = 16
 const MOMENTUM_STOP_VELOCITY = 0.15
 const MOMENTUM_FRICTION = 0.93
@@ -126,7 +126,7 @@ const engageFilmstripDrag = (
     dx: number
 ) => {
     if (state.engaged) return true
-    if (Math.abs(dx) < DRAG_THRESHOLD_PX) return false
+    if (Math.abs(dx) < POINTER_THRESHOLD_PX) return false
 
     state.engaged = true
     viewport.dataset.dragging = 'true'
@@ -457,9 +457,6 @@ export const OtherProjects = (props: OtherProjectsProps) => {
                     <div className='filmstrip__rail' aria-hidden>
                         <span className='filmstrip__progress' />
                     </div>
-                    <span className='filmstrip__hint' aria-hidden>
-                        DRAG · ← →
-                    </span>
                 </div>
 
                 <button
@@ -726,18 +723,6 @@ const FILMSTRIP_CSS = `
     will-change: transform;
 }
 
-.filmstrip__hint {
-    grid-column: 2;
-    grid-row: 2;
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.625rem;
-    letter-spacing: 0.25em;
-    color: rgb(182 236 247 / 0.32);
-    text-transform: uppercase;
-    text-align: center;
-    user-select: none;
-}
-
 @media (max-width: 640px) {
     .filmstrip {
         margin-top: 1.5rem;
@@ -790,9 +775,6 @@ const FILMSTRIP_CSS = `
         font-size: 0.75rem;
     }
 
-    .filmstrip__hint {
-        display: none;
-    }
 }
 
 @media (hover: none) and (pointer: coarse) {

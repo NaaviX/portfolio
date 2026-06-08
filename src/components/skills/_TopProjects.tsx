@@ -38,7 +38,7 @@ export const TopProjects = ({ projects }: TopProjectsProps) => {
 
     return (
         <div className='flex flex-col gap-3 min-w-0'>
-            <h4 className='text-[0.65rem] tracking-[0.2em] uppercase text-primary-light/55 font-mono'>
+            <h4 className='text-sm font-semibold text-primary-light/62'>
                 {t.gitlab.topProjects}
             </h4>
 

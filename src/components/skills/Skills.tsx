@@ -2,54 +2,45 @@ import { motion, useReducedMotion, type Variants } from 'framer-motion'
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { skillsData } from './skills.data'
 import { SKILL_TYPE, type Skill } from './skills.type'
+import { useLanguage } from '@/i18n'
 
 type Palette = { hue: string; tint: string; ink: string }
 
 const CATEGORY_PALETTE: Record<SKILL_TYPE, Palette> = {
     [SKILL_TYPE.WEBFRONT]: {
-        hue: '#22d3ee',
-        tint: 'rgba(34, 211, 238, 0.14)',
-        ink: '#cffafe',
+        hue: '#2fc7df',
+        tint: 'rgba(47, 199, 223, 0.13)',
+        ink: '#d7f5f7',
     },
     [SKILL_TYPE.WEBBACK]: {
-        hue: '#f59e0b',
-        tint: 'rgba(245, 158, 11, 0.13)',
-        ink: '#fef3c7',
+        hue: '#2fc7df',
+        tint: 'rgba(47, 199, 223, 0.1)',
+        ink: '#d7f5f7',
     },
     [SKILL_TYPE.DEVTOOLS]: {
-        hue: '#a78bfa',
-        tint: 'rgba(167, 139, 250, 0.13)',
-        ink: '#ede9fe',
+        hue: '#2fc7df',
+        tint: 'rgba(47, 199, 223, 0.09)',
+        ink: '#d7f5f7',
     },
     [SKILL_TYPE.MOBILE]: {
-        hue: '#34d399',
-        tint: 'rgba(52, 211, 153, 0.13)',
-        ink: '#d1fae5',
+        hue: '#2fc7df',
+        tint: 'rgba(47, 199, 223, 0.11)',
+        ink: '#d7f5f7',
     },
     [SKILL_TYPE.TESTING]: {
-        hue: '#facc15',
-        tint: 'rgba(250, 204, 21, 0.13)',
-        ink: '#fef9c3',
+        hue: '#2fc7df',
+        tint: 'rgba(47, 199, 223, 0.08)',
+        ink: '#d7f5f7',
     },
     [SKILL_TYPE.PRACTICES]: {
-        hue: '#fb7185',
-        tint: 'rgba(251, 113, 133, 0.13)',
-        ink: '#ffe4e6',
+        hue: '#2fc7df',
+        tint: 'rgba(47, 199, 223, 0.075)',
+        ink: '#d7f5f7',
     },
-}
-
-const CATEGORY_LABEL_FR: Record<SKILL_TYPE, string> = {
-    [SKILL_TYPE.WEBFRONT]: 'Frontend',
-    [SKILL_TYPE.WEBBACK]: 'Backend',
-    [SKILL_TYPE.DEVTOOLS]: 'DevTools',
-    [SKILL_TYPE.MOBILE]: 'Mobile',
-    [SKILL_TYPE.TESTING]: 'Testing',
-    [SKILL_TYPE.PRACTICES]: 'Pratiques',
 }
 
 import { EASE_OUT_QUART, EASE_OUT_QUART_CSS } from '@/lib/motion'
 
-const TRACK_LABEL = '0.28em'
 const MAG_RADIUS = 140
 const MAG_STRENGTH = 0.35
 const RESET_TRANSFORM = 'translate3d(0px, 0px, 0px)'
@@ -58,7 +49,6 @@ type FlatSkill = Skill & { category: SKILL_TYPE; palette: Palette }
 type Group = {
     category: SKILL_TYPE
     palette: Palette
-    label: string
     skills: FlatSkill[]
 }
 
@@ -80,7 +70,6 @@ const buildGroups = (): Group[] => {
         groups.push({
             category: cat.nameKey,
             palette,
-            label: CATEGORY_LABEL_FR[cat.nameKey],
             skills,
         })
     }
@@ -113,15 +102,8 @@ const chipVariants: Variants = {
     },
 }
 
-const dotVariants: Variants = {
-    hidden: { scale: 1 },
-    visible: {
-        scale: [1, 1.7, 1],
-        transition: { duration: 0.7, ease: EASE_OUT_QUART, times: [0, 0.4, 1] },
-    },
-}
-
 export const Skills = () => {
+    const { t } = useLanguage()
     const groups = useMemo(buildGroups, [])
     const reduce = useReducedMotion() ?? false
 
@@ -151,10 +133,8 @@ export const Skills = () => {
             })
         }
         window.addEventListener('resize', onResize)
-        window.addEventListener('scroll', onResize, { passive: true })
         return () => {
             window.removeEventListener('resize', onResize)
-            window.removeEventListener('scroll', onResize)
             if (scheduled) cancelAnimationFrame(scheduled)
             if (rafRef.current) cancelAnimationFrame(rafRef.current)
         }
@@ -224,7 +204,7 @@ export const Skills = () => {
                         >
                             <GroupHeader
                                 palette={group.palette}
-                                label={group.label}
+                                label={t.skills.categories[group.category]}
                                 count={group.skills.length}
                             />
                             <motion.ul
@@ -267,30 +247,16 @@ const GroupHeader = ({
 }) => (
     <motion.div
         variants={headerVariants}
-        className='flex items-center gap-3 lg:flex-col lg:items-start lg:gap-2 lg:pt-1'
+        className='flex items-baseline justify-between gap-3 border-b border-border-subtle/45 pb-2 lg:flex-col lg:items-start lg:justify-start lg:gap-1 lg:border-b-0 lg:pb-0 lg:pt-1'
     >
-        <div className='flex items-center gap-2'>
-            <motion.span
-                aria-hidden
-                variants={dotVariants}
-                className='inline-block h-1.5 w-1.5 rounded-full'
-                style={{
-                    background: palette.hue,
-                    boxShadow: `0 0 10px ${palette.hue}`,
-                }}
-            />
-            <span
-                className='text-2xs uppercase'
-                style={{ letterSpacing: TRACK_LABEL, color: palette.ink }}
-            >
-                {label}
-            </span>
-        </div>
+        <span className='text-sm font-semibold text-primary-light/82'>
+            {label}
+        </span>
         <span
-            className='text-2xs tabular-nums uppercase text-primary-dark/45'
-            style={{ letterSpacing: TRACK_LABEL }}
+            className='text-xs tabular-nums text-primary-light/42'
+            style={{ color: `${palette.ink}73` }}
         >
-            {String(count).padStart(2, '0')}
+            {count}
         </span>
     </motion.div>
 )
@@ -324,18 +290,11 @@ const getIconStyle = (important: boolean) => ({
     opacity: important ? 1 : 0.85,
 })
 
-const getFallbackDotStyle = (important: boolean, palette: Palette) => ({
-    width: 6,
-    height: 6,
-    background: palette.hue,
-    opacity: important ? 1 : 0.6,
-})
-
 const getTooltipStyle = (palette: Palette) => ({
     background: 'rgba(6, 24, 29, 0.96)',
     borderColor: `${palette.hue}55`,
     color: palette.ink,
-    letterSpacing: '0.18em',
+    letterSpacing: '0',
 })
 
 const SkillChip = ({ skill, setRef }: ChipProps) => {
@@ -351,13 +310,7 @@ const SkillChip = ({ skill, setRef }: ChipProps) => {
         >
             {Icon ? (
                 <Icon aria-hidden style={getIconStyle(important)} />
-            ) : (
-                <span
-                    aria-hidden
-                    className='inline-block rounded-full'
-                    style={getFallbackDotStyle(important, palette)}
-                />
-            )}
+            ) : null}
             <span className='whitespace-nowrap'>{skill.name}</span>
             {skill.about && (
                 <span

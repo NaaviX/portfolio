@@ -195,11 +195,11 @@ export const translations = {
                 title: 'Message envoyé.',
                 body: 'Merci, je vous réponds sous 24 heures.',
                 again: 'Envoyer un autre message',
-                eta: 'ETA · 24 H',
+                eta: 'Réponse sous 24 h',
             },
         },
         footer: {
-            wordmark: 'ANTOINE LEGRAND',
+            wordmark: 'Antoine Legrand',
             yearRange: '2023 - {year}',
             madeIn: '',
             statusLive: '',
@@ -207,7 +207,7 @@ export const translations = {
             backToTopShort: 'TOP',
         },
         meta: {
-            baseTitle: 'Antoine Legrand · Ingénieur full-stack',
+            baseTitle: 'Antoine Legrand | Ingénieur full-stack',
         },
         gitlab: {
             title: 'Pulse GitLab',
@@ -248,7 +248,7 @@ export const translations = {
             projects: 'Main Projects',
             skills: 'Skills & Technologies',
             courses: 'Education',
-            contact: 'Contact Me',
+            contact: 'Get in touch',
         },
         sectionSubtitles: {
             experiences: 'Career and missions',
@@ -434,11 +434,11 @@ export const translations = {
                 title: 'Message sent.',
                 body: 'Thanks, I’ll get back to you within 24 hours.',
                 again: 'Send another message',
-                eta: 'ETA · 24 H',
+                eta: 'Reply within 24h',
             },
         },
         footer: {
-            wordmark: 'ANTOINE LEGRAND',
+            wordmark: 'Antoine Legrand',
             yearRange: '2023 - {year}',
             madeIn: '',
             statusLive: '',
@@ -446,7 +446,7 @@ export const translations = {
             backToTopShort: 'TOP',
         },
         meta: {
-            baseTitle: 'Antoine Legrand · Full-stack engineer',
+            baseTitle: 'Antoine Legrand | Full-stack engineer',
         },
         gitlab: {
             title: 'GitLab pulse',

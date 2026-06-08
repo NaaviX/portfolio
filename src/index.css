@@ -1,18 +1,18 @@
 @import 'tailwindcss';
 
 @theme {
-    --color-bg: #082c36;
-    --color-bg-hover: #003848;
-    --color-bg-active: #004558;
-    --color-bg-subtle: #101b20;
-    --color-bg-app: #0b161a;
-    --color-border: #12677e;
-    --color-border-subtle: #045468;
-    --color-border-hover: #11809c;
-    --color-primary: #00a2c7;
-    --color-primary-hover: #23afd0;
-    --color-primary-light: #b6ecf7;
-    --color-primary-dark: #4ccce6;
+    --color-bg: #0a2026;
+    --color-bg-hover: #102a31;
+    --color-bg-active: #173840;
+    --color-bg-subtle: #0d181d;
+    --color-bg-app: #071114;
+    --color-border: #2fc7df;
+    --color-border-subtle: #244a53;
+    --color-border-hover: #61d8e9;
+    --color-primary: #2fc7df;
+    --color-primary-hover: #74e3ef;
+    --color-primary-light: #d7f5f7;
+    --color-primary-dark: #8de3eb;
 
     --font-family-body:
         'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -116,6 +116,7 @@ html,
 body {
     background-color: var(--color-bg-app);
     overflow-x: clip;
+    color-scheme: dark;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -142,6 +143,41 @@ body {
     text-rendering: optimizeLegibility;
 }
 
+::selection {
+    background: rgb(47 199 223 / 0.32);
+    color: var(--color-primary-light);
+}
+
+.page-shell {
+    position: relative;
+    isolation: isolate;
+    min-height: 100dvh;
+}
+
+.page-shell::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+        linear-gradient(rgb(215 245 247 / 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgb(215 245 247 / 0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(to bottom, transparent, black 12%, black 78%, transparent);
+}
+
+.page-shell::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        linear-gradient(180deg, rgb(7 17 20 / 0.16), rgb(7 17 20 / 0.92)),
+        linear-gradient(115deg, rgb(47 199 223 / 0.12), transparent 32%);
+}
+
 h1,
 h2,
 h3,
@@ -155,6 +191,7 @@ h6 {
 input,
 textarea {
     border-color: var(--color-border) !important;
+    color: var(--color-primary-light);
 }
 
 input:hover,

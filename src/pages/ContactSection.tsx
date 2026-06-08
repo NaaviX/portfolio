@@ -53,10 +53,10 @@ export const ContactSection = () => {
                     <div className='flex flex-col gap-6'>
                         <motion.h3
                             variants={itemVariants}
-                            className='font-heading text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.04em] leading-[0.95] text-primary-light'
+                            className='font-heading text-4xl md:text-5xl lg:text-6xl font-semibold tracking-normal leading-[0.98] text-primary-light'
                         >
                             {t.contact.headlineLead}{' '}
-                            <span className='font-normal italic text-primary'>
+                            <span className='text-primary'>
                                 {t.contact.headlineHighlight}
                             </span>
                             .
@@ -74,7 +74,7 @@ export const ContactSection = () => {
 
                     <motion.ul
                         variants={itemVariants}
-                        className='flex flex-col rounded-2xl border border-border-subtle/80 overflow-hidden divide-y divide-border-subtle/60'
+                        className='flex flex-col rounded-lg border border-border-subtle/80 overflow-hidden divide-y divide-border-subtle/60'
                     >
                         {directLinks.map((link) => (
                             <li key={link.href}>
@@ -88,7 +88,7 @@ export const ContactSection = () => {
                                             ? 'noopener noreferrer'
                                             : undefined
                                     }
-                                    className='group flex items-center gap-4 px-5 py-4 transition-colors hover:bg-bg-hover/35'
+                                    className='group flex items-center gap-4 px-5 py-4 transition-colors hover:bg-primary-light/[0.035]'
                                 >
                                     <link.icon className='w-4 h-4 text-primary shrink-0' />
                                     <span className='flex-1 text-sm lg:text-[15px] text-primary-light/85 font-medium tracking-tight truncate'>

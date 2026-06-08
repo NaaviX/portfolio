@@ -70,34 +70,21 @@ export const GitLabPulse = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.8, ease: EASE_OUT_QUART }}
-            className='mt-10 scroll-mt-24 flex flex-col gap-6 sm:gap-8 rounded-2xl border border-border-subtle/70 bg-bg-subtle/40 p-5 sm:p-7 backdrop-blur-sm'
+            className='mt-10 scroll-mt-24 flex flex-col gap-6 sm:gap-8 rounded-lg border border-border-subtle/70 bg-bg-subtle/58 p-5 sm:p-7 backdrop-blur-sm'
             aria-label={labels.aria}
         >
             <header className='flex items-center justify-between gap-4 pb-1 border-b border-border-subtle/40'>
                 <div className='flex items-center gap-2.5'>
-                    <span className='relative flex h-2 w-2'>
-                        {!reduce && (
-                            <motion.span
-                                aria-hidden
-                                className='absolute inset-0 rounded-full bg-primary'
-                                initial={{ scale: 1, opacity: 0.55 }}
-                                animate={{ scale: 2.4, opacity: 0 }}
-                                transition={{
-                                    duration: 2.2,
-                                    ease: EASE_OUT_QUART,
-                                    repeat: Infinity,
-                                    repeatDelay: 0.6,
-                                }}
-                            />
-                        )}
-                        <span className='relative inline-flex h-2 w-2 rounded-full bg-primary' />
-                    </span>
-                    <span className='text-[0.65rem] tracking-[0.2em] uppercase text-primary-light/70 font-mono'>
+                    <FaGitlab
+                        aria-hidden
+                        className='text-primary-light/55 text-base'
+                    />
+                    <span className='text-sm font-semibold text-primary-light/78'>
                         {labels.title}
                     </span>
                 </div>
 
-                <div className='flex items-center gap-4 text-[0.6rem] tracking-[0.2em] uppercase font-mono text-primary-light/45'>
+                <div className='flex items-center gap-4 text-xs font-mono text-primary-light/45'>
                     <span className='hidden sm:inline'>
                         {labels.memberSince}{' '}
                         <span className='text-primary-light/75 tabular-nums'>
@@ -128,10 +115,6 @@ export const GitLabPulse = () => {
                             className={`text-[0.8rem] ${refreshing ? 'animate-spin' : ''}`}
                         />
                     </button>
-                    <FaGitlab
-                        aria-hidden
-                        className='text-primary-light/35 text-base'
-                    />
                 </div>
             </header>
 
@@ -163,7 +146,7 @@ export const GitLabPulse = () => {
                 <section className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 pt-2 border-t border-border-subtle/40'>
                     {stats.languages.length > 0 && (
                         <div className='flex flex-col gap-3'>
-                            <h3 className='text-[0.65rem] tracking-[0.2em] uppercase text-primary-light/55 font-mono'>
+                            <h3 className='text-sm font-semibold text-primary-light/62'>
                                 {labels.languages}
                             </h3>
                             <LanguageDonut languages={stats.languages} />
@@ -234,28 +217,15 @@ const GitLabPulseSkeleton = ({
     <aside
         aria-label={labels.aria}
         aria-busy='true'
-        className='mt-10 flex flex-col gap-6 sm:gap-8 rounded-2xl border border-border-subtle/70 bg-bg-subtle/40 p-5 sm:p-7 backdrop-blur-sm'
+        className='mt-10 flex flex-col gap-6 sm:gap-8 rounded-lg border border-border-subtle/70 bg-bg-subtle/58 p-5 sm:p-7 backdrop-blur-sm'
     >
         <header className='flex items-center justify-between gap-4 pb-1 border-b border-border-subtle/40'>
             <div className='flex items-center gap-2.5'>
-                <span className='relative flex h-2 w-2'>
-                    {!reduce && (
-                        <motion.span
-                            aria-hidden
-                            className='absolute inset-0 rounded-full bg-primary/40'
-                            initial={{ scale: 1, opacity: 0.45 }}
-                            animate={{ scale: 2.4, opacity: 0 }}
-                            transition={{
-                                duration: 2.2,
-                                ease: EASE_OUT_QUART,
-                                repeat: Infinity,
-                                repeatDelay: 0.6,
-                            }}
-                        />
-                    )}
-                    <span className='relative inline-flex h-2 w-2 rounded-full bg-primary/60' />
-                </span>
-                <span className='text-[0.65rem] tracking-[0.2em] uppercase text-primary-light/70 font-mono'>
+                <FaGitlab
+                    aria-hidden
+                    className='text-primary-light/50 text-base'
+                />
+                <span className='text-sm font-semibold text-primary-light/78'>
                     {labels.title}
                 </span>
             </div>
@@ -346,7 +316,7 @@ const Stat = ({
                     </span>
                 )}
             </span>
-            <span className='text-[0.6rem] sm:text-[0.65rem] tracking-[0.2em] uppercase text-primary-light/45 font-mono leading-snug'>
+            <span className='text-xs text-primary-light/45 leading-snug'>
                 {label}
             </span>
         </div>
@@ -393,7 +363,7 @@ const DiffStat = ({
                     −{formatCompact(del, language)}
                 </span>
             </span>
-            <span className='text-[0.6rem] sm:text-[0.65rem] tracking-[0.2em] uppercase text-primary-light/45 font-mono leading-snug'>
+            <span className='text-xs text-primary-light/45 leading-snug'>
                 {label}
             </span>
         </div>

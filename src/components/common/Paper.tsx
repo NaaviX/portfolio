@@ -15,13 +15,12 @@ export const Paper = (props: PaperProps) => {
     const isMedium = useMediumScreen()
 
     const paperClasses = cn(
-        'relative z-10 rounded-2xl',
-        'border border-border',
-        'bg-[rgba(8,44,54,0.5)] backdrop-blur-sm',
-        'shadow-[0_0_20px_rgba(0,162,199,0.08),0_0_40px_rgba(0,162,199,0.04),inset_0_1px_0_rgba(255,255,255,0.05)]',
+        'relative z-10 rounded-lg',
+        'border border-border-subtle/70',
+        'bg-bg-subtle/72 backdrop-blur-sm',
+        'shadow-[0_22px_76px_-66px_rgba(47,199,223,0.55),inset_0_1px_0_rgba(215,245,247,0.05)]',
         'transition-all duration-500 ease-out',
-        'hover:bg-[rgba(8,44,54,0.6)] hover:border-border-hover',
-        'hover:shadow-[0_0_30px_rgba(0,162,199,0.15),0_0_60px_rgba(0,162,199,0.08),inset_0_1px_0_rgba(255,255,255,0.08)]',
+        'hover:bg-bg-subtle hover:border-primary/60',
         isMedium ? 'p-10' : 'p-4',
         className
     )

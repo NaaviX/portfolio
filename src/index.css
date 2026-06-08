@@ -15,9 +15,9 @@
     --color-primary-dark: #8de3eb;
 
     --font-family-body:
-        'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+        'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
     --font-family-heading:
-        'Bricolage Grotesque', 'Inter', system-ui, sans-serif;
+        'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
     --font-size-3xs: 0.45rem;
     --font-size-2xs: 0.625rem;

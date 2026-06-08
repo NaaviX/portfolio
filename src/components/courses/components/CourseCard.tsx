@@ -30,9 +30,9 @@ const getDuration = (
     const end = dateTo || new Date()
     const years = Math.max(1, end.getFullYear() - dateFrom.getFullYear())
     if (language === 'fr') {
-        return years === 1 ? '1 AN' : `${years} ANS`
+        return years === 1 ? '1 an' : `${years} ans`
     }
-    return years === 1 ? '1 YEAR' : `${years} YEARS`
+    return years === 1 ? '1 year' : `${years} years`
 }
 
 export const CourseCard = (props: CourseCardProps) => {
@@ -53,30 +53,28 @@ export const CourseCard = (props: CourseCardProps) => {
                 ease: easeOutQuart,
                 delay: index * 0.08,
             }}
-            className='border-b border-border-subtle/60 py-7 md:py-14 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-10 group'
+            className='group rounded-lg border border-border-subtle/70 bg-bg-subtle/58 p-5 transition-colors duration-300 hover:border-primary/60 sm:p-6'
         >
-            <div className='md:col-span-3 flex flex-col'>
-                <span className='font-heading font-medium text-primary text-2xl md:text-[1.75rem] leading-none tracking-[-0.02em] tabular-nums'>
+            <div className='flex min-h-full flex-col'>
+                <span className='font-heading text-2xl font-semibold leading-none tracking-normal text-primary tabular-nums'>
                     {formatYearRange(course.dateFrom, course.dateTo, language)}
                 </span>
-                <span className='mt-2 text-[0.65rem] tracking-[0.2em] text-primary-light/40 font-mono'>
+                <span className='mt-2 text-xs text-primary-light/45'>
                     {getDuration(course.dateFrom, course.dateTo, language)}
                 </span>
-            </div>
 
-            <div className='md:col-span-9 flex flex-col gap-3'>
-                <span className='text-[0.65rem] tracking-[0.2em] uppercase text-primary-light/40 font-mono'>
+                <span className='mt-8 text-sm text-primary-light/52'>
                     {type}
                 </span>
-                <h3 className='text-2xl md:text-3xl font-medium text-primary-light leading-tight tracking-tight transition-colors duration-300 group-hover:text-primary-light'>
+                <h3 className='mt-3 text-2xl font-semibold leading-tight tracking-normal text-primary-light transition-colors duration-300 group-hover:text-primary-light'>
                     {title}
                 </h3>
                 {course.institution && (
-                    <p className='text-sm md:text-base text-primary-light/50'>
+                    <p className='mt-5 text-sm text-primary-light/52'>
                         <span className='text-primary-light/70'>
                             {course.institution}
                         </span>
-                        <span className='mx-2 text-primary-light/30'>·</span>
+                        <span className='mx-2 text-primary-light/30'>/</span>
                         <span>{course.city}</span>
                     </p>
                 )}

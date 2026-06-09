@@ -118,26 +118,29 @@ export const GitLabPulse = () => {
                 </div>
             </header>
 
-            <section className='grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-6'>
+            <section className='flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8'>
                 <Stat
+                    hero
                     value={stats.commits30d}
                     label={labels.commits30d}
                     reduce={reduce}
                 />
-                <Stat
-                    value={stats.activeDays30d}
-                    suffix='/30'
-                    label={labels.activeDays}
-                    reduce={reduce}
-                />
-                <DiffStat
-                    additions={stats.linesAdded30d ?? 0}
-                    deletions={stats.linesRemoved30d ?? 0}
-                    label={labels.linesDiff}
-                    aria={labels.linesDiffAria}
-                    language={language}
-                    reduce={reduce}
-                />
+                <div className='flex flex-col gap-4 sm:border-l sm:border-border-subtle/50 sm:pl-8'>
+                    <Stat
+                        value={stats.activeDays30d}
+                        suffix='/30'
+                        label={labels.activeDays}
+                        reduce={reduce}
+                    />
+                    <DiffStat
+                        additions={stats.linesAdded30d ?? 0}
+                        deletions={stats.linesRemoved30d ?? 0}
+                        label={labels.linesDiff}
+                        aria={labels.linesDiffAria}
+                        language={language}
+                        reduce={reduce}
+                    />
+                </div>
             </section>
 
             <HeatCalendar calendar={stats.calendar} />
@@ -235,22 +238,22 @@ const GitLabPulseSkeleton = ({
             />
         </header>
 
-        <section className='grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-6'>
-            {[0, 1, 2].map((i) => (
-                <div
-                    key={i}
-                    className={
-                        'flex flex-col gap-1.5 border-l border-border-subtle/60 pl-3 sm:pl-4 ' +
-                        (i === 2 ? 'col-span-2 sm:col-span-1' : '')
-                    }
-                >
-                    <SkeletonBlock
-                        className='h-7 sm:h-8 w-24'
-                        reduce={reduce}
-                    />
-                    <SkeletonBlock className='h-2 w-24' reduce={reduce} />
-                </div>
-            ))}
+        <section className='flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8'>
+            <div className='flex flex-col gap-1.5'>
+                <SkeletonBlock className='h-10 sm:h-12 w-28' reduce={reduce} />
+                <SkeletonBlock className='h-2 w-20' reduce={reduce} />
+            </div>
+            <div className='flex flex-col gap-4 sm:border-l sm:border-border-subtle/50 sm:pl-8'>
+                {[0, 1].map((i) => (
+                    <div key={i} className='flex flex-col gap-1.5'>
+                        <SkeletonBlock
+                            className='h-7 sm:h-8 w-24'
+                            reduce={reduce}
+                        />
+                        <SkeletonBlock className='h-2 w-20' reduce={reduce} />
+                    </div>
+                ))}
+            </div>
         </section>
 
         <div className='flex flex-col gap-3'>
@@ -293,25 +296,34 @@ const Stat = ({
     suffix,
     label,
     reduce,
+    hero = false,
 }: {
     value: number
     suffix?: string
     label: string
     reduce: boolean
+    hero?: boolean
 }) => {
     const ref = useRef<HTMLDivElement>(null)
     const inView = useInView(ref, { once: true, margin: '-40px' })
     const display = useCountUp(value, reduce, inView)
 
     return (
-        <div
-            ref={ref}
-            className='flex flex-col gap-1.5 border-l border-border-subtle/60 pl-3 sm:pl-4'
-        >
-            <span className='font-heading text-2xl sm:text-3xl font-semibold tabular-nums leading-none text-primary-light'>
+        <div ref={ref} className='flex flex-col gap-1.5'>
+            <span
+                className={`font-heading font-semibold tabular-nums leading-none text-primary-light ${
+                    hero ? 'text-4xl sm:text-5xl' : 'text-2xl sm:text-3xl'
+                }`}
+            >
                 {display}
                 {suffix && (
-                    <span className='text-primary-light/40 text-base sm:text-lg ml-0.5'>
+                    <span
+                        className={`text-primary-light/40 ml-0.5 ${
+                            hero
+                                ? 'text-xl sm:text-2xl'
+                                : 'text-base sm:text-lg'
+                        }`}
+                    >
                         {suffix}
                     </span>
                 )}
@@ -350,16 +362,12 @@ const DiffStat = ({
     const del = useCountUp(deletions, reduce, inView)
 
     return (
-        <div
-            ref={ref}
-            aria-label={aria}
-            className='flex flex-col gap-1.5 border-l border-border-subtle/60 pl-3 sm:pl-4 col-span-2 sm:col-span-1'
-        >
+        <div ref={ref} aria-label={aria} className='flex flex-col gap-1.5'>
             <span className='font-heading text-2xl sm:text-3xl font-semibold tabular-nums leading-none flex items-baseline gap-2 sm:gap-2.5'>
-                <span className='text-emerald-400/90'>
+                <span className='text-emerald-400/80'>
                     +{formatCompact(add, language)}
                 </span>
-                <span className='text-rose-400/80'>
+                <span className='text-rose-400/70'>
                     −{formatCompact(del, language)}
                 </span>
             </span>

@@ -93,10 +93,7 @@ const App = () => {
                         className='element relative scroll-mt-24'
                     >
                         <section className={SECTION_STYLES[section.target]}>
-                            <SectionLayout
-                                title={t.nav[section.nameKey]}
-                                subtitle={t.sectionSubtitles[section.nameKey]}
-                            >
+                            <SectionLayout title={t.nav[section.nameKey]}>
                                 <Suspense fallback={<SectionSkeleton />}>
                                     <section.element />
                                 </Suspense>

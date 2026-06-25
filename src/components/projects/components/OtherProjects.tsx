@@ -1,805 +1,351 @@
-import {
-    useCallback,
-    useEffect,
-    useLayoutEffect,
-    useRef,
-    useState,
-} from 'react'
+import { useCallback, useRef, useState } from 'react'
+import { ChipList, LazyImage, MagneticButton, Title } from '@/components/common'
+import { useLanguage } from '@/i18n/LanguageContext'
+import { EASE_OUT_QUART } from '@/lib/motion'
+import { cn } from '@/lib/utils'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { FaCode, FaPlayCircle } from 'react-icons/fa'
+import { FaUserGroup } from 'react-icons/fa6'
+import { GoArrowUpRight, GoDeviceDesktop, GoDeviceMobile } from 'react-icons/go'
 import { Project } from '../projects.type'
-import { BentoProjectCard } from './card/BentoProjectCard'
+import { Gallery } from './Gallery'
+import { GitLabProjectStrip } from './_GitLabProjectStrip'
 
 interface OtherProjectsProps {
     projects: Project[]
 }
 
-type FilmstripItemA11yProps = React.HTMLAttributes<HTMLDivElement> & {
-    inert?: ''
-}
+const ROW_SELECTOR = '[data-archive-row]'
+const fmt = (n: number) => String(n).padStart(2, '0')
 
-const getFilmstripItems = (viewport: HTMLDivElement) =>
-    Array.from(viewport.querySelectorAll<HTMLElement>('[data-filmstrip-item]'))
-
-const getItemTargetLeft = (viewport: HTMLDivElement, item: HTMLElement) =>
-    item.offsetLeft + item.offsetWidth / 2 - viewport.clientWidth / 2
-
-const getClosestTrackIndex = (
-    viewport: HTMLDivElement,
-    items = getFilmstripItems(viewport)
-) => {
-    if (!items.length) return -1
-
-    const center = viewport.scrollLeft + viewport.clientWidth / 2
-    return items.reduce(
-        (best, item, i) => {
-            const itemCenter = item.offsetLeft + item.offsetWidth / 2
-            const distance = Math.abs(itemCenter - center)
-            return distance < best.distance ? { index: i, distance } : best
-        },
-        { index: 0, distance: Infinity }
-    ).index
-}
-
-const getCloneA11yProps = (isClone: boolean): FilmstripItemA11yProps =>
-    isClone ? { 'aria-hidden': true, inert: '' } : {}
-
-type DragState = {
-    isDown: boolean
-    engaged: boolean
-    startX: number
-    startScroll: number
-    lastX: number
-    lastT: number
-    velocity: number
-    momentumRaf: number
-    pointerId: number
-}
-
-const POINTER_THRESHOLD_PX = 6
-const MOMENTUM_FRAME_MS = 16
-const MOMENTUM_STOP_VELOCITY = 0.15
-const MOMENTUM_FRICTION = 0.93
-
-const createDragState = (): DragState => ({
-    isDown: false,
-    engaged: false,
-    startX: 0,
-    startScroll: 0,
-    lastX: 0,
-    lastT: 0,
-    velocity: 0,
-    momentumRaf: 0,
-    pointerId: -1,
-})
-
-const stopFilmstripMomentum = (state: DragState) => {
-    if (!state.momentumRaf) return
-    cancelAnimationFrame(state.momentumRaf)
-    state.momentumRaf = 0
-}
-
-const decayFilmstripMomentum = (viewport: HTMLDivElement, state: DragState) => {
-    if (Math.abs(state.velocity) < MOMENTUM_STOP_VELOCITY) {
-        state.momentumRaf = 0
-        return
-    }
-    viewport.scrollLeft -= state.velocity
-    state.velocity *= MOMENTUM_FRICTION
-    state.momentumRaf = requestAnimationFrame(() =>
-        decayFilmstripMomentum(viewport, state)
-    )
-}
-
-const beginFilmstripDrag = (
-    event: PointerEvent,
-    viewport: HTMLDivElement,
-    state: DragState,
-    pointerActiveRef: React.MutableRefObject<boolean>
-) => {
-    if (event.pointerType === 'mouse' && event.button !== 0) return
-
-    stopFilmstripMomentum(state)
-    pointerActiveRef.current = true
-    state.isDown = true
-    state.engaged = false
-    state.startX = event.clientX
-    state.startScroll = viewport.scrollLeft
-    state.lastX = event.clientX
-    state.lastT = performance.now()
-    state.velocity = 0
-    state.pointerId = event.pointerId
-}
-
-const captureFilmstripPointer = (
-    viewport: HTMLDivElement,
-    pointerId: number
-) => {
-    try {
-        viewport.setPointerCapture(pointerId)
-    } catch {
-        // Pointer capture can fail if the pointer has already been released.
-    }
-}
-
-const engageFilmstripDrag = (
-    viewport: HTMLDivElement,
-    state: DragState,
-    dx: number
-) => {
-    if (state.engaged) return true
-    if (Math.abs(dx) < POINTER_THRESHOLD_PX) return false
-
-    state.engaged = true
-    viewport.dataset.dragging = 'true'
-    captureFilmstripPointer(viewport, state.pointerId)
-    return true
-}
-
-const updateFilmstripVelocity = (event: PointerEvent, state: DragState) => {
-    const now = performance.now()
-    const dt = Math.max(1, now - state.lastT)
-    state.velocity = ((event.clientX - state.lastX) / dt) * MOMENTUM_FRAME_MS
-    state.lastX = event.clientX
-    state.lastT = now
-}
-
-const moveFilmstripDrag = (
-    event: PointerEvent,
-    viewport: HTMLDivElement,
-    state: DragState
-) => {
-    if (!state.isDown) return
-
-    const dx = event.clientX - state.startX
-    if (!engageFilmstripDrag(viewport, state, dx)) return
-
-    viewport.scrollLeft = state.startScroll - dx
-    updateFilmstripVelocity(event, state)
-}
-
-const releaseFilmstripDrag = (
-    viewport: HTMLDivElement,
-    state: DragState,
-    pointerActiveRef: React.MutableRefObject<boolean>,
-    normalizeLoopPosition: () => void,
-    scheduleLoopReset: () => void
-) => {
-    if (!state.isDown) return
-
-    state.isDown = false
-    const shouldStartMomentum = state.engaged
-    state.engaged = false
-    pointerActiveRef.current = false
-    viewport.dataset.dragging = 'false'
-
-    if (shouldStartMomentum) {
-        state.momentumRaf = requestAnimationFrame(() =>
-            decayFilmstripMomentum(viewport, state)
-        )
-        scheduleLoopReset()
-        return
-    }
-
-    normalizeLoopPosition()
-}
-
-export const OtherProjects = (props: OtherProjectsProps) => {
-    const { projects } = props
-    const viewportRef = useRef<HTMLDivElement>(null)
-    const rootRef = useRef<HTMLElement>(null)
-    const pointerActiveRef = useRef(false)
-    const loopResetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+/**
+ * Archive index: a hover/keyboard-driven list (left) that swaps a single synced
+ * preview panel (right). On < lg it collapses to an always-one-open accordion,
+ * since a side-by-side preview can't fit a phone.
+ */
+export const OtherProjects = ({ projects }: OtherProjectsProps) => {
+    const { t } = useLanguage()
+    const reduce = useReducedMotion()
+    const listRef = useRef<HTMLUListElement>(null)
     const [activeIndex, setActiveIndex] = useState(0)
     const total = projects.length
-    const isLooping = total > 1
-    const slides = isLooping
-        ? [
-              {
-                  project: projects[total - 1],
-                  projectIndex: total - 1,
-                  key: `loop-start-${projects[total - 1].name}`,
-                  isClone: true,
-              },
-              ...projects.map((project, i) => ({
-                  project,
-                  projectIndex: i,
-                  key: `project-${project.name}`,
-                  isClone: false,
-              })),
-              {
-                  project: projects[0],
-                  projectIndex: 0,
-                  key: `loop-end-${projects[0].name}`,
-                  isClone: true,
-              },
-          ]
-        : projects.map((project, i) => ({
-              project,
-              projectIndex: i,
-              key: `project-${project.name}`,
-              isClone: false,
-          }))
+    const active = projects[activeIndex]
 
-    const getProjectIndexFromTrackIndex = useCallback(
-        (trackIndex: number) => {
-            if (!isLooping) return trackIndex
-            if (trackIndex === 0) return total - 1
-            if (trackIndex === total + 1) return 0
-            return trackIndex - 1
-        },
-        [isLooping, total]
-    )
+    // Keyboard roving: move focus between rows; focusing a row activates it,
+    // which is what drives the preview swap.
+    const focusRow = useCallback((target: number) => {
+        const rows =
+            listRef.current?.querySelectorAll<HTMLButtonElement>(ROW_SELECTOR)
+        if (!rows?.length) return
+        const clamped = Math.max(0, Math.min(rows.length - 1, target))
+        rows[clamped]?.focus()
+    }, [])
 
-    const getTrackIndexFromTarget = useCallback(
-        (target: number) => {
-            if (!total) return 0
-            if (!isLooping) return Math.max(0, Math.min(total - 1, target))
-            if (target < 0) return 0
-            if (target >= total) return total + 1
-            return target + 1
-        },
-        [isLooping, total]
-    )
-
-    const centerTrackItem = useCallback(
-        (trackIndex: number, behavior: ScrollBehavior = 'smooth') => {
-            const viewport = viewportRef.current
-            if (!viewport) return
-
-            const items = getFilmstripItems(viewport)
-            const item = items[trackIndex]
-            if (!item) return
-
-            const targetLeft = getItemTargetLeft(viewport, item)
-            if (behavior === 'auto') {
-                viewport.scrollLeft = targetLeft
-                return
-            }
-            viewport.scrollTo({ left: targetLeft, behavior })
-        },
-        []
-    )
-
-    const normalizeLoopPosition = useCallback(() => {
-        const viewport = viewportRef.current
-        if (!viewport || !isLooping) return
-
-        const best = getClosestTrackIndex(viewport)
-        if (best < 0) return
-
-        if (best === 0) centerTrackItem(total, 'auto')
-        if (best === total + 1) centerTrackItem(1, 'auto')
-    }, [centerTrackItem, isLooping, total])
-
-    const scheduleLoopReset = useCallback(() => {
-        if (!isLooping) return
-        if (loopResetTimerRef.current) clearTimeout(loopResetTimerRef.current)
-        loopResetTimerRef.current = setTimeout(() => {
-            loopResetTimerRef.current = null
-            if (!pointerActiveRef.current) normalizeLoopPosition()
-        }, 140)
-    }, [isLooping, normalizeLoopPosition])
-
-    useLayoutEffect(() => {
-        if (!isLooping) return
-        centerTrackItem(1, 'auto')
-        setActiveIndex(0)
-    }, [centerTrackItem, isLooping, total])
-
-    useEffect(() => {
-        const viewport = viewportRef.current
-        const root = rootRef.current
-        if (!viewport || !root) return
-
-        let raf = 0
-        const compute = () => {
-            raf = 0
-            const items = getFilmstripItems(viewport)
-            const best = getClosestTrackIndex(viewport, items)
-            if (best < 0) return
-
-            const projectIndex = getProjectIndexFromTrackIndex(best)
-            setActiveIndex(projectIndex)
-
-            const progress =
-                total > 1 ? projectIndex / Math.max(1, total - 1) : 0
-            root.style.setProperty('--filmstrip-p', progress.toFixed(4))
-        }
-
-        const onScroll = () => {
-            if (!raf) raf = requestAnimationFrame(compute)
-            scheduleLoopReset()
-        }
-
-        compute()
-        viewport.addEventListener('scroll', onScroll, { passive: true })
-        window.addEventListener('resize', onScroll)
-
-        return () => {
-            viewport.removeEventListener('scroll', onScroll)
-            window.removeEventListener('resize', onScroll)
-            if (raf) cancelAnimationFrame(raf)
-            if (loopResetTimerRef.current) {
-                clearTimeout(loopResetTimerRef.current)
-                loopResetTimerRef.current = null
+    const onRowKeyDown =
+        (index: number) => (e: React.KeyboardEvent<HTMLButtonElement>) => {
+            if (e.key === 'ArrowDown') {
+                e.preventDefault()
+                focusRow(index + 1)
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault()
+                focusRow(index - 1)
+            } else if (e.key === 'Home') {
+                e.preventDefault()
+                focusRow(0)
+            } else if (e.key === 'End') {
+                e.preventDefault()
+                focusRow(total - 1)
             }
         }
-    }, [getProjectIndexFromTrackIndex, scheduleLoopReset, total])
-
-    useEffect(() => {
-        const viewport = viewportRef.current
-        if (!viewport) return
-
-        const dragState = createDragState()
-        const onDown = (e: PointerEvent) =>
-            beginFilmstripDrag(e, viewport, dragState, pointerActiveRef)
-        const onMove = (e: PointerEvent) =>
-            moveFilmstripDrag(e, viewport, dragState)
-        const release = () =>
-            releaseFilmstripDrag(
-                viewport,
-                dragState,
-                pointerActiveRef,
-                normalizeLoopPosition,
-                scheduleLoopReset
-            )
-
-        viewport.addEventListener('pointerdown', onDown)
-        viewport.addEventListener('pointermove', onMove)
-        viewport.addEventListener('pointerup', release)
-        viewport.addEventListener('pointercancel', release)
-        viewport.addEventListener('pointerleave', release)
-
-        return () => {
-            stopFilmstripMomentum(dragState)
-            viewport.removeEventListener('pointerdown', onDown)
-            viewport.removeEventListener('pointermove', onMove)
-            viewport.removeEventListener('pointerup', release)
-            viewport.removeEventListener('pointercancel', release)
-            viewport.removeEventListener('pointerleave', release)
-        }
-    }, [normalizeLoopPosition, scheduleLoopReset])
-
-    const goTo = (target: number) => {
-        if (!total) return
-        centerTrackItem(getTrackIndexFromTarget(target))
-        scheduleLoopReset()
-    }
-
-    const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-        if (e.key === 'ArrowRight') {
-            e.preventDefault()
-            goTo(activeIndex + 1)
-        } else if (e.key === 'ArrowLeft') {
-            e.preventDefault()
-            goTo(activeIndex - 1)
-        } else if (e.key === 'Home') {
-            e.preventDefault()
-            goTo(0)
-        } else if (e.key === 'End') {
-            e.preventDefault()
-            goTo(projects.length - 1)
-        }
-    }
-
-    const fmt = (n: number) => String(n).padStart(2, '0')
 
     return (
         <section
-            ref={rootRef}
-            className='filmstrip'
-            aria-roledescription='carousel'
-            aria-label='Other projects'
+            className='w-full mt-8 sm:mt-12'
+            aria-roledescription='list'
+            aria-label={t.otherProjects.ariaLabel}
         >
-            <style>{FILMSTRIP_CSS}</style>
-
-            <div
-                ref={viewportRef}
-                className='filmstrip__viewport'
-                tabIndex={0}
-                onKeyDown={onKeyDown}
-            >
-                {slides.map((slide) => (
-                    <div
-                        key={slide.key}
-                        data-filmstrip-item
-                        data-loop-clone={slide.isClone ? 'true' : undefined}
-                        data-active={
-                            slide.projectIndex === activeIndex
-                                ? 'true'
-                                : 'false'
-                        }
-                        {...getCloneA11yProps(slide.isClone)}
-                        aria-label={
-                            slide.isClone
-                                ? undefined
-                                : `${slide.project.name}, project ${
-                                      slide.projectIndex + 1
-                                  } of ${total}`
-                        }
-                        aria-roledescription={
-                            slide.isClone ? undefined : 'slide'
-                        }
-                    >
-                        <BentoProjectCard
-                            project={slide.project}
-                            variant='compact'
-                            index={slide.projectIndex}
-                        />
-                    </div>
-                ))}
-            </div>
-
-            <div className='filmstrip__chrome' aria-hidden='false'>
-                <button
-                    type='button'
-                    className='filmstrip__nav'
-                    onClick={() => goTo(activeIndex - 1)}
-                    disabled={total < 2}
-                    aria-label='Previous project'
-                >
-                    <span aria-hidden>←</span>
-                </button>
-
-                <div className='filmstrip__meter'>
-                    <span
-                        className='filmstrip__count'
-                        aria-live='polite'
-                        aria-atomic='true'
-                    >
-                        <span className='filmstrip__count-current'>
-                            {fmt(activeIndex + 1)}
-                        </span>
-                        <span className='filmstrip__count-sep'>/</span>
-                        <span className='filmstrip__count-total'>
+            <div className='grid grid-cols-1 gap-x-10 gap-y-8 lg:grid-cols-12'>
+                {/* Index list */}
+                <div className='lg:col-span-5'>
+                    <div className='mb-5 flex items-baseline justify-between gap-4'>
+                        <div>
+                            <h3 className='text-lg font-semibold text-primary-light'>
+                                {t.otherProjects.title}
+                            </h3>
+                            <p className='mt-1 text-sm text-primary-light/45'>
+                                {t.otherProjects.subtitle}
+                            </p>
+                        </div>
+                        <span className='font-mono text-xs tabular-nums text-primary-light/35'>
                             {fmt(total)}
                         </span>
-                    </span>
-                    <div className='filmstrip__rail' aria-hidden>
-                        <span className='filmstrip__progress' />
                     </div>
+
+                    <ul
+                        ref={listRef}
+                        role='list'
+                        className='border-y border-border-subtle/45'
+                    >
+                        {projects.map((project, i) => {
+                            const isActive = i === activeIndex
+                            return (
+                                <li
+                                    key={project.name}
+                                    className='border-t border-border-subtle/35 first:border-t-0'
+                                >
+                                    <ArchiveRow
+                                        project={project}
+                                        index={i}
+                                        isActive={isActive}
+                                        reduce={!!reduce}
+                                        onActivate={() => setActiveIndex(i)}
+                                        onKeyDown={onRowKeyDown(i)}
+                                    />
+
+                                    {/* Mobile-only inline preview (accordion) */}
+                                    <AnimatePresence initial={false}>
+                                        {isActive && (
+                                            <motion.div
+                                                key='inline'
+                                                className='overflow-hidden lg:hidden'
+                                                initial={
+                                                    reduce
+                                                        ? { opacity: 0 }
+                                                        : {
+                                                              height: 0,
+                                                              opacity: 0,
+                                                          }
+                                                }
+                                                animate={
+                                                    reduce
+                                                        ? { opacity: 1 }
+                                                        : {
+                                                              height: 'auto',
+                                                              opacity: 1,
+                                                          }
+                                                }
+                                                exit={
+                                                    reduce
+                                                        ? { opacity: 0 }
+                                                        : {
+                                                              height: 0,
+                                                              opacity: 0,
+                                                          }
+                                                }
+                                                transition={{
+                                                    duration: 0.4,
+                                                    ease: EASE_OUT_QUART,
+                                                }}
+                                            >
+                                                <div className='pb-6 pt-2'>
+                                                    <ProjectPreview
+                                                        project={project}
+                                                    />
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </li>
+                            )
+                        })}
+                    </ul>
                 </div>
 
-                <button
-                    type='button'
-                    className='filmstrip__nav'
-                    onClick={() => goTo(activeIndex + 1)}
-                    disabled={total < 2}
-                    aria-label='Next project'
-                >
-                    <span aria-hidden>→</span>
-                </button>
+                {/* Synced preview panel (desktop) */}
+                <div className='hidden lg:col-span-7 lg:block'>
+                    <div className='lg:sticky lg:top-28'>
+                        <AnimatePresence mode='wait'>
+                            <motion.div
+                                key={active.name}
+                                initial={
+                                    reduce
+                                        ? { opacity: 0 }
+                                        : { opacity: 0, y: 18 }
+                                }
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={
+                                    reduce
+                                        ? { opacity: 0 }
+                                        : { opacity: 0, y: -14 }
+                                }
+                                transition={{
+                                    duration: 0.42,
+                                    ease: EASE_OUT_QUART,
+                                }}
+                            >
+                                <ProjectPreview project={active} />
+                            </motion.div>
+                        </AnimatePresence>
+                    </div>
+                </div>
             </div>
         </section>
     )
 }
 
-const FILMSTRIP_CSS = `
-@property --filmstrip-glow {
-    syntax: '<number>';
-    inherits: false;
-    initial-value: 0;
+const ArchiveRow = ({
+    project,
+    index,
+    isActive,
+    reduce,
+    onActivate,
+    onKeyDown,
+}: {
+    project: Project
+    index: number
+    isActive: boolean
+    reduce: boolean
+    onActivate: () => void
+    onKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>) => void
+}) => {
+    const TypeIcon = project.type === 'WEB' ? GoDeviceDesktop : GoDeviceMobile
+
+    return (
+        <button
+            type='button'
+            data-archive-row
+            aria-expanded={isActive}
+            aria-label={`${project.name}, ${project.year}`}
+            onMouseEnter={onActivate}
+            onFocus={onActivate}
+            onClick={onActivate}
+            onKeyDown={onKeyDown}
+            className={cn(
+                'group/row relative flex w-full items-center gap-4 py-4 pr-2 pl-4 text-left sm:py-5',
+                'transition-colors duration-300 ease-out outline-none',
+                'focus-visible:bg-bg-hover/40',
+                isActive ? 'bg-bg-hover/30' : 'hover:bg-bg-hover/20'
+            )}
+        >
+            {/* Active rail */}
+            {isActive &&
+                (reduce ? (
+                    <span className='absolute inset-y-2 left-0 w-[2px] rounded-full bg-primary' />
+                ) : (
+                    <motion.span
+                        layoutId='archive-rail'
+                        className='absolute inset-y-2 left-0 w-[2px] rounded-full bg-primary'
+                        transition={{
+                            type: 'spring',
+                            stiffness: 420,
+                            damping: 34,
+                        }}
+                    />
+                ))}
+
+            <span
+                className={cn(
+                    'font-mono text-xs tabular-nums transition-colors duration-300',
+                    isActive ? 'text-primary' : 'text-primary-light/35'
+                )}
+            >
+                {fmt(index + 1)}
+            </span>
+
+            <span
+                className={cn(
+                    'flex-1 truncate text-base font-medium tracking-tight transition-colors duration-300 sm:text-lg',
+                    isActive
+                        ? 'text-primary-light'
+                        : 'text-primary-light/55 group-hover/row:text-primary-light/85'
+                )}
+            >
+                {project.name}
+            </span>
+
+            <span className='flex items-center gap-3 text-primary-light/40'>
+                <span className='hidden items-center gap-1.5 text-xs tabular-nums sm:inline-flex'>
+                    <TypeIcon size={13} />
+                    {project.year}
+                </span>
+                <GoArrowUpRight
+                    size={16}
+                    className={cn(
+                        'transition-all duration-300',
+                        isActive
+                            ? 'translate-x-0 text-primary opacity-100'
+                            : '-translate-x-1 opacity-0 group-hover/row:translate-x-0 group-hover/row:opacity-60'
+                    )}
+                    aria-hidden
+                />
+            </span>
+        </button>
+    )
 }
 
-.filmstrip {
-    position: relative;
-    width: 100%;
-    max-width: 100%;
-    overflow-x: clip;
-    margin-top: 2rem;
-    --filmstrip-p: 0;
-    --filmstrip-card-width: min(26rem, calc(100vw - 2rem));
-    --filmstrip-edge-pad: max(
-        1rem,
-        calc((100% - var(--filmstrip-card-width)) / 2)
-    );
+const ProjectPreview = ({ project }: { project: Project }) => {
+    const { t } = useLanguage()
+    const description = t.projects[project.descriptionKey]
+    const TypeIcon = project.type === 'WEB' ? GoDeviceDesktop : GoDeviceMobile
+    const typeLabel = project.type === 'WEB' ? 'Web' : 'Mobile'
+    const members =
+        project.membersCount === 1 ? 'Solo' : `Team of ${project.membersCount}`
+
+    return (
+        <div className='relative flex flex-col overflow-hidden rounded-lg border border-border-subtle/70 bg-bg-subtle/78 shadow-[0_24px_80px_-68px_rgba(47,199,223,0.55),inset_0_1px_0_rgba(215,245,247,0.05)]'>
+            <div className='relative aspect-[16/10] overflow-hidden border-b border-border-subtle'>
+                <LazyImage
+                    src={project.images[0]}
+                    alt={project.name}
+                    className='h-full w-full'
+                />
+                <div
+                    className='pointer-events-none absolute inset-0 bg-gradient-to-t from-bg-subtle via-bg-subtle/20 to-transparent'
+                    aria-hidden
+                />
+                <div className='absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 sm:p-6'>
+                    <Title className='text-2xl font-semibold leading-tight tracking-tight sm:text-[1.75rem]'>
+                        {project.name}
+                    </Title>
+                </div>
+            </div>
+
+            <div className='flex flex-col gap-4 p-5 sm:p-6'>
+                <div className='flex items-center gap-2.5 text-xs font-medium tabular-nums text-primary-light/52'>
+                    <span>{project.year}</span>
+                    <span className='h-3 w-px bg-border-subtle' aria-hidden />
+                    <span className='inline-flex items-center gap-1.5'>
+                        <TypeIcon size={12} />
+                        {typeLabel}
+                    </span>
+                    <span className='h-3 w-px bg-border-subtle' aria-hidden />
+                    <span className='inline-flex items-center gap-1.5'>
+                        <FaUserGroup size={11} />
+                        {members}
+                    </span>
+                </div>
+
+                <p className='text-sm leading-relaxed text-primary-light/60 line-clamp-3'>
+                    {description}
+                </p>
+
+                <ChipList
+                    skills={project.skills.slice(0, 5)}
+                    className='justify-start'
+                />
+
+                <GitLabProjectStrip project={project} size='compact' />
+
+                <div className='flex gap-3 pt-1'>
+                    {project.gitLink && (
+                        <MagneticButton
+                            href={project.gitLink}
+                            ariaLabel='Code'
+                            icon={FaCode}
+                            size='small'
+                        />
+                    )}
+                    {project.previewLink && (
+                        <MagneticButton
+                            href={project.previewLink}
+                            ariaLabel='Démo'
+                            icon={FaPlayCircle}
+                            size='small'
+                        />
+                    )}
+                    <Gallery {...project} size='small' />
+                </div>
+            </div>
+        </div>
+    )
 }
-
-.filmstrip__viewport {
-    display: flex;
-    gap: 1.25rem;
-    overflow-x: auto;
-    overflow-y: visible;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding-block: 3rem;
-    padding-inline: var(--filmstrip-edge-pad);
-    cursor: grab;
-    touch-action: pan-y;
-    outline: none;
-}
-
-.filmstrip__viewport::-webkit-scrollbar {
-    display: none;
-}
-
-.filmstrip__viewport:focus-visible {
-    box-shadow: 0 0 0 1px rgb(0 162 199 / 0.4) inset;
-    border-radius: 1rem;
-}
-
-.filmstrip__viewport[data-dragging='true'] {
-    cursor: grabbing;
-    scroll-snap-type: none;
-    scroll-behavior: auto;
-}
-
-.filmstrip__viewport {
-    align-items: stretch;
-}
-
-[data-filmstrip-item] {
-    flex: 0 0 var(--filmstrip-card-width);
-    width: var(--filmstrip-card-width);
-    display: flex;
-    align-items: stretch;
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
-    position: relative;
-    transform-origin: center center;
-    will-change: transform, opacity, filter;
-    /* Pre-supports fallback: visible, normal */
-    transform: scale(0.92);
-    opacity: 0.75;
-    filter: saturate(0.85);
-    transition:
-        transform 600ms cubic-bezier(0.25, 1, 0.5, 1),
-        opacity 600ms cubic-bezier(0.25, 1, 0.5, 1),
-        filter 600ms cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-[data-filmstrip-item][data-active='true'] {
-    transform: scale(1);
-    opacity: 1;
-    filter: saturate(1);
-}
-
-[data-filmstrip-item]::after {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: 0.75rem;
-    pointer-events: none;
-    box-shadow:
-        0 0 calc(36px * var(--filmstrip-glow, 0))
-            rgb(0 162 199 / calc(0.32 * var(--filmstrip-glow, 0))),
-        0 0 calc(80px * var(--filmstrip-glow, 0))
-            rgb(0 162 199 / calc(0.16 * var(--filmstrip-glow, 0)));
-    transition: box-shadow 320ms cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-[data-filmstrip-item][data-active='true']::after {
-    --filmstrip-glow: 1;
-}
-
-@supports (animation-timeline: view()) {
-    [data-filmstrip-item] {
-        animation: filmstrip-focus linear both;
-        animation-timeline: view(inline);
-        animation-range: cover 0% cover 100%;
-        transition: none;
-    }
-
-    @keyframes filmstrip-focus {
-        0% {
-            transform: scale(0.84);
-            opacity: 0.32;
-            filter: saturate(0.35);
-            --filmstrip-glow: 0;
-        }
-        45% {
-            transform: scale(0.99);
-            opacity: 0.96;
-            filter: saturate(0.95);
-            --filmstrip-glow: 0.85;
-        }
-        50% {
-            transform: scale(1);
-            opacity: 1;
-            filter: saturate(1);
-            --filmstrip-glow: 1;
-        }
-        55% {
-            transform: scale(0.99);
-            opacity: 0.96;
-            filter: saturate(0.95);
-            --filmstrip-glow: 0.85;
-        }
-        100% {
-            transform: scale(0.84);
-            opacity: 0.32;
-            filter: saturate(0.35);
-            --filmstrip-glow: 0;
-        }
-    }
-
-    [data-filmstrip-item]::after {
-        transition: none;
-    }
-}
-
-.filmstrip__chrome {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0 0.5rem;
-    margin-top: -0.25rem;
-}
-
-.filmstrip__nav {
-    flex: 0 0 auto;
-    width: 2.25rem;
-    height: 2.25rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    background: transparent;
-    border: 1px solid rgb(4 84 104 / 0.7);
-    color: rgb(182 236 247 / 0.7);
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.875rem;
-    cursor: pointer;
-    transition:
-        border-color 320ms cubic-bezier(0.25, 1, 0.5, 1),
-        color 320ms cubic-bezier(0.25, 1, 0.5, 1),
-        background-color 320ms cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.filmstrip__nav:hover:not(:disabled) {
-    border-color: rgb(17 128 156 / 1);
-    color: rgb(182 236 247 / 1);
-    background: rgb(0 53 67 / 0.4);
-}
-
-.filmstrip__nav:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-}
-
-.filmstrip__nav:focus-visible {
-    outline: 2px solid rgb(0 162 199);
-    outline-offset: 4px;
-}
-
-.filmstrip__meter {
-    flex: 1 1 auto;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-template-rows: auto auto;
-    column-gap: 0.875rem;
-    row-gap: 0.5rem;
-    align-items: center;
-}
-
-.filmstrip__count {
-    grid-column: 1;
-    grid-row: 1 / span 2;
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    color: rgb(182 236 247 / 0.55);
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0.25rem;
-    font-variant-numeric: tabular-nums;
-}
-
-.filmstrip__count-current {
-    color: rgb(0 162 199);
-    font-size: 1.125rem;
-    line-height: 1;
-    transition: color 320ms cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.filmstrip__count-sep {
-    color: rgb(4 84 104);
-    font-size: 1rem;
-}
-
-.filmstrip__count-total {
-    color: rgb(182 236 247 / 0.45);
-    font-size: 0.875rem;
-}
-
-.filmstrip__rail {
-    grid-column: 2;
-    grid-row: 1;
-    position: relative;
-    height: 1px;
-    background: rgb(4 84 104 / 0.55);
-    overflow: hidden;
-    border-radius: 999px;
-}
-
-.filmstrip__progress {
-    display: block;
-    height: 100%;
-    width: 100%;
-    background: rgb(0 162 199);
-    transform: scaleX(var(--filmstrip-p, 0));
-    transform-origin: left center;
-    will-change: transform;
-}
-
-@media (max-width: 640px) {
-    .filmstrip {
-        margin-top: 1.5rem;
-    }
-
-    .filmstrip__viewport {
-        gap: 0.875rem;
-        padding-block: 2rem;
-        padding-inline: var(--filmstrip-edge-pad);
-        scroll-padding-inline: var(--filmstrip-edge-pad);
-    }
-
-    [data-filmstrip-item] {
-        transform: scale(0.97);
-        opacity: 0.9;
-        filter: none;
-    }
-
-    [data-filmstrip-item][data-active='true'] {
-        transform: scale(1);
-        opacity: 1;
-    }
-
-    .filmstrip__chrome {
-        padding-inline: 1rem;
-        gap: 0.625rem;
-        margin-top: 0.25rem;
-    }
-
-    .filmstrip__nav {
-        width: 2.75rem;
-        height: 2.75rem;
-        font-size: 1rem;
-    }
-
-    .filmstrip__meter {
-        column-gap: 0.625rem;
-        row-gap: 0.375rem;
-    }
-
-    .filmstrip__count {
-        letter-spacing: 0.16em;
-    }
-
-    .filmstrip__count-current {
-        font-size: 1rem;
-    }
-
-    .filmstrip__count-total {
-        font-size: 0.75rem;
-    }
-
-}
-
-@media (hover: none) and (pointer: coarse) {
-    .filmstrip__viewport {
-        cursor: auto;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    [data-filmstrip-item] {
-        animation: none !important;
-        transition: none !important;
-        transform: none !important;
-        opacity: 1 !important;
-        filter: none !important;
-    }
-    [data-filmstrip-item]::after {
-        --filmstrip-glow: 0 !important;
-    }
-    .filmstrip__viewport {
-        scroll-behavior: auto;
-    }
-    .filmstrip__progress {
-        animation: none !important;
-        transform: scaleX(var(--filmstrip-p, 0)) !important;
-    }
-}
-`

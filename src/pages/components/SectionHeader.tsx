@@ -3,11 +3,10 @@ import { EASE_OUT_QUART as easeOutQuart } from '@/lib/motion'
 
 interface SectionHeaderProps {
     title: string
-    subtitle?: string
 }
 
 export const SectionHeader = (props: SectionHeaderProps) => {
-    const { title, subtitle } = props
+    const { title } = props
 
     return (
         <motion.header
@@ -20,11 +19,6 @@ export const SectionHeader = (props: SectionHeaderProps) => {
             <h2 className='max-w-4xl font-heading font-semibold text-primary-light text-[clamp(2.5rem,7vw,5.75rem)] leading-[0.96] tracking-normal'>
                 {title}
             </h2>
-            {subtitle && (
-                <p className='mt-4 max-w-[48ch] text-base text-primary-light/58 leading-relaxed'>
-                    {subtitle}
-                </p>
-            )}
         </motion.header>
     )
 }

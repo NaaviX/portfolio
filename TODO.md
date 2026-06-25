@@ -1,0 +1,4 @@
+- supprimer le sous titre des titres de la section compétences et technos (affichant le nombre de compétences)
+- renommer Activité 12 derniers mois => Heatmap 12 derniers mois. Et supprimer le nombre de contributions s'affichant à droite
+- repense le layout des stats de la card activités gitlab pour que ça prenne toute la largeur
+-

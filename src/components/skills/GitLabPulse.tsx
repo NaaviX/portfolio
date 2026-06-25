@@ -1,8 +1,13 @@
-import { useGitLabStats } from '@/hooks/useGitLabStats'
+import {
+    GitLabCalendarRaw,
+    normalizeDay,
+    useGitLabStats,
+} from '@/hooks/useGitLabStats'
 import { useLanguage } from '@/i18n'
+import { cn } from '@/lib/utils'
 import { EASE_OUT_QUART } from '@/lib/motion'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { FaGitlab } from 'react-icons/fa6'
 import { FiRefreshCw } from 'react-icons/fi'
 import { HeatCalendar } from './_HeatCalendar'
@@ -32,6 +37,68 @@ const formatRelative = (
 const formatYear = (iso: string): string =>
     new Date(iso).getFullYear().toString()
 
+type PeriodKey = 'week' | 'month' | 'year'
+
+const PERIOD_DAYS: Record<PeriodKey, number> = {
+    week: 7,
+    month: 30,
+    year: 365,
+}
+
+const PERIOD_ORDER: PeriodKey[] = ['week', 'month', 'year']
+
+const DAY_MS = 86_400_000
+
+type PeriodStats = {
+    commits: number
+    activeDays: number
+    additions: number
+    deletions: number
+    days: number
+    avgCommitsPerDay: number
+    avgLinesPerDay: number
+}
+
+// Derive period stats client-side from the 12-month daily calendar so the
+// 1w / 1m / 1y switch needs no extra backend round-trip.
+const computePeriodStats = (
+    calendar: GitLabCalendarRaw,
+    period: PeriodKey,
+    nowMs: number
+): PeriodStats => {
+    const days = PERIOD_DAYS[period]
+    const cutoff = nowMs - days * DAY_MS
+    let commits = 0
+    let additions = 0
+    let deletions = 0
+    let activeDays = 0
+
+    for (const [date, raw] of Object.entries(calendar)) {
+        const time = new Date(date).getTime()
+        if (Number.isNaN(time) || time < cutoff) continue
+        const day = normalizeDay(raw)
+        commits += day.commits
+        additions += day.additions
+        deletions += day.deletions
+        if (day.commits > 0) activeDays += 1
+    }
+
+    return {
+        commits,
+        activeDays,
+        additions,
+        deletions,
+        days,
+        avgCommitsPerDay: commits / days,
+        avgLinesPerDay: (additions + deletions) / days,
+    }
+}
+
+const formatAvg = (n: number, language: 'fr' | 'en'): string =>
+    new Intl.NumberFormat(language === 'fr' ? 'fr-FR' : 'en-US', {
+        maximumFractionDigits: 1,
+    }).format(n)
+
 const useNowTick = (intervalMs: number) => {
     const [now, setNow] = useState(() => Date.now())
     useEffect(() => {
@@ -46,22 +113,31 @@ const useNowTick = (intervalMs: number) => {
     return now
 }
 
+const HIDDEN_PROJECT_TOKENS = ['deletion', 'obsidian']
+
 export const GitLabPulse = () => {
     const { stats, error, loading, refresh, refreshing } = useGitLabStats()
     const { t, language } = useLanguage()
     const reduce = useReducedMotion() ?? false
     const now = useNowTick(60_000)
+    const [period, setPeriod] = useState<PeriodKey>('month')
+
+    const periodStats = useMemo(
+        () => (stats ? computePeriodStats(stats.calendar, period, now) : null),
+        [stats, period, now]
+    )
 
     if (error) return null
 
     const labels = t.gitlab
 
-    if (loading || !stats)
+    if (loading || !stats || !periodStats)
         return <GitLabPulseSkeleton labels={labels} reduce={reduce} />
 
-    const visibleTopProjects = stats.topProjects.filter(
-        (p) => !p.name.toLowerCase().includes('deletion')
-    )
+    const visibleTopProjects = stats.topProjects.filter((p) => {
+        const name = p.name.toLowerCase()
+        return !HIDDEN_PROJECT_TOKENS.some((token) => name.includes(token))
+    })
 
     return (
         <motion.aside
@@ -118,28 +194,54 @@ export const GitLabPulse = () => {
                 </div>
             </header>
 
-            <section className='flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8'>
-                <Stat
-                    hero
-                    value={stats.commits30d}
-                    label={labels.commits30d}
-                    reduce={reduce}
+            <section className='flex flex-col gap-5'>
+                <PeriodToggle
+                    period={period}
+                    onChange={setPeriod}
+                    labels={labels}
                 />
-                <div className='flex flex-col gap-4 sm:border-l sm:border-border-subtle/50 sm:pl-8'>
+                <div
+                    key={period}
+                    className='flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8'
+                >
                     <Stat
-                        value={stats.activeDays30d}
-                        suffix='/30'
-                        label={labels.activeDays}
+                        hero
+                        value={periodStats.commits}
+                        label={labels.commitsTotal}
                         reduce={reduce}
                     />
-                    <DiffStat
-                        additions={stats.linesAdded30d ?? 0}
-                        deletions={stats.linesRemoved30d ?? 0}
-                        label={labels.linesDiff}
-                        aria={labels.linesDiffAria}
-                        language={language}
-                        reduce={reduce}
-                    />
+                    <div className='flex flex-col gap-4 sm:border-l sm:border-border-subtle/50 sm:pl-8'>
+                        <Stat
+                            value={periodStats.activeDays}
+                            suffix={`/${periodStats.days}`}
+                            label={labels.activeDays}
+                            reduce={reduce}
+                        />
+                        <DiffStat
+                            additions={periodStats.additions}
+                            deletions={periodStats.deletions}
+                            label={labels.linesLabel}
+                            aria={labels.linesDiffAria}
+                            language={language}
+                            reduce={reduce}
+                        />
+                    </div>
+                    <div className='flex flex-col gap-4 sm:border-l sm:border-border-subtle/50 sm:pl-8'>
+                        <PlainStat
+                            value={formatAvg(
+                                periodStats.avgCommitsPerDay,
+                                language
+                            )}
+                            label={labels.avgCommitsPerDay}
+                        />
+                        <PlainStat
+                            value={formatAvg(
+                                periodStats.avgLinesPerDay,
+                                language
+                            )}
+                            label={labels.avgLinesPerDay}
+                        />
+                    </div>
                 </div>
             </section>
 
@@ -334,6 +436,58 @@ const Stat = ({
         </div>
     )
 }
+
+type PeriodToggleLabels = {
+    periods: Record<PeriodKey, string>
+    periodAria: string
+}
+
+const PeriodToggle = ({
+    period,
+    onChange,
+    labels,
+}: {
+    period: PeriodKey
+    onChange: (period: PeriodKey) => void
+    labels: PeriodToggleLabels
+}) => (
+    <div
+        role='group'
+        aria-label={labels.periodAria}
+        className='inline-flex items-center gap-1 self-start rounded-full border border-border-subtle/60 bg-bg-app/40 p-1'
+    >
+        {PERIOD_ORDER.map((key) => {
+            const active = key === period
+            return (
+                <button
+                    key={key}
+                    type='button'
+                    onClick={() => onChange(key)}
+                    aria-pressed={active}
+                    className={cn(
+                        'rounded-full px-3 py-1 text-xs font-medium tracking-tight transition-colors',
+                        active
+                            ? 'bg-primary/15 text-primary'
+                            : 'text-primary-light/55 hover:text-primary-light/85'
+                    )}
+                >
+                    {labels.periods[key]}
+                </button>
+            )
+        })}
+    </div>
+)
+
+const PlainStat = ({ value, label }: { value: string; label: string }) => (
+    <div className='flex flex-col gap-1.5'>
+        <span className='font-heading text-2xl sm:text-3xl font-semibold tabular-nums leading-none text-primary-light'>
+            {value}
+        </span>
+        <span className='text-xs text-primary-light/45 leading-snug'>
+            {label}
+        </span>
+    </div>
+)
 
 const formatCompact = (n: number, language: 'fr' | 'en'): string =>
     new Intl.NumberFormat(language === 'fr' ? 'fr-FR' : 'en-US', {

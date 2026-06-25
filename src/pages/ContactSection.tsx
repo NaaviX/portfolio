@@ -1,7 +1,8 @@
+import { MagneticButton } from '@/components/common'
 import { ContactForm } from '@/components/contact'
 import { useLanguage } from '@/i18n'
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Mail } from 'lucide-react'
+import { FiMail } from 'react-icons/fi'
 import { FaLinkedinIn } from 'react-icons/fa6'
 import { EASE_OUT_QUART } from '@/lib/motion'
 
@@ -24,16 +25,14 @@ const itemVariants = {
 
 const directLinks = [
     {
-        label: 'antoine.legrand77@gmail.com',
+        label: 'Email',
         href: 'mailto:antoine.legrand77@gmail.com',
-        icon: Mail,
-        external: false,
+        icon: FiMail,
     },
     {
-        label: 'linkedin.com/in/antoine-legrand1',
+        label: 'LinkedIn',
         href: 'https://linkedin.com/in/antoine-legrand1',
         icon: FaLinkedinIn,
-        external: true,
     },
 ]
 
@@ -67,38 +66,22 @@ export const ContactSection = () => {
                             className='text-base lg:text-lg text-primary-light/65 leading-relaxed max-w-[52ch]'
                         >
                             {t.contact.intro}
-                            <br />
-                            {t.contact.responseTime}
                         </motion.p>
                     </div>
 
-                    <motion.ul
+                    <motion.div
                         variants={itemVariants}
-                        className='flex flex-col rounded-lg border border-border-subtle/80 overflow-hidden divide-y divide-border-subtle/60'
+                        className='flex items-center gap-4'
                     >
                         {directLinks.map((link) => (
-                            <li key={link.href}>
-                                <a
-                                    href={link.href}
-                                    target={
-                                        link.external ? '_blank' : undefined
-                                    }
-                                    rel={
-                                        link.external
-                                            ? 'noopener noreferrer'
-                                            : undefined
-                                    }
-                                    className='group flex items-center gap-4 px-5 py-4 transition-colors hover:bg-primary-light/[0.035]'
-                                >
-                                    <link.icon className='w-4 h-4 text-primary shrink-0' />
-                                    <span className='flex-1 text-sm lg:text-[15px] text-primary-light/85 font-medium tracking-tight truncate'>
-                                        {link.label}
-                                    </span>
-                                    <ArrowUpRight className='w-4 h-4 text-primary-light/35 transition-all duration-500 ease-out group-hover:text-primary group-hover:-translate-y-0.5 group-hover:translate-x-0.5' />
-                                </a>
-                            </li>
+                            <MagneticButton
+                                key={link.href}
+                                icon={link.icon}
+                                href={link.href}
+                                ariaLabel={link.label}
+                            />
                         ))}
-                    </motion.ul>
+                    </motion.div>
                 </motion.aside>
 
                 <div className='w-full'>

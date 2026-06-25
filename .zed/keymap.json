@@ -1,0 +1,12 @@
+[
+  {
+    "context": "Editor",
+    "bindings": {
+      // Ctrl+clic gauche -> aller à la définition (fix navigation Linux)
+      "ctrl-click": "editor::GoToDefinition",
+      // Replis clavier au cas où le clic est capturé par le bureau Linux
+      "f12": "editor::GoToDefinition",
+      "ctrl-f12": "editor::GoToDefinition"
+    }
+  }
+]

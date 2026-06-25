@@ -22,8 +22,7 @@ export const translations = {
             description2:
                 "Passionné d'informatique et de nouvelles technologies",
             description3: 'Actuellement en mission chez Amundi',
-            metaLine:
-                'Ingénieur web et mobile, 8 ans d’expérience',
+            metaLine: 'Ingénieur web et mobile, 8 ans d’expérience',
             tagline:
                 'Je conçois des produits web et mobiles solides, lisibles et simples à faire évoluer.',
             ctaContact: 'Me contacter',
@@ -170,7 +169,6 @@ export const translations = {
             headlineLead: 'Travaillons',
             headlineHighlight: 'ensemble',
             intro: "Disponible pour une mission freelance, à l'écoute d'opportunités en CDI ou de collaborations sur vos projets.",
-            responseTime: 'Réponse sous 24 heures.',
             name: 'Nom',
             namePlaceholder: 'Votre nom',
             email: 'Email',
@@ -210,10 +208,20 @@ export const translations = {
             baseTitle: 'Antoine Legrand | Ingénieur full-stack',
         },
         gitlab: {
-            title: 'Pulse GitLab',
+            title: 'Activité GitLab',
             aria: 'Activité GitLab',
             commits30d: 'commits / 30j',
             activeDays: 'jours actifs',
+            commitsTotal: 'commits',
+            avgCommitsPerDay: 'commits / jour (moy.)',
+            avgLinesPerDay: 'lignes / jour (moy.)',
+            linesLabel: 'lignes',
+            periods: {
+                week: '1 semaine',
+                month: '1 mois',
+                year: '1 an',
+            },
+            periodAria: 'Choisir la période des statistiques',
             linesDiff: 'lignes / 30j',
             linesDiffAria:
                 'Lignes ajoutées et supprimées sur les 30 derniers jours',
@@ -241,6 +249,11 @@ export const translations = {
             topLanguage: 'top langage',
             commitsAria: 'Activité des commits sur les 26 dernières semaines',
         },
+        otherProjects: {
+            title: 'Archives',
+            subtitle: 'Réalisations plus anciennes et explorations',
+            ariaLabel: 'Autres projets',
+        },
     },
     en: {
         nav: {
@@ -262,8 +275,7 @@ export const translations = {
             description1: 'Full Stack Software Engineer',
             description2: 'Passionate about IT and new technologies',
             description3: 'Currently on assignment at Amundi',
-            metaLine:
-                'Web and mobile software engineer, 8 years of experience',
+            metaLine: 'Web and mobile software engineer, 8 years of experience',
             tagline:
                 'I build resilient web and mobile products that stay clear, useful, and easy to extend.',
             ctaContact: 'Get in touch',
@@ -409,7 +421,6 @@ export const translations = {
             headlineLead: "Let's work",
             headlineHighlight: 'together',
             intro: 'Available for freelance missions, open to permanent positions or collaborations on your projects.',
-            responseTime: 'Reply within 24 hours.',
             name: 'Name',
             namePlaceholder: 'Your name',
             email: 'Email',
@@ -449,10 +460,20 @@ export const translations = {
             baseTitle: 'Antoine Legrand | Full-stack engineer',
         },
         gitlab: {
-            title: 'GitLab pulse',
+            title: 'GitLab activity',
             aria: 'GitLab activity',
             commits30d: 'commits / 30d',
             activeDays: 'active days',
+            commitsTotal: 'commits',
+            avgCommitsPerDay: 'commits / day (avg.)',
+            avgLinesPerDay: 'lines / day (avg.)',
+            linesLabel: 'lines',
+            periods: {
+                week: '1 week',
+                month: '1 month',
+                year: '1 year',
+            },
+            periodAria: 'Choose the stats period',
             linesDiff: 'lines / 30d',
             linesDiffAria: 'Lines added and removed over the last 30 days',
             publicProjects: 'public repos',
@@ -478,6 +499,11 @@ export const translations = {
             lastUpdate: 'last update',
             topLanguage: 'top language',
             commitsAria: 'Commit activity over the last 26 weeks',
+        },
+        otherProjects: {
+            title: 'Archive',
+            subtitle: 'Older builds and side explorations',
+            ariaLabel: 'Other projects',
         },
     },
 }

@@ -44,6 +44,12 @@ const SURFACE =
     'transition-[border-color,transform] duration-500 ease-out ' +
     'group-hover:border-primary/70'
 
+// Shared header-image height so every stacked card (large / medium / compact)
+// lines up to the same height. The featured card is intentionally excluded:
+// its screenshot is a full-height side panel, not a top header image.
+const CARD_IMAGE =
+    'relative h-[200px] sm:h-[230px] overflow-hidden border-b border-border-subtle'
+
 export const BentoProjectCard = (props: BentoProjectCardProps) => {
     const { project, variant = 'medium', index = 0 } = props
 
@@ -217,7 +223,7 @@ const LargeCard = ({ project, index }: { project: Project; index: number }) => {
                         'h-full flex flex-col shadow-[0_24px_80px_-68px_rgba(47,199,223,0.58),inset_0_1px_0_rgba(215,245,247,0.05)]'
                     )}
                 >
-                    <div className='relative h-[200px] sm:h-[240px] overflow-hidden border-b border-border-subtle'>
+                    <div className={CARD_IMAGE}>
                         <LazyImage
                             src={project.images[0]}
                             alt={project.name}
@@ -280,7 +286,7 @@ const MediumCard = ({
                         'h-full flex flex-col shadow-[0_20px_70px_-64px_rgba(47,199,223,0.5),inset_0_1px_0_rgba(215,245,247,0.05)]'
                     )}
                 >
-                    <div className='relative h-[170px] sm:h-[210px] overflow-hidden border-b border-border-subtle'>
+                    <div className={CARD_IMAGE}>
                         <LazyImage
                             src={project.images[0]}
                             alt={project.name}
@@ -343,7 +349,7 @@ const CompactCard = ({
                         'h-full flex flex-col shadow-[0_18px_60px_-56px_rgba(47,199,223,0.48),inset_0_1px_0_rgba(215,245,247,0.05)]'
                     )}
                 >
-                    <div className='relative h-[180px] sm:h-[210px] overflow-hidden border-b border-border-subtle'>
+                    <div className={CARD_IMAGE}>
                         <LazyImage
                             src={project.images[0]}
                             alt={project.name}

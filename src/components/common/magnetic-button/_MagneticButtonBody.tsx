@@ -10,7 +10,7 @@ const sizeClasses = {
 }
 
 export const MagneticButtonBody = (props: MagneticButtonProps) => {
-    const { icon: Icon, href, ariaLabel, size = 'normal' } = props
+    const { icon: Icon, href, onClick, ariaLabel, size = 'normal' } = props
 
     const iconElement = (
         <Icon className='transition-transform duration-300 group-hover:scale-110' />
@@ -33,7 +33,12 @@ export const MagneticButtonBody = (props: MagneticButtonProps) => {
     }
 
     return (
-        <button type='button' className={buttonClasses} aria-label={ariaLabel}>
+        <button
+            type='button'
+            onClick={onClick}
+            className={buttonClasses}
+            aria-label={ariaLabel}
+        >
             {iconElement}
         </button>
     )

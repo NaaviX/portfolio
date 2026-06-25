@@ -1,4 +1,3 @@
-import { projectsData } from '@/components/projects'
 import { userData } from '@/components/user'
 import { useLanguage } from '@/i18n'
 import { EASE_OUT_QUART } from '@/lib/motion'
@@ -7,6 +6,7 @@ import { ArrowUpRight, Mail } from 'lucide-react'
 import { useEffect } from 'react'
 import { FaLinkedinIn } from 'react-icons/fa6'
 import { Link } from 'react-scroll'
+import { heroImages } from './hero.config'
 
 const useConsoleGreeting = () => {
     useEffect(() => {
@@ -32,11 +32,6 @@ const useConsoleGreeting = () => {
         console.info('%cAntoine Legrand', meta)
     }, [])
 }
-
-const heroImages = projectsData.slice(0, 3).map((project) => ({
-    src: project.images[0],
-    alt: project.name,
-}))
 
 const statKeys = ['Java', 'TypeScript', 'React', 'Node']
 

@@ -92,7 +92,7 @@ const ProjectRow = ({
 
     const baseClasses = cn(
         'group relative flex flex-col gap-1.5 py-2.5 border-t first:border-t-0 -mx-2 px-2 rounded transition-colors',
-        isTop ? 'border-signal/24 bg-signal-soft' : 'border-border-subtle/40'
+        isTop ? 'border-primary/24 bg-primary/10' : 'border-border-subtle/40'
     )
 
     const inner = (
@@ -101,7 +101,7 @@ const ProjectRow = ({
                 <span
                     className={cn(
                         'font-mono text-[0.65rem] tabular-nums w-4 shrink-0',
-                        isTop ? 'text-signal' : 'text-primary/55'
+                        isTop ? 'text-primary' : 'text-primary/55'
                     )}
                 >
                     {String(i + 1).padStart(2, '0')}
@@ -158,7 +158,7 @@ const ProjectRow = ({
                     className={cn(
                         'block h-full origin-left bg-gradient-to-r transition-colors duration-500',
                         isTop
-                            ? 'from-signal/70 via-signal to-signal-hover/70'
+                            ? 'from-primary/70 via-primary to-primary-hover/70'
                             : 'from-primary/45 via-primary/55 to-primary-dark/40 group-hover:from-primary/70 group-hover:via-primary group-hover:to-primary-dark/70'
                     )}
                     initial={reduce ? false : { scaleX: 0 }}

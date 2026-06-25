@@ -66,7 +66,7 @@ export const Modal = (props: ModalProps) => {
                     <div
                         className={cn(
                             isGallery
-                                ? 'min-h-0 flex-1 overflow-hidden'
+                                ? 'min-h-0 flex-1 overflow-y-auto overflow-x-hidden'
                                 : 'mt-4'
                         )}
                     >

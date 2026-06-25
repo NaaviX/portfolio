@@ -39,6 +39,7 @@ export const GallerySwiper = (props: GallerySwiperProps) => {
                     } as CSSProperties
                 }
                 spaceBetween={48}
+                autoHeight={true}
                 grabCursor={true}
                 keyboard={{ enabled: true }}
                 navigation={true}

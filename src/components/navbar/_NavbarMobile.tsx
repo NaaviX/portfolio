@@ -1,7 +1,7 @@
 import { useLanguage } from '@/i18n'
 import { Section, sectionsData } from '@/pages/sections.data'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { FiMenu, FiX } from 'react-icons/fi'
 import { useEffect, useState } from 'react'
 import { animateScroll as scroll } from 'react-scroll'
 import { LanguageSwitcher } from './_LanguageSwitcher'
@@ -89,7 +89,7 @@ export const NavbarMobile = () => {
                                     exit={{ rotate: 45, opacity: 0 }}
                                     transition={{ duration: 0.15 }}
                                 >
-                                    <X className='h-5 w-5' />
+                                    <FiX className='h-5 w-5' />
                                 </motion.span>
                             ) : (
                                 <motion.span
@@ -99,7 +99,7 @@ export const NavbarMobile = () => {
                                     exit={{ rotate: -45, opacity: 0 }}
                                     transition={{ duration: 0.15 }}
                                 >
-                                    <Menu className='h-5 w-5' />
+                                    <FiMenu className='h-5 w-5' />
                                 </motion.span>
                             )}
                         </AnimatePresence>

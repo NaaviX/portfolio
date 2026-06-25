@@ -153,7 +153,7 @@ export const GitLabPulse = () => {
                 <div className='flex items-center gap-2.5'>
                     <FaGitlab
                         aria-hidden
-                        className='text-primary-light/55 text-base'
+                        className='text-signal/80 text-base'
                     />
                     <span className='text-sm font-semibold text-primary-light/78'>
                         {labels.title}
@@ -168,8 +168,12 @@ export const GitLabPulse = () => {
                         </span>
                     </span>
                     {stats.lastActivity && (
-                        <span>
-                            <span className='text-primary-light/75'>
+                        <span className='inline-flex items-center gap-1.5'>
+                            <span
+                                aria-hidden
+                                className='size-1.5 rounded-full bg-signal motion-safe:animate-pulse-dot'
+                            />
+                            <span className='text-signal/90'>
                                 {formatRelative(
                                     stats.lastActivity,
                                     language,

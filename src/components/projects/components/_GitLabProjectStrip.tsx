@@ -86,6 +86,7 @@ export const GitLabProjectStrip = ({
                             value={relative}
                             label={labels.lastUpdate}
                             isCompact={isCompact}
+                            accent='signal'
                         />
                     </>
                 )}
@@ -114,15 +115,18 @@ const Stat = ({
     value,
     label,
     isCompact,
+    accent = 'default',
 }: {
     value: string
     label: string
     isCompact: boolean
+    accent?: 'default' | 'signal'
 }) => (
     <div className='flex items-baseline gap-1.5 min-w-0'>
         <span
             className={cn(
-                'text-primary-light tabular-nums font-medium leading-none truncate',
+                'tabular-nums font-medium leading-none truncate',
+                accent === 'signal' ? 'text-signal' : 'text-primary-light',
                 isCompact ? 'text-[11px]' : 'text-xs'
             )}
         >
@@ -130,7 +134,10 @@ const Stat = ({
         </span>
         <span
             className={cn(
-                'font-mono text-primary-light/45 leading-none whitespace-nowrap',
+                'font-mono leading-none whitespace-nowrap',
+                accent === 'signal'
+                    ? 'text-signal/55'
+                    : 'text-primary-light/45',
                 isCompact ? 'text-[8px]' : 'text-[9px]'
             )}
         >

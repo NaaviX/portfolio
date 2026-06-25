@@ -43,6 +43,7 @@ export const Gallery = (props: GalleryProps) => {
                 title={project.name}
                 isOpen={isOpen}
                 onClose={() => setIsOpen(false)}
+                variant='gallery'
             >
                 <GallerySwiper {...project} />
             </Modal>

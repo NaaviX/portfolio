@@ -55,7 +55,7 @@ export const ContactSection = () => {
                             className='font-heading text-4xl md:text-5xl lg:text-6xl font-semibold tracking-normal leading-[0.98] text-primary-light'
                         >
                             {t.contact.headlineLead}{' '}
-                            <span className='text-primary'>
+                            <span className='text-signal'>
                                 {t.contact.headlineHighlight}
                             </span>
                             .
@@ -63,7 +63,7 @@ export const ContactSection = () => {
 
                         <motion.p
                             variants={itemVariants}
-                            className='text-base lg:text-lg text-primary-light/65 leading-relaxed max-w-[52ch]'
+                            className='text-base lg:text-lg text-ink-muted/78 leading-relaxed max-w-[52ch]'
                         >
                             {t.contact.intro}
                         </motion.p>

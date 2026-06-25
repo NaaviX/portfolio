@@ -4,51 +4,15 @@ import { skillsData } from './skills.data'
 import { SKILL_TYPE, type Skill } from './skills.type'
 import { useLanguage } from '@/i18n'
 
-type Palette = { hue: string; tint: string; ink: string }
-
-const CATEGORY_PALETTE: Record<SKILL_TYPE, Palette> = {
-    [SKILL_TYPE.WEBFRONT]: {
-        hue: '#2fc7df',
-        tint: 'rgba(47, 199, 223, 0.13)',
-        ink: '#d7f5f7',
-    },
-    [SKILL_TYPE.WEBBACK]: {
-        hue: '#2fc7df',
-        tint: 'rgba(47, 199, 223, 0.1)',
-        ink: '#d7f5f7',
-    },
-    [SKILL_TYPE.DEVTOOLS]: {
-        hue: '#2fc7df',
-        tint: 'rgba(47, 199, 223, 0.09)',
-        ink: '#d7f5f7',
-    },
-    [SKILL_TYPE.MOBILE]: {
-        hue: '#2fc7df',
-        tint: 'rgba(47, 199, 223, 0.11)',
-        ink: '#d7f5f7',
-    },
-    [SKILL_TYPE.TESTING]: {
-        hue: '#2fc7df',
-        tint: 'rgba(47, 199, 223, 0.08)',
-        ink: '#d7f5f7',
-    },
-    [SKILL_TYPE.PRACTICES]: {
-        hue: '#2fc7df',
-        tint: 'rgba(47, 199, 223, 0.075)',
-        ink: '#d7f5f7',
-    },
-}
-
 import { EASE_OUT_QUART, EASE_OUT_QUART_CSS } from '@/lib/motion'
 
 const MAG_RADIUS = 140
 const MAG_STRENGTH = 0.35
 const RESET_TRANSFORM = 'translate3d(0px, 0px, 0px)'
 
-type FlatSkill = Skill & { category: SKILL_TYPE; palette: Palette }
+type FlatSkill = Skill & { category: SKILL_TYPE }
 type Group = {
     category: SKILL_TYPE
-    palette: Palette
     skills: FlatSkill[]
 }
 
@@ -56,12 +20,11 @@ const buildGroups = (): Group[] => {
     const seen = new Set<string>()
     const groups: Group[] = []
     for (const cat of skillsData) {
-        const palette = CATEGORY_PALETTE[cat.nameKey]
         const skills: FlatSkill[] = []
         for (const skill of cat.skills) {
             if (seen.has(skill.name)) continue
             seen.add(skill.name)
-            skills.push({ ...skill, category: cat.nameKey, palette })
+            skills.push({ ...skill, category: cat.nameKey })
         }
         skills.sort((a, b) => {
             if (a.isImportant !== b.isImportant) return a.isImportant ? -1 : 1
@@ -69,7 +32,6 @@ const buildGroups = (): Group[] => {
         })
         groups.push({
             category: cat.nameKey,
-            palette,
             skills,
         })
     }
@@ -203,7 +165,6 @@ export const Skills = () => {
                             className='grid grid-cols-1 gap-x-8 gap-y-3 lg:grid-cols-[10rem_1fr] lg:items-baseline'
                         >
                             <GroupHeader
-                                palette={group.palette}
                                 label={t.skills.categories[group.category]}
                                 count={group.skills.length}
                             />
@@ -236,15 +197,7 @@ export const Skills = () => {
     )
 }
 
-const GroupHeader = ({
-    palette,
-    label,
-    count,
-}: {
-    palette: Palette
-    label: string
-    count: number
-}) => (
+const GroupHeader = ({ label, count }: { label: string; count: number }) => (
     <motion.div
         variants={headerVariants}
         className='flex items-baseline justify-between gap-3 border-b border-border-subtle/45 pb-2 lg:flex-col lg:items-start lg:justify-start lg:gap-1 lg:border-b-0 lg:pb-0 lg:pt-1'
@@ -252,10 +205,7 @@ const GroupHeader = ({
         <span className='text-sm font-semibold text-primary-light/82'>
             {label}
         </span>
-        <span
-            className='text-xs tabular-nums text-primary-light/42'
-            style={{ color: `${palette.ink}73` }}
-        >
+        <span className='text-xs tabular-nums text-primary-light/42'>
             {count}
         </span>
     </motion.div>
@@ -268,16 +218,20 @@ type ChipProps = {
     setRef: (el: HTMLDivElement | null) => void
 }
 
-const getChipStyle = (important: boolean, palette: Palette) => ({
+const getChipStyle = (important: boolean) => ({
     paddingInline: important ? '1.05rem' : '0.78rem',
     paddingBlock: important ? '0.55rem' : '0.4rem',
     fontSize: important ? '0.98rem' : '0.82rem',
     fontWeight: important ? 600 : 500,
-    color: important ? palette.ink : 'rgba(214, 240, 247, 0.78)',
-    background: important ? palette.tint : 'rgba(255, 255, 255, 0.022)',
-    borderColor: important ? palette.hue : `${palette.hue}30`,
+    color: important ? 'var(--color-signal)' : 'rgba(214, 240, 247, 0.78)',
+    background: important
+        ? 'var(--color-signal-soft)'
+        : 'rgba(47, 199, 223, 0.035)',
+    borderColor: important
+        ? 'rgb(244 177 90 / 0.58)'
+        : 'rgb(47 199 223 / 0.22)',
     boxShadow: important
-        ? `0 0 0 1px ${palette.hue}33, 0 14px 36px -24px ${palette.hue}`
+        ? '0 0 0 1px rgb(244 177 90 / 0.16), 0 14px 36px -24px rgb(244 177 90 / 0.95)'
         : undefined,
     letterSpacing: '-0.005em',
     transition: CHIP_TRANSITION,
@@ -290,33 +244,32 @@ const getIconStyle = (important: boolean) => ({
     opacity: important ? 1 : 0.85,
 })
 
-const getTooltipStyle = (palette: Palette) => ({
+const getTooltipStyle = (important: boolean) => ({
     background: 'rgba(6, 24, 29, 0.96)',
-    borderColor: `${palette.hue}55`,
-    color: palette.ink,
+    borderColor: important
+        ? 'rgb(244 177 90 / 0.38)'
+        : 'rgb(47 199 223 / 0.34)',
+    color: important ? 'var(--color-signal)' : 'var(--color-primary-light)',
     letterSpacing: '0',
 })
 
 const SkillChip = ({ skill, setRef }: ChipProps) => {
     const Icon = skill.icon
     const important = !!skill.isImportant
-    const { palette } = skill
 
     return (
         <div
             ref={setRef}
             className='group/chip relative inline-flex items-center gap-2 rounded-full border'
-            style={getChipStyle(important, palette)}
+            style={getChipStyle(important)}
         >
-            {Icon ? (
-                <Icon aria-hidden style={getIconStyle(important)} />
-            ) : null}
+            {Icon ? <Icon aria-hidden style={getIconStyle(important)} /> : null}
             <span className='whitespace-nowrap'>{skill.name}</span>
             {skill.about && (
                 <span
                     role='tooltip'
                     className='pointer-events-none absolute left-1/2 top-full z-30 mt-2.5 -translate-x-1/2 translate-y-1 whitespace-nowrap rounded-md border px-2.5 py-1.5 text-2xs opacity-0 transition-[opacity,transform] duration-200 group-hover/chip:translate-y-0 group-hover/chip:opacity-100'
-                    style={getTooltipStyle(palette)}
+                    style={getTooltipStyle(important)}
                 >
                     {skill.about}
                 </span>

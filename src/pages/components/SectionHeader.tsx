@@ -16,7 +16,7 @@ export const SectionHeader = (props: SectionHeaderProps) => {
             transition={{ duration: 0.8, ease: easeOutQuart }}
             className='w-full mb-9 md:mb-14'
         >
-            <h2 className='max-w-4xl font-heading font-semibold text-primary-light text-[clamp(2.5rem,7vw,5.75rem)] leading-[0.96] tracking-normal'>
+            <h2 className='max-w-4xl font-heading font-semibold text-primary-light text-[clamp(2.25rem,5.5vw,4rem)] leading-[0.98] tracking-normal'>
                 {title}
             </h2>
         </motion.header>

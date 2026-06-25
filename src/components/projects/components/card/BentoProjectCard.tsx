@@ -44,6 +44,9 @@ const SURFACE =
     'transition-[border-color,transform] duration-500 ease-out ' +
     'group-hover:border-primary/70'
 
+const FEATURED_SURFACE =
+    'border-signal/35 shadow-[0_28px_90px_-70px_rgba(244,177,90,0.44),inset_0_1px_0_rgba(244,177,90,0.11)] group-hover:border-signal/55'
+
 // Shared header-image height so every stacked card (large / medium / compact)
 // lines up to the same height. The featured card is intentionally excluded:
 // its screenshot is a full-height side panel, not a top header image.
@@ -113,15 +116,18 @@ const MetaRow = ({
 const TitleWithRule = ({
     children,
     className,
+    accent = 'primary',
 }: {
     children: React.ReactNode
     className?: string
+    accent?: 'primary' | 'signal'
 }) => (
     <div className='relative inline-flex flex-col items-start'>
         <Title className={className}>{children}</Title>
         <span
             className={cn(
-                'mt-3 h-px bg-primary/44 origin-left',
+                'mt-3 h-px origin-left',
+                accent === 'signal' ? 'bg-signal/75' : 'bg-primary/44',
                 'transition-transform duration-700 ease-out',
                 'scale-x-[0.18] group-hover:scale-x-100',
                 'w-full'
@@ -155,14 +161,9 @@ const FeaturedCard = ({
                 animate='rest'
                 className='group cursor-default'
             >
-                <div
-                    className={cn(
-                        SURFACE,
-                        'shadow-[0_28px_90px_-70px_rgba(47,199,223,0.65),inset_0_1px_0_rgba(215,245,247,0.06)]'
-                    )}
-                >
+                <div className={cn(SURFACE, FEATURED_SURFACE)}>
                     <div className='grid grid-cols-1 lg:grid-cols-12'>
-                        <div className='relative h-[220px] sm:h-[300px] lg:h-auto lg:col-span-7 overflow-hidden lg:border-r lg:border-border-subtle'>
+                        <div className='relative h-[220px] sm:h-[300px] lg:h-auto lg:col-span-7 overflow-hidden lg:border-r lg:border-signal/18'>
                             <LazyImage
                                 src={project.images[0]}
                                 alt={project.name}
@@ -173,10 +174,13 @@ const FeaturedCard = ({
                         </div>
                         <div className='relative lg:col-span-5 p-5 sm:p-7 lg:p-12 flex flex-col justify-between gap-8 lg:gap-10'>
                             <div>
-                                <TitleWithRule className='text-3xl lg:text-4xl xl:text-5xl font-semibold tracking-normal leading-[1.05]'>
+                                <TitleWithRule
+                                    accent='signal'
+                                    className='text-3xl lg:text-4xl xl:text-5xl font-semibold tracking-normal leading-[1.05]'
+                                >
                                     {project.name}
                                 </TitleWithRule>
-                                <p className='mt-6 text-primary-light/65 text-base lg:text-lg leading-relaxed max-w-md'>
+                                <p className='mt-6 text-ink-muted/82 text-base lg:text-lg leading-relaxed max-w-md'>
                                     {description}
                                 </p>
                             </div>
@@ -238,7 +242,7 @@ const LargeCard = ({ project, index }: { project: Project; index: number }) => {
                         <TitleWithRule className='text-2xl lg:text-[1.75rem] font-semibold tracking-normal leading-tight'>
                             {project.name}
                         </TitleWithRule>
-                        <p className='text-primary-light/60 text-sm lg:text-[15px] leading-relaxed flex-1'>
+                        <p className='text-ink-muted/76 text-sm lg:text-[15px] leading-relaxed flex-1'>
                             {description}
                         </p>
                         <ChipList
@@ -301,7 +305,7 @@ const MediumCard = ({
                         <TitleWithRule className='text-xl lg:text-[1.375rem] font-semibold tracking-normal leading-tight'>
                             {project.name}
                         </TitleWithRule>
-                        <p className='text-primary-light/55 text-sm leading-relaxed flex-1 line-clamp-3'>
+                        <p className='text-ink-muted/72 text-sm leading-relaxed flex-1 line-clamp-3'>
                             {description}
                         </p>
                         <ChipList
@@ -366,7 +370,7 @@ const CompactCard = ({
                         <TitleWithRule className='text-lg font-semibold tracking-normal leading-tight'>
                             {project.name}
                         </TitleWithRule>
-                        <p className='text-primary-light/55 text-sm leading-relaxed line-clamp-3 flex-1'>
+                        <p className='text-ink-muted/72 text-sm leading-relaxed line-clamp-3 flex-1'>
                             {description}
                         </p>
                         <ChipList

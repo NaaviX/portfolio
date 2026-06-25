@@ -1,5 +1,5 @@
 import { useLanguage } from '@/i18n'
-import { ArrowUp } from 'lucide-react'
+import { FiArrowUp } from 'react-icons/fi'
 
 const BUILD_YEAR = new Date().getFullYear()
 
@@ -33,7 +33,7 @@ export const FooterSection = () => {
                         className='group inline-flex items-center gap-2 rounded-full border border-border-subtle/0 px-2 py-1 text-primary-light/55 transition-colors duration-300 hover:text-primary-light focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50'
                     >
                         <span>{t.footer.backToTopShort}</span>
-                        <ArrowUp className='h-3 w-3 transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-0.5 group-focus-visible:-translate-y-0.5' />
+                        <FiArrowUp className='h-3 w-3 transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-0.5 group-focus-visible:-translate-y-0.5' />
                     </button>
                 </div>
             </div>

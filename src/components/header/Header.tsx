@@ -2,8 +2,9 @@ import { userData } from '@/components/user'
 import { useLanguage } from '@/i18n'
 import { EASE_OUT_QUART } from '@/lib/motion'
 import { motion, useReducedMotion } from 'framer-motion'
-import { ArrowUpRight, Mail } from 'lucide-react'
 import { useEffect } from 'react'
+import { FiMail } from 'react-icons/fi'
+import { GoArrowUpRight } from 'react-icons/go'
 import { FaLinkedinIn } from 'react-icons/fa6'
 import { Link } from 'react-scroll'
 import { heroImages } from './hero.config'
@@ -32,8 +33,6 @@ const useConsoleGreeting = () => {
         console.info('%cAntoine Legrand', meta)
     }, [])
 }
-
-const statKeys = ['Java', 'TypeScript', 'React', 'Node']
 
 export const Header = () => {
     useConsoleGreeting()
@@ -75,7 +74,7 @@ export const Header = () => {
                                 className='group inline-flex cursor-pointer items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-bg-app transition duration-300 hover:bg-primary-hover active:translate-y-px'
                             >
                                 {t.header.ctaContact}
-                                <ArrowUpRight className='h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5' />
+                                <GoArrowUpRight className='h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5' />
                             </Link>
                             <a
                                 href={userData.linkedin}
@@ -91,7 +90,7 @@ export const Header = () => {
                                 aria-label='Email'
                                 className='inline-flex h-12 w-12 items-center justify-center rounded-full border border-border-subtle/80 text-primary-light/70 transition duration-300 hover:border-primary hover:text-primary active:translate-y-px'
                             >
-                                <Mail className='h-4 w-4' />
+                                <FiMail className='h-4 w-4' />
                             </a>
                         </div>
                     </motion.div>
@@ -141,16 +140,6 @@ export const Header = () => {
                             <p className='text-sm leading-snug text-primary-light/80'>
                                 {t.header.metaLine}
                             </p>
-                            <div className='mt-4 flex flex-wrap gap-1.5'>
-                                {statKeys.map((key) => (
-                                    <span
-                                        key={key}
-                                        className='rounded-full border border-border-subtle/70 px-2.5 py-1 text-xs text-primary-light/66'
-                                    >
-                                        {key}
-                                    </span>
-                                ))}
-                            </div>
                         </div>
                     </motion.aside>
                 </div>

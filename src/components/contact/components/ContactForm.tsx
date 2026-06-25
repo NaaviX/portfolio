@@ -4,14 +4,14 @@ import { EASE_OUT_QUART } from '@/lib/motion'
 import { cn } from '@/lib/utils'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import {
-    AlertCircle,
-    Check,
-    Loader2,
-    Mail,
-    MessageSquare,
-    Send,
-    User,
-} from 'lucide-react'
+    FiAlertCircle,
+    FiCheck,
+    FiLoader,
+    FiMail,
+    FiMessageSquare,
+    FiSend,
+    FiUser,
+} from 'react-icons/fi'
 import { useState } from 'react'
 
 const inputClasses =
@@ -58,7 +58,7 @@ export const ContactForm = () => {
             inputClasses,
             errors[field]
                 ? 'border-rose-400/70 focus:border-rose-300 focus:ring-2 focus:ring-rose-300/30'
-                : 'border-border focus:border-primary focus:ring-2 focus:ring-primary/40'
+                : 'border-border-subtle focus:border-primary focus:ring-2 focus:ring-primary/40'
         )
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -129,7 +129,7 @@ export const ContactForm = () => {
                     <FieldRow
                         id='name'
                         label={t.contact.name}
-                        icon={<User className='w-4 h-4' />}
+                        icon={<FiUser className='w-4 h-4' />}
                         error={errors.name}
                     >
                         <input
@@ -148,7 +148,7 @@ export const ContactForm = () => {
                     <FieldRow
                         id='email'
                         label={t.contact.email}
-                        icon={<Mail className='w-4 h-4' />}
+                        icon={<FiMail className='w-4 h-4' />}
                         error={errors.email}
                     >
                         <input
@@ -170,7 +170,7 @@ export const ContactForm = () => {
                     <FieldRow
                         id='subject'
                         label={t.contact.subject}
-                        icon={<MessageSquare className='w-4 h-4' />}
+                        icon={<FiMessageSquare className='w-4 h-4' />}
                         error={errors.subject}
                     >
                         <input
@@ -189,7 +189,7 @@ export const ContactForm = () => {
                     <FieldRow
                         id='message'
                         label={t.contact.message}
-                        icon={<MessageSquare className='w-4 h-4' />}
+                        icon={<FiMessageSquare className='w-4 h-4' />}
                         error={errors.message}
                     >
                         <textarea
@@ -220,7 +220,7 @@ export const ContactForm = () => {
                                 }}
                                 className='flex items-start gap-2 rounded-lg border border-rose-400/40 bg-rose-400/10 px-3 py-2 text-sm text-rose-100/90'
                             >
-                                <AlertCircle className='w-4 h-4 mt-0.5 shrink-0 text-rose-300' />
+                                <FiAlertCircle className='w-4 h-4 mt-0.5 shrink-0 text-rose-300' />
                                 <span>{submitError}</span>
                             </motion.div>
                         )}
@@ -235,13 +235,13 @@ export const ContactForm = () => {
                             <span className='relative flex items-center justify-center gap-2'>
                                 {isSubmitting ? (
                                     <>
-                                        <Loader2 className='w-5 h-5 animate-spin' />
+                                        <FiLoader className='w-5 h-5 animate-spin' />
                                         {t.contact.sending}
                                     </>
                                 ) : (
                                     <>
                                         {t.contact.send}
-                                        <Send className='w-5 h-5 transition-transform duration-300 group-hover:translate-x-1' />
+                                        <FiSend className='w-5 h-5 transition-transform duration-300 group-hover:translate-x-1' />
                                     </>
                                 )}
                             </span>
@@ -300,7 +300,7 @@ const SuccessPanel = (props: {
         transition={{ duration: 0.5, ease: EASE_OUT_QUART }}
         className='w-full max-w-2xl'
     >
-        <div className='relative p-8 md:p-10 rounded-lg border border-primary/40 bg-bg-subtle/68 backdrop-blur-md overflow-hidden'>
+        <div className='relative p-8 md:p-10 rounded-lg border border-signal/40 bg-bg-subtle/68 backdrop-blur-md overflow-hidden'>
             <div className='flex items-start gap-4'>
                 <SuccessMark reduce={props.reduce} />
                 <div className='flex-1'>
@@ -310,7 +310,7 @@ const SuccessPanel = (props: {
                     <p className='mt-1 text-primary-light/70 leading-relaxed'>
                         {props.body}
                     </p>
-                    <div className='mt-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs text-primary-light/70'>
+                    <div className='mt-4 inline-flex items-center gap-2 rounded-full border border-signal/35 bg-signal-soft px-3 py-1 text-xs text-signal/88'>
                         {props.eta}
                     </div>
                     <div>
@@ -333,13 +333,13 @@ const SuccessMark = ({ reduce }: { reduce: boolean }) => (
         {!reduce && (
             <motion.span
                 aria-hidden='true'
-                className='absolute inset-0 rounded-full border border-primary/60'
+                className='absolute inset-0 rounded-full border border-signal/60'
                 initial={{ scale: 0.6, opacity: 0.7 }}
                 animate={{ scale: 1.8, opacity: 0 }}
                 transition={{ duration: 1.2, ease: EASE_OUT_QUART }}
             />
         )}
-        <div className='relative flex h-10 w-10 items-center justify-center rounded-full border border-primary/60 text-primary'>
+        <div className='relative flex h-10 w-10 items-center justify-center rounded-full border border-signal/60 text-signal'>
             <motion.span
                 initial={reduce ? false : { scale: 0.72, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
@@ -349,7 +349,7 @@ const SuccessMark = ({ reduce }: { reduce: boolean }) => (
                     delay: 0.12,
                 }}
             >
-                <Check className='h-5 w-5' aria-hidden='true' />
+                <FiCheck className='h-5 w-5' aria-hidden='true' />
             </motion.span>
         </div>
     </div>

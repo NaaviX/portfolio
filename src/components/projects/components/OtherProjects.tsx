@@ -72,7 +72,7 @@ export const OtherProjects = ({ projects }: OtherProjectsProps) => {
                             <h3 className='text-lg font-semibold text-primary-light'>
                                 {t.otherProjects.title}
                             </h3>
-                            <p className='mt-1 text-sm text-primary-light/45'>
+                            <p className='mt-1 text-sm text-ink-muted/58'>
                                 {t.otherProjects.subtitle}
                             </p>
                         </div>
@@ -315,7 +315,7 @@ const ProjectPreview = ({ project }: { project: Project }) => {
                     </span>
                 </div>
 
-                <p className='text-sm leading-relaxed text-primary-light/60 line-clamp-3'>
+                <p className='text-sm leading-relaxed text-ink-muted/74 line-clamp-3'>
                     {description}
                 </p>
 

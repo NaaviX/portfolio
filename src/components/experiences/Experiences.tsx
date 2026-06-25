@@ -16,7 +16,7 @@ export const Experiences = () => {
                 whileInView={{ scaleY: 1 }}
                 viewport={{ once: true, margin: '-80px' }}
                 transition={{ duration: 1.1, ease: EASE_OUT_QUART }}
-                className='absolute bottom-10 left-[6px] top-7 w-px origin-top bg-gradient-to-b from-primary/70 via-border-subtle/80 to-transparent sm:left-[7px] sm:top-8'
+                className='absolute bottom-10 left-[6px] top-7 w-px origin-top bg-gradient-to-b from-signal/75 via-border-subtle/80 to-transparent sm:left-[7px] sm:top-8'
             />
 
             <ol className='flex flex-col gap-8 sm:gap-10'>

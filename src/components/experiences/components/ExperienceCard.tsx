@@ -75,26 +75,29 @@ export const ExperienceCard = (props: ExperienceCardProps) => {
                 className={cn(
                     'absolute left-0 top-6 z-10 grid size-3.5 place-items-center rounded-full ring-4 ring-bg-app transition-colors duration-300 sm:top-7',
                     featured
-                        ? 'bg-primary'
+                        ? 'bg-signal'
                         : 'bg-border-subtle group-hover:bg-primary/70'
                 )}
             >
                 {featured && (
-                    <span className='size-3.5 rounded-full bg-primary/40 motion-safe:animate-ping' />
+                    <span className='size-3.5 rounded-full bg-signal/40 motion-safe:animate-ping' />
                 )}
             </span>
 
             {/* Connector tying the node to the card edge. */}
             <span
                 aria-hidden
-                className='absolute left-[7px] top-7 hidden h-px w-[1.85rem] bg-border-subtle/55 transition-colors duration-300 group-hover:bg-primary/40 sm:block sm:top-8'
+                className={cn(
+                    'absolute left-[7px] top-7 hidden h-px w-[1.85rem] transition-colors duration-300 group-hover:bg-primary/40 sm:block sm:top-8',
+                    featured ? 'bg-signal/55' : 'bg-border-subtle/55'
+                )}
             />
 
             <div
                 className={cn(
                     'rounded-xl border p-5 transition-colors duration-300 sm:p-6 lg:p-7',
                     featured
-                        ? 'border-primary/25 bg-primary/[0.045]'
+                        ? 'border-signal/30 bg-signal-soft'
                         : 'border-border-subtle/55 bg-bg-app/40 group-hover:border-primary/35 group-hover:bg-bg/30'
                 )}
             >
@@ -104,7 +107,7 @@ export const ExperienceCard = (props: ExperienceCardProps) => {
                             className={cn(
                                 'font-heading font-semibold leading-none tabular-nums',
                                 featured
-                                    ? 'text-2xl text-primary sm:text-3xl'
+                                    ? 'text-2xl text-signal sm:text-3xl'
                                     : 'text-xl text-primary-light/80 sm:text-2xl'
                             )}
                         >
@@ -126,7 +129,7 @@ export const ExperienceCard = (props: ExperienceCardProps) => {
                         className={cn(
                             'rounded-full border px-3 py-1 text-xs font-medium',
                             featured
-                                ? 'border-primary/40 text-primary'
+                                ? 'border-signal/45 bg-signal-soft text-signal'
                                 : 'border-border-subtle/70 text-primary-light/60'
                         )}
                     >
@@ -167,11 +170,16 @@ export const ExperienceCard = (props: ExperienceCardProps) => {
                         {activities.map((activity) => (
                             <li
                                 key={activity}
-                                className='flex gap-3 text-sm leading-relaxed text-primary-light/65'
+                                className='flex gap-3 text-sm leading-relaxed text-ink-muted/74'
                             >
                                 <span
                                     aria-hidden
-                                    className='mt-[0.55em] h-px w-3 shrink-0 bg-primary/45 transition-colors duration-300 group-hover:bg-primary/70'
+                                    className={cn(
+                                        'mt-[0.55em] h-px w-3 shrink-0 transition-colors duration-300 group-hover:bg-primary/70',
+                                        featured
+                                            ? 'bg-signal/65'
+                                            : 'bg-primary/45'
+                                    )}
                                 />
                                 <span>{activity}</span>
                             </li>

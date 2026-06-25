@@ -1,8 +1,10 @@
 import { GitLabTopProject } from '@/hooks/useGitLabStats'
 import { useLanguage } from '@/i18n'
 import { EASE_OUT_QUART } from '@/lib/motion'
+import { cn } from '@/lib/utils'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
-import { ArrowUpRight, Lock } from 'lucide-react'
+import { FiLock } from 'react-icons/fi'
+import { GoArrowUpRight } from 'react-icons/go'
 import { useRef } from 'react'
 
 type TopProjectsProps = {
@@ -84,16 +86,24 @@ const ProjectRow = ({
     reduce,
 }: RowProps) => {
     const isPublic = p.visibility === 'public'
+    const isTop = i === 0
     const commitCountLabel =
         p.commits === 1 ? t.gitlab.commitSingular : t.gitlab.commitPlural
 
-    const baseClasses =
-        'group relative flex flex-col gap-1.5 py-2.5 border-t border-border-subtle/40 first:border-t-0 -mx-2 px-2 rounded'
+    const baseClasses = cn(
+        'group relative flex flex-col gap-1.5 py-2.5 border-t first:border-t-0 -mx-2 px-2 rounded transition-colors',
+        isTop ? 'border-signal/24 bg-signal-soft' : 'border-border-subtle/40'
+    )
 
     const inner = (
         <>
             <div className='flex items-baseline gap-3'>
-                <span className='font-mono text-[0.65rem] tabular-nums text-primary/55 w-4 shrink-0'>
+                <span
+                    className={cn(
+                        'font-mono text-[0.65rem] tabular-nums w-4 shrink-0',
+                        isTop ? 'text-signal' : 'text-primary/55'
+                    )}
+                >
                     {String(i + 1).padStart(2, '0')}
                 </span>
                 <span
@@ -105,7 +115,7 @@ const ProjectRow = ({
                     }
                 >
                     {!isPublic && (
-                        <Lock
+                        <FiLock
                             aria-hidden
                             className='h-3 w-3 text-primary-light/35 shrink-0'
                         />
@@ -131,7 +141,7 @@ const ProjectRow = ({
                     {formatPercent(share, language)}%
                 </span>
                 {isPublic ? (
-                    <ArrowUpRight
+                    <GoArrowUpRight
                         aria-hidden
                         className='h-3 w-3 text-primary-light/25 group-hover:text-primary group-hover:-translate-y-px group-hover:translate-x-px transition-all duration-300 shrink-0'
                     />
@@ -145,7 +155,12 @@ const ProjectRow = ({
                 className='ml-7 mr-6 h-px overflow-hidden rounded-full bg-border-subtle/35'
             >
                 <motion.span
-                    className='block h-full origin-left bg-gradient-to-r from-primary/45 via-primary/55 to-primary-dark/40 group-hover:from-primary/70 group-hover:via-primary group-hover:to-primary-dark/70 transition-colors duration-500'
+                    className={cn(
+                        'block h-full origin-left bg-gradient-to-r transition-colors duration-500',
+                        isTop
+                            ? 'from-signal/70 via-signal to-signal-hover/70'
+                            : 'from-primary/45 via-primary/55 to-primary-dark/40 group-hover:from-primary/70 group-hover:via-primary group-hover:to-primary-dark/70'
+                    )}
                     initial={reduce ? false : { scaleX: 0 }}
                     animate={
                         reduce || inView
@@ -172,9 +187,10 @@ const ProjectRow = ({
                     share,
                     language
                 )}%)`}
-                className={
-                    'transition-colors hover:bg-bg-hover/20 ' + baseClasses
-                }
+                className={cn(
+                    'transition-colors hover:bg-bg-hover/20',
+                    baseClasses
+                )}
             >
                 {inner}
             </a>

@@ -8,7 +8,7 @@ import { projectsData } from '@/components/projects'
  * `projects.data.ts`); `imageIndex` optionally selects which screenshot of that
  * project to use (defaults to the first one).
  *
- * Reorder, add, or swap entries here to change the hero — no need to touch the
+ * Reorder, add, or swap entries here to change the hero - no need to touch the
  * Header component itself.
  */
 export interface HeroImageConfig {

@@ -29,7 +29,6 @@ export default defineConfig({
                         '@radix-ui/react-dialog',
                         '@radix-ui/react-label',
                         '@radix-ui/react-slot',
-                        'lucide-react',
                     ],
                 },
             },

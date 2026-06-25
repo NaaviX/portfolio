@@ -14,6 +14,17 @@
     --color-primary-light: #d7f5f7;
     --color-primary-dark: #8de3eb;
 
+    /* Second accent - locked to semantic signal states: live, current,
+       featured, top, and available. Cyan stays the brand + interactive color;
+       signal never replaces a CTA, link, focus, or generic hover state. */
+    --color-signal: #f4b15a;
+    --color-signal-hover: #f7c079;
+    --color-signal-soft: rgb(244 177 90 / 0.14);
+
+    /* Near-neutral body text. Cooler/greyer than primary-light so long copy
+       reads as text rather than tinted cyan, lifting contrast hierarchy. */
+    --color-ink-muted: #c3d2d4;
+
     --font-family-body:
         'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
     --font-family-heading:
@@ -188,21 +199,19 @@ h6 {
     font-optical-sizing: auto;
 }
 
+/* Inputs own their own border classes (default / focus / rose error state) via
+   the component. Only set text color + keep backgrounds transparent here - no
+   !important border, which previously clobbered the form's error styling. */
 input,
 textarea {
-    border-color: var(--color-border) !important;
     color: var(--color-primary-light);
 }
 
 input:hover,
-textarea:hover {
-    border-color: var(--color-border-hover) !important;
-    background-color: transparent !important;
-}
-
+textarea:hover,
 input:focus,
 textarea:focus {
-    background-color: transparent !important;
+    background-color: transparent;
 }
 
 :where(a, button, input, textarea, [role='button']):focus-visible {

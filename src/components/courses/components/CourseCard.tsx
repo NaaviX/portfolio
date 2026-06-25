@@ -65,12 +65,12 @@ export const CourseCard = (props: CourseCardProps) => {
                 className={cn(
                     'absolute left-0 top-1.5 grid size-3.5 place-items-center rounded-full ring-4 ring-bg-app transition-colors duration-300',
                     featured
-                        ? 'bg-primary'
+                        ? 'bg-signal'
                         : 'bg-border-subtle group-hover:bg-primary/70'
                 )}
             >
                 {featured && (
-                    <span className='size-3.5 rounded-full bg-primary/40 motion-safe:animate-ping' />
+                    <span className='size-3.5 rounded-full bg-signal/40 motion-safe:animate-ping' />
                 )}
             </span>
 
@@ -80,7 +80,7 @@ export const CourseCard = (props: CourseCardProps) => {
                         className={cn(
                             'font-heading font-semibold leading-none tabular-nums',
                             featured
-                                ? 'text-3xl text-primary sm:text-4xl'
+                                ? 'text-3xl text-signal sm:text-4xl'
                                 : 'text-2xl text-primary-light/80'
                         )}
                     >
@@ -90,9 +90,25 @@ export const CourseCard = (props: CourseCardProps) => {
                             language
                         )}
                     </p>
-                    <p className='mt-2 text-xs text-primary-light/45'>
+                    <p
+                        className={cn(
+                            'mt-2 text-xs',
+                            featured
+                                ? 'text-signal/68'
+                                : 'text-primary-light/45'
+                        )}
+                    >
                         {getDuration(course.dateFrom, course.dateTo, language)}
-                        <span className='mx-1.5 text-primary-light/25'>/</span>
+                        <span
+                            className={cn(
+                                'mx-1.5',
+                                featured
+                                    ? 'text-signal/35'
+                                    : 'text-primary-light/25'
+                            )}
+                        >
+                            /
+                        </span>
                         {type}
                     </p>
                 </div>

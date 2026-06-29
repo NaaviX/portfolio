@@ -108,6 +108,15 @@ export const translations = {
         projects: {
             tooManyCooks:
                 "Dashboard d'analyse des différentes stratégies d'arbitrage de funding rates entre plusieurs échanges décentralisés de cryptomonnaie.",
+            spotiflem:
+                "Générateur de playlists orienté découverte à partir d'un prompt, de titres de référence et d'une connexion Spotify optionnelle.",
+            flatty: 'Agrégateur immobilier qui transforme une recherche en langage naturel en annonces scorées, filtrées et enrichies.',
+            wikiPulse:
+                'Jeu mobile de cartes où chaque carte représente un article Wikipédia vivant, avec des statistiques issues des tendances et éditions.',
+            harnessable:
+                'Marketplace pour créer, publier et installer des packs de configuration versionnés pour agents de code.',
+            obsidianDashboard:
+                "Cockpit personnel qui centralise appartements, briefings, veilles et revues de code extraits d'un vault Obsidian.",
             ogSpot: "Trouve des spots près de toi, connecte-toi avec d'autres sportifs",
             tooManyCooksPrediction:
                 "Dashboard d'analyse des différentes stratégies d'arbitrage entre plusieurs plateformes de marché de prédiction, utilisant l'IA.",
@@ -361,6 +370,15 @@ export const translations = {
         projects: {
             tooManyCooks:
                 'Analytics dashboard for various funding rate arbitrage strategies across multiple decentralized cryptocurrency exchanges.',
+            spotiflem:
+                'Discovery-focused playlist generator built from a prompt, reference tracks, and an optional Spotify connection.',
+            flatty: 'Real-estate aggregator that turns natural-language searches into scored, filtered, and enriched listings.',
+            wikiPulse:
+                'Mobile card game where each card is a live Wikipedia article with stats from trends and edits.',
+            harnessable:
+                'Marketplace for creating, publishing, and installing versioned configuration packs for coding agents.',
+            obsidianDashboard:
+                'Personal cockpit centralizing apartments, briefings, watchlists, and code reviews extracted from an Obsidian vault.',
             ogSpot: 'Find spots near you and connect with other athletes.',
             tooManyCooksPrediction:
                 'Analytics dashboard for various arbitrage strategies across multiple prediction market platforms, using AI.',

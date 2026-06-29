@@ -7,7 +7,10 @@ import { animateScroll as scroll } from 'react-scroll'
 import { LanguageSwitcher } from './_LanguageSwitcher'
 import { NavLink } from './_NavLink'
 import { SocialButton } from './_SocialButton'
-import { EASE_OUT_QUART as easeOutQuart } from '@/lib/motion'
+import {
+    EASE_OUT_QUART as easeOutQuart,
+    SCROLL_DURATION_MS,
+} from '@/lib/motion'
 
 const itemVariants = {
     hidden: { opacity: 0, x: -8 },
@@ -60,7 +63,7 @@ export const NavbarMobile = () => {
                 <motion.button
                     whileTap={{ scale: 0.96 }}
                     onClick={() => {
-                        scroll.scrollToTop()
+                        scroll.scrollToTop({ duration: SCROLL_DURATION_MS })
                         setIsOpen(false)
                     }}
                     className='font-heading font-semibold text-base text-primary-light bg-transparent border-none cursor-pointer'

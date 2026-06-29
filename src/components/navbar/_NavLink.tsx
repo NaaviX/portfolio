@@ -1,4 +1,5 @@
 import { Section } from '@/pages/sections.data'
+import { SCROLL_DURATION_MS } from '@/lib/motion'
 import { Link } from 'react-scroll'
 
 type NavLinkProps = {
@@ -15,6 +16,7 @@ export const NavLink = (props: NavLinkProps) => {
             <Link
                 to={section.target}
                 smooth
+                duration={SCROLL_DURATION_MS}
                 spy
                 activeClass='nav-active'
                 isDynamic
@@ -31,6 +33,7 @@ export const NavLink = (props: NavLinkProps) => {
         <Link
             to={section.target}
             smooth
+            duration={SCROLL_DURATION_MS}
             spy
             activeClass='nav-active'
             isDynamic

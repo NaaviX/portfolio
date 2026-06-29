@@ -1,4 +1,5 @@
 import { useLanguage } from '@/i18n'
+import { SCROLL_DURATION_MS } from '@/lib/motion'
 import { Section, sectionsData } from '@/pages/sections.data'
 import { motion } from 'framer-motion'
 import { animateScroll as scroll } from 'react-scroll'
@@ -12,7 +13,9 @@ export const NavbarDesktop = () => {
     return (
         <div className='h-[68px] items-center hidden lg:grid grid-cols-[auto_1fr_auto] gap-6'>
             <motion.button
-                onClick={() => scroll.scrollToTop()}
+                onClick={() =>
+                    scroll.scrollToTop({ duration: SCROLL_DURATION_MS })
+                }
                 whileTap={{ scale: 0.96 }}
                 className='font-heading text-lg font-semibold text-primary-light transition-colors duration-200 bg-transparent border-none cursor-pointer justify-self-start hover:text-primary'
             >

@@ -1,10 +1,12 @@
 import { useLanguage } from '@/i18n'
+import { SCROLL_DURATION_MS } from '@/lib/motion'
+import { animateScroll as scroll } from 'react-scroll'
 import { FiArrowUp } from 'react-icons/fi'
 
 const BUILD_YEAR = new Date().getFullYear()
 
 const scrollTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    scroll.scrollToTop({ duration: SCROLL_DURATION_MS })
 }
 
 export const FooterSection = () => {

@@ -1,6 +1,6 @@
 import { userData } from '@/components/user'
 import { useLanguage } from '@/i18n'
-import { EASE_OUT_QUART } from '@/lib/motion'
+import { EASE_OUT_QUART, SCROLL_DURATION_MS } from '@/lib/motion'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useEffect } from 'react'
 import { FiMail } from 'react-icons/fi'
@@ -71,6 +71,7 @@ export const Header = () => {
                             <Link
                                 to='contact'
                                 smooth
+                                duration={SCROLL_DURATION_MS}
                                 className='group inline-flex cursor-pointer items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-bg-app transition duration-300 hover:bg-primary-hover active:translate-y-px'
                             >
                                 {t.header.ctaContact}

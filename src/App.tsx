@@ -3,6 +3,7 @@ import { GlobalBackground } from '@/components/common/GlobalBackground'
 // so data is in flight while the lazy Skills chunk is still being downloaded.
 import '@/hooks/useGitLabStats'
 import { useLanguage } from '@/i18n'
+import { LENIS_OPTIONS } from '@/lib/motion'
 import { ReactLenis } from '@studio-freight/react-lenis'
 import dayjs from 'dayjs'
 import 'dayjs/locale/en'
@@ -80,7 +81,7 @@ const App = () => {
     })
 
     return (
-        <ReactLenis root>
+        <ReactLenis root options={LENIS_OPTIONS}>
             <main className='page-shell'>
                 <GlobalBackground />
                 <HeaderSection />

@@ -19,7 +19,7 @@ export const Paper = (props: PaperProps) => {
         'border border-border-subtle/70',
         'bg-bg-subtle/72 backdrop-blur-sm',
         'shadow-[0_22px_76px_-66px_rgba(47,199,223,0.55),inset_0_1px_0_rgba(215,245,247,0.05)]',
-        'transition-all duration-500 ease-out',
+        'transition-[background-color,border-color,box-shadow] duration-500 ease-out',
         'hover:bg-bg-subtle hover:border-primary/60',
         isMedium ? 'p-10' : 'p-4',
         className

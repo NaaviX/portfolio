@@ -143,7 +143,7 @@ const ProjectRow = ({
                 {isPublic ? (
                     <GoArrowUpRight
                         aria-hidden
-                        className='h-3 w-3 text-primary-light/25 group-hover:text-primary group-hover:-translate-y-px group-hover:translate-x-px transition-all duration-300 shrink-0'
+                        className='h-3 w-3 text-primary-light/25 group-hover:text-primary group-hover:-translate-y-px group-hover:translate-x-px transition-[transform,color] duration-300 shrink-0'
                     />
                 ) : (
                     <span aria-hidden className='h-3 w-3 shrink-0' />

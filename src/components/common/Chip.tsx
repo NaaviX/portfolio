@@ -15,7 +15,7 @@ export const Chip = memo((props: ChipProps) => {
                 'bg-primary-light/[0.035]',
                 'border border-border-subtle/70',
                 'text-sm font-normal text-primary-light/82',
-                'cursor-default transition-all duration-300 ease-out',
+                'cursor-default transition-[background-color,border-color,color] duration-300 ease-out',
                 'hover:bg-primary-light/[0.055]',
                 'hover:border-primary/70',
                 'hover:text-primary-light',
@@ -24,7 +24,7 @@ export const Chip = memo((props: ChipProps) => {
             {...spanProps}
         >
             {skill.icon ? (
-                <skill.icon className='w-4 h-4 shrink-0 transition-all duration-300 group-hover:rotate-12 group-hover:scale-110 group-hover:text-primary' />
+                <skill.icon className='w-4 h-4 shrink-0 transition-[transform,color] duration-300 group-hover:rotate-12 group-hover:scale-110 group-hover:text-primary' />
             ) : null}
             <span
                 className={skill.isImportant ? 'font-semibold' : 'font-light'}

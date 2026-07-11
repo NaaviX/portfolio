@@ -72,7 +72,7 @@ export const Header = () => {
                                 to='contact'
                                 smooth
                                 duration={SCROLL_DURATION_MS}
-                                className='group inline-flex cursor-pointer items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-bg-app transition duration-300 hover:bg-primary-hover active:translate-y-px'
+                                className='group inline-flex cursor-pointer items-center gap-2 rounded-full bg-primary pl-6 pr-[22px] py-3 text-sm font-semibold text-bg-app transition-[scale,background-color] duration-300 hover:bg-primary-hover active:scale-[0.96]'
                             >
                                 {t.header.ctaContact}
                                 <GoArrowUpRight className='h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5' />
@@ -82,14 +82,14 @@ export const Header = () => {
                                 target='_blank'
                                 rel='noopener noreferrer'
                                 aria-label={t.header.ctaLinkedin}
-                                className='inline-flex h-12 w-12 items-center justify-center rounded-full border border-border-subtle/80 text-primary-light/70 transition duration-300 hover:border-primary hover:text-primary active:translate-y-px'
+                                className='inline-flex h-12 w-12 items-center justify-center rounded-full border border-border-subtle/80 text-primary-light/70 transition-[scale,border-color,color] duration-300 hover:border-primary hover:text-primary active:scale-[0.96]'
                             >
                                 <FaLinkedinIn className='h-4 w-4' />
                             </a>
                             <a
                                 href={`mailto:${userData.email}`}
                                 aria-label='Email'
-                                className='inline-flex h-12 w-12 items-center justify-center rounded-full border border-border-subtle/80 text-primary-light/70 transition duration-300 hover:border-primary hover:text-primary active:translate-y-px'
+                                className='inline-flex h-12 w-12 items-center justify-center rounded-full border border-border-subtle/80 text-primary-light/70 transition-[scale,border-color,color] duration-300 hover:border-primary hover:text-primary active:scale-[0.96]'
                             >
                                 <FiMail className='h-4 w-4' />
                             </a>
@@ -113,7 +113,7 @@ export const Header = () => {
                                 alt={heroImages[0].alt}
                                 loading='eager'
                                 decoding='async'
-                                className='h-full w-full rounded-md object-cover object-top'
+                                className='h-full w-full rounded-md object-cover object-top outline outline-1 -outline-offset-1 outline-white/10'
                             />
                         </div>
 
@@ -123,7 +123,7 @@ export const Header = () => {
                                 alt={heroImages[1].alt}
                                 loading='lazy'
                                 decoding='async'
-                                className='aspect-[4/3] w-full rounded-md object-cover object-top'
+                                className='aspect-[4/3] w-full rounded-md object-cover object-top outline outline-1 -outline-offset-1 outline-white/10'
                             />
                         </div>
 
@@ -133,7 +133,7 @@ export const Header = () => {
                                 alt={heroImages[2].alt}
                                 loading='lazy'
                                 decoding='async'
-                                className='aspect-[3/4] w-full rounded-md object-cover object-top'
+                                className='aspect-[3/4] w-full rounded-md object-cover object-top outline outline-1 -outline-offset-1 outline-white/10'
                             />
                         </div>
 

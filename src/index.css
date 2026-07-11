@@ -175,7 +175,13 @@ body {
         linear-gradient(rgb(215 245 247 / 0.035) 1px, transparent 1px),
         linear-gradient(90deg, rgb(215 245 247 / 0.03) 1px, transparent 1px);
     background-size: 48px 48px;
-    mask-image: linear-gradient(to bottom, transparent, black 12%, black 78%, transparent);
+    mask-image: linear-gradient(
+        to bottom,
+        transparent,
+        black 12%,
+        black 78%,
+        transparent
+    );
 }
 
 .page-shell::after {
@@ -197,6 +203,14 @@ h5,
 h6 {
     font-family: var(--font-family-heading);
     font-optical-sizing: auto;
+    text-wrap: balance;
+}
+
+p,
+li,
+figcaption,
+blockquote {
+    text-wrap: pretty;
 }
 
 /* Inputs own their own border classes (default / focus / rose error state) via

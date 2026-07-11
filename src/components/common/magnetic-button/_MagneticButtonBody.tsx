@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils'
 import { MagneticButtonProps } from './magnetic-button.type'
 
 const baseClasses =
-    'group inline-flex items-center justify-center rounded-full border border-border-subtle bg-bg-subtle text-primary-light transition-all duration-300 hover:bg-bg-hover hover:border-primary hover:text-primary active:translate-y-px'
+    'group inline-flex min-h-10 min-w-10 items-center justify-center rounded-full border border-border-subtle bg-bg-subtle text-primary-light transition-[scale,background-color,border-color,color] duration-300 hover:bg-bg-hover hover:border-primary hover:text-primary active:scale-[0.96]'
 
 const sizeClasses = {
     normal: 'text-xl m-1.5 p-3',

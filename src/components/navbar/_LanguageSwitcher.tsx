@@ -10,7 +10,7 @@ export const LanguageSwitcher = () => {
     return (
         <motion.button
             onClick={() => setLanguage(next)}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.96 }}
             aria-label={
                 next === 'en' ? 'Switch to English' : 'Passer en français'
             }

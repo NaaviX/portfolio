@@ -188,7 +188,7 @@ export const GitLabPulse = () => {
                         disabled={refreshing}
                         aria-label={labels.refreshAria}
                         title={labels.refresh}
-                        className='inline-flex h-6 w-6 items-center justify-center rounded-full text-primary-light/45 hover:text-primary-light/85 hover:bg-primary-light/5 transition-colors disabled:cursor-not-allowed disabled:opacity-60'
+                        className='inline-flex h-10 w-10 -m-2 items-center justify-center rounded-full text-primary-light/45 hover:text-primary-light/85 hover:bg-primary-light/5 transition-[scale,background-color,color] active:scale-[0.96] disabled:cursor-not-allowed disabled:opacity-60'
                     >
                         <FiRefreshCw
                             aria-hidden

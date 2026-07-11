@@ -80,27 +80,59 @@ export const NavbarMobile = () => {
                         aria-label={isOpen ? 'Close Menu' : 'Open Menu'}
                         aria-expanded={isOpen}
                         onClick={() => setIsOpen(!isOpen)}
-                        whileTap={{ scale: 0.92 }}
+                        whileTap={{ scale: 0.96 }}
                         className='inline-flex items-center justify-center w-11 h-11 ml-1 rounded-full border border-border-subtle/60 text-primary-light/70 hover:text-primary transition-colors duration-200 bg-bg-subtle/40 cursor-pointer'
                     >
                         <AnimatePresence mode='wait' initial={false}>
                             {isOpen ? (
                                 <motion.span
                                     key='x'
-                                    initial={{ rotate: -45, opacity: 0 }}
-                                    animate={{ rotate: 0, opacity: 1 }}
-                                    exit={{ rotate: 45, opacity: 0 }}
-                                    transition={{ duration: 0.15 }}
+                                    initial={{
+                                        opacity: 0,
+                                        scale: 0.25,
+                                        filter: 'blur(4px)',
+                                    }}
+                                    animate={{
+                                        opacity: 1,
+                                        scale: 1,
+                                        filter: 'blur(0px)',
+                                    }}
+                                    exit={{
+                                        opacity: 0,
+                                        scale: 0.25,
+                                        filter: 'blur(4px)',
+                                    }}
+                                    transition={{
+                                        type: 'spring',
+                                        duration: 0.3,
+                                        bounce: 0,
+                                    }}
                                 >
                                     <FiX className='h-5 w-5' />
                                 </motion.span>
                             ) : (
                                 <motion.span
                                     key='m'
-                                    initial={{ rotate: 45, opacity: 0 }}
-                                    animate={{ rotate: 0, opacity: 1 }}
-                                    exit={{ rotate: -45, opacity: 0 }}
-                                    transition={{ duration: 0.15 }}
+                                    initial={{
+                                        opacity: 0,
+                                        scale: 0.25,
+                                        filter: 'blur(4px)',
+                                    }}
+                                    animate={{
+                                        opacity: 1,
+                                        scale: 1,
+                                        filter: 'blur(0px)',
+                                    }}
+                                    exit={{
+                                        opacity: 0,
+                                        scale: 0.25,
+                                        filter: 'blur(4px)',
+                                    }}
+                                    transition={{
+                                        type: 'spring',
+                                        duration: 0.3,
+                                        bounce: 0,
+                                    }}
                                 >
                                     <FiMenu className='h-5 w-5' />
                                 </motion.span>

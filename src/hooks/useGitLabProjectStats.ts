@@ -14,7 +14,7 @@ export type GitLabProjectStats = {
     updatedAt: string
 }
 
-const BASE_URL = 'https://antoine-legrand.dev/backend/gitlab-project-stats'
+const BASE_URL = 'https://antoinelegrand.dev/backend/gitlab-project-stats'
 
 export const parseProjectPath = (gitLink: string): string | null => {
     try {

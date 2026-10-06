@@ -1,4 +1,4 @@
-const SEND_EMAIL_API_URL = 'https://api.antoine-legrand.dev/'
+const SEND_EMAIL_API_URL = '/backend/'
 
 export type ContactPayload = {
     name: string

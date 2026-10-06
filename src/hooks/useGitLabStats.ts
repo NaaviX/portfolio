@@ -45,7 +45,7 @@ export const normalizeDay = (
     return raw
 }
 
-const STATS_URL = 'https://antoine-legrand.dev/backend/gitlab-stats'
+const STATS_URL = 'https://antoinelegrand.dev/backend/gitlab-stats'
 
 const fetchStats = (forceRefresh = false): Promise<GitLabStats> => {
     const url = forceRefresh ? `${STATS_URL}?refresh=1` : STATS_URL

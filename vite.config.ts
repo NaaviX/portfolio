@@ -7,11 +7,11 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 export default defineConfig({
     server: {
         port: 3000,
-        allowedHosts: ['antoine-legrand.dev', '167.235.59.152'],
+        allowedHosts: ['antoinelegrand.dev', 'www.antoinelegrand.dev', '167.235.59.152'],
     },
     preview: {
         port: 3000,
-        allowedHosts: ['antoine-legrand.dev', '167.235.59.152'],
+        allowedHosts: ['antoinelegrand.dev', 'www.antoinelegrand.dev', '167.235.59.152'],
     },
     build: {
         outDir: 'build',

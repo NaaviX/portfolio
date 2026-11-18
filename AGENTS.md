@@ -1,12 +1,13 @@
 # AGENTS.md
 
-Concise project guide for Codex. Keep startup context small; open `PRODUCT.md` or `DESIGN.md` only for product, copy, or visual-design work.
+Concise project guide for coding agents. Keep startup context small; open `PRODUCT.md` or `DESIGN.md` only for product, copy, or visual-design work.
 
 ## Commands
 
 ```bash
 npm start        # Vite dev server on :3000 (--host)
 npm run build    # TypeScript check, then Vite build
+npm run typecheck # tsc --noEmit, the cheap check to run after a change
 npm run serve    # Preview production build on :3000
 npm run lint     # ESLint
 npm run lint:fix # ESLint --fix
